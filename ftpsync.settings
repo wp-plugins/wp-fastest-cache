@@ -1,0 +1,45 @@
+{
+	// HELP / INFO moved to bottom
+	// Remove "//" to uncomment settings directive
+
+	"default": {
+
+		"host": "159.253.37.128",
+		"username": "ishalx",  // or null for anonymous login
+		"password": "4rtgfde!Z",
+		"path": "/public_html/wp-content/plugins/wp-fastest-cache",
+		"upload_on_save": true
+	}
+
+	// ------ INFO ----------------------------------------------------------------------
+
+	// For settings description see:
+	// --- https://github.com/NoxArt/SublimeText2-FTPSync
+
+	// For more info see:
+	// --- https://github.com/NoxArt/SublimeText2-FTPSync/wiki/_pages
+
+	// Want to ask? Report a bug?
+	// --- Hit: https://github.com/NoxArt/SublimeText2-FTPSync/issues/new
+
+
+	// ** Commas **
+
+	// Don't forget about commas -> each entry needs a comma at the end of line EXCEPT the last (uncommented) entry
+	// For precise info see http://www.json.org
+	// Also try http://jsonlint.com
+
+
+	// ** Comments **
+
+	// The "//" are so called "comments", all text after it is ignored,
+	// they are used for notes or deactivating an entry
+
+	// Non-basic settings are deactivated and default options specified in the global settings file,
+	// that is $packages$/FTPSync/ftpsync.sublime-settings (where $packages$ is a path where Sublime
+	// keeps packages in your Operating System) accessible via Preferences > Package Settings > FTPSync
+	// Use Settings - User to override the global defaults
+
+	// More info about Sublime Text 2 settings on http://www.sublimetext.com/docs/2/settings.html
+
+}
