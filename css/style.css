@@ -1,0 +1,104 @@
+/* Set the size and font of the tab widget */
+.tabGroup {
+    background: none repeat scroll 0 0 #F3F1EB;
+    border: 1px solid #DEDBD1;
+    padding: 10px;
+    width: 530px;
+    height: auto;
+}
+
+.tabGroup div.questionCon{
+    width: 100%;
+    float: left;
+    padding-top: 5px;
+}
+
+div.questionCon.qsubmit{
+    text-align: center;
+}
+
+.tabGroup div.question{
+	padding-right: 10px;
+    float: left;
+    text-align: right;
+    width: 100px;
+}
+
+.tabGroup div.inputCon{
+    float:left;
+}
+  
+/* Configure the radio buttons to hide off screen */
+.tabGroup > input[type="radio"] {
+    position: absolute;
+    left:-100px;
+    top:-100px;
+}
+  
+/* Configure labels to look like tabs */
+.tabGroup > input[type="radio"] + label {
+    /* inline-block such that the label can be given dimensions */
+    display: inline-block;
+  
+    /* A nice curved border around the tab */
+    border: 1px solid #DEDBD1;
+    border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+      
+    /* the bottom border is handled by the tab content div */
+    border-bottom: 0;
+  
+    /* Padding around tab text */
+    padding: 5px 10px;
+  
+    /* Set the background color to default gray (non-selected tab) */
+    background-color:#ddd;
+}
+  
+/* Focused tabs need to be highlighted as such */
+.tabGroup > input[type="radio"]:focus + label {
+    border:1px dashed #DEDBD1;
+}
+  
+/* Checked tabs must be white with the bottom border removed */
+.tabGroup > input[type="radio"]:checked + label {
+    background-color:white;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+    margin-bottom: -1px;
+}
+  
+/* The tab content must fill the widgets size and have a nice border */
+.tabGroup > div {
+    display: none;
+    border: 1px solid #DEDBD1;
+    background-color: white;
+    padding: 10px 0px;
+    height: auto;
+    overflow: auto;
+    margin-top: -1px;
+      
+    border-radius: 0 5px 5px 5px;
+    -moz-border-radius: 0 5px 5px 5px;
+    -webkit-border-radius: 0 5px 5px 5px;
+}
+  
+/* This matchs tabs displaying to thier associated radio inputs */
+#wpfc-options:checked ~ .tab1, #wpfc-deleteCache:checked ~ .tab2, #wpfc-cacheTimeout:checked ~ .tab3 {
+    display: block;
+}
+/* for lef panel */
+#toplevel_page_WpFastestCacheOptions img{
+    padding: 0 !important;
+    margin-left: 5px !important;
+}
+#toplevel_page_WpFastestCacheOptions div.wp-menu-name{
+    margin-left: 46px !important;
+}
+.question:after {
+    content: ":";
+}
+.tab1 input{
+    margin-right: 5px;
+}
