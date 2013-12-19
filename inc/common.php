@@ -541,10 +541,6 @@
 
 				$this->createFolder($cachFilePath, $content);
 
-				if($_SERVER["REQUEST_URI"] == "/"){
-					$this->createFolder($this->wpContentDir."/cache/all/index.php", $content);
-				}
-
 				return $buffer;
 			}
 		}
