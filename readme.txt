@@ -16,13 +16,14 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 
 http://www.youtube.com/watch?v=glG4UukFuFM
 
-<h4>Features: </h4>
+<h4>Features</h4>
 
 1. Mod_Rewrite which is the fastest method is used in this plugin
 2. All cache files are deleted when a post or page is published
 3. Admin can delete all cached files from the options page
-4. Block cache for specific page or post with Short Code
-5. Cache Timeout - All cached files are deleted at the determinated time
+4. Admin can delete minified css and js files from the options page
+5. Block cache for specific page or post with Short Code
+6. Cache Timeout - All cached files are deleted at the determinated time
 
 <h4>Performance Optimization</h4>
 
