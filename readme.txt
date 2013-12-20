@@ -51,13 +51,17 @@ http://www.youtube.com/watch?v=glG4UukFuFM
 
 1. Main Page
 2. Delete All File Page
-3. Block caching for post and pages (TinyMCE)
-4. Block caching for post and pages (Quicktags)
-5. All cached files are deleted at the determinated time
-6. You can minify your html
-7. You can minify the css files
+3. Delete Minified Css and Js Files
+4. All cached files are deleted at the determinated time
+5. Block caching for post and pages (TinyMCE)
+6. Block caching for post and pages (Quicktags)
+7. You can minify your html
+8. You can minify the css files
 
 == Changelog ==
+
+= 0.7.8 =
+* Delete Minified Css & Js feature has been added
 
 = 0.7.7 =
 * Optimisation of CSS minify
