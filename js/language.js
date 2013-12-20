@@ -152,6 +152,18 @@ jQuery.fn.extend({
 			"Cost-benefit ratio: high" : {"tr" : "Maliyet-fayda oranı: Yüksek",
 													"ru" : "",
 													"ukr":"",
+													"es" :""},
+			"All cache files will be removed as well" : {"tr" : "Tüm cache dosyaları da silinecek",
+													"ru" : "",
+													"ukr":"",
+													"es" :""},
+			"If you modify any css or js file, you have to delete minified js and css files" : {"tr" : "Herhangi bir css ya da js dosyasını değiştirdiyseniz, minify edilmiş css ve js dosyalarını silmeniz gerekir",
+													"ru" : "",
+													"ukr":"",
+													"es" :""},
+			"Delete Minified Css & Js" : {"tr" : "Küçültülen Css & Js Temizle",
+													"ru" : "",
+													"ukr":"",
 													"es" :""}
 		};
 		var el = jQuery(this);
