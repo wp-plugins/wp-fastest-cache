@@ -63,6 +63,10 @@ http://www.youtube.com/watch?v=glG4UukFuFM
 
 = 0.7.8 =
 * Delete Minified Css & Js feature has been added
+* Update of Spanish translation
+* Update of Turkish translation
+* Update of Russian translation
+* Update of Ukrainian translation
 
 = 0.7.7 =
 * Optimisation of CSS minify

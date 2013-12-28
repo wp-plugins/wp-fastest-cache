@@ -6,10 +6,10 @@
 
 		}else if(input.attr("id") == "wpFastestCacheMinifyHtml"){
 			options.h4 = "Minify HTML";
-			options.h1 = "Compacting HTML code, including any inline JavaScript and CSS contained in it, can save many bytes of data and speed up downloading, parsing, and execution time.";
+			options.h1 = "<label>Compacting HTML code, including any inline JavaScript and CSS contained in it, can save many bytes of data and speed up downloading, parsing, and execution time.</label>";
 		}else if(input.attr("id") == "wpFastestCacheMinifyCss"){
 			options.h4 = "Minify CSS";
-			options.h1 = "Compacting CSS code can save many bytes of data and speed up downloading, parsing, and execution time.";
+			options.h1 = "<label>Compacting CSS code can save many bytes of data and speed up downloading, parsing, and execution time.</label>";
 		}else if(input.attr("id") == "wpFastestCacheGzip"){
 			options.h4 = "Enable Gzip Compression";
 			options.h1 = "<label>Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser.</label><br><br>" + 
