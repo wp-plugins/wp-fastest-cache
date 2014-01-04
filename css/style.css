@@ -104,7 +104,7 @@ div.questionCon.qsubmit{
 .question:after {
     content: ":";
 }
-.tab1 input{
+.inputCon input[type="checkbox"]{
     margin-right: 5px;
 }
 .get-info {
@@ -194,4 +194,7 @@ h1.summary-rec {
     border-color: #D8000C !important;
     color: #D8000C !important;
     background: url("../images/error.png") no-repeat;
+}
+.omni_admin_sidebar_section label {
+    font-size: 11px;
 }
