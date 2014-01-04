@@ -62,7 +62,7 @@
 		public function addButtonOnQuicktagsEditor(){
 			if (wp_script_is('quicktags')){ ?>
 				<script type="text/javascript">
-				    QTags.addButton('wpfc_not', 'wpfcNOT', '[wpfcNOT]', '', '', 'Block caching for this page');
+				    QTags.addButton('wpfc_not', 'wpfcNOT', '<!--[wpfcNOT]-->', '', '', 'Block caching for this page');
 			    </script>
 		    <?php }
 		}

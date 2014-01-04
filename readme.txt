@@ -61,6 +61,11 @@ http://www.youtube.com/watch?v=glG4UukFuFM
 
 == Changelog ==
 
+= 0.7.8.1 =
+* Optimisation of CSS minify
+* "[wpfcNOT]" shortcode has been converted to the image
+* Some style changes
+
 = 0.7.8 =
 * Delete Minified Css & Js feature has been added
 * Update of Spanish translation
