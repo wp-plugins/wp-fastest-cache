@@ -302,6 +302,13 @@
 				  <h3>Having Issues?</h3>
 				  <ul>
 				    <li><label>You can create a ticket</label> <a target="_blank" href="http://wordpress.org/support/plugin/wp-fastest-cache"><label>WordPress support forum</label></a></li>
+				  <?
+				  	if(isset($this->options->wpFastestCacheLanguage) && $this->options->wpFastestCacheLanguage == "tr"){
+				  		?>
+				  		<li><label>R10 Üzerinden Sorabilirsiniz</label> <a target="_blank" href="http://www.r10.net/wordpress/1096868-wp-fastest-cache-wp-en-hizli-ve-en-basit-cache-sistemi.html"><label>R10.net destek başlığı</label></a></li>
+				  		<?
+				  	}
+				  ?>
 				  </ul>
 				  </div>
 				</div>
