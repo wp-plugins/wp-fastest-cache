@@ -64,6 +64,7 @@ http://www.youtube.com/watch?v=glG4UukFuFM
 = 0.7.8.1 =
 * Optimisation of CSS minify
 * "[wpfcNOT]" shortcode has been converted to the image
+* r10.net support forum url has been added
 * Some style changes
 
 = 0.7.8 =
