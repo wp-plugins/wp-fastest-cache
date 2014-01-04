@@ -600,13 +600,20 @@
 
 		public function minifyCss($content){
 			if(isset($this->options->wpFastestCacheMinifyCss)){
+
+				$tmpContent = preg_replace("/\s+/", " ", ((string) $content));
+				preg_match("/<head(.*?)<\/head>/", $tmpContent, $matchContent);
+
+				$tmpContent = (count($matchContent) > 0) ? $matchContent[0] : $content;
+
 				$contentUrl = str_replace("http://", "", content_url());
 				$contentUrl = str_replace("www.", "", $contentUrl);
 
 				$contentUrlPreg = preg_quote($contentUrl, "/");
 
-				preg_match_all("/href=[\"\']http\:\/\/(www\.)?$contentUrlPreg\/(.*?)\.css(.*?)[\"\']/", $content, $match, PREG_SET_ORDER);
+				preg_match_all("/href=[\"\']http\:\/\/(www\.)?$contentUrlPreg\/(.*?)\.css(.*?)[\"\']/", $tmpContent, $match, PREG_SET_ORDER);
 				if(count($match) > 0){
+					require_once "minify-css.php";
 					foreach ($match as $fileV) {
 						$file = "http://".$fileV[1].$contentUrl."/".$fileV[2];
 				    	$cssThemePath = "/".$fileV[2];
@@ -615,7 +622,6 @@
 					    if(!is_dir($cachFilePath)){
 					    	if($cachFilePath){
 								if($cssContent = @file_get_contents($file.".css")){
-									require_once "minify-css.php";
 								    $themePath = substr($cssThemePath, 1, strripos($cssThemePath, "/"));
 								    $cssContent = preg_replace('/url\((\"|\')?(?!\"http|http|\'http)(.*?)\.(.*?)\)/','url($1'.str_repeat("../", 3).$themePath.'$2.$3)',$cssContent); 
 								    $cssContent = Minify_CSS_Compressor::process($cssContent, array());
