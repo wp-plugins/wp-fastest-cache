@@ -14,7 +14,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 This plugin creates static html files from your dynamic WordPress blog.
 Setup of this plugin is so easy. You don't need to modify .htacces file. It will modified automatically.
 
-http://www.youtube.com/watch?v=glG4UukFuFM
+http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 <h4>Features</h4>
 
