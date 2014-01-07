@@ -427,14 +427,14 @@
 		public function modifyHtaccess($post){
 			if(isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on"){
 				if(!is_file(ABSPATH.".htaccess")){
-					return array(".htacces was not found", "error");
+					return array(".htaccess was not found", "error");
 				}else if(is_writable(ABSPATH.".htaccess")){
 					$htaccess = file_get_contents(ABSPATH.".htaccess");
 					$htaccess = $this->insertRewriteRule($htaccess);
 					$htaccess = $this->insertGzipRule($htaccess, $post);
 					file_put_contents(ABSPATH.".htaccess", $htaccess);
 				}else{
-					return array(".htacces is not writable", "error");
+					return array(".htaccess is not writable", "error");
 				}
 				return array("Options have been saved", "success");
 			}else{

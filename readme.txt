@@ -61,11 +61,12 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.7.8.1 =
+= 0.7.8.2 =
 * Optimisation of CSS minify
 * "[wpfcNOT]" shortcode has been converted to the image
 * r10.net support forum url has been added
 * Some style changes
+* to corrent misspelling
 
 = 0.7.8 =
 * Delete Minified Css & Js feature has been added
