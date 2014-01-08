@@ -66,7 +66,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * "[wpfcNOT]" shortcode has been converted to the image
 * r10.net support forum url has been added
 * Some style changes
-* to corrent misspelling
+* to correct misspelling
 
 = 0.7.8 =
 * Delete Minified Css & Js feature has been added
