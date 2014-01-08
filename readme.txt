@@ -185,7 +185,7 @@ If a page is cached, at the bottom of the page there is a text like "<!-- WP Fas
 = What does ".htaccess not found" warning mean? =
 Wpfc does not create .htaccess automatically so you need to create empty one.
 
-= Does Wpfc work with WPMU (Wordpress Multisite) properly?
+= Does Wpfc work with WPMU (Wordpress Multisite) properly? =
 No. Wpfc does not support Wordpress Multisite.
 
 == Upgrade notice ==
