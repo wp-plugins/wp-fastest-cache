@@ -27,9 +27,10 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 <h4>Performance Optimization</h4>
 
-1. Minify Html - You can decrease the size of page
-2. Minify Css - You can decrease the size of css files
-3. Enable Gzip Compression - Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser.
+1. Generating static html files from your dynamic WordPress blog
+2. Minify Html - You can decrease the size of page
+3. Minify Css - You can decrease the size of css files
+4. Enable Gzip Compression - Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser.
 
 <h4>Supported languages: </h4>
 
