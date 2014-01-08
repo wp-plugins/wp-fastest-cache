@@ -177,4 +177,15 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Admin can delete all cached files from the options page
 * Blocking cache with Shortcode
 
+== Frequently Asked Questions ==
+
+= How do I know my blog is being cached? =
+If a page is cached, at the bottom of the page there is a text like "<!-- WP Fastest Cache file was created in 0.330816984177 seconds, on 08-01-14 9:01:35 -->".
+
+= What does ".htaccess not found" warning mean? =
+Wpfc does not create .htaccess automatically so you need to create empty one.
+
+= Does Wpfc work with WPMU (Wordpress Multisite) properly?
+No. Wpfc does not support Wordpress Multisite.
+
 == Upgrade notice ==
