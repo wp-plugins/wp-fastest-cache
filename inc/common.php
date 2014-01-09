@@ -108,7 +108,7 @@
 		public function addJavaScript(){
 			wp_enqueue_script("language", plugins_url("wp-fastest-cache/js/language.js"), array(), time(), false);
 			wp_enqueue_script("info", plugins_url("wp-fastest-cache/js/info.js"), array(), time(), true);
-			if($this->options->wpFastestCacheLanguage != "eng"){
+			if(isset($this->options->wpFastestCacheLanguage) && $this->options->wpFastestCacheLanguage != "eng"){
 				wp_enqueue_script("dictionary", plugins_url("wp-fastest-cache/js/lang/".$this->options->wpFastestCacheLanguage.".js"), array(), time(), false);
 			}
 		}
