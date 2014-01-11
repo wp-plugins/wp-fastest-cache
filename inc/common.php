@@ -126,6 +126,7 @@
 			$wpFastestCacheLanguage = "";
 			$wpFastestCacheTimeOut = "";
 			$wpFastestCacheStatus = isset($this->options->wpFastestCacheStatus) ? 'checked="checked"' : "";
+			$wpFastestCacheMobile = isset($this->options->wpFastestCacheMobile) ? 'checked="checked"' : "";
 			$wpFastestCacheNewPost = isset($this->options->wpFastestCacheNewPost) ? 'checked="checked"' : "";
 			$wpFastestCacheMinifyHtml = isset($this->options->wpFastestCacheMinifyHtml) ? 'checked="checked"' : "";
 			$wpFastestCacheMinifyCss = isset($this->options->wpFastestCacheMinifyCss) ? 'checked="checked"' : "";
@@ -164,6 +165,13 @@
 								<div class="question">Cache System</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheStatus; ?> id="wpFastestCacheStatus" name="wpFastestCacheStatus"><label for="wpFastestCacheStatus">Enable</label></div>
 							</div>
+
+							<div class="questionCon">
+								<div class="question">Mobile</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMobile; ?> id="wpFastestCacheMobile" name="wpFastestCacheMobile"><label for="wpFastestCacheMobile">Don't show the cached version for mobile devices</label></div>
+							</div>
+
+
 							<div class="questionCon">
 								<div class="question">New Post</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheNewPost; ?> id="wpFastestCacheNewPost" name="wpFastestCacheNewPost"><label for="wpFastestCacheNewPost">Clear all cache files when a post or page is published</label></div>
@@ -476,16 +484,19 @@
 		}
 
 		public function insertRewriteRule($htaccess){
-			preg_match("/wp-content\/cache\/all/", $htaccess, $check);
-			if(count($check) === 0){
-				$htaccess = $this->getHtaccess().$htaccess;
-			}else{
-				//already changed
-			}
+			$htaccess = preg_replace("/#\s?BEGIN\s?WpFastestCache.*?#\s?END\s?WpFastestCache/s", "", $htaccess);
+			$htaccess = $this->getHtaccess().$htaccess;
+
 			return $htaccess;
 		}
 
 		public function getHtaccess(){
+			$mobile = "";
+
+			if(isset($_POST["wpFastestCacheMobile"]) && $_POST["wpFastestCacheMobile"] == "on"){
+				$mobile = "RewriteCond %{HTTP_USER_AGENT} !^.*(iphone|sony|symbos|nokia|samsung|mobile|epoc|ericsson|panasonic|philips|sanyo|sharp|sie-|portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|android|blackberry|iphone|ipod|iemobile|palmos|webos|googlebot-mobile).*$ [NC]"."\n";
+			}
+
 			$data = "# BEGIN WpFastestCache"."\n".
 					"<IfModule mod_rewrite.c>"."\n".
 					"RewriteEngine On"."\n".
@@ -494,7 +505,7 @@
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".
 					"RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$"."\n".
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
-					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".
+					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile.
 					"RewriteCond %{DOCUMENT_ROOT}/".$this->getRewriteBase()."wp-content/cache/all/".$this->getRewriteBase()."$1/index.html -f"."\n".
 					'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase().'$1/index.html" [L]'."\n".
 					"</IfModule>"."\n".
