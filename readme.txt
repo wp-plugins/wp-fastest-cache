@@ -24,6 +24,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 4. Admin can delete minified css and js files from the options page
 5. Block cache for specific page or post with Short Code
 6. Cache Timeout - All cached files are deleted at the determinated time
+7. Enable/Disable cache option for mobile devices
 
 <h4>Performance Optimization</h4>
 
