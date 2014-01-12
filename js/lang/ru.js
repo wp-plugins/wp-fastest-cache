@@ -39,5 +39,6 @@ window.wpfc.dictionary = {
 	"Cost-benefit ratio: high" : "соотношение затрат и прибыли - высокое",
 	"All cache files will be removed as well" : "",
 	"If you modify any css or js file, you have to delete minified js and css files" : "",
-	"Delete Minified Css & Js" : ""
+	"Delete Minified Css & Js" : "",
+	"Don't show the cached version for mobile devices" : ""
 };

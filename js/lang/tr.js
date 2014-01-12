@@ -39,5 +39,6 @@ window.wpfc.dictionary = {
 	"Cost-benefit ratio: high" :  "Maliyet-fayda oranı: Yüksek",
 	"All cache files will be removed as well" :  "Tüm cache dosyaları da silinecek",
 	"If you modify any css or js file, you have to delete minified js and css files" :  "Herhangi bir css ya da js dosyasını değiştirdiyseniz, minify edilmiş css ve js dosyalarını silmeniz gerekir",
-	"Delete Minified Css & Js" :  "Küçültülen Css & Js Temizle"
+	"Delete Minified Css & Js" :  "Küçültülen Css & Js Temizle",
+	"Don't show the cached version for mobile devices" : "Mobile kullanıcılar için cache'i gösterme"
 };
