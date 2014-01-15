@@ -69,15 +69,15 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 == Changelog ==
 
 = 0.7.8.3 =
-* [FEATURE] Enable/Disable cache option for mobile devices has been added
+* <strong>[FEATURE]</strong> Enable/Disable cache option for mobile devices has been added
 * Optimisation of CSS minify
-* [FEATURE] "[wpfcNOT]" shortcode has been converted to the image
+* <strong>[FEATURE]</strong> "[wpfcNOT]" shortcode has been converted to the image
 * r10.net support forum url has been added
 * Some style changes
 * to correct misspelling
 
 = 0.7.8 =
-* [FEATURE] Delete Minified Css & Js feature has been added
+* <strong>[FEATURE]</strong> Delete Minified Css & Js feature has been added
 * Update of Spanish translation
 * Update of Turkish translation
 * Update of Russian translation
@@ -93,7 +93,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Update of Ukrainian translation
 
 = 0.7.6 =
-* [FEATURE] Gzip Compression
+* <strong>[FEATURE]</strong> Gzip Compression
 
 = 0.7.5 =
 * Performance of delete all files is improved
@@ -112,36 +112,36 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Info Tip has been added
 
 = 0.7.2 =
-* [FEATURE] Minify CSS files
+* <strong>[FEATURE]</strong> Minify CSS files
 
 = 0.7.1 =
 * Delete Cron Job when the plugin is deactivated
 * Delete from DB when the plugin is deactivated
 
 = 0.7 =
-* [FEATURE] works with Wordfence properly
+* <strong>[FEATURE]</strong> works with Wordfence properly
 
 = 0.6.9 =
-* [FEATURE] 404 pages are not cached
+* <strong>[FEATURE]</strong> 404 pages are not cached
 
 = 0.6.8 =
 * urls which includes words that wp-content, wp-admin, wp-includes are not cached
 * The issue about cache timeout has been solved
 
 = 0.6.7 =
-* [FEATURE] Cache Timeout has been added
+* <strong>[FEATURE]</strong> Cache Timeout has been added
 
 = 0.6.6 =
-* [FEATURE] Spanish language has been added
+* <strong>[FEATURE]</strong> Spanish language has been added
 
 = 0.6.5 =
-* [FEATURE] Minify html
+* <strong>[FEATURE]</strong> Minify html
 
 = 0.6.4 =
-* [FEATURE] Supported languages: Russian, Ukrainian and Turkish
+* <strong>[FEATURE]</strong> Supported languages: Russian, Ukrainian and Turkish
 
 = 0.6.3 =
-* [FEATURE] "Block Cache For Posts and Pages" has been added as a icon for TinyMCE and  Quicktags editor
+* <strong>[FEATURE]</strong> "Block Cache For Posts and Pages" has been added as a icon for TinyMCE and  Quicktags editor
 
 = 0.6.2 =
 * Cache file is not created if the file is exist
@@ -180,9 +180,9 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Some styles changes
 
 = 0.5 =
-* [FEATURE] Admin can delete all cached files from the options page
-* [FEATURE] All cache files are deleted when a post or page is published
-* [FEATURE] Blocking cache with Shortcode
+* <strong>[FEATURE]</strong> Admin can delete all cached files from the options page
+* <strong>[FEATURE]</strong> All cache files are deleted when a post or page is published
+* <strong>[FEATURE]</strong> Blocking cache with Shortcode
 
 == Frequently Asked Questions ==
 
