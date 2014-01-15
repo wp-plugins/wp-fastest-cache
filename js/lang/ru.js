@@ -32,13 +32,13 @@ window.wpfc.dictionary = {
 	"WordPress support forum" : "",
 	"Compacting HTML code, including any inline JavaScript and CSS contained in it, can save many bytes of data and speed up downloading, parsing, and execution time." : "уплотнение HTML-кода, а также входящих JavaScript и CSS, могут сохранить значительное количество байтов данных и ускорить время загрузки, анализа и исполнения.",
 	"Compacting CSS code can save many bytes of data and speed up downloading, parsing, and execution time." : "сокращение CSS-кода помогает сэкономить на объеме данных, а также ускорить процесс загрузки, анализа и исполнения.",
-	"Enable Gzip Compression" : "",
+	"Enable Gzip Compression" : "Включить сжатие Gzip ",
 	"Increase page speed" : "увеличить скорость загрузки страниц",
 	"Reduce sizes of pages by up to 70%" : "уменьшить размеры страниц до 70%.",
 	"Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser." : "уменьшение объема отправленных вашим сервером файлов приводит к повышению скорости работы браузера при их передаче.",
 	"Cost-benefit ratio: high" : "соотношение затрат и прибыли - высокое",
-	"All cache files will be removed as well" : "",
-	"If you modify any css or js file, you have to delete minified js and css files" : "",
-	"Delete Minified Css & Js" : "",
-	"Don't show the cached version for mobile devices" : ""
+	"All cache files will be removed as well" : "Все кешированые файлы также будут удалены",
+	"If you modify any css or js file, you have to delete minified js and css files" : "Если вы изменяете какой-либо из css или js файлов вы должны удалить уменьшенные файлы css или js соответственно",
+	"Delete Minified Css & Js" : "Уничтожьте уменьшенные css и js",
+	"Don't show the cached version for mobile devices" : "Не отображать кэшированные версии для мобильных устройств"
 };
