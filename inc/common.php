@@ -18,7 +18,7 @@
 			$this->checkCronTime();
 			if(is_admin()){
 				$this->optionsPageRequest();
-				$this->iconUrl = plugins_url("wp-fastest-cache/images/icon.png");
+				$this->iconUrl = plugins_url("wp-fastest-cache/images/icon-left.png");
 				$this->setCronJobSettings();
 				$this->addButtonOnEditor();
 				add_action('admin_enqueue_scripts', array($this, 'addJavaScript'));

@@ -68,13 +68,14 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.7.8.3 =
+= 0.7.8.4 =
 * <strong>[FEATURE]</strong> Enable/Disable cache option for mobile devices has been added
-* Optimisation of CSS minify
 * <strong>[FEATURE]</strong> "[wpfcNOT]" shortcode has been converted to the image
+* Optimisation of CSS minify
 * r10.net support forum url has been added
 * Some style changes
 * to correct misspelling
+* Icon has been changed
 
 = 0.7.8 =
 * <strong>[FEATURE]</strong> Delete Minified Css & Js feature has been added
