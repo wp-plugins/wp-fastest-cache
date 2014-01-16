@@ -196,4 +196,7 @@ Wpfc does not create .htaccess automatically so you need to create empty one.
 = Does Wpfc work with WPMU (Wordpress Multisite) properly? =
 No. Wpfc does not support Wordpress Multisite yet.
 
+= Is this plugin compatible with Adsense? =
+Yes, it is compatible with Adsense %100.
+
 == Upgrade notice ==
