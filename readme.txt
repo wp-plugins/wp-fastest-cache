@@ -68,7 +68,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.7.8.4 =
+= 0.7.8.5 =
 * <strong>[FEATURE]</strong> Enable/Disable cache option for mobile devices has been added
 * <strong>[FEATURE]</strong> "[wpfcNOT]" shortcode has been converted to the image
 * Optimisation of CSS minify
@@ -76,6 +76,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Some style changes
 * to correct misspelling
 * Icon has been changed
+* <strong>[FEATURE]</strong> Portuguese language has been added
 
 = 0.7.8 =
 * <strong>[FEATURE]</strong> Delete Minified Css & Js feature has been added

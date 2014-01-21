@@ -201,6 +201,7 @@
 									<select id="wpFastestCacheLanguage" name="wpFastestCacheLanguage">
 									  <option value="eng">English</option>
 									  <option value="es">Español</option>
+									  <option value="pt">Português</option>
 									  <option value="ru">Русский</option>
 									  <option value="tr">Türkçe</option>
 									  <option value="ukr">Українська</option>
