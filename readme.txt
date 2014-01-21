@@ -42,10 +42,10 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 * English
 * Español (by Diplo)
+* Português
 * Русский
 * Türkçe
 * Українська
-* Português
 
 == Installation ==
 
