@@ -199,6 +199,7 @@
 								<div class="question">Language</div>
 								<div class="inputCon">
 									<select id="wpFastestCacheLanguage" name="wpFastestCacheLanguage">
+									  <option value="de">Deutsch</option>
 									  <option value="eng">English</option>
 									  <option value="es">Español</option>
 									  <option value="pt">Português</option>

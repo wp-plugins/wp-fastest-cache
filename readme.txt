@@ -40,6 +40,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 <h4>Supported languages: </h4>
 
+* Deutsch (by Hinji)
 * English
 * Español (by Diplo)
 * Português
@@ -78,6 +79,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * to correct misspelling
 * Icon has been changed
 * <strong>[FEATURE]</strong> Portuguese language has been added
+* <strong>[FEATURE]</strong> German language has been added
 
 = 0.7.8 =
 * <strong>[FEATURE]</strong> Delete Minified Css & Js feature has been added
