@@ -16,12 +16,26 @@
 			$this->setOptions();
 			$this->detectNewPost();
 			$this->checkCronTime();
+
+			$this->checkActivePlugins();
+
 			if(is_admin()){
 				$this->optionsPageRequest();
 				$this->iconUrl = plugins_url("wp-fastest-cache/images/icon-left.png");
 				$this->setCronJobSettings();
 				$this->addButtonOnEditor();
 				add_action('admin_enqueue_scripts', array($this, 'addJavaScript'));
+			}
+		}
+
+		public function checkActivePlugins(){
+			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+			//for WP-Polls
+			if(is_plugin_active('wp-polls/wp-polls.php')){ 
+				include "wp-polls.php";
+				$wp_polls = new WpPollsForWpFc();
+				$wp_polls->execute();
 			}
 		}
 
