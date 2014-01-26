@@ -207,4 +207,5 @@ Yes, it is compatible with Adsense %100.
 = Is this plugin compatible with WP-Polls? =
 Yes, it is compatible with WP-Polls %100.
 
+
 == Upgrade notice ==
