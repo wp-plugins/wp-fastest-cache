@@ -48,6 +48,8 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Türkçe
 * Українська
 
+<img src="http://www.alastyr.com/sss/wp-content/uploads/2012/11/alastyrlogo.png" />
+
 == Installation ==
 
 1. Upload `wp-fastest-cache` to the `/wp-content/plugins/` directory
