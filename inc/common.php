@@ -634,49 +634,26 @@
 
 		public function minifyCss($content){
 			if(isset($this->options->wpFastestCacheMinifyCss)){
+				require_once "css-utilities.php.php";
+				$css = new CssUtilities($content);
 
-				$tmpContent = preg_replace("/\s+/", " ", ((string) $content));
-				preg_match("/<head(.*?)<\/head>/", $tmpContent, $matchContent);
+				if(count($css->getCssLinks()) > 0){
+					foreach ($css->getCssLinks() as $key => $value) {
+						if($href = $css->checkInternal($value)){
+							$minifiedCss = $css->minify($href);
 
-				$tmpContent = (count($matchContent) > 0) ? $matchContent[0] : $content;
-
-				$contentUrl = str_replace("http://", "", content_url());
-				$contentUrl = str_replace("www.", "", $contentUrl);
-
-				$contentUrlPreg = preg_quote($contentUrl, "/");
-
-				preg_match_all("/href=[\"\']http\:\/\/(www\.)?$contentUrlPreg\/(.*?)\.css(.*?)[\"\']/", $tmpContent, $match, PREG_SET_ORDER);
-				if(count($match) > 0){
-					require_once "minify-css.php";
-					foreach ($match as $fileV) {
-						$file = "http://".$fileV[1].$contentUrl."/".$fileV[2];
-				    	$cssThemePath = "/".$fileV[2];
-					    $cachFilePath = $this->wpContentDir."/cache/wpfc-minified/".md5($cssThemePath);
-
-					    if(!is_dir($cachFilePath)){
-					    	if($cachFilePath){
-								if($cssContent = @file_get_contents($file.".css")){
-								    $themePath = substr($cssThemePath, 1, strripos($cssThemePath, "/"));
-								    $cssContent = preg_replace('/url\((\"|\')?(?!\"http|http|\'http)(.*?)\.(.*?)\)/','url($1'.str_repeat("../", 3).$themePath.'$2.$3)',$cssContent); 
-								    $cssContent = Minify_CSS_Compressor::process($cssContent, array());
-								    $prefix = time();
-								    $this->createFolder($cachFilePath, $cssContent, "css", $prefix);
-
-									$newFile = str_replace('wp-content', 'wp-content/cache/wpfc-minified/', $file);
-								    $newFile = str_replace($cssThemePath, md5($cssThemePath), $newFile);
-								    $content = str_replace($fileV[3] ? $file.".css".$fileV[3] : $file.".css", $newFile."/".$prefix."index.css", $content);
+							if($minifiedCss){
+								if(!is_dir($minifiedCss["cachFilePath"])){
+									$prefix = time();
+									$this->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
 								}
-					    	}
-					    }else{
-						    $newFile = str_replace('wp-content', 'wp-content/cache/wpfc-minified/', $file);
-						    $newFile = str_replace($cssThemePath, md5($cssThemePath), $newFile);
-						    $cssFiles = scandir($cachFilePath, 1);
-						    if($cssFiles){
-						    	$content = str_replace($fileV[3] ? $file.".css".$fileV[3] : $file.".css", $newFile."/".$cssFiles[0], $content);
-						    }
-					    }
 
-				  	}
+								if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
+									$content = str_replace($href, $minifiedCss["url"]."/".$cssFiles[0], $content);	
+								}
+							}
+						}
+					}
 				}
 			}
 			return $content;
