@@ -33,7 +33,7 @@
 
 			//for WP-Polls
 			if(is_plugin_active('wp-polls/wp-polls.php')){ 
-				include "wp-polls.php";
+				require_once "wp-polls.php";
 				$wp_polls = new WpPollsForWpFc();
 				$wp_polls->execute();
 			}
