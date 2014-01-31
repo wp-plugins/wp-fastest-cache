@@ -634,7 +634,7 @@
 
 		public function minifyCss($content){
 			if(isset($this->options->wpFastestCacheMinifyCss)){
-				require_once "css-utilities.php.php";
+				require_once "css-utilities.php";
 				$css = new CssUtilities($content);
 
 				if(count($css->getCssLinks()) > 0){
