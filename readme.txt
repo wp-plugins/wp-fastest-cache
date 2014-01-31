@@ -72,7 +72,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.7.8.6 =
+= 0.7.8.7 =
 * <strong>[FEATURE]</strong> compatible with WP-Polls
 * <strong>[FEATURE]</strong> Enable/Disable cache option for mobile devices has been added
 * <strong>[FEATURE]</strong> "[wpfcNOT]" shortcode has been converted to the image
@@ -83,6 +83,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Icon has been changed
 * <strong>[FEATURE]</strong> Portuguese language has been added
 * <strong>[FEATURE]</strong> German language has been added
+* Minify css issue has been solved
 
 = 0.7.8 =
 * <strong>[FEATURE]</strong> Delete Minified Css & Js feature has been added
