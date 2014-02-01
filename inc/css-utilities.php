@@ -2,6 +2,7 @@
 	class CssUtilities{
 		private $html = "";
 		private $cssLinks = array();
+		private $url = "";
 
 		public function __construct($html){
 			$this->html = preg_replace("/\s+/", " ", ((string) $html));
@@ -9,6 +10,7 @@
 		}
 
 		public function minify($url){
+			$this->url = $url;
 			preg_match("/^.*?wp-content\/(themes|plugins)\/(.*?)$/", $url, $name);
 
 			if($css = @file_get_contents($url)){
@@ -22,8 +24,21 @@
 		}
 
 		public function fixPathsInCssContent($css){
-			$themePath = "themes/".get_template()."/";
-			return preg_replace('/url\((\"|\')?(?!\"http|http|\'http)(.*?)\.(.*?)\)/','url($1'.str_repeat("../", 3).$themePath.'$2.$3)',$css); 
+			return preg_replace_callback('/url\((?P<firstQuote>\"|\')?(?!http)(?P<up>(\.\.\/)*)(?P<imageUrl>[^\'\"\(\)]+)(?P<lastQuote>\"|\')?\)/',array($this, 'newImgPath'),$css);
+		}
+
+		public function newImgPath($matches){
+			$wpContent = strpos($this->url, "wp-content") + 11;
+			$lastSlash = strripos($this->url, "/") + 1;
+
+			$themePath = substr($this->url, $wpContent, $lastSlash - $wpContent);
+
+			$countUp = substr_count($matches["up"], '../');
+			$arrThemePath = explode("/", $themePath);
+			$arrReturnImgPath = array_slice($arrThemePath, 0, count($arrThemePath) - $countUp- 1); 
+			$returnImgPath = implode("/", $arrReturnImgPath)."/".$matches["imageUrl"];
+
+			return 'url('.$matches["firstQuote"].str_repeat("../", 3).$returnImgPath.$matches["lastQuote"].')';
 		}
 
 		public function setCssLinks(){
@@ -42,7 +57,8 @@
 			$httpHost = str_replace("www.", "", $_SERVER["HTTP_HOST"]); 
 			if(preg_match("/href=[\"\'](.*?)[\"\']/", $link, $href)){
 				if(strpos($href[1], $httpHost)){
-					if(strpos($href[1], $contentUrl."/themes") || strpos($href[1], $contentUrl."/plugins")){
+					//if(strpos($href[1], $contentUrl."/themes") || strpos($href[1], $contentUrl."/plugins")){
+					if(strpos($href[1], $contentUrl."/themes")){
 						return $href[1];
 					}
 				}
