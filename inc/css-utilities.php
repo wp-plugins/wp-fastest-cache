@@ -57,8 +57,7 @@
 			$httpHost = str_replace("www.", "", $_SERVER["HTTP_HOST"]); 
 			if(preg_match("/href=[\"\'](.*?)[\"\']/", $link, $href)){
 				if(strpos($href[1], $httpHost)){
-					//if(strpos($href[1], $contentUrl."/themes") || strpos($href[1], $contentUrl."/plugins")){
-					if(strpos($href[1], $contentUrl."/themes")){
+					if(strpos($href[1], $contentUrl."/themes") || strpos($href[1], $contentUrl."/plugins")){
 						return $href[1];
 					}
 				}
