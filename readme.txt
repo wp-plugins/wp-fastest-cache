@@ -210,5 +210,8 @@ Yes, it is compatible with Adsense %100.
 = Is this plugin compatible with WP-Polls? =
 Yes, it is compatible with WP-Polls %100.
 
+= Is this plugin compatible with Http Secure (https) ?
+No, it is not compatible with Http Secure (https).
+
 
 == Upgrade notice ==
