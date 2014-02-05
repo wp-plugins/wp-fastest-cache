@@ -202,7 +202,7 @@ You need to refresh a page twice. If a page is cached, at the bottom of the page
 Wpfc does not create .htaccess automatically so you need to create empty one.
 
 = How is "tmpWpfc" removed? =
-It is deleted automatically. Cron-job is set not to use lots of CPU. Cron-job is set and it deletes 100 files every 5 minutes. When all files in tmpWpfc are deleted, cron-job is unset.
+It is deleted automatically. Cron-job is set not to use a lot of CPU resources. Cron-job is set and it deletes 100 files every 5 minutes. When all files in tmpWpfc are deleted, cron-job is unset.
 
 = Does Wpfc work with WPMU (Wordpress Multisite) properly? =
 No. Wpfc does not support Wordpress Multisite yet.
