@@ -196,10 +196,13 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 == Frequently Asked Questions ==
 
 = How do I know my blog is being cached? =
-If a page is cached, at the bottom of the page there is a text like "&lt;!-- WP Fastest Cache file was created in 0.330816984177 seconds, on 08-01-14 9:01:35 --&gt;".
+You need to refresh a page twice. If a page is cached, at the bottom of the page there is a text like "&lt;!-- WP Fastest Cache file was created in 0.330816984177 seconds, on 08-01-14 9:01:35 --&gt;".
 
 = What does ".htaccess not found" warning mean? =
 Wpfc does not create .htaccess automatically so you need to create empty one.
+
+= How is "tmpWpfc" removed? =
+It is deleted automatically. Cron-job is set not to use lots of CPU. Cron-job is set and it deletes 100 files every 5 minutes. When all files in tmpWpfc are deleted, cron-job is unset.
 
 = Does Wpfc work with WPMU (Wordpress Multisite) properly? =
 No. Wpfc does not support Wordpress Multisite yet.
