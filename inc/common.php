@@ -434,12 +434,62 @@
 			//for optionsPage() $_POST is array and json_decode() converts to stdObj
 			$this->options = json_decode($data);
 
-			if(get_option("WpFastestCache")){
-				update_option("WpFastestCache", $data);
-			}else{
-				add_option("WpFastestCache", $data, null, "yes");
-			}
 			$this->systemMessage = $this->modifyHtaccess($_POST);
+
+			if(isset($this->systemMessage[1]) && $this->systemMessage[1] != "error"){
+
+				if($message = $this->checkCachePathWriteable()){
+
+
+					if(is_array($message)){
+						$this->systemMessage = $message;
+					}else{
+						if(get_option("WpFastestCache")){
+							update_option("WpFastestCache", $data);
+						}else{
+							add_option("WpFastestCache", $data, null, "yes");
+						}
+					}
+				}
+			}
+		}
+
+		public function checkCachePathWriteable(){
+			$message = array();
+
+			if(!is_dir($this->wpContentDir."/cache/")){
+				if (@mkdir($this->wpContentDir."/cache/", 0755, true)){
+					//
+				}else{
+					array_push($message, "- /wp-content/cache/ is needed to be created");
+				}
+			}else{
+				if (@mkdir($this->wpContentDir."/cache/testWpFc/", 0755, true)){
+					rmdir($this->wpContentDir."/cache/testWpFc/");
+				}else{
+					array_push($message, "- /wp-content/cache/ permission has to be 755");
+				}
+			}
+
+			if(!is_dir($this->wpContentDir."/cache/all/")){
+				if (@mkdir($this->wpContentDir."/cache/all/", 0755, true)){
+					//
+				}else{
+					array_push($message, "- /wp-content/cache/all/ is needed to be created");
+				}
+			}else{
+				if (@mkdir($this->wpContentDir."/cache/all/testWpFc/", 0755, true)){
+					rmdir($this->wpContentDir."/cache/all/testWpFc/");
+				}else{
+					array_push($message, "- /wp-content/cache/all/ permission has to be 755");
+				}	
+			}
+
+			if(count($message) > 0){
+				return array(implode("<br>", $message), "error");
+			}else{
+				return true;
+			}
 		}
 
 		public function setOptions(){
@@ -449,7 +499,7 @@
 		}
 
 		public function modifyHtaccess($post){
-			if(isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on"){
+			if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on")){
 				if(!is_file(ABSPATH.".htaccess")){
 					return array(".htaccess was not found", "error");
 				}else if(is_writable(ABSPATH.".htaccess")){
