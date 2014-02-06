@@ -206,6 +206,9 @@ It is deleted automatically. Cron-job is set not to use a lot of CPU resources. 
 = Does Wpfc work with WPMU (Wordpress Multisite) properly? =
 No. Wpfc does not support Wordpress Multisite yet.
 
+= Does Wpfc work in "Subdirectory Install"? =
+No. Wpfc does not support "Subdirectory Install" yet.
+
 = Is this plugin compatible with Adsense? =
 Yes, it is compatible with Adsense %100.
 
