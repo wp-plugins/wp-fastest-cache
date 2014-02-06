@@ -71,8 +71,8 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.7.8.8 =
-* <strong>[FEATURE]</strong> compatible with WP-Polls
+= 0.7.8.9 =
+* <strong>[FEATURE]</strong> Compatible with WP-Polls
 * <strong>[FEATURE]</strong> Enable/Disable cache option for mobile devices has been added
 * <strong>[FEATURE]</strong> "[wpfcNOT]" shortcode has been converted to the image
 * Optimisation of CSS minify
@@ -83,6 +83,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * <strong>[FEATURE]</strong> Portuguese language has been added
 * <strong>[FEATURE]</strong> German language has been added
 * Minify css issue has been solved
+* <strong>[FEATURE]</strong> Blackberry PlayBook has been added into mobiles
 
 = 0.7.8 =
 * <strong>[FEATURE]</strong> Delete Minified Css & Js feature has been added
