@@ -1,4 +1,4 @@
-<?
+<?php
 	class CssUtilities{
 		private $html = "";
 		private $cssLinks = array();
@@ -16,7 +16,7 @@
 			if($css = @file_get_contents($url)){
 				$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($name[2]);
 				$cssContent = $this->_process($css);
-				$cssContent = $this->fixPathsInCssContent($css);
+				$cssContent = $this->fixPathsInCssContent($cssContent);
 
 				return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => content_url()."/cache/wpfc-minified/".md5($name[2]));
 			}
