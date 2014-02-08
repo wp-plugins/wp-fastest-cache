@@ -556,6 +556,28 @@
 			return $htaccess;
 		}
 
+		public function prefixRedirect(){
+			$forceTo = "";
+			if(preg_match("/^https:\/\//", site_url())){
+				//toDo
+			}else{
+				if(preg_match("/^http:\/\/www\./", site_url())){
+					$forceTo = "RewriteCond %{HTTP_HOST} !^www\."."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
+							   "RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]"."\n";
+				}else{
+					$forceTo = "RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
+							   "RewriteRule ^(.*)$ http://%1/$1/ [R=301,L]"."\n";
+				}
+			}
+			return $forceTo;
+		}
+
 		public function getHtaccess(){
 			$mobile = "";
 
@@ -566,7 +588,7 @@
 			$data = "# BEGIN WpFastestCache"."\n".
 					"<IfModule mod_rewrite.c>"."\n".
 					"RewriteEngine On"."\n".
-					"RewriteBase /"."\n".
+					"RewriteBase /"."\n".$this->prefixRedirect().
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".
 					"RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$"."\n".
