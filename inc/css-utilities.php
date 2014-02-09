@@ -13,12 +13,18 @@
 			$this->url = $url;
 			preg_match("/^.*?wp-content\/(themes|plugins)\/(.*?)$/", $url, $name);
 
-			if($css = @file_get_contents($url)){
-				$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($name[2]);
-				$cssContent = $this->_process($css);
-				$cssContent = $this->fixPathsInCssContent($cssContent);
+			$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($name[2]);
+			$cssLink = content_url()."/cache/wpfc-minified/".md5($name[2]);
 
-				return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => content_url()."/cache/wpfc-minified/".md5($name[2]));
+			if(is_dir($cachFilePath)){
+				return array("cachFilePath" => $cachFilePath, "cssContent" => "", "url" => $cssLink);
+			}else{
+				if($css = @file_get_contents($url)){
+					$cssContent = $this->_process($css);
+					$cssContent = $this->fixPathsInCssContent($cssContent);
+
+					return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => $cssLink);
+				}
 			}
 			return false;
 		}

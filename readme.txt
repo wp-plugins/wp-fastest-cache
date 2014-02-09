@@ -71,7 +71,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.7.8.9 =
+= 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
 * <strong>[FEATURE]</strong> Enable/Disable cache option for mobile devices has been added
 * <strong>[FEATURE]</strong> "[wpfcNOT]" shortcode has been converted to the image
