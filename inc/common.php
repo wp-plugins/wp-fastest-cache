@@ -82,16 +82,21 @@
 		}
 
 		public function deactivate(){
-			if(is_file(ABSPATH.".htaccess") && is_writable(ABSPATH.".htaccess")){
-				$htaccess = file_get_contents(ABSPATH.".htaccess");
+			$wpfc = new WpFastestCache();
+			$path = ABSPATH;
+			if($wpfc->is_subdirectory_install()){
+				$path = $wpfc->getABSPATH();
+			}
+
+			if(is_file($path.".htaccess") && is_writable($path.".htaccess")){
+				$htaccess = file_get_contents($path.".htaccess");
 				$htaccess = preg_replace("/#\s?BEGIN\s?WpFastestCache.*?#\s?END\s?WpFastestCache/s", "", $htaccess);
 				$htaccess = preg_replace("/#\s?BEGIN\s?GzipWpFastestCache.*?#\s?END\s?GzipWpFastestCache/s", "", $htaccess);
-				file_put_contents(ABSPATH.".htaccess", $htaccess);
+				file_put_contents($path.".htaccess", $htaccess);
 			}
 
 			wp_clear_scheduled_hook("wp_fastest_cache");
 			delete_option("WpFastestCache");
-			$wpfc = new WpFastestCache();
 			$wpfc->deleteCache();
 		}
 
@@ -498,15 +503,44 @@
 			}
 		}
 
+		public function is_subdirectory_install(){
+			if(strlen(site_url()) > strlen(home_url())){
+				return true;
+			}
+			return false;
+		}
+
+		public function getABSPATH(){
+			$path = ABSPATH;
+			$siteUrl = site_url();
+			$homeUrl = home_url();
+			$diff = str_replace($homeUrl, "", $siteUrl);
+			$diff = trim($diff,"/");
+
+		    $pos = strrpos($path, $diff);
+
+		    if($pos !== false){
+		    	$path = substr_replace($path, "", $pos, strlen($diff));
+		    	$path = trim($path,"/");
+		    	$path = "/".$path."/";
+		    }
+		    return $path;
+		}
+
 		public function modifyHtaccess($post){
+			$path = ABSPATH;
+			if($this->is_subdirectory_install()){
+				$path = $this->getABSPATH();
+			}
+
 			if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on")){
-				if(!is_file(ABSPATH.".htaccess")){
+				if(!is_file($path.".htaccess")){
 					return array(".htaccess was not found", "error");
-				}else if(is_writable(ABSPATH.".htaccess")){
-					$htaccess = file_get_contents(ABSPATH.".htaccess");
+				}else if(is_writable($path.".htaccess")){
+					$htaccess = file_get_contents($path.".htaccess");
 					$htaccess = $this->insertRewriteRule($htaccess);
 					$htaccess = $this->insertGzipRule($htaccess, $post);
-					file_put_contents(ABSPATH.".htaccess", $htaccess);
+					file_put_contents($path.".htaccess", $htaccess);
 				}else{
 					return array(".htaccess is not writable", "error");
 				}
@@ -594,14 +628,18 @@
 					"RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$"."\n".
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
 					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile.
-					"RewriteCond %{DOCUMENT_ROOT}/".$this->getRewriteBase()."wp-content/cache/all/".$this->getRewriteBase()."$1/index.html -f"."\n".
-					'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase().'$1/index.html" [L]'."\n".
+					"RewriteCond %{DOCUMENT_ROOT}/".$this->getRewriteBase()."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n".
+					'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n".
 					"</IfModule>"."\n".
 					"# END WpFastestCache"."\n";
 			return $data;
 		}
 
-		public function getRewriteBase(){
+		public function getRewriteBase($sub = ""){
+			if($sub && $this->is_subdirectory_install()){
+				return "";
+			}
+			
 			$tmp = str_replace($_SERVER['DOCUMENT_ROOT']."/", "", ABSPATH);
 			$tmp = str_replace("/", "", $tmp);
 			$tmp = $tmp ? $tmp."/" : "";
