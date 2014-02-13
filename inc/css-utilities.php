@@ -19,7 +19,7 @@
 			if(is_dir($cachFilePath)){
 				return array("cachFilePath" => $cachFilePath, "cssContent" => "", "url" => $cssLink);
 			}else{
-				if($css = @file_get_contents($url)){
+				if($css = @file_get_contents($url."?v=".time())){
 					$cssContent = $this->_process($css);
 					$cssContent = $this->fixPathsInCssContent($cssContent);
 
