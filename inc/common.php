@@ -592,21 +592,50 @@
 
 		public function prefixRedirect(){
 			$forceTo = "";
-			if(preg_match("/^https:\/\//", site_url())){
-				//toDo
-			}else{
-				if(preg_match("/^http:\/\/www\./", site_url())){
-					$forceTo = "RewriteCond %{HTTP_HOST} !^www\."."\n".
+
+			if(preg_match("/^https:\/\//", home_url())){
+				if(preg_match("/^https:\/\/www\./", home_url())){
+					$forceTo = "\nRewriteCond %{HTTPS} !=on"."\n".
+							   "RewriteCond %{HTTP_HOST} !^www\."."\n".
 							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
 							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
 							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
-							   "RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]"."\n";
+							   "RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]"."\n\n".
+
+							   "RewriteCond %{HTTPS} !=on"."\n".
+							   "RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
+							   "RewriteRule ^(.*)$ https://www.%1/$1 [R=301,L]"."\n\n";
 				}else{
-					$forceTo = "RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"."\n".
+					$forceTo = "\nRewriteCond %{HTTPS} !=on"."\n".
+							   "RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"."\n".
 							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
 							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
 							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
-							   "RewriteRule ^(.*)$ http://%1/$1/ [R=301,L]"."\n";
+							   "RewriteRule ^(.*)$ http://%1/$1 [R=301,L]"."\n\n".
+
+							   "RewriteCond %{HTTPS} !=on"."\n".
+							   "RewriteCond %{HTTP_HOST} !^www\."."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
+							   "RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]"."\n\n";
+				}
+			}else{
+				if(preg_match("/^http:\/\/www\./", home_url())){
+					$forceTo = "\nRewriteCond %{HTTP_HOST} !^www\."."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
+							   "RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]"."\n\n";
+				}else{
+					$forceTo = "\nRewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
+							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
+							   "RewriteRule ^(.*)$ http://%1/$1 [R=301,L]"."\n\n";
 				}
 			}
 			return $forceTo;
