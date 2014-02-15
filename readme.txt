@@ -209,7 +209,7 @@ When the cached files are deleted, they are moved to "tmpWpfc" instead of being 
 No. Wpfc does not support Wordpress Multisite yet.
 
 = Does Wpfc work in "Subdirectory Install"? =
-No. Wpfc does not support "Subdirectory Install" yet.
+Yes. Wpfc supports "Subdirectory Install" yet.
 
 = Is this plugin compatible with Adsense? =
 Yes, it is compatible with Adsense %100.
@@ -217,8 +217,14 @@ Yes, it is compatible with Adsense %100.
 = Is this plugin compatible with WP-Polls? =
 Yes, it is compatible with WP-Polls %100.
 
+= Is this plugin compatible with Bulletproof Security? =
+Yes, it is compatible with Bulletproof Security %100.
+
+= Is this plugin compatible with Wordfence Security? =
+Yes, it is compatible with Wordfence Security %100.
+
 = Is this plugin compatible with Http Secure (https) ? =
-No, it is not compatible with Http Secure (https).
+Yes, it is compatible with Http Secure (https).
 
 
 == Upgrade notice ==
