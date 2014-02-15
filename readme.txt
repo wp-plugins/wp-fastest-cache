@@ -71,6 +71,9 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.7.9.1 =
+* Supports "Subdirectory Install"
+
 = 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
 * <strong>[FEATURE]</strong> Enable/Disable cache option for mobile devices has been added
@@ -209,7 +212,7 @@ When the cached files are deleted, they are moved to "tmpWpfc" instead of being 
 No. Wpfc does not support Wordpress Multisite yet.
 
 = Does Wpfc work in "Subdirectory Install"? =
-Yes. Wpfc supports "Subdirectory Install" yet.
+Yes. Wpfc supports "Subdirectory Install".
 
 = Is this plugin compatible with Adsense? =
 Yes, it is compatible with Adsense %100.
