@@ -71,8 +71,9 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.7.9.1 =
+= 0.7.9.2 =
 * Supports "Subdirectory Install"
+* SSL support
 
 = 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
