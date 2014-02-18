@@ -72,8 +72,8 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 == Changelog ==
 
 = 0.7.9.2 =
-* Supports "Subdirectory Install"
-* SSL support
+* <strong>[FEATURE]</strong> Supports "Subdirectory Install"
+* <strong>[FEATURE]</strong> SSL support
 
 = 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
@@ -88,7 +88,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * <strong>[FEATURE]</strong> German language has been added
 * Minify css issue has been solved
 * <strong>[FEATURE]</strong> Blackberry PlayBook has been added into mobiles
-* www and non-www redirections have been added
+* <strong>[FEATURE]</strong> www and non-www redirections have been added
 
 = 0.7.8 =
 * <strong>[FEATURE]</strong> Delete Minified Css & Js feature has been added
