@@ -16,6 +16,12 @@
 						"- <label>Reduce sizes of pages by up to 70%</label><br>" + 
 						"- <label>Increase page speed</label><br>" +
 						"- <label>Cost-benefit ratio: high</label><br>";
+		}else if(input.attr("id") == "wpFastestCacheLBC"){
+			options.h4 = "Leverage Browser Caching";
+			options.h1 = "<label>Reduce the load times of pages by storing commonly used files from your website on your visitors browser.</label><br><br>" + 
+						"- <label>Reduce page load times for repeat visitors</label><br>" + 
+						"- <label>Particularly effective on websites where users regularly re-visit the same areas of the website</label><br>" +
+						"- <label>Cost-benefit ratio: high</label><br>";
 		}
 
 		options.type = input.attr("id");

@@ -150,6 +150,7 @@
 			$wpFastestCacheMinifyHtml = isset($this->options->wpFastestCacheMinifyHtml) ? 'checked="checked"' : "";
 			$wpFastestCacheMinifyCss = isset($this->options->wpFastestCacheMinifyCss) ? 'checked="checked"' : "";
 			$wpFastestCacheGzip = isset($this->options->wpFastestCacheGzip) ? 'checked="checked"' : "";
+			$wpFastestCacheLBC = isset($this->options->wpFastestCacheLBC) ? 'checked="checked"' : "";
 			$wpFastestCacheLanguage = isset($this->options->wpFastestCacheLanguage) ? $this->options->wpFastestCacheLanguage : "eng";
 			$wpFastestCacheTimeOut = isset($this->cronJobSettings["period"]) ? $this->cronJobSettings["period"] : "";
 			?>
@@ -210,6 +211,12 @@
 							<div class="questionCon">
 								<div class="question">Gzip</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheGzip; ?> id="wpFastestCacheGzip" name="wpFastestCacheGzip"><label for="wpFastestCacheGzip">Reduce the size of files sent from your server</label></div>
+								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
+							</div>
+
+							<div class="questionCon">
+								<div class="question">Browser Caching</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheLBC; ?> id="wpFastestCacheLBC" name="wpFastestCacheLBC"><label for="wpFastestCacheLBC">Reduce page load times for repeat visitors</label></div>
 								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
 							</div>
 
@@ -533,13 +540,16 @@
 				$path = $this->getABSPATH();
 			}
 
-			if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on")){
+			if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on") || (isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on")){
 				if(!is_file($path.".htaccess")){
 					return array(".htaccess was not found", "error");
 				}else if(is_writable($path.".htaccess")){
 					$htaccess = file_get_contents($path.".htaccess");
 					$htaccess = $this->insertRewriteRule($htaccess);
 					$htaccess = $this->insertGzipRule($htaccess, $post);
+					$htaccess = $this->insertLBCRule($htaccess, $post);
+					$htaccess = preg_replace("/\n+/","\n", $htaccess);
+
 					file_put_contents($path.".htaccess", $htaccess);
 				}else{
 					return array(".htaccess is not writable", "error");
@@ -549,6 +559,37 @@
 				//disable
 				$this->deleteCache();
 				return array("Options have been saved", "success");
+			}
+		}
+
+		public function insertLBCRule($htaccess, $post){
+			if(isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on"){
+		    	$data = "# BEGIN LBCWpFastestCache"."\n".
+						'<IfModule mod_expires.c>'."\n".
+						'ExpiresActive On'."\n".
+						'ExpiresByType image/jpg "access plus 1 year"'."\n".
+						'ExpiresByType image/jpeg "access plus 1 year"'."\n".
+						'ExpiresByType image/gif "access plus 1 year"'."\n".
+						'ExpiresByType image/png "access plus 1 year"'."\n".
+						'ExpiresByType text/css "access plus 1 month"'."\n".
+						'ExpiresByType application/pdf "access plus 1 month"'."\n".
+						'ExpiresByType text/x-javascript "access plus 1 month"'."\n".
+						'ExpiresByType application/x-shockwave-flash "access plus 1 month"'."\n".
+						'ExpiresByType image/x-icon "access plus 1 year"'."\n".
+						'ExpiresDefault "access plus 2 days"'."\n".
+						'</IfModule>'."\n".
+						"# END LBCWpFastestCache"."\n";
+
+				preg_match("/BEGIN LBCWpFastestCache/", $htaccess, $check);
+				if(count($check) === 0){
+					return $data.$htaccess;
+				}else{
+					return $htaccess;
+				}
+			}else{
+				//delete levere browser caching
+				$htaccess = preg_replace("/#\s?BEGIN\s?LBCWpFastestCache.*?#\s?END\s?LBCWpFastestCache/s", "", $htaccess);
+				return $htaccess;
 			}
 		}
 
@@ -566,7 +607,7 @@
 		  				"AddOutputFilterByType DEFLATE application/javascript"."\n".
 		  				"AddOutputFilterByType DEFLATE application/x-javascript"."\n".
 		  				"</IfModule>"."\n".
-						"# END GzipWpFastestCache"."\n\n";
+						"# END GzipWpFastestCache"."\n";
 
 				preg_match("/BEGIN GzipWpFastestCache/", $htaccess, $check);
 				if(count($check) === 0){
@@ -577,8 +618,6 @@
 			}else{
 				//delete gzip rules
 				$htaccess = preg_replace("/#\s?BEGIN\s?GzipWpFastestCache.*?#\s?END\s?GzipWpFastestCache/s", "", $htaccess);
-				//echo $htaccess;
-				//file_put_contents(ABSPATH.".htaccess", $htaccess);
 				return $htaccess;
 			}
 		}
