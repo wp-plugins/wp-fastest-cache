@@ -709,7 +709,11 @@
 			}
 			
 			$tmp = str_replace($_SERVER['DOCUMENT_ROOT']."/", "", ABSPATH);
-			$tmp = str_replace("/", "", $tmp);
+			//$tmp = str_replace("/", "", $tmp);
+			if(substr($tmp, -1) == "/"){
+				$tmp = rtrim($tmp, "/");
+			}
+			
 			$tmp = $tmp ? $tmp."/" : "";
 			return $tmp;
 		}
