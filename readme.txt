@@ -36,6 +36,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 2. Minify Html - You can decrease the size of page
 3. Minify Css - You can decrease the size of css files
 4. Enable Gzip Compression - Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser.
+5. Leverage browser caching - Reduce page load times for repeat visitors
 
 <h4>Supported languages: </h4>
 
@@ -74,6 +75,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 = 0.7.9.2 =
 * <strong>[FEATURE]</strong> Supports "Subdirectory Install"
 * <strong>[FEATURE]</strong> SSL support
+* <strong>[FEATURE]</strong> Leverage browser caching has been added
 
 = 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
