@@ -567,21 +567,47 @@
 
 		public function insertLBCRule($htaccess, $post){
 			if(isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on"){
-		    	$data = "# BEGIN LBCWpFastestCache"."\n".
-						'<IfModule mod_expires.c>'."\n".
-						'ExpiresActive On'."\n".
-						'ExpiresByType image/jpg "access plus 1 year"'."\n".
-						'ExpiresByType image/jpeg "access plus 1 year"'."\n".
-						'ExpiresByType image/gif "access plus 1 year"'."\n".
-						'ExpiresByType image/png "access plus 1 year"'."\n".
-						'ExpiresByType text/css "access plus 1 month"'."\n".
-						'ExpiresByType application/pdf "access plus 1 month"'."\n".
-						'ExpiresByType text/x-javascript "access plus 1 month"'."\n".
-						'ExpiresByType application/x-shockwave-flash "access plus 1 month"'."\n".
-						'ExpiresByType image/x-icon "access plus 1 year"'."\n".
-						'ExpiresDefault "access plus 2 days"'."\n".
-						'</IfModule>'."\n".
-						"# END LBCWpFastestCache"."\n";
+
+
+			$data = "# BEGIN LBCWpFastestCache"."\n".
+					'<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|x-html|css|xml|js|woff|ttf|svg|eot)(\.gz)?$">'."\n".
+					'<IfModule mod_expires.c>'."\n".
+					'ExpiresActive On'."\n".
+					'ExpiresDefault A0'."\n".
+					'ExpiresByType image/gif A2592000'."\n".
+					'ExpiresByType image/png A2592000'."\n".
+					'ExpiresByType image/jpg A2592000'."\n".
+					'ExpiresByType image/jpeg A2592000'."\n".
+					'ExpiresByType image/ico A2592000'."\n".
+					'ExpiresByType text/css A2592000'."\n".
+					'ExpiresByType text/javascript A2592000'."\n".
+					'</IfModule>'."\n".
+					'<IfModule mod_headers.c>'."\n".
+					'Header set Expires "max-age=2592000, public"'."\n".
+					'Header unset ETag'."\n".
+					'</IfModule>'."\n".
+					'FileETag None'."\n".
+					'</FilesMatch>'."\n".
+					"# END LBCWpFastestCache"."\n";
+
+
+
+
+		    // 	$data = "# BEGIN LBCWpFastestCache"."\n".
+						// '<IfModule mod_expires.c>'."\n".
+						// 'ExpiresActive On'."\n".
+						// 'ExpiresByType image/jpg "access plus 1 year"'."\n".
+						// 'ExpiresByType image/jpeg "access plus 1 year"'."\n".
+						// 'ExpiresByType image/gif "access plus 1 year"'."\n".
+						// 'ExpiresByType image/png "access plus 1 year"'."\n".
+						// 'ExpiresByType text/css "access plus 1 month"'."\n".
+						// 'ExpiresByType application/pdf "access plus 1 month"'."\n".
+						// 'ExpiresByType text/x-javascript "access plus 1 month"'."\n".
+						// 'ExpiresByType application/x-shockwave-flash "access plus 1 month"'."\n".
+						// 'ExpiresByType image/x-icon "access plus 1 year"'."\n".
+						// 'ExpiresDefault "access plus 2 days"'."\n".
+						// '</IfModule>'."\n".
+						// "# END LBCWpFastestCache"."\n";
 
 				preg_match("/BEGIN LBCWpFastestCache/", $htaccess, $check);
 				if(count($check) === 0){
