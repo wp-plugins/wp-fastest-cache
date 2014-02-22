@@ -736,14 +736,21 @@
 			if($sub && $this->is_subdirectory_install()){
 				return "";
 			}
+			$url = rtrim(site_url(), "/");
+			preg_match("/https?:\/\/[^\/]+(.*)/", $url, $out);
+
+			return isset($out[1]) ? $out[1] : "";
+
+
+			// $tmp = str_replace($_SERVER['DOCUMENT_ROOT']."/", "", ABSPATH);
+			// if(substr($tmp, -1) == "/"){
+			// 	$tmp = rtrim($tmp, "/");
+			// }
 			
-			$tmp = str_replace($_SERVER['DOCUMENT_ROOT']."/", "", ABSPATH);
-			//$tmp = str_replace("/", "", $tmp);
-			if(substr($tmp, -1) == "/"){
-				$tmp = rtrim($tmp, "/");
-			}
-			
-			$tmp = $tmp ? $tmp."/" : "";
+			// $tmp = $tmp ? $tmp."/" : "";
+
+
+
 			return $tmp;
 		}
 
