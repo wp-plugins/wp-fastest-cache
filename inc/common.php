@@ -157,7 +157,7 @@
 			<div class="wrap">
 				<h2>WP Fastest Cache Options</h2>
 				<?php if($this->systemMessage){ ?>
-					<div class="updated <?php echo $this->systemMessage[1]; ?>" id="message"><p><?php echo $this->systemMessage[0]; ?></p></div>
+					<div class="updated <?php echo $this->systemMessage[1]."-wpfc"; ?>" id="message"><p><?php echo $this->systemMessage[0]; ?></p></div>
 				<?php } ?>
 				<div class="tabGroup">
 					<?php
@@ -541,7 +541,10 @@
 			}
 
 			if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on") || (isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on")){
-				if(!is_file($path.".htaccess")){
+				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				if(is_plugin_active('gzippy/gzippy.php')){
+					return array("GZippy needs to be deactive<br>This plugin has aldready Gzip feature", "error");
+				}else if(!is_file($path.".htaccess")){
 					return array(".htaccess was not found", "error");
 				}else if(is_writable($path.".htaccess")){
 					$htaccess = file_get_contents($path.".htaccess");

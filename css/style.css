@@ -175,21 +175,21 @@ h1.summary-rec {
 .omni_admin_sidebar h3 {
     margin: 0 0 10px;
 }
-.success, .error{
+.success-wpfc, .error-wpfc{
     background-position: 10px center !important;
     padding-bottom: 5px !important;
     padding-top: 5px !important;
 }
-.success{
+.success-wpfc{
     background-color: #DFF2BF !important;
     border-color: #4F8A10 !important;
     color: #4F8A10 !important;
     background: url("../images/success.png") no-repeat;
 }
-.success p, .error p{
+.success-wpfc p, .error-wpfc p{
     padding: 2px 2px 2px 40px !important;
 }
-.error{
+.error-wpfc{
     background-color: #FFBABA !important;
     border-color: #D8000C !important;
     color: #D8000C !important;

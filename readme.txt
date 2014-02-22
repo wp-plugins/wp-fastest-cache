@@ -76,6 +76,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * <strong>[FEATURE]</strong> Supports "Subdirectory Install"
 * <strong>[FEATURE]</strong> SSL support
 * <strong>[FEATURE]</strong> Leverage browser caching has been added
+* GZippy warning has been added
 
 = 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
