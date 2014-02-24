@@ -740,7 +740,7 @@
 			$url = rtrim(site_url(), "/");
 			preg_match("/https?:\/\/[^\/]+(.*)/", $url, $out);
 
-			return isset($out[1]) ? $out[1] : "";
+			return isset($out[1]) ? trim($out[1], "/") : "";
 
 
 			// $tmp = str_replace($_SERVER['DOCUMENT_ROOT']."/", "", ABSPATH);
