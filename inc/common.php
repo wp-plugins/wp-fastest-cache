@@ -572,7 +572,7 @@
 
 			$data = "# BEGIN LBCWpFastestCache"."\n".
 					'<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|x-html|css|xml|js|woff|ttf|svg|eot)(\.gz)?$">'."\n".
-					'<IfModule mod_expires.c>'."\n".
+					'<IfModule mod_expires.so>'."\n".
 					'ExpiresActive On'."\n".
 					'ExpiresDefault A0'."\n".
 					'ExpiresByType image/gif A2592000'."\n".
