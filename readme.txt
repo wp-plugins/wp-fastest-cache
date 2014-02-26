@@ -222,6 +222,9 @@ No. Wpfc does not support Wordpress Multisite yet.
 = Does Wpfc work in "Subdirectory Install"? =
 Yes. Wpfc supports "Subdirectory Install".
 
+= Is this plugin compatible with Http Secure (https) ? =
+Yes, it is compatible with Http Secure (https).
+
 = Is this plugin compatible with Adsense? =
 Yes, it is compatible with Adsense %100.
 
@@ -234,8 +237,8 @@ Yes, it is compatible with Bulletproof Security %100.
 = Is this plugin compatible with Wordfence Security? =
 Yes, it is compatible with Wordfence Security %100.
 
-= Is this plugin compatible with Http Secure (https) ? =
-Yes, it is compatible with Http Secure (https).
+= Is this plugin compatible with qTranslate? =
+Yes, it works if you use qTranslate with "Use Query Mode (?lang=en)".
 
 
 == Upgrade notice ==
