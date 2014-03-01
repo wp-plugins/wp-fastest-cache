@@ -98,7 +98,7 @@ GNU General Public License for more details.
 			}
 		}
 
-		protected function deleteCache(){
+		public function deleteCache(){
 			if(is_dir($this->getWpContentDir()."/cache/all")){
 				//$this->rm_folder_recursively($this->getWpContentDir()."/cache/all");
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
