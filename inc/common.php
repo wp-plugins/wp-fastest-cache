@@ -714,7 +714,7 @@
 			$mobile = "";
 
 			if(isset($_POST["wpFastestCacheMobile"]) && $_POST["wpFastestCacheMobile"] == "on"){
-				$mobile = "RewriteCond %{HTTP_USER_AGENT} !^.*(iphone|sony|symbos|nokia|samsung|mobile|epoc|ericsson|panasonic|philips|sanyo|sharp|sie-|portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|android|blackberry|playbook|iphone|ipod|iemobile|palmos|webos|googlebot-mobile).*$ [NC]"."\n";
+				$mobile = "RewriteCond %{HTTP_USER_AGENT} !^.*(".$this->getMobileUserAgents().").*$ [NC]"."\n";
 			}
 
 			$data = "# BEGIN WpFastestCache"."\n".
@@ -777,6 +777,8 @@
 			$buffer = $this->checkShortCode($buffer);
 
 			if(defined('DONOTCACHEPAGE')){ // for Wordfence: not to cache 503 pages
+				return $buffer;
+			}else if($this->isMobile()){
 				return $buffer;
 			}else if(is_404()){
 				return $buffer;
@@ -876,6 +878,18 @@
 				}
 			}
 			return $content;
+		}
+
+		public function getMobileUserAgents(){
+			return "iphone|sony|symbos|nokia|samsung|mobile|epoc|ericsson|panasonic|philips|sanyo|sharp|sie-|portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|android|blackberry|playbook|iphone|ipod|iemobile|palmos|webos|googlebot-mobile";
+		}
+
+		public function isMobile(){
+			if(preg_match("/.*".$this->getMobileUserAgents().".*/i", $_SERVER['HTTP_USER_AGENT'])){
+				return true;
+			}else{
+				return false;
+			}
 		}
 	}
 ?>
