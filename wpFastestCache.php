@@ -20,17 +20,151 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */ 
 
+	class WpFastestCache{
+		private $systemMessage = "";
+		private $options = array();
 
-	include_once('inc/common.php');
+		public function __construct(){
+			$this->options = $this->getOptions();
+			$this->detectNewPost();
+
+			$this->checkCronTime();
+
+			register_deactivation_hook( __FILE__, array('WpFastestCache', 'deactivate') );
+
+			if(is_admin()){
+				//for wp-panel
+				$this->admin();
+			}else{
+				//for cache
+				$this->cache();
+			}
+		}
+
+		private function admin(){
+			include_once('inc/admin.php');
+			$wpfc = new WpFastestCacheAdmin();
+			$wpfc->addMenuPage();
+		}
+		private function cache(){
+			include_once('inc/cache.php');
+			$wpfc = new WpFastestCacheCreateCache();
+			$wpfc->createCache();
+		}
+
+		public function deactivate(){
+			$wpfc = new WpFastestCache();
+			$path = ABSPATH;
+			
+			if($wpfc->is_subdirectory_install()){
+				$path = $wpfc->getABSPATH();
+			}
+
+			if(is_file($path.".htaccess") && is_writable($path.".htaccess")){
+				$htaccess = file_get_contents($path.".htaccess");
+				$htaccess = preg_replace("/#\s?BEGIN\s?WpFastestCache.*?#\s?END\s?WpFastestCache/s", "", $htaccess);
+				$htaccess = preg_replace("/#\s?BEGIN\s?GzipWpFastestCache.*?#\s?END\s?GzipWpFastestCache/s", "", $htaccess);
+				$htaccess = preg_replace("/#\s?BEGIN\s?LBCWpFastestCache.*?#\s?END\s?LBCWpFastestCache/s", "", $htaccess);
+				file_put_contents($path.".htaccess", $htaccess);
+			}
+
+			wp_clear_scheduled_hook("wp_fastest_cache");
+			delete_option("WpFastestCache");
+			$wpfc->deleteCache();
+		}
+
+		protected function slug(){
+			return "wp_fastest_cache";
+		}
+
+		protected function getWpContentDir(){
+			return ABSPATH."wp-content";
+		}
+
+		protected function getOptions(){
+			if($data = get_option("WpFastestCache")){
+				return json_decode($data);
+			}
+		}
+
+		protected function getSystemMessage(){
+			return $this->systemMessage;
+		}
+
+		protected function detectNewPost(){
+			if(isset($this->options->wpFastestCacheNewPost) && isset($this->options->wpFastestCacheStatus)){
+				add_filter ('publish_post', array($this, 'deleteCache'));
+				add_filter ('delete_post', array($this, 'deleteCache'));
+			}
+		}
+
+		protected function deleteCache(){
+			if(is_dir($this->getWpContentDir()."/cache/all")){
+				//$this->rm_folder_recursively($this->getWpContentDir()."/cache/all");
+				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
+					rename($this->getWpContentDir()."/cache/all", $this->getWpContentDir()."/cache/tmpWpfc/".time());
+					wp_schedule_single_event(time() + 60, $this->slug()."TmpDelete");
+					$this->systemMessage = array("All cache files have been deleted","success");
+				}else if(@mkdir($this->getWpContentDir()."/cache/tmpWpfc", 0755, true)){
+					rename($this->getWpContentDir()."/cache/all", $this->getWpContentDir()."/cache/tmpWpfc/".time());
+					wp_schedule_single_event(time() + 60, $this->slug()."TmpDelete");
+					$this->systemMessage = array("All cache files have been deleted","success");
+				}else{
+					$this->systemMessage = array("Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>", "error");
+				}
+			}else{
+				$this->systemMessage = array("Already deleted","success");
+			}
+		}
+
+		protected function checkCronTime(){
+			add_action($this->slug(),  array($this, 'setSchedule'));
+			add_action($this->slug()."TmpDelete",  array($this, 'actionDelete'));
+		}
+
+		protected function actionDelete(){
+			if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
+				$this->rm_folder_recursively($this->getWpContentDir()."/cache/tmpWpfc");
+				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
+					wp_schedule_single_event(time() + 60, $this->slug()."TmpDelete");
+				}
+			}
+		}
+
+		protected function setSchedule(){
+			$this->deleteCache();
+		}
+
+		protected function rm_folder_recursively($dir, $i = 1) {
+		    foreach(scandir($dir) as $file) {
+		    	if($i > 500){
+		    		return true;
+		    	}else{
+		    		$i++;
+		    	}
+		        if ('.' === $file || '..' === $file) continue;
+		        if (is_dir("$dir/$file")) $this->rm_folder_recursively("$dir/$file", $i);
+		        else @unlink("$dir/$file");
+		    }
+		    
+		    @rmdir($dir);
+		    return true;
+		}
+
+		protected function is_subdirectory_install(){
+			if(strlen(site_url()) > strlen(home_url())){
+				return true;
+			}
+			return false;
+		}
+
+		protected function getMobileUserAgents(){
+			return "iphone|sony|symbos|nokia|samsung|mobile|epoc|ericsson|panasonic|philips|sanyo|sharp|sie-|portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|android|blackberry|playbook|iphone|ipod|iemobile|palmos|webos|googlebot-mobile";
+		}
+	}
 
 	$wpfc = new WpFastestCache();
-	register_deactivation_hook( __FILE__, array('WpFastestCache', 'deactivate') );
-	if(is_admin()){
-		//for wp-panel
-		$wpfc->addMenuPage();
-	}else{
-		//for cache
-		$wpfc->createCache();
-	}
+
+
 
 ?>
