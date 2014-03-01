@@ -164,7 +164,7 @@
 					<?php
 						$tabs = array(array("id"=>"wpfc-options","title"=>"Settings"),
 									  array("id"=>"wpfc-deleteCache","title"=>"Delete Cache"),
-									  array("id"=>"wpfc-deleteCssAndJsCache","title"=>"Delete Minified Css & Js"),
+									  array("id"=>"wpfc-deleteCssAndJsCache","title"=>"Delete Minified Css"),
 									  array("id"=>"wpfc-cacheTimeout","title"=>"Cache Timeout"));
 
 						foreach ($tabs as $key => $value){
@@ -263,7 +263,7 @@
 				    		<input type="hidden" value="deleteCssAndJsCache" name="wpFastestCachePage">
 				    		<div class="questionCon">
 				    			<div style="padding-left:11px;">
-				    			<label>If you modify any css or js file, you have to delete minified js and css files</label><br>
+				    			<label>If you modify any css file, you have to delete minified css files</label><br>
 				    			<label>All cache files will be removed as well</label><br>
 				    			<label>Target folder</label> <b><?php echo $this->wpContentDir; ?>/cache/wpfc-minified</b><br>
 				    			<label>Target folder</label> <b><?php echo $this->wpContentDir; ?>/cache/all</b>

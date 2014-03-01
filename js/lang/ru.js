@@ -39,6 +39,6 @@ window.wpfc.dictionary = {
 	"Cost-benefit ratio: high" : "соотношение затрат и прибыли - высокое",
 	"All cache files will be removed as well" : "Все кешированые файлы также будут удалены",
 	"If you modify any css or js file, you have to delete minified js and css files" : "Если вы изменяете какой-либо из css или js файлов вы должны удалить уменьшенные файлы css или js соответственно",
-	"Delete Minified Css & Js" : "Уничтожьте уменьшенные css и js",
+	"Delete Minified Css" : "Уничтожьте уменьшенные css",
 	"Don't show the cached version for mobile devices" : "Не отображать кэшированные версии для мобильных устройств"
 };

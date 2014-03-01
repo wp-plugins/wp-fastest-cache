@@ -39,7 +39,7 @@ window.wpfc.dictionary = {
 	"Cost-benefit ratio: high" : "Tasa costo-beneficio: alta",
 	"All cache files will be removed as well" : "Todos los archivos en el cache serán borrados también",
 	"If you modify any css or js file, you have to delete minified js and css files" : "Si modifica algún archivo CSS o JS tendrá que borrar los archivos js y css minificados",
-	"Delete Minified Css & Js" : "Borrar los archivos CSS & JS minificados",
+	"Delete Minified Css" : "Borrar los archivos CSS minificados",
 	"Don't show the cached version for mobile devices" : "No mostrar la versión del cache en dispositivos móviles",
 	"Leverage Browser Caching" : "",
 	"Reduce the load times of pages by storing commonly used files from your website on your visitors browser." : "",

@@ -38,8 +38,8 @@ window.wpfc.dictionary = {
 	"Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser." : "Verringert die Größe der von deinem Server gesendeten Dateien, um die Geschwindigkeit, mit der sie zum Browser übertragen werden, zu erhöhen.",
 	"Cost-benefit ratio: high" : "Kosten-Nutzen-Verhältnis: hoch",
 	"All cache files will be removed as well" : "Dabei werden auch alle Dateien im Cache gelöscht.",
-	"If you modify any css or js file, you have to delete minified js and css files" : "Falls du irgendwelche CSS- oder JS-Dateien änderst, solltest du ihre minifizierten Dateien löschen.",
-	"Delete Minified Css & Js" : "Lösche minifizierte CSS- & JS-Dateien",
+	"If you modify any css file, you have to delete minified css files" : "Falls du irgendwelche CSS-Dateien änderst, solltest du ihre minifizierten Dateien löschen.",
+	"Delete Minified Css" : "Lösche minifizierte CSS-Dateien",
 	"Don't show the cached version for mobile devices" : "Keine Anzeige der gecachten Version in mobilen Browsern",
 	// new
 	"Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>" : "Die Rechte von <strong>/wp-content/cache</strong> müssen auf <strong>755</strong> gesetzt sein.",
