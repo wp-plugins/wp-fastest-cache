@@ -124,222 +124,6 @@
 			}
 		}
 
-		public function optionsPage(){
-			$this->systemMessage = count($this->systemMessage) > 0 ? $this->systemMessage : $this->getSystemMessage();
-
-			$wpFastestCacheStatus = "";
-			$wpFastestCacheNewPost = "";
-			$wpFastestCacheLanguage = "";
-			$wpFastestCacheTimeOut = "";
-			$wpFastestCacheStatus = isset($this->options->wpFastestCacheStatus) ? 'checked="checked"' : "";
-			$wpFastestCacheMobile = isset($this->options->wpFastestCacheMobile) ? 'checked="checked"' : "";
-			$wpFastestCacheNewPost = isset($this->options->wpFastestCacheNewPost) ? 'checked="checked"' : "";
-			$wpFastestCacheMinifyHtml = isset($this->options->wpFastestCacheMinifyHtml) ? 'checked="checked"' : "";
-			$wpFastestCacheMinifyCss = isset($this->options->wpFastestCacheMinifyCss) ? 'checked="checked"' : "";
-			$wpFastestCacheGzip = isset($this->options->wpFastestCacheGzip) ? 'checked="checked"' : "";
-			$wpFastestCacheLBC = isset($this->options->wpFastestCacheLBC) ? 'checked="checked"' : "";
-			$wpFastestCacheLanguage = isset($this->options->wpFastestCacheLanguage) ? $this->options->wpFastestCacheLanguage : "eng";
-			$wpFastestCacheTimeOut = isset($this->cronJobSettings["period"]) ? $this->cronJobSettings["period"] : "";
-			?>
-			<div class="wrap">
-				<h2>WP Fastest Cache Options</h2>
-				<?php if($this->systemMessage){ ?>
-					<div class="updated <?php echo $this->systemMessage[1]."-wpfc"; ?>" id="message"><p><?php echo $this->systemMessage[0]; ?></p></div>
-				<?php } ?>
-				<div class="tabGroup">
-					<?php
-						$tabs = array(array("id"=>"wpfc-options","title"=>"Settings"),
-									  array("id"=>"wpfc-deleteCache","title"=>"Delete Cache"),
-									  array("id"=>"wpfc-deleteCssAndJsCache","title"=>"Delete Minified Css"),
-									  array("id"=>"wpfc-cacheTimeout","title"=>"Cache Timeout"));
-
-						foreach ($tabs as $key => $value){
-							$checked = "";
-							if(!isset($_POST["wpFastestCachePage"]) && $value["id"] == "wpfc-options"){
-								$checked = ' checked="checked" ';
-							}else if((isset($_POST["wpFastestCachePage"])) && ("wpfc-".$_POST["wpFastestCachePage"] == $value["id"])){
-								$checked = ' checked="checked" ';
-							}
-							echo '<input '.$checked.' type="radio" id="'.$value["id"].'" name="tabGroup1">'."\n";
-							echo '<label for="'.$value["id"].'">'.$value["title"].'</label>'."\n";
-						}
-					?>
-				    <br>
-				    <div class="tab1">
-						<form method="post" name="wp_manager">
-							<input type="hidden" value="options" name="wpFastestCachePage">
-							<div class="questionCon">
-								<div class="question">Cache System</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheStatus; ?> id="wpFastestCacheStatus" name="wpFastestCacheStatus"><label for="wpFastestCacheStatus">Enable</label></div>
-							</div>
-
-							<div class="questionCon">
-								<div class="question">Mobile</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMobile; ?> id="wpFastestCacheMobile" name="wpFastestCacheMobile"><label for="wpFastestCacheMobile">Don't show the cached version for mobile devices</label></div>
-							</div>
-
-
-							<div class="questionCon">
-								<div class="question">New Post</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheNewPost; ?> id="wpFastestCacheNewPost" name="wpFastestCacheNewPost"><label for="wpFastestCacheNewPost">Clear all cache files when a post or page is published</label></div>
-							</div>
-							<div class="questionCon">
-								<div class="question">Minify HTML</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMinifyHtml; ?> id="wpFastestCacheMinifyHtml" name="wpFastestCacheMinifyHtml"><label for="wpFastestCacheMinifyHtml">You can decrease the size of page</label></div>
-								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
-							</div>
-
-							<div class="questionCon">
-								<div class="question">Minify Css</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMinifyCss; ?> id="wpFastestCacheMinifyCss" name="wpFastestCacheMinifyCss"><label for="wpFastestCacheMinifyCss">You can decrease the size of css files</label></div>
-								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
-							</div>
-
-							<div class="questionCon">
-								<div class="question">Gzip</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheGzip; ?> id="wpFastestCacheGzip" name="wpFastestCacheGzip"><label for="wpFastestCacheGzip">Reduce the size of files sent from your server</label></div>
-								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
-							</div>
-
-							<div class="questionCon">
-								<div class="question">Browser Caching</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheLBC; ?> id="wpFastestCacheLBC" name="wpFastestCacheLBC"><label for="wpFastestCacheLBC">Reduce page load times for repeat visitors</label></div>
-								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
-							</div>
-
-
-							<div class="questionCon">
-								<div class="question">Language</div>
-								<div class="inputCon">
-									<select id="wpFastestCacheLanguage" name="wpFastestCacheLanguage">
-									  <option value="de">Deutsch</option>
-									  <option value="eng">English</option>
-									  <option value="es">Español</option>
-									  <option value="pt">Português</option>
-									  <option value="ru">Русский</option>
-									  <option value="tr">Türkçe</option>
-									  <option value="ukr">Українська</option>
-									</select> 
-								</div>
-							</div>
-							<div class="questionCon qsubmit">
-								<div class="submit"><input type="submit" value="Submit" class="button-primary"></div>
-							</div>
-						</form>
-				    </div>
-				    <div class="tab2">
-				    	<form method="post" name="wp_manager">
-				    		<input type="hidden" value="deleteCache" name="wpFastestCachePage">
-				    		<div class="questionCon">
-				    			<div style="padding-left:11px;">
-				    			<label>You can delete all cache files</label><br>
-				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/all</b>
-				    			</div>
-				    		</div>
-				    		<div class="questionCon qsubmit">
-				    			<div class="submit"><input type="submit" value="Delete Now" class="button-primary"></div>
-				    		</div>
-				   		</form>
-				    </div>
-
-
-
-				    <div class="tab3">
-				    	<form method="post" name="wp_manager">
-				    		<input type="hidden" value="deleteCssAndJsCache" name="wpFastestCachePage">
-				    		<div class="questionCon">
-				    			<div style="padding-left:11px;">
-				    			<label>If you modify any css file, you have to delete minified css files</label><br>
-				    			<label>All cache files will be removed as well</label><br>
-				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/wpfc-minified</b><br>
-				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/all</b>
-				    			</div>
-				    		</div>
-				    		<div class="questionCon qsubmit">
-				    			<div class="submit"><input type="submit" value="Delete Now" class="button-primary"></div>
-				    		</div>
-				   		</form>
-				    </div>
-
-
-				    <div class="tab4">
-				    	<form method="post" name="wp_manager">
-				    		<input type="hidden" value="cacheTimeout" name="wpFastestCachePage">
-				    		<div class="questionCon">
-				    			<label style="padding-left:11px;">All cached files are deleted at the determinated time.</label>
-				    		</div>
-				    		<div class="questionCon" style="text-align: center;padding-top: 10px;">
-									<select id="wpFastestCacheTimeOut" name="wpFastestCacheTimeOut">
-										<?php
-											$arrSettings = array(array("value" => "", "text" => "Choose One"),
-																array("value" => "hourly", "text" => "Once an hour"),
-																array("value" => "daily", "text" => "Once a day"),
-																array("value" => "twicedaily", "text" => "Twice a day"));
-
-											foreach ($arrSettings as $key => $value) {
-												$checked = $value["value"] == $wpFastestCacheTimeOut ? 'selected=""' : "";
-												echo "<option {$checked} value='{$value["value"]}'>{$value["text"]}</option>";
-											}
-										?>
-									</select> 
-							</div>
-							<?php if($wpFastestCacheTimeOut){ ?>
-								<div class="questionCon">
-									<table class="widefat fixed" style="border:0;border-top:1px solid #DEDBD1;border-radius:0;margin: 5px 4% 0 4%;width: 92%;">
-										<thead>
-											<tr>
-												<th scope="col" style="border-left:1px solid #DEDBD1;border-top-left-radius:0;">Next due</th>
-												<th scope="col" style="border-right:1px solid #DEDBD1;border-top-right-radius:0;">Schedule</th>
-											</tr>
-										</thead>
-											<tbody>
-												<tr>
-													<th scope="row" style="border-left:1px solid #DEDBD1;"><?php echo date("d-m-Y @ H:i", $this->cronJobSettings["time"]); ?></th>
-													<td style="border-right:1px solid #DEDBD1;"><?php echo $this->cronJobSettings["period"]; ?>
-														<label id="deleteCron" style="float:right;padding-right:5px;">[ x ]</label>
-														<script>
-															jQuery("#deleteCron").click(function(){
-																var selectPeriod = jQuery("#wpFastestCacheTimeOut");
-																selectPeriod.val("");
-																var submit = selectPeriod.closest("form").find('input[type="submit"]');
-																submit.click();
-															})
-														</script>
-													</td>
-												</tr>
-											</tbody>
-									</table>
-					    		</div>
-				    		<?php } ?>
-				    		<div class="questionCon" style="text-align: center;padding-top: 10px;">
-				    			<strong><label>Server time</label>: <?php echo date("Y-m-d H:i:s"); ?></strong>
-				    		</div>
-				    		<div class="questionCon qsubmit">
-				    			<div class="submit"><input type="submit" value="Submit" class="button-primary"></div>
-				    		</div>
-				   		</form>
-				    </div>
-				</div>
-				<div class="omni_admin_sidebar">
-				<div class="omni_admin_sidebar_section">
-				  <h3>Having Issues?</h3>
-				  <ul>
-				    <li><label>You can create a ticket</label> <a target="_blank" href="http://wordpress.org/support/plugin/wp-fastest-cache"><label>WordPress support forum</label></a></li>
-				  <?
-				  	if(isset($this->options->wpFastestCacheLanguage) && $this->options->wpFastestCacheLanguage == "tr"){
-				  		?>
-				  		<li><label>R10 Üzerinden Sorabilirsiniz</label> <a target="_blank" href="http://www.r10.net/wordpress/1096868-wp-fastest-cache-wp-en-hizli-ve-en-basit-cache-sistemi.html"><label>R10.net destek başlığı</label></a></li>
-				  		<?
-				  	}
-				  ?>
-				  </ul>
-				  </div>
-				</div>
-			</div>
-			<script>Wpfclang.init("<?php echo $wpFastestCacheLanguage; ?>");</script>
-			<?php
-		}
-
 		public function saveOption(){
 			unset($_POST["wpFastestCachePage"]);
 			$data = json_encode($_POST);
@@ -579,9 +363,14 @@
 
 		public function getHtaccess(){
 			$mobile = "";
+			$loggedInUser = "";
 
 			if(isset($_POST["wpFastestCacheMobile"]) && $_POST["wpFastestCacheMobile"] == "on"){
 				$mobile = "RewriteCond %{HTTP_USER_AGENT} !^.*(".$this->getMobileUserAgents().").*$ [NC]"."\n";
+			}
+
+			if(isset($_POST["wpFastestCacheLoggedInUser"]) && $_POST["wpFastestCacheLoggedInUser"] == "on"){
+				$loggedInUser = "RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$"."\n";
 			}
 
 			$data = "# BEGIN WpFastestCache"."\n".
@@ -589,8 +378,7 @@
 					"RewriteEngine On"."\n".
 					"RewriteBase /"."\n".$this->prefixRedirect().
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
-					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".
-					"RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$"."\n".
+					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".$loggedInUser.
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
 					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile.
 					"RewriteCond %{DOCUMENT_ROOT}/".$this->getRewriteBase()."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n".
@@ -622,12 +410,217 @@
 			return $tmp;
 		}
 
-		public function isMobile(){
-			if(preg_match("/.*".$this->getMobileUserAgents().".*/i", $_SERVER['HTTP_USER_AGENT'])){
-				return true;
-			}else{
-				return false;
-			}
+		public function optionsPage(){
+			$this->systemMessage = count($this->systemMessage) > 0 ? $this->systemMessage : $this->getSystemMessage();
+
+			$wpFastestCacheGzip = isset($this->options->wpFastestCacheGzip) ? 'checked="checked"' : "";
+			$wpFastestCacheLanguage = isset($this->options->wpFastestCacheLanguage) ? $this->options->wpFastestCacheLanguage : "eng";
+			$wpFastestCacheLBC = isset($this->options->wpFastestCacheLBC) ? 'checked="checked"' : "";
+			$wpFastestCacheLoggedInUser = isset($this->options->wpFastestCacheLoggedInUser) ? 'checked="checked"' : "";
+			$wpFastestCacheMinifyCss = isset($this->options->wpFastestCacheMinifyCss) ? 'checked="checked"' : "";
+			$wpFastestCacheMinifyHtml = isset($this->options->wpFastestCacheMinifyHtml) ? 'checked="checked"' : "";
+			$wpFastestCacheMobile = isset($this->options->wpFastestCacheMobile) ? 'checked="checked"' : "";
+			$wpFastestCacheNewPost = isset($this->options->wpFastestCacheNewPost) ? 'checked="checked"' : "";
+			$wpFastestCacheStatus = isset($this->options->wpFastestCacheStatus) ? 'checked="checked"' : "";
+			$wpFastestCacheTimeOut = isset($this->cronJobSettings["period"]) ? $this->cronJobSettings["period"] : "";
+			?>
+			<div class="wrap">
+				<h2>WP Fastest Cache Options</h2>
+				<?php if($this->systemMessage){ ?>
+					<div class="updated <?php echo $this->systemMessage[1]."-wpfc"; ?>" id="message"><p><?php echo $this->systemMessage[0]; ?></p></div>
+				<?php } ?>
+				<div class="tabGroup">
+					<?php
+						$tabs = array(array("id"=>"wpfc-options","title"=>"Settings"),
+									  array("id"=>"wpfc-deleteCache","title"=>"Delete Cache"),
+									  array("id"=>"wpfc-deleteCssAndJsCache","title"=>"Delete Minified Css"),
+									  array("id"=>"wpfc-cacheTimeout","title"=>"Cache Timeout"));
+
+						foreach ($tabs as $key => $value){
+							$checked = "";
+							if(!isset($_POST["wpFastestCachePage"]) && $value["id"] == "wpfc-options"){
+								$checked = ' checked="checked" ';
+							}else if((isset($_POST["wpFastestCachePage"])) && ("wpfc-".$_POST["wpFastestCachePage"] == $value["id"])){
+								$checked = ' checked="checked" ';
+							}
+							echo '<input '.$checked.' type="radio" id="'.$value["id"].'" name="tabGroup1">'."\n";
+							echo '<label for="'.$value["id"].'">'.$value["title"].'</label>'."\n";
+						}
+					?>
+				    <br>
+				    <div class="tab1">
+						<form method="post" name="wp_manager">
+							<input type="hidden" value="options" name="wpFastestCachePage">
+							<div class="questionCon">
+								<div class="question">Cache System</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheStatus; ?> id="wpFastestCacheStatus" name="wpFastestCacheStatus"><label for="wpFastestCacheStatus">Enable</label></div>
+							</div>
+
+							<div class="questionCon">
+								<div class="question">Logged-in Users</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheLoggedInUser; ?> id="wpFastestCacheLoggedInUser" name="wpFastestCacheLoggedInUser"><label for="wpFastestCacheLoggedInUser">Don't show the cached version for logged-in users</label></div>
+							</div>
+
+							<div class="questionCon">
+								<div class="question">Mobile</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMobile; ?> id="wpFastestCacheMobile" name="wpFastestCacheMobile"><label for="wpFastestCacheMobile">Don't show the cached version for mobile devices</label></div>
+							</div>
+
+							<div class="questionCon">
+								<div class="question">New Post</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheNewPost; ?> id="wpFastestCacheNewPost" name="wpFastestCacheNewPost"><label for="wpFastestCacheNewPost">Clear all cache files when a post or page is published</label></div>
+							</div>
+							<div class="questionCon">
+								<div class="question">Minify HTML</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMinifyHtml; ?> id="wpFastestCacheMinifyHtml" name="wpFastestCacheMinifyHtml"><label for="wpFastestCacheMinifyHtml">You can decrease the size of page</label></div>
+								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
+							</div>
+
+							<div class="questionCon">
+								<div class="question">Minify Css</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMinifyCss; ?> id="wpFastestCacheMinifyCss" name="wpFastestCacheMinifyCss"><label for="wpFastestCacheMinifyCss">You can decrease the size of css files</label></div>
+								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
+							</div>
+
+							<div class="questionCon">
+								<div class="question">Gzip</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheGzip; ?> id="wpFastestCacheGzip" name="wpFastestCacheGzip"><label for="wpFastestCacheGzip">Reduce the size of files sent from your server</label></div>
+								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
+							</div>
+
+							<div class="questionCon">
+								<div class="question">Browser Caching</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheLBC; ?> id="wpFastestCacheLBC" name="wpFastestCacheLBC"><label for="wpFastestCacheLBC">Reduce page load times for repeat visitors</label></div>
+								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
+							</div>
+
+							<div class="questionCon">
+								<div class="question">Language</div>
+								<div class="inputCon">
+									<select id="wpFastestCacheLanguage" name="wpFastestCacheLanguage">
+									  <option value="de">Deutsch</option>
+									  <option value="eng">English</option>
+									  <option value="es">Español</option>
+									  <option value="pt">Português</option>
+									  <option value="ru">Русский</option>
+									  <option value="tr">Türkçe</option>
+									  <option value="ukr">Українська</option>
+									</select> 
+								</div>
+							</div>
+							<div class="questionCon qsubmit">
+								<div class="submit"><input type="submit" value="Submit" class="button-primary"></div>
+							</div>
+						</form>
+				    </div>
+				    <div class="tab2">
+				    	<form method="post" name="wp_manager">
+				    		<input type="hidden" value="deleteCache" name="wpFastestCachePage">
+				    		<div class="questionCon">
+				    			<div style="padding-left:11px;">
+				    			<label>You can delete all cache files</label><br>
+				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/all</b>
+				    			</div>
+				    		</div>
+				    		<div class="questionCon qsubmit">
+				    			<div class="submit"><input type="submit" value="Delete Now" class="button-primary"></div>
+				    		</div>
+				   		</form>
+				    </div>
+
+				    <div class="tab3">
+				    	<form method="post" name="wp_manager">
+				    		<input type="hidden" value="deleteCssAndJsCache" name="wpFastestCachePage">
+				    		<div class="questionCon">
+				    			<div style="padding-left:11px;">
+				    			<label>If you modify any css file, you have to delete minified css files</label><br>
+				    			<label>All cache files will be removed as well</label><br>
+				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/wpfc-minified</b><br>
+				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/all</b>
+				    			</div>
+				    		</div>
+				    		<div class="questionCon qsubmit">
+				    			<div class="submit"><input type="submit" value="Delete Now" class="button-primary"></div>
+				    		</div>
+				   		</form>
+				    </div>
+
+				    <div class="tab4">
+				    	<form method="post" name="wp_manager">
+				    		<input type="hidden" value="cacheTimeout" name="wpFastestCachePage">
+				    		<div class="questionCon">
+				    			<label style="padding-left:11px;">All cached files are deleted at the determinated time.</label>
+				    		</div>
+				    		<div class="questionCon" style="text-align: center;padding-top: 10px;">
+									<select id="wpFastestCacheTimeOut" name="wpFastestCacheTimeOut">
+										<?php
+											$arrSettings = array(array("value" => "", "text" => "Choose One"),
+																array("value" => "hourly", "text" => "Once an hour"),
+																array("value" => "daily", "text" => "Once a day"),
+																array("value" => "twicedaily", "text" => "Twice a day"));
+
+											foreach ($arrSettings as $key => $value) {
+												$checked = $value["value"] == $wpFastestCacheTimeOut ? 'selected=""' : "";
+												echo "<option {$checked} value='{$value["value"]}'>{$value["text"]}</option>";
+											}
+										?>
+									</select> 
+							</div>
+							<?php if($wpFastestCacheTimeOut){ ?>
+								<div class="questionCon">
+									<table class="widefat fixed" style="border:0;border-top:1px solid #DEDBD1;border-radius:0;margin: 5px 4% 0 4%;width: 92%;">
+										<thead>
+											<tr>
+												<th scope="col" style="border-left:1px solid #DEDBD1;border-top-left-radius:0;">Next due</th>
+												<th scope="col" style="border-right:1px solid #DEDBD1;border-top-right-radius:0;">Schedule</th>
+											</tr>
+										</thead>
+											<tbody>
+												<tr>
+													<th scope="row" style="border-left:1px solid #DEDBD1;"><?php echo date("d-m-Y @ H:i", $this->cronJobSettings["time"]); ?></th>
+													<td style="border-right:1px solid #DEDBD1;"><?php echo $this->cronJobSettings["period"]; ?>
+														<label id="deleteCron" style="float:right;padding-right:5px;">[ x ]</label>
+														<script>
+															jQuery("#deleteCron").click(function(){
+																var selectPeriod = jQuery("#wpFastestCacheTimeOut");
+																selectPeriod.val("");
+																var submit = selectPeriod.closest("form").find('input[type="submit"]');
+																submit.click();
+															})
+														</script>
+													</td>
+												</tr>
+											</tbody>
+									</table>
+					    		</div>
+				    		<?php } ?>
+				    		<div class="questionCon" style="text-align: center;padding-top: 10px;">
+				    			<strong><label>Server time</label>: <?php echo date("Y-m-d H:i:s"); ?></strong>
+				    		</div>
+				    		<div class="questionCon qsubmit">
+				    			<div class="submit"><input type="submit" value="Submit" class="button-primary"></div>
+				    		</div>
+				   		</form>
+				    </div>
+				</div>
+				<div class="omni_admin_sidebar">
+				<div class="omni_admin_sidebar_section">
+				  <h3>Having Issues?</h3>
+				  <ul>
+				    <li><label>You can create a ticket</label> <a target="_blank" href="http://wordpress.org/support/plugin/wp-fastest-cache"><label>WordPress support forum</label></a></li>
+				  <?
+				  	if(isset($this->options->wpFastestCacheLanguage) && $this->options->wpFastestCacheLanguage == "tr"){
+				  		?>
+				  		<li><label>R10 Üzerinden Sorabilirsiniz</label> <a target="_blank" href="http://www.r10.net/wordpress/1096868-wp-fastest-cache-wp-en-hizli-ve-en-basit-cache-sistemi.html"><label>R10.net destek başlığı</label></a></li>
+				  		<?
+				  	}
+				  ?>
+				  </ul>
+				  </div>
+				</div>
+			</div>
+			<script>Wpfclang.init("<?php echo $wpFastestCacheLanguage; ?>");</script>
+			<?php
 		}
 	}
 ?>
