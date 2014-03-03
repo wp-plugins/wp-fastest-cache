@@ -122,7 +122,7 @@ GNU General Public License for more details.
 			add_action($this->slug()."TmpDelete",  array($this, 'actionDelete'));
 		}
 
-		protected function actionDelete(){
+		public function actionDelete(){
 			if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
 				$this->rm_folder_recursively($this->getWpContentDir()."/cache/tmpWpfc");
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
