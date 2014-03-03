@@ -41,9 +41,8 @@ window.wpfc.dictionary = {
 	"If you modify any css file, you have to delete minified css files" :  "Herhangi bir css dosyasını değiştirdiyseniz, minify edilmiş css dosyalarını silmeniz gerekir",
 	"Delete Minified Css" :  "Küçültülen Css Temizle",
 	"Don't show the cached version for mobile devices" : "Mobile kullanıcılar için cache'i gösterme",
-	"Leverage Browser Caching" : "Tarayıcı Önbelleği",
+	"Browser Caching" : "Tarayıcı Önbellekleme",
 	"Reduce the load times of pages by storing commonly used files from your website on your visitors browser." : "Çok kullanılan dosyaları ziyaretçilerinizin tarayıcısında saklayarak sayfanın yüklenme zamanını azaltın.",
 	"Reduce page load times for repeat visitors" : "Sürekli gelen kullanıcılar için sayfa yüklenme hızını azaltma",
 	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "Kullanıcıların düzenli olarak ziyaret ettiği alanlarda çok verimlidir"
-
 };
