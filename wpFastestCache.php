@@ -131,7 +131,7 @@ GNU General Public License for more details.
 			}
 		}
 
-		protected function setSchedule(){
+		public function setSchedule(){
 			$this->deleteCache();
 		}
 
