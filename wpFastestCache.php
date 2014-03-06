@@ -95,6 +95,19 @@ GNU General Public License for more details.
 			if(isset($this->options->wpFastestCacheNewPost) && isset($this->options->wpFastestCacheStatus)){
 				add_filter ('publish_post', array($this, 'deleteCache'));
 				add_filter ('delete_post', array($this, 'deleteCache'));
+				add_filter ('wp_set_comment_status', array($this, 'singleDeleteCache'));
+			}
+		}
+
+		public function singleDeleteCache($comment_id){
+			$comment = get_comment($comment_id);
+			$permalink = get_permalink($comment->comment_post_ID);
+
+			if(preg_match("/http:\/\/[^\/]+\/(.+)/", $permalink, $out)){
+				$path = $this->getWpContentDir()."/cache/all/".$out[1];
+				if(is_dir($path)){
+					$this->rm_folder_recursively($path);
+				}
 			}
 		}
 
