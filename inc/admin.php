@@ -376,7 +376,8 @@
 			$data = "# BEGIN WpFastestCache"."\n".
 					"<IfModule mod_rewrite.c>"."\n".
 					"RewriteEngine On"."\n".
-					"RewriteBase /"."\n".$this->prefixRedirect().
+					"RewriteBase /"."\n".
+					"AddDefaultCharset UTF-8"."\n".$this->prefixRedirect().
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".$loggedInUser.
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
