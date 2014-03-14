@@ -48,7 +48,7 @@
 		}
 
 		public function setCssLinks(){
-			preg_match("/<head(.*?)<\/head>/", $this->html, $head);
+			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
 			preg_match_all("/<link[^<>]*rel=[\"\']stylesheet[\"\'][^<>]*>/", $head[1], $this->cssLinks);
 			$this->cssLinks = $this->cssLinks[0];
 		}
