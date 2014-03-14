@@ -246,4 +246,7 @@ Yes, it works if you use qTranslate with "Use Query Mode (?lang=en)".
 = Is this plugin compatible with WPtouch Mobile Plugin? =
 Yes, it is compatible with WPtouch Mobile Plugin %100.
 
+= Is this plugin compatible with AdRotate? =
+Yes, it is compatible with AdRotate %100.
+
 == Upgrade notice ==
