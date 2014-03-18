@@ -43,5 +43,7 @@ window.wpfc.dictionary = {
 	"Don't show the cached version for mobile devices" : "Keine Anzeige der gecachten Version in mobilen Browsern",
 	// new
 	"Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>" : "Die Rechte von <strong>/wp-content/cache</strong> müssen auf <strong>755</strong> gesetzt sein.",
-	"Already deleted" : "Bereits gelöscht"
+	"Already deleted" : "Bereits gelöscht",
+	"Support Us" : "",
+	"If you like it, Please vote and support us." : ""
 };

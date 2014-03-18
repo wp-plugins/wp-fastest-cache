@@ -40,5 +40,7 @@ window.wpfc.dictionary = {
 	"All cache files will be removed as well" : "Toate fisierele cache vor fi eliminate la fel",
 	"If you modify any css or js file, you have to delete minified js and css files" : "Daca modifici orice fisier CSS sau js, trebuie sa stergi fisierele micsorate js si CSS",
 	"Delete Minified Css" : "Sterge fisierele CSS micsorate",
-	"Don't show the cached version for mobile devices" : "Nu arata versiunea de cache pentru dispozitivele mobile"
+	"Don't show the cached version for mobile devices" : "Nu arata versiunea de cache pentru dispozitivele mobile",
+	"Support Us" : "",
+	"If you like it, Please vote and support us." : ""
 };

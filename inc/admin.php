@@ -606,6 +606,19 @@
 				    </div>
 				</div>
 				<div class="omni_admin_sidebar">
+
+				<div class="omni_admin_sidebar_section" id="vote-us">
+					<h3 style="color: antiquewhite;">Support Us</h3>
+					<ul>
+						<li><label>If you like it, Please vote and support us.</label></li>
+					</ul>
+					<script>
+						jQuery("#vote-us").click(function(){
+							var win=window.open("http://wordpress.org/support/view/plugin-reviews/wp-fastest-cache?free-counter?rate=5#postform", '_blank');
+							win.focus();
+						});
+					</script>
+				</div>
 				<div class="omni_admin_sidebar_section">
 				  <h3>Having Issues?</h3>
 				  <ul>

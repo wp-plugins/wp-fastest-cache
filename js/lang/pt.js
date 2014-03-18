@@ -40,5 +40,7 @@ window.wpfc.dictionary = {
    "All cache files will be removed as well" :  "Todos os arquivos de cache serão removidos bem",
    "If you modify any css or js file, you have to delete minified js and css files" :  "Se você modificar qualquer css ou js , você tem que apagar js minified e css",
    "Delete Minified Css" :  "Excluir minified Css",
-   "Don't show the cached version for mobile devices" : "Não mostrar a versão em cache para dispositivos móveis"
+   "Don't show the cached version for mobile devices" : "Não mostrar a versão em cache para dispositivos móveis",
+   "Support Us" : "",
+   "If you like it, Please vote and support us." : ""
 };

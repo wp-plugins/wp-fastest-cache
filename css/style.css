@@ -198,3 +198,10 @@ h1.summary-rec {
 .omni_admin_sidebar_section label {
     font-size: 11px;
 }
+
+#vote-us{
+    border-color: #D09847; 
+    background: url("../images/facebook-like-xxl.png") #E39124 no-repeat 103% 130%; 
+    background-size: 30%;
+    cursor: pointer;
+}

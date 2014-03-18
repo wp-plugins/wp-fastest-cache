@@ -45,5 +45,7 @@ window.wpfc.dictionary = {
 	"Reduce the load times of pages by storing commonly used files from your website on your visitors browser." : "Guarda archivos en el navegador del visitante para que las páginas carguen más rápido",
 	"Reduce page load times for repeat visitors" : "Reducir el tiempo de carga para visitantes frecuentes",
 	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "Muy eficiente en sitios cuyos usuarios visitan las mismas páginas con frecuencia",
-	"Don't show the cached version for logged-in users" : "No mostrar los archivos en el cache a los usuarios registrados."
+	"Don't show the cached version for logged-in users" : "No mostrar los archivos en el cache a los usuarios registrados.",
+	"Support Us" : "",
+	"If you like it, Please vote and support us." : ""
 };
