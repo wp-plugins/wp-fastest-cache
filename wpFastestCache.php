@@ -148,6 +148,23 @@ GNU General Public License for more details.
 			$this->deleteCache();
 		}
 
+		public function getABSPATH(){
+			$path = ABSPATH;
+			$siteUrl = site_url();
+			$homeUrl = home_url();
+			$diff = str_replace($homeUrl, "", $siteUrl);
+			$diff = trim($diff,"/");
+
+		    $pos = strrpos($path, $diff);
+
+		    if($pos !== false){
+		    	$path = substr_replace($path, "", $pos, strlen($diff));
+		    	$path = trim($path,"/");
+		    	$path = "/".$path."/";
+		    }
+		    return $path;
+		}
+
 		protected function rm_folder_recursively($dir, $i = 1) {
 		    foreach(scandir($dir) as $file) {
 		    	if($i > 500){
