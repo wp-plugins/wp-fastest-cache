@@ -2,11 +2,13 @@
 	class CssUtilities{
 		private $html = "";
 		private $cssLinks = array();
+		private $cssLinksExcept = "";
 		private $url = "";
 
 		public function __construct($html){
 			$this->html = preg_replace("/\s+/", " ", ((string) $html));
 			$this->setCssLinks();
+			//$this->setCssLinksExcept();
 		}
 
 		public function minify($url){
@@ -53,8 +55,22 @@
 			$this->cssLinks = $this->cssLinks[0];
 		}
 
+		public function setCssLinksExcept(){
+			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
+
+			preg_match_all("/<\!--\s*\[\s*if[^>]+>(.*?)<\!\s*\[\s*endif\s*\]\s*-->/si", $head[1], $cssLinksInIf);
+
+			preg_match_all("/<\!--(?!\[if)(.*?)(?!<\!\s*\[\s*endif\s*\]\s*)-->/si", $head[1], $cssLinksCommentOut);
+			
+			$this->cssLinksExcept = implode(" ", array_merge($cssLinksInIf[0], $cssLinksCommentOut[0]));
+		}
+
 		public function getCssLinks(){
 			return $this->cssLinks;
+		}
+
+		public function getCssLinksExcept(){
+			return $this->cssLinksExcept;
 		}
 
 		public function checkInternal($link){
