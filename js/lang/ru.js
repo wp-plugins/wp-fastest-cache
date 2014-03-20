@@ -42,5 +42,11 @@ window.wpfc.dictionary = {
 	"Delete Minified Css" : "Уничтожьте уменьшенные css",
 	"Don't show the cached version for mobile devices" : "Не отображать кэшированные версии для мобильных устройств",
 	"Support Us" : "",
-	"If you like it, Please vote and support us." : ""
+	"If you like it, Please vote and support us." : "",
+	"If you modify any css file, you have to delete minified css files" : "Если вы измените любой css файл, вам потребуется удалить минифицированные css файлы",
+	"Don't show the cached version for logged-in users" : "Не показывать кэшированную версию авторизованным пользователям",
+	"Browser Caching" : "Браузерное Кэширование",
+	"Reduce the load times of pages by storing commonly used files from your website on your visitors browser." : "Уменьшает время загрузки страниц, храня наиболее часто используемые файлы с веб-сайта в браузерах ваших посетителей",
+	"Reduce page load times for repeat visitors" : "Уменьшает время загрузки для повторных посетителей",
+	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "Практически эффективно на веб-сайтах, где пользователи регулярно посещают одни и те же разделы"
 };
