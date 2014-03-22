@@ -365,7 +365,8 @@
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".$loggedInUser.
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
 					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile.
-					"RewriteCond %{DOCUMENT_ROOT}/".$this->getRewriteBase()."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n".
+					//"RewriteCond %{DOCUMENT_ROOT}/".$this->getRewriteBase()."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n".
+					"RewriteCond ".ABSPATH."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n".
 					'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n".
 					"</IfModule>"."\n".
 					"# END WpFastestCache"."\n";
