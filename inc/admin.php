@@ -364,10 +364,15 @@
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".$loggedInUser.
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
-					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile.
-					//"RewriteCond %{DOCUMENT_ROOT}/".$this->getRewriteBase()."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n".
-					"RewriteCond ".ABSPATH."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n".
-					'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n".
+					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile;
+
+			if(ABSPATH == "//"){
+				$data = $data."RewriteCond %{DOCUMENT_ROOT}/wp-content/cache/all/$1/index.html -f"."\n";
+			}else{
+				$data = $data."RewriteCond ".ABSPATH."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n";
+			}
+
+			$data = $data.'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n".
 					"</IfModule>"."\n".
 					"# END WpFastestCache"."\n";
 			return $data;
@@ -385,19 +390,6 @@
 			}else{
 				return "";
 			}
-			//return isset($out[1]) ? trim($out[1], "/")."/" : "";
-
-
-			// $tmp = str_replace($_SERVER['DOCUMENT_ROOT']."/", "", ABSPATH);
-			// if(substr($tmp, -1) == "/"){
-			// 	$tmp = rtrim($tmp, "/");
-			// }
-			
-			// $tmp = $tmp ? $tmp."/" : "";
-
-
-
-			return $tmp;
 		}
 
 		public function optionsPage(){

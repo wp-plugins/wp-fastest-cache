@@ -73,7 +73,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.7.9.7 =
+= 0.7.9.8 =
 * <strong>[FEATURE]</strong> Supports "Subdirectory Install"
 * <strong>[FEATURE]</strong> SSL support
 * <strong>[FEATURE]</strong> Leverage browser caching has been added
@@ -83,6 +83,8 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * <strong>[FEATURE]</strong> Enable/Disable cache option for logged-in users has been added
 * Improvement of Turkish and Spanish translation
 * Issue of subdirectory install using with subdirectory url
+* Double slash in the rewrite rule problem has been solved
+* Full path is written instead of %{DOCUMENT_ROOT}
 
 = 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
