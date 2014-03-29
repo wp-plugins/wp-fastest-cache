@@ -108,7 +108,14 @@
 		}
 
 		public function createFolder($cachFilePath, $buffer, $extension = "html", $prefix = ""){
+			$create = false;
 			if($buffer && strlen($buffer) > 100){
+				$create = true;
+			}elseif($extension == "css" && $buffer && strlen($buffer) > 5){
+				$create = true;
+			}
+
+			if($create){
 				if (!is_user_logged_in() && $this->isCommenter()){
 					if(!is_dir($cachFilePath)){
 						if(is_writable($this->getWpContentDir()) || ((is_dir($this->getWpContentDir()."/cache")) && (is_writable($this->getWpContentDir()."/cache")))){
