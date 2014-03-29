@@ -86,8 +86,6 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Double slash in the rewrite rule problem has been solved
 * Full path is written instead of %{DOCUMENT_ROOT}
 
-* Stop to prevent not to minify css files which has small size
-
 = 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
 * <strong>[FEATURE]</strong> Enable/Disable cache option for mobile devices has been added
