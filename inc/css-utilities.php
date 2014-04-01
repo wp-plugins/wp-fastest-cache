@@ -8,7 +8,7 @@
 		public function __construct($html){
 			$this->html = preg_replace("/\s+/", " ", ((string) $html));
 			$this->setCssLinks();
-			//$this->setCssLinksExcept();
+			$this->setCssLinksExcept();
 		}
 
 		public function minify($url){

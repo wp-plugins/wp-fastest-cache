@@ -72,7 +72,7 @@
 
 				$content = $this->cacheDate($buffer);
 				$content = $this->minify($content);
-				$content = $this->minifyCss($content);
+				$content = $this->minifyCss($content, false);
 
 				$this->createFolder($cachFilePath, $content);
 
@@ -137,30 +137,121 @@
 			}
 		}
 
-		public function minifyCss($content){
+		// public function minifyCss($content){
+		// 	if(isset($this->options->wpFastestCacheMinifyCss)){
+		// 		require_once "css-utilities.php";
+		// 		$css = new CssUtilities($content);
+
+		// 		if(count($css->getCssLinks()) > 0){
+		// 			foreach ($css->getCssLinks() as $key => $value) {
+		// 				if($href = $css->checkInternal($value)){
+		// 					$minifiedCss = $css->minify($href);
+
+		// 					if($minifiedCss){
+		// 						if(!is_dir($minifiedCss["cachFilePath"])){
+		// 							$prefix = time();
+		// 							$this->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
+		// 						}
+
+		// 						if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
+		// 							$content = str_replace($href, $minifiedCss["url"]."/".$cssFiles[0], $content);	
+		// 						}
+		// 					}
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// 	return $content;
+		// }
+
+		public function minifyCss($content, $merge = false){
 			if(isset($this->options->wpFastestCacheMinifyCss)){
 				require_once "css-utilities.php";
 				$css = new CssUtilities($content);
 
 				if(count($css->getCssLinks()) > 0){
+					$prev = array("content" => "", "value" => array());
 					foreach ($css->getCssLinks() as $key => $value) {
 						if($href = $css->checkInternal($value)){
-							$minifiedCss = $css->minify($href);
+							if(strpos($css->getCssLinksExcept(), $href) === false){
 
-							if($minifiedCss){
-								if(!is_dir($minifiedCss["cachFilePath"])){
-									$prefix = time();
-									$this->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
+								$minifiedCss = $css->minify($href);
+
+								if($minifiedCss){
+									if(!is_dir($minifiedCss["cachFilePath"])){
+										$prefix = time();
+										$this->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
+									}
+
+									if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
+										if($merge){
+											if($cssContent = $css->file_get_contents_curl($minifiedCss["url"]."/".$cssFiles[0]."?v=".time())){
+												$prev["content"] .= $cssContent;
+												array_push($prev["value"], $value);
+											}
+										}else{
+											$content = str_replace($href, $minifiedCss["url"]."/".$cssFiles[0], $content);	
+										}
+									}
 								}
-
-								if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
-									$content = str_replace($href, $minifiedCss["url"]."/".$cssFiles[0], $content);	
+							}else{
+								if($merge){
+									$content = $this->mergeCss($prev, $content);
+									$prev = array("content" => "", "value" => array());
 								}
 							}
 						}
 					}
+					if($merge){
+						$content = $this->mergeCss($prev, $content);
+					}
 				}
 			}
+			return $content;
+		}
+
+		public function mergeCss($prev, $content){
+			if(count($prev["value"]) > 0){
+				$name = "";
+				foreach ($prev["value"] as $prevKey => $prevValue) {
+					if($prevKey == count($prev["value"]) - 1){
+						$name = md5($name);
+						$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".$name;
+
+						if(!is_dir($cachFilePath)){
+							$this->createFolder($cachFilePath, $prev["content"], "css", time());
+						}
+
+						if($cssFiles = @scandir($cachFilePath, 1)){
+							$newLink = "<link rel='stylesheet' href='".content_url()."/cache/wpfc-minified/".$name."/".$cssFiles[0]."' type='text/css' media='all' />";
+							$content = $this->replaceLink($prevValue, $newLink, $content);
+						}
+					}else{
+						$name .= $prevValue;
+						$content = $this->replaceLink($prevValue, "<!-- removed -->", $content);
+					}
+				}
+			}
+			return $content;
+		}
+
+		public function replaceLink($search, $replace, $content){
+			$href = "";
+
+			if(stripos($search, "<link") === false){
+				$href = $search;
+			}else{
+				preg_match("/.+href=[\"\'](.+)[\"\'].+/", $search, $out);
+			}
+
+			if(count($out) > 0){
+				$out[1] = str_replace("/", "\/", $out[1]);
+				$out[1] = str_replace("?", "\?", $out[1]);
+				$out[1] = str_replace(".", "\.", $out[1]);
+
+				$content = preg_replace("/<link[^>]+".$out[1]."[^>]+>/", $replace, $content);
+			}
+
 			return $content;
 		}
 
