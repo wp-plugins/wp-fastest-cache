@@ -11,10 +11,10 @@
 		}
 
 		public function checkActivePlugins(){
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			//include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 			//for WP-Polls
-			if(is_plugin_active('wp-polls/wp-polls.php')){ 
+			if($this->isPluginActive('wp-polls/wp-polls.php')){
 				require_once "wp-polls.php";
 				$wp_polls = new WpPollsForWpFc();
 				$wp_polls->execute();
@@ -255,13 +255,25 @@
 			return $content;
 		}
 
-
 		public function isMobile(){
 			if(preg_match("/.*".$this->getMobileUserAgents().".*/i", $_SERVER['HTTP_USER_AGENT'])){
 				return true;
 			}else{
 				return false;
 			}
+		}
+		public function isPluginActive( $plugin ) {
+			return in_array( $plugin, (array) get_option( 'active_plugins', array() ) ) || $this->isPluginActiveForNetwork( $plugin );
+		}
+		public function isPluginActiveForNetwork( $plugin ) {
+			if ( !is_multisite() )
+				return false;
+
+			$plugins = get_site_option( 'active_sitewide_plugins');
+			if ( isset($plugins[$plugin]) )
+				return true;
+
+			return false;
 		}
 	}
 ?>
