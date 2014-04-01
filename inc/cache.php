@@ -72,8 +72,15 @@
 
 				$content = $this->cacheDate($buffer);
 				$content = $this->minify($content);
-				$content = $this->minifyCss($content, false);
 
+				if(isset($this->options->wpFastestCacheCombineCss) && isset($this->options->wpFastestCacheMinifyCss)){
+					$content = $this->combineCss($content, true);
+				}else if(isset($this->options->wpFastestCacheCombineCss)){
+					$content = $this->combineCss($content, false);
+				}else if(isset($this->options->wpFastestCacheMinifyCss)){
+					$content = $this->minifyCss($content);
+				}
+				
 				$this->createFolder($cachFilePath, $content);
 
 				return $buffer;
@@ -137,35 +144,35 @@
 			}
 		}
 
-		// public function minifyCss($content){
-		// 	if(isset($this->options->wpFastestCacheMinifyCss)){
-		// 		require_once "css-utilities.php";
-		// 		$css = new CssUtilities($content);
-
-		// 		if(count($css->getCssLinks()) > 0){
-		// 			foreach ($css->getCssLinks() as $key => $value) {
-		// 				if($href = $css->checkInternal($value)){
-		// 					$minifiedCss = $css->minify($href);
-
-		// 					if($minifiedCss){
-		// 						if(!is_dir($minifiedCss["cachFilePath"])){
-		// 							$prefix = time();
-		// 							$this->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
-		// 						}
-
-		// 						if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
-		// 							$content = str_replace($href, $minifiedCss["url"]."/".$cssFiles[0], $content);	
-		// 						}
-		// 					}
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// 	return $content;
-		// }
-
-		public function minifyCss($content, $merge = false){
+		public function minifyCss($content){
 			if(isset($this->options->wpFastestCacheMinifyCss)){
+				require_once "css-utilities.php";
+				$css = new CssUtilities($content);
+
+				if(count($css->getCssLinks()) > 0){
+					foreach ($css->getCssLinks() as $key => $value) {
+						if($href = $css->checkInternal($value)){
+							$minifiedCss = $css->minify($href);
+
+							if($minifiedCss){
+								if(!is_dir($minifiedCss["cachFilePath"])){
+									$prefix = time();
+									$this->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
+								}
+
+								if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
+									$content = str_replace($href, $minifiedCss["url"]."/".$cssFiles[0], $content);	
+								}
+							}
+						}
+					}
+				}
+			}
+			return $content;
+		}
+
+		public function combineCss($content, $minify = false){
+			if(isset($this->options->wpFastestCacheCombineCss)){
 				require_once "css-utilities.php";
 				$css = new CssUtilities($content);
 
@@ -175,7 +182,7 @@
 						if($href = $css->checkInternal($value)){
 							if(strpos($css->getCssLinksExcept(), $href) === false){
 
-								$minifiedCss = $css->minify($href);
+								$minifiedCss = $css->minify($href, $minify);
 
 								if($minifiedCss){
 									if(!is_dir($minifiedCss["cachFilePath"])){
@@ -184,27 +191,19 @@
 									}
 
 									if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
-										if($merge){
-											if($cssContent = $css->file_get_contents_curl($minifiedCss["url"]."/".$cssFiles[0]."?v=".time())){
-												$prev["content"] .= $cssContent;
-												array_push($prev["value"], $value);
-											}
-										}else{
-											$content = str_replace($href, $minifiedCss["url"]."/".$cssFiles[0], $content);	
+										if($cssContent = $css->file_get_contents_curl($minifiedCss["url"]."/".$cssFiles[0]."?v=".time())){
+											$prev["content"] .= $cssContent;
+											array_push($prev["value"], $value);
 										}
 									}
 								}
 							}else{
-								if($merge){
-									$content = $this->mergeCss($prev, $content);
-									$prev = array("content" => "", "value" => array());
-								}
+								$content = $this->mergeCss($prev, $content);
+								$prev = array("content" => "", "value" => array());
 							}
 						}
 					}
-					if($merge){
-						$content = $this->mergeCss($prev, $content);
-					}
+					$content = $this->mergeCss($prev, $content);
 				}
 			}
 			return $content;

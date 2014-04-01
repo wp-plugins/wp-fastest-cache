@@ -11,7 +11,7 @@
 			$this->setCssLinksExcept();
 		}
 
-		public function minify($url){
+		public function minify($url, $minify = true){
 			$this->url = $url;
 			preg_match("/^.*?wp-content\/(themes|plugins)\/(.*?)$/", $url, $name);
 
@@ -22,8 +22,12 @@
 				return array("cachFilePath" => $cachFilePath, "cssContent" => "", "url" => $cssLink);
 			}else{
 				if($css = $this->file_get_contents_curl($url."?v=".time())){
-					$cssContent = $this->_process($css);
-					$cssContent = $this->fixPathsInCssContent($cssContent);
+					if($minify){
+						$cssContent = $this->_process($css);
+						$cssContent = $this->fixPathsInCssContent($cssContent);
+					}else{
+						$cssContent = $css;
+					}
 
 					return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => $cssLink);
 				}
