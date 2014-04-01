@@ -195,8 +195,8 @@
 			}
 
 			if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on") || (isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on")){
-				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-				if(is_plugin_active('gzippy/gzippy.php')){
+				//include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				if($this->isPluginActive('gzippy/gzippy.php')){
 					return array("GZippy needs to be deactive<br>This plugin has aldready Gzip feature", "error");
 				}else if(!is_file($path.".htaccess")){
 					return array(".htaccess was not found", "error");
@@ -390,6 +390,20 @@
 			}else{
 				return "";
 			}
+		}
+
+		public function isPluginActive( $plugin ) {
+			return in_array( $plugin, (array) get_option( 'active_plugins', array() ) ) || $this->isPluginActiveForNetwork( $plugin );
+		}
+		public function isPluginActiveForNetwork( $plugin ) {
+			if ( !is_multisite() )
+				return false;
+
+			$plugins = get_site_option( 'active_sitewide_plugins');
+			if ( isset($plugins[$plugin]) )
+				return true;
+
+			return false;
 		}
 
 		public function optionsPage(){
