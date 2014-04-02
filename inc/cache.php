@@ -244,11 +244,11 @@
 			}
 
 			if(count($out) > 0){
-				$out[1] = str_replace("/", "\/", $out[1]);
-				$out[1] = str_replace("?", "\?", $out[1]);
-				$out[1] = str_replace(".", "\.", $out[1]);
+				// $out[1] = str_replace("/", "\/", $out[1]);
+				// $out[1] = str_replace("?", "\?", $out[1]);
+				// $out[1] = str_replace(".", "\.", $out[1]);
 
-				$content = preg_replace("/<link[^>]+".$out[1]."[^>]+>/", $replace, $content);
+				$content = preg_replace("/<link[^>]+".preg_quote($out[1], "/")."[^>]+>/", $replace, $content);
 			}
 
 			return $content;
