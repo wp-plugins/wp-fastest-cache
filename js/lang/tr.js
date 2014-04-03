@@ -47,5 +47,8 @@ window.wpfc.dictionary = {
 	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "Kullanıcıların düzenli olarak ziyaret ettiği alanlarda çok verimlidir",
 	"Don't show the cached version for logged-in users" : "Login olan kullanıcılara önbelleği gösterme",
 	"Support Us" : "Bizi Destekleyin",
-	"If you like it, Please vote and support us." : "Beğendiyseniz lütfen oylayın ve destek olun."
+	"If you like it, Please vote and support us." : "Beğendiyseniz lütfen oylayın ve destek olun.",
+	"Reduce HTTP requests through combined files" : "CSS dosyalarını birleştirerek HTTP isteklerini azaltın",
+	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Sayfanızda bulunan bileşenlerin sayısını düşürmek, HTTP istek sayısını azaltacağından sayfanın daha hızlı yüklenmesini sağlar.",
+	"Combine Css" : "Css Birleştir"
 };

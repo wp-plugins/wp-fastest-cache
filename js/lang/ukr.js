@@ -42,5 +42,8 @@ window.wpfc.dictionary = {
 	"Delete Minified Css" : "Знищити зменшені css",
 	"Don't show the cached version for mobile devices" : "Не відображати керовані версії для мобільних пристроїв",
 	"Support Us" : "",
-	"If you like it, Please vote and support us." : ""
+	"If you like it, Please vote and support us." : "",
+	"Reduce HTTP requests through combined files" : "",
+	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "",
+	"Combine Css" : ""
 };

@@ -1,7 +1,7 @@
 === WP Fastest Cache ===
 Contributors: emrevona
 Donate link: http://profiles.wordpress.org/emrevona/
-Tags: fastest wp cache, cache, caching, performance, wp-cache, plugin, page, optimize, fast, w3 total cache, apache, wp fast cache, google, mod_rewrite, accelerator, google rank, htaccess, quick cache, super cache, w3 total cache, minify, speed, performance, page cache, optimizer, wp fastest cache, facebook, shortcode, gallery, widget, apache, minify html, availability, AWS, batcache, buddypress, bwp-minify, cache, caching, cascading style sheet, CDN, Cloud Files, cloudflare, cloudfront, twitter, compress, content delivery network, CSS, css cache, database cache, db-cache, deflate, disk cache, disk caching, eacclerator, elasticache, flash media server, google, google page speed, google rank, gzip, http compression, javascript, Amazon S3, js cache, limelight, litespeed, max cdn, media library, merge, microsoft, minify css, compressor css, mod_cloudflare, image, links, mod_pagespeed, multiple hosts, mysql, posts, plugin, Post, Autoptimize, optimize, optimizer, page cache, performance, plugin, quick cache, images 
+Tags: fastest wp cache, cache, caching, performance, wp-cache, plugin, page, optimize, fast, w3 total cache, apache, wp fast cache, google, mod_rewrite, accelerator, google rank, htaccess, quick cache, super cache, w3 total cache, minify, speed, performance, page cache, optimizer, wp fastest cache, facebook, shortcode, gallery, widget, apache, minify html, availability, AWS, batcache, buddypress, bwp-minify, cache, caching, cascading style sheet, CDN, Cloud Files, cloudflare, cloudfront, combine css, compress, content delivery network, CSS, css cache, database cache, db-cache, deflate, disk cache, disk caching, eacclerator, elasticache, flash media server, google, google page speed, google rank, gzip, http compression, javascript, Amazon S3, js cache, limelight, litespeed, max cdn, media library, merge, microsoft, minify css, compressor css, mod_cloudflare, image, links, mod_pagespeed, multiple hosts, mysql, posts, plugin, Post, Autoptimize, optimize, optimizer, page cache, performance, plugin, quick cache, images 
 Requires at least: 3.3
 Tested up to: 3.8
 Stable tag: 4.3
@@ -38,6 +38,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 3. Minify Css - You can decrease the size of css files
 4. Enable Gzip Compression - Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser.
 5. Leverage browser caching - Reduce page load times for repeat visitors
+6. Combine CSS - Reduce number of HTTP round-trips by combining multiple CSS resources into one
 
 <h4>Supported languages: </h4>
 
@@ -72,6 +73,11 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 8. You can minify the css files
 
 == Changelog ==
+
+= 0.7.9.9 =
+* Stop to prevent not to minify css files which has small size
+* Improvement of detection active plugins
+* <strong>[FEATURE]</strong> "Combine Css" has been added
 
 = 0.7.9.8 =
 * <strong>[FEATURE]</strong> Supports "Subdirectory Install"

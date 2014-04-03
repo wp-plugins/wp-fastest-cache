@@ -22,6 +22,9 @@
 						"- <label>Reduce page load times for repeat visitors</label><br>" + 
 						"- <label>Particularly effective on websites where users regularly re-visit the same areas of the website</label><br>" +
 						"- <label>Cost-benefit ratio: high</label><br>";
+		}else if(input.attr("id") == "wpFastestCacheCombineCss"){
+			options.h4 = "Combine CSS";
+			options.h1 = "<label>Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
 		}
 
 		options.type = input.attr("id");

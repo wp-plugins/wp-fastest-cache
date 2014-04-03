@@ -45,5 +45,8 @@ window.wpfc.dictionary = {
 	"Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>" : "Die Rechte von <strong>/wp-content/cache</strong> müssen auf <strong>755</strong> gesetzt sein.",
 	"Already deleted" : "Bereits gelöscht",
 	"Support Us" : "",
-	"If you like it, Please vote and support us." : ""
+	"If you like it, Please vote and support us." : "",
+	"Reduce HTTP requests through combined files" : "",
+	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "",
+	"Combine Css" : ""
 };

@@ -48,5 +48,8 @@ window.wpfc.dictionary = {
 	"Browser Caching" : "Браузерное Кэширование",
 	"Reduce the load times of pages by storing commonly used files from your website on your visitors browser." : "Уменьшает время загрузки страниц, храня наиболее часто используемые файлы с веб-сайта в браузерах ваших посетителей",
 	"Reduce page load times for repeat visitors" : "Уменьшает время загрузки для повторных посетителей",
-	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "Практически эффективно на веб-сайтах, где пользователи регулярно посещают одни и те же разделы"
+	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "Практически эффективно на веб-сайтах, где пользователи регулярно посещают одни и те же разделы",
+	"Reduce HTTP requests through combined files" : "",
+	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "",
+	"Combine Css" : ""
 };
