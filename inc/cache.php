@@ -201,6 +201,9 @@
 								$content = $this->mergeCss($prev, $content);
 								$prev = array("content" => "", "value" => array());
 							}
+						}else{
+							$content = $this->mergeCss($prev, $content);
+							$prev = array("content" => "", "value" => array());
 						}
 					}
 					$content = $this->mergeCss($prev, $content);
