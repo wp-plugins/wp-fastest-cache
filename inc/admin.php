@@ -481,7 +481,7 @@
 
 							<div class="questionCon">
 								<div class="question">Combine Css</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineCss; ?> id="wpFastestCacheCombineCss" name="wpFastestCacheCombineCss"><label for="wpFastestCacheCombineCss">Reduce HTTP requests through combined files</label></div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineCss; ?> id="wpFastestCacheCombineCss" name="wpFastestCacheCombineCss"><span id="wpfc-beta">(Beta)</span><label for="wpFastestCacheCombineCss">Reduce HTTP requests through combined files</label></div>
 								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
 							</div>
 

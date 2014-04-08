@@ -205,3 +205,9 @@ h1.summary-rec {
     background-size: 30%;
     cursor: pointer;
 }
+
+#wpfc-beta{
+    padding-right: 5px;
+    font-weight: bold;
+    color: red;
+}
