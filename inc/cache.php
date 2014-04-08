@@ -198,14 +198,17 @@
 									}
 								}
 							}else{
+								$prev["content"] = $css->fixRules($prev["content"]);
 								$content = $this->mergeCss($prev, $content);
 								$prev = array("content" => "", "value" => array());
 							}
 						}else{
+							$prev["content"] = $css->fixRules($prev["content"]);
 							$content = $this->mergeCss($prev, $content);
 							$prev = array("content" => "", "value" => array());
 						}
 					}
+					$prev["content"] = $css->fixRules($prev["content"]);
 					$content = $this->mergeCss($prev, $content);
 				}
 			}
