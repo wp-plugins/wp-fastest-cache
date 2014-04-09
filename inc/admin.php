@@ -235,6 +235,7 @@
 					'ExpiresByType image/ico A2592000'."\n".
 					'ExpiresByType text/css A2592000'."\n".
 					'ExpiresByType text/javascript A2592000'."\n".
+					'ExpiresByType application/javascript A2592000'."\n".
 					'</IfModule>'."\n".
 					'<IfModule mod_headers.c>'."\n".
 					'Header set Expires "max-age=2592000, public"'."\n".
