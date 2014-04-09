@@ -30,6 +30,29 @@
 		options.type = input.attr("id");
 		modifyHelpTip(options);
 	});
+	lbcWarning();
+	function lbcWarning(){
+		$('#wpFastestCacheLBC').click(function(e){
+			var options = {"h4": "", "h1" : ""};
+
+			options.h4 = "*** Attention ***";
+			options.h1 = "<label>If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below.</label><br><br>" + 
+						"<label>Open .htaccess and remove this rule</label><br><br>"+
+						"<label>&#60;IfModule mod_expires.c&#62;</label><br>"+
+						"<label>ExpiresActive On</label><br>"+
+						"<label>ExpiresDefault A0</label><br>"+
+						"<label>ExpiresByType image/gif A2592000</label><br>"+
+						"<label>ExpiresByType image/png A2592000</label><br>"+
+						"<label>ExpiresByType image/jpg A2592000</label><br>"+
+						"<label>ExpiresByType image/jpeg A2592000</label><br>"+
+						"<label>ExpiresByType image/ico A2592000</label><br>"+
+						"<label>ExpiresByType text/css A2592000</label><br>"+
+						"<label>ExpiresByType text/javascript A2592000</label><br>"+
+						"<label>&#60;/IfModule&#62;</label><br>";
+
+			modifyHelpTip(options);
+		});
+	}
 	function modifyHelpTip(options){
 		var helpTip = $('<div id="rule-help-tip" style="display: block;"><div title="Close Window" class="close-window"> </div><h4></h4><h1 class="summary-rec"></h1><p></p></div>');
 		var windowHeight;

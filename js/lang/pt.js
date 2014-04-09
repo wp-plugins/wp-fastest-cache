@@ -45,5 +45,7 @@ window.wpfc.dictionary = {
    "If you like it, Please vote and support us." : "",
    "Reduce HTTP requests through combined files" : "",
    "Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "",
-   "Combine Css" : ""
+   "Combine Css" : "", 
+   "Open .htaccess and remove this rule" : "",
+   "If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : ""
 };
