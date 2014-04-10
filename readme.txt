@@ -74,12 +74,14 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.7.9.9 =
+= 0.8 =
 * Stop to prevent not to minify css files which has small size
 * Improvement of detection active plugins
 * <strong>[FEATURE]</strong> "Combine Css" has been added
+* Improvement of combine css
+* to prevent creating cache for the urls which has query string
 
-= 0.7.9.8 =
+= 0.7.9.9 =
 * <strong>[FEATURE]</strong> Supports "Subdirectory Install"
 * <strong>[FEATURE]</strong> SSL support
 * <strong>[FEATURE]</strong> Leverage browser caching has been added
@@ -91,6 +93,9 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Issue of subdirectory install using with subdirectory url
 * Double slash in the rewrite rule problem has been solved
 * Full path is written instead of %{DOCUMENT_ROOT}
+* Stop to prevent not to minify css files which has small size
+* Improvement of detection active plugins
+* <strong>[FEATURE]</strong> "Combine Css" has been added
 
 = 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
