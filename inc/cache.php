@@ -67,6 +67,8 @@
 				return $buffer."<!-- not cached -->";
 			}else if($this->checkHtml($buffer)){
 				return $buffer;
+			}else if(preg_match("/\?/", $_SERVER["REQUEST_URI"])){
+				return $buffer;
 			}else{
 				$cachFilePath = $this->getWpContentDir()."/cache/all".$_SERVER["REQUEST_URI"];
 
