@@ -27,6 +27,7 @@
 						$cssContent = $this->fixPathsInCssContent($cssContent);
 					}else{
 						$cssContent = $css;
+						$cssContent = $this->fixPathsInCssContent($cssContent);
 					}
 
 					return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => $cssLink);
