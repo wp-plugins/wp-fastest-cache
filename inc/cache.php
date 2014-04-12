@@ -231,11 +231,11 @@
 
 						if($cssFiles = @scandir($cachFilePath, 1)){
 							$newLink = "<link rel='stylesheet' href='".content_url()."/cache/wpfc-minified/".$name."/".$cssFiles[0]."' type='text/css' media='all' />";
-							$content = $this->replaceLink($prevValue, $newLink, $content);
+							$content = $this->replaceLink($prevValue, "<!-- ".$prevValue." -->"."\n".$newLink, $content);
 						}
 					}else{
 						$name .= $prevValue;
-						$content = $this->replaceLink($prevValue, "<!-- removed -->", $content);
+						$content = $this->replaceLink($prevValue, "<!-- ".$prevValue." -->", $content);
 					}
 				}
 			}
