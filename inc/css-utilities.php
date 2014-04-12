@@ -176,7 +176,8 @@
 	        $css = preg_replace('/;?\\s*}\\s*/', '}', $css);
 	        
 	        // remove ws surrounding semicolons
-	        $css = preg_replace('/\\s*;\\s*/', ';', $css);
+	        //causes break css down
+	        // $css = preg_replace('/\\s*;\\s*/', ';', $css);
 	        
 	        // remove ws around urls
 	        $css = preg_replace('/
@@ -237,7 +238,7 @@
 	            ,"$1\n", $css);
 	        
 	        // prevent triggering IE6 bug: http://www.crankygeek.com/ie6pebug/
-	        $css = preg_replace('/:first-l(etter|ine)\\{/', ':first-l$1 {', $css);
+	        //$css = preg_replace('/:first-l(etter|ine)\\{/', ':first-l$1 {', $css);
 	            
 	        return trim($css);
 	    }
