@@ -49,7 +49,7 @@
 		}
 
 		public function fixPathsInCssContent($css){
-			return preg_replace_callback('/url\((?P<firstQuote>\"|\')?(?!http)(?P<up>(\.\.\/)*)(?P<imageUrl>[^\'\"\(\)]+)(?P<lastQuote>\"|\')?\)/',array($this, 'newImgPath'),$css);
+			return preg_replace_callback('/url\((?P<firstQuote>\"|\')?(?!\/\/fonts|http)(?P<up>(\.\.\/)*)(?P<imageUrl>[^\'\"\(\)]+)(?P<lastQuote>\"|\')?\)/',array($this, 'newImgPath'),$css);
 		}
 
 		public function fixRules($css){
