@@ -61,12 +61,12 @@
 		}
 
 		public function fixImportRules($css){
-			preg_match_all('/@import\s+url.+;/i', $css, $imports);
+			preg_match_all('/@import\s+url\([^\)]+\);/i', $css, $imports);
 
 			if(count($imports[0]) > 0){
-				$css = preg_replace('/@import\s+url.+;/i', "/* @import is moved to the top */", $css);
-				foreach($imports[0] as $import){
-					$css = $import."\n".$css;
+				$css = preg_replace('/@import\s+url\([^\)]+\);/i', "/* @import is moved to the top */", $css);
+				for ($i = count($imports[0])-1; $i >= 0; $i--) {
+					$css = $imports[0][$i]."\n".$css;
 				}
 			}
 			return $css;
