@@ -85,7 +85,9 @@
 
 		public function newImgPath($matches){
 			$matches["path"] = str_replace(array("\"","'"), "", $matches["path"]);
-			if(preg_match("/^(?P<up>(\.\.\/)+)(?P<name>.+)/", $matches["path"], $out)){
+			if(preg_match("/^\//", $matches["path"])){
+				$matches["path"] = home_url().$matches["path"];
+			}else if(preg_match("/^(?P<up>(\.\.\/)+)(?P<name>.+)/", $matches["path"], $out)){
 				$count = strlen($out["up"])/3;
 				$url = dirname($this->url);
 				for($i = 1; $i <= $count; $i++){
