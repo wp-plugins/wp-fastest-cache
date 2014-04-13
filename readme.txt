@@ -74,14 +74,12 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.8 =
-* Stop to prevent not to minify css files which has small size
-* Improvement of detection active plugins
-* <strong>[FEATURE]</strong> "Combine Css" has been added
-* Improvement of combine css
-* to prevent creating cache for the urls which has query string
+= 0.8.1.1 =
+* to show which style files are combined
+* to fix the minify css issue
+* to fix minify css breaking css down
 
-= 0.7.9.9 =
+= 0.8 =
 * <strong>[FEATURE]</strong> Supports "Subdirectory Install"
 * <strong>[FEATURE]</strong> SSL support
 * <strong>[FEATURE]</strong> Leverage browser caching has been added
@@ -96,6 +94,11 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Stop to prevent not to minify css files which has small size
 * Improvement of detection active plugins
 * <strong>[FEATURE]</strong> "Combine Css" has been added
+* Stop to prevent not to minify css files which has small size
+* Improvement of detection active plugins
+* <strong>[FEATURE]</strong> "Combine Css" has been added
+* Improvement of combine css
+* to prevent creating cache for the urls which has query string
 
 = 0.7.9 =
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
