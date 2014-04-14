@@ -55,6 +55,8 @@
 
 			if(defined('DONOTCACHEPAGE')){ // for Wordfence: not to cache 503 pages
 				return $buffer;
+			}else if($this->isPasswordProtected()){
+				return $buffer;
 			}else if($this->isMobile()){
 				return $buffer;
 			}else if(is_404()){
@@ -114,6 +116,15 @@
 		public function isCommenter(){
 			$commenter = wp_get_current_commenter();
 			return isset($commenter["comment_author_email"]) && $commenter["comment_author_email"] ? false : true;
+		}
+		public function isPasswordProtected(){
+			if(count($_COOKIE) > 0){
+				if(preg_match("/wp-postpass/", implode(" ",array_keys($_COOKIE)))){
+					return true;
+				}
+
+			}
+			return false;
 		}
 
 		public function createFolder($cachFilePath, $buffer, $extension = "html", $prefix = ""){
