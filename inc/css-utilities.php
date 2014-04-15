@@ -13,10 +13,10 @@
 
 		public function minify($url, $minify = true){
 			$this->url = $url;
-			preg_match("/^.*?wp-content\/(themes|plugins)\/(.*?)$/", $url, $name);
+			//preg_match("/^.*?wp-content\/(themes|plugins)\/(.*?)$/", $url, $name);
 
-			$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($name[2]);
-			$cssLink = content_url()."/cache/wpfc-minified/".md5($name[2]);
+			$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($url);
+			$cssLink = content_url()."/cache/wpfc-minified/".md5($url);
 
 			if(is_dir($cachFilePath)){
 				return array("cachFilePath" => $cachFilePath, "cssContent" => "", "url" => $cssLink);
