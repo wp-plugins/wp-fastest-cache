@@ -50,7 +50,7 @@
 		}
 
 		public function fixPathsInCssContent($css){
-			return preg_replace_callback("/url\((?!\/\/fonts|http)(?P<path>[^\)]+)\)/", array($this, 'newImgPath'), $css);
+			return preg_replace_callback("/url\((?P<path>[^\)]*)\)/", array($this, 'newImgPath'), $css);
 			//return preg_replace_callback('/url\((?P<firstQuote>\"|\')?(?!\/\/fonts|http)(?P<up>(\.\.\/)*)(?P<imageUrl>[^\'\"\(\)]+)(?P<lastQuote>\"|\')?\)/',array($this, 'newImgPath'),$css);
 		}
 
@@ -87,6 +87,8 @@
 			$matches["path"] = str_replace(array("\"","'"), "", $matches["path"]);
 			if(!$matches["path"]){
 				$matches["path"] = "";
+			}else if(preg_match("/^(http|\/\/fonts|data:image)/", $matches["path"])){
+				$matches["path"] = $matches["path"];
 			}else if(preg_match("/^\//", $matches["path"])){
 				$matches["path"] = home_url().$matches["path"];
 			}else if(preg_match("/^(?P<up>(\.\.\/)+)(?P<name>.+)/", $matches["path"], $out)){
