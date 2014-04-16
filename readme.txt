@@ -74,6 +74,11 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.1.2 =
+* to fix combine css breaking css down
+* the password protected posts are not cached
+* change of minified css file name
+
 = 0.8.1.1 =
 * to show which style files are combined
 * to fix the minify css issue
