@@ -74,6 +74,9 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.1.3 =
+* to support renamed wp-content
+
 = 0.8.1.2 =
 * to fix combine css breaking css down
 * the password protected posts are not cached

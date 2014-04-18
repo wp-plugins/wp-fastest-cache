@@ -361,7 +361,8 @@
 					"<IfModule mod_rewrite.c>"."\n".
 					"RewriteEngine On"."\n".
 					"RewriteBase /"."\n".
-					"AddDefaultCharset UTF-8"."\n".$this->prefixRedirect().
+					"AddDefaultCharset UTF-8"."\n".$this->ruleForWpContent().
+					$this->prefixRedirect().
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".$loggedInUser.
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
@@ -377,6 +378,15 @@
 					"</IfModule>"."\n".
 					"# END WpFastestCache"."\n";
 			return $data;
+		}
+
+		public function ruleForWpContent(){
+			$newContentPath = str_replace(home_url(), "", content_url());
+			if(!preg_match("/wp-content/", $newContentPath)){
+				$newContentPath = trim($newContentPath, "/");
+				return "RewriteRule ^".$newContentPath."/cache/(.*) ".ABSPATH."wp-content/cache/$1 [L]"."\n";
+			}
+			return "";
 		}
 
 		public function getRewriteBase($sub = ""){
