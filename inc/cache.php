@@ -53,7 +53,9 @@
 		public function callback($buffer){
 			$buffer = $this->checkShortCode($buffer);
 
-			if(defined('DONOTCACHEPAGE')){ // for Wordfence: not to cache 503 pages
+			if (is_user_logged_in() || $this->isCommenter()){
+				return $buffer;
+			}else if(defined('DONOTCACHEPAGE')){ // for Wordfence: not to cache 503 pages
 				return $buffer;
 			}else if($this->isPasswordProtected()){
 				return $buffer;
@@ -115,7 +117,7 @@
 
 		public function isCommenter(){
 			$commenter = wp_get_current_commenter();
-			return isset($commenter["comment_author_email"]) && $commenter["comment_author_email"] ? false : true;
+			return isset($commenter["comment_author_email"]) && $commenter["comment_author_email"] ? true : false;
 		}
 		public function isPasswordProtected(){
 			if(count($_COOKIE) > 0){
@@ -136,7 +138,7 @@
 			}
 
 			if($create){
-				if (!is_user_logged_in() && $this->isCommenter()){
+				if (!is_user_logged_in() && !$this->isCommenter()){
 					if(!is_dir($cachFilePath)){
 						if(is_writable($this->getWpContentDir()) || ((is_dir($this->getWpContentDir()."/cache")) && (is_writable($this->getWpContentDir()."/cache")))){
 							if (@mkdir($cachFilePath, 0755, true)){
