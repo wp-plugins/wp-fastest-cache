@@ -50,8 +50,8 @@
 		}
 
 		public function fixPathsInCssContent($css){
-			return preg_replace_callback("/url\((?P<path>[^\)]*)\)/", array($this, 'newImgPath'), $css);
-			//return preg_replace_callback('/url\((?P<firstQuote>\"|\')?(?!\/\/fonts|http)(?P<up>(\.\.\/)*)(?P<imageUrl>[^\'\"\(\)]+)(?P<lastQuote>\"|\')?\)/',array($this, 'newImgPath'),$css);
+			return preg_replace_callback("/url\(([^\)]*)\)/", array($this, 'newImgPath'), $css);
+			//return preg_replace_callback("/url\((?P<path>[^\)]*)\)/", array($this, 'newImgPath'), $css);
 		}
 
 		public function fixRules($css){
@@ -84,36 +84,25 @@
 		}
 
 		public function newImgPath($matches){
-			$matches["path"] = str_replace(array("\"","'"), "", $matches["path"]);
-			if(!$matches["path"]){
-				$matches["path"] = "";
-			}else if(preg_match("/^(http|\/\/fonts|data:image)/", $matches["path"])){
-				$matches["path"] = $matches["path"];
-			}else if(preg_match("/^\//", $matches["path"])){
-				$matches["path"] = home_url().$matches["path"];
-			}else if(preg_match("/^(?P<up>(\.\.\/)+)(?P<name>.+)/", $matches["path"], $out)){
+			$matches[1] = str_replace(array("\"","'"), "", $matches[1]);
+			if(!$matches[1]){
+				$matches[1] = "";
+			}else if(preg_match("/^(http|\/\/fonts|data:image)/", $matches[1])){
+				$matches[1] = $matches[1];
+			}else if(preg_match("/^\//", $matches[1])){
+				$matches[1] = home_url().$matches[1];
+			}else if(preg_match("/^(?P<up>(\.\.\/)+)(?P<name>.+)/", $matches[1], $out)){
 				$count = strlen($out["up"])/3;
 				$url = dirname($this->url);
 				for($i = 1; $i <= $count; $i++){
 					$url = substr($url, 0, strrpos($url, "/"));
 				}
-				$matches["path"] = $url."/".$out["name"];
+				$matches[1] = $url."/".$out["name"];
 			}else{
-				$matches["path"] = dirname($this->url)."/".$matches["path"];
+				$matches[1] = dirname($this->url)."/".$matches[1];
 			}
 
-			return "url(".$matches["path"].")";
-			// $wpContent = strpos($this->url, "wp-content") + 11;
-			// $lastSlash = strripos($this->url, "/") + 1;
-
-			// $themePath = substr($this->url, $wpContent, $lastSlash - $wpContent);
-
-			// $countUp = substr_count($matches["up"], '../');
-			// $arrThemePath = explode("/", $themePath);
-			// $arrReturnImgPath = array_slice($arrThemePath, 0, count($arrThemePath) - $countUp- 1); 
-			// $returnImgPath = implode("/", $arrReturnImgPath)."/".$matches["imageUrl"];
-
-			// return 'url('.$matches["firstQuote"].str_repeat("../", 3).$returnImgPath.$matches["lastQuote"].')';
+			return "url(".$matches[1].")";
 		}
 
 		public function setCssLinks(){
