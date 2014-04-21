@@ -41,6 +41,7 @@ window.wpfc.dictionary = {
 	"If you modify any css or js file, you have to delete minified js and css files" : "Si modifica algún archivo CSS o JS tendrá que borrar los archivos js y css minificados",
 	"If you modify any css file, you have to delete minified css files" : "Al modificar cualquier archivo CSS deberá de eliminar los archivos CSS minificados",
 	"Delete Minified Css & Js" : "Borrar los archivos CSS & JS minificados",
+	"Delete Minified Css" : "Eliminar CSS minificado",
 	"Don't show the cached version for mobile devices" : "No mostrar la versión del cache en dispositivos móviles",
 	"Leverage Browser Caching" : "Aumentar el uso del cache del navegador",
 	"Reduce the load times of pages by storing commonly used files from your website on your visitors browser." : "Guarda archivos en el navegador del visitante para que las páginas carguen más rápido",
@@ -49,9 +50,9 @@ window.wpfc.dictionary = {
 	"Don't show the cached version for logged-in users" : "No mostrar los archivos en el cache a los usuarios registrados.",
 	"Support Us" : "",
 	"If you like it, Please vote and support us." : "",
-	"Reduce HTTP requests through combined files" : "",
-	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "",
-	"Combine Css" : "", 
+	"Reduce HTTP requests through combined files" : "Combinar archivos para reducir las solicitudes HTTP",
+	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Al reducir el número de objetos de una página se disminuye también el número de solicitudes HTTP, por lo cual las páginas cargarán más rápido.",
+	"Combine Css" : "Combinar CSS", 
 	"Open .htaccess and remove this rule" : "",
 	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : ""
 };
