@@ -42,13 +42,22 @@ window.wpfc.dictionary = {
 	"Delete Minified Css" : "Lösche minifizierte CSS-Dateien",
 	"Don't show the cached version for mobile devices" : "Keine Anzeige der gecachten Version in mobilen Browsern",
 	// new
+	"Support Us" : "",
+	"If you like it, Please vote and support us." : "",
+	"Reduce the load times of pages by storing commonly used files from your website on your visitors browser." : "",
+	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "",
+	"Browser Caching" : "",
+	"Reduce page load times for repeat visitors" : "",
+	"Logged-in User" : "",
+	"Don't show the cached version for logged-in users" : "",
 	"Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>" : "Die Rechte von <strong>/wp-content/cache</strong> müssen auf <strong>755</strong> gesetzt sein.",
 	"Already deleted" : "Bereits gelöscht",
 	"Support Us" : "",
 	"If you like it, Please vote and support us." : "",
 	"Reduce HTTP requests through combined files" : "",
 	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "",
-	"Combine Css" : "", 
+	"Combine Css" : "",
+	"*** Attention ***" : "",
 	"Open .htaccess and remove this rule" : "",
 	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : ""
 };
