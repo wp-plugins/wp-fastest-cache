@@ -51,6 +51,7 @@ window.wpfc.dictionary = {
 	"Reduce HTTP requests through combined files" : "CSS dosyalarını birleştirerek HTTP isteklerini azaltın",
 	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Sayfanızda bulunan bileşenlerin sayısını düşürmek, HTTP istek sayısını azaltacağından sayfanın daha hızlı yüklenmesini sağlar.",
 	"Combine Css" : "Css Birleştir",
+	"*** Attention ***" : "*** Dikkat ***",
 	"Open .htaccess and remove this rule" : ".htaccess dosyasını açın ve aşağıda yer alan kuralı kaldırın",
 	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : "Eğer serveriniz mod_expires.c'i desteklemiyorsa, Internel Server Error (500) hatası ile karşılaşabilirsiniz. Bu durumda lütfen aşağıda yer alan adımları uygulayın."
 };
