@@ -48,11 +48,12 @@ window.wpfc.dictionary = {
 	"Reduce page load times for repeat visitors" : "Reducir el tiempo de carga para visitantes frecuentes",
 	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "Muy eficiente en sitios cuyos usuarios visitan las mismas páginas con frecuencia",
 	"Don't show the cached version for logged-in users" : "No mostrar los archivos en el cache a los usuarios registrados.",
-	"Support Us" : "",
-	"If you like it, Please vote and support us." : "",
+	"Support Us" : "Apóyanos",
+	"If you like it, Please vote and support us." : "Si te gusta este plugin, por favor vota y apóyanos.",
 	"Reduce HTTP requests through combined files" : "Combinar archivos para reducir las solicitudes HTTP",
 	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Al reducir el número de objetos de una página se disminuye también el número de solicitudes HTTP, por lo cual las páginas cargarán más rápido.",
-	"Combine Css" : "Combinar CSS", 
-	"Open .htaccess and remove this rule" : "",
-	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : ""
+	"Combine Css" : "Combinar CSS",
+	"*** Attention ***" : "*** Atención ***",
+	"Open .htaccess and remove this rule" : "Abra el archivo .htaccess y remueva esta línea",
+	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : "Si activa esta opción y su servidor no tiene mod_expires.c instalado puede generar un error de servidor 500. En ese caso, siga estos pasos para resolverlo"
 };
