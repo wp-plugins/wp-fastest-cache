@@ -262,6 +262,7 @@
 			if(isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on"){
 		    	$data = "# BEGIN GzipWpFastestCache"."\n".
 		          		"<IfModule mod_deflate.c>"."\n".
+		          		"AddOutputFilterByType DEFLATE image/svg+xml"."\n".
 		  				"AddOutputFilterByType DEFLATE text/plain"."\n".
 		  				"AddOutputFilterByType DEFLATE text/html"."\n".
 		  				"AddOutputFilterByType DEFLATE text/xml"."\n".
@@ -271,15 +272,22 @@
 		  				"AddOutputFilterByType DEFLATE application/rss+xml"."\n".
 		  				"AddOutputFilterByType DEFLATE application/javascript"."\n".
 		  				"AddOutputFilterByType DEFLATE application/x-javascript"."\n".
+		  				"AddOutputFilterByType DEFLATE application/x-font-ttf"."\n".
+						"AddOutputFilterByType DEFLATE application/vnd.ms-fontobject"."\n".
+						"AddOutputFilterByType DEFLATE font/opentype font/ttf font/eot font/otf"."\n".
 		  				"</IfModule>"."\n".
 						"# END GzipWpFastestCache"."\n";
 
-				preg_match("/BEGIN GzipWpFastestCache/", $htaccess, $check);
-				if(count($check) === 0){
-					return $data.$htaccess;
-				}else{
-					return $htaccess;
-				}	
+
+				$htaccess = preg_replace("/#\s?BEGIN\s?GzipWpFastestCache.*?#\s?END\s?GzipWpFastestCache/s", "", $htaccess);
+				return $data.$htaccess;
+
+				// preg_match("/BEGIN GzipWpFastestCache/", $htaccess, $check);
+				// if(count($check) === 0){
+				// 	return $data.$htaccess;
+				// }else{
+				// 	return $htaccess;
+				// }	
 			}else{
 				//delete gzip rules
 				$htaccess = preg_replace("/#\s?BEGIN\s?GzipWpFastestCache.*?#\s?END\s?GzipWpFastestCache/s", "", $htaccess);
