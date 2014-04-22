@@ -41,6 +41,7 @@ window.wpfc.dictionary = {
 	"If you modify any css file, you have to delete minified css files" : "Falls du irgendwelche CSS-Dateien änderst, solltest du ihre minifizierten Dateien löschen.",
 	"Delete Minified Css" : "Lösche minifizierte CSS-Dateien",
 	"Don't show the cached version for mobile devices" : "Keine Anzeige der gecachten Version in mobilen Browsern",
+	"Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>" : "Die Rechte von <strong>/wp-content/cache</strong> müssen auf <strong>755</strong> gesetzt sein.",
 	// new
 	"Support Us" : "",
 	"If you like it, Please vote and support us." : "",
@@ -50,7 +51,6 @@ window.wpfc.dictionary = {
 	"Reduce page load times for repeat visitors" : "",
 	"Logged-in User" : "",
 	"Don't show the cached version for logged-in users" : "",
-	"Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>" : "Die Rechte von <strong>/wp-content/cache</strong> müssen auf <strong>755</strong> gesetzt sein.",
 	"Already deleted" : "Bereits gelöscht",
 	"Support Us" : "",
 	"If you like it, Please vote and support us." : "",
