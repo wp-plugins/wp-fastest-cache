@@ -204,7 +204,6 @@
 					$htaccess = file_get_contents($path.".htaccess");
 					$htaccess = $this->insertLBCRule($htaccess, $post);
 					$htaccess = $this->insertGzipRule($htaccess, $post);
-					$htaccess = $this->keepAlive($htaccess, $post);
 					$htaccess = $this->insertRewriteRule($htaccess);
 					$htaccess = preg_replace("/\n+/","\n", $htaccess);
 
@@ -398,18 +397,6 @@
 			return "";
 		}
 
-		public function keepAlive($htaccess, $post){
-			$htaccess = preg_replace("/#\s?BEGIN\s?KeepAliveWpFastestCache.*?#\s?END\s?KeepAliveWpFastestCache/s", "", $htaccess);
-			if(isset($post["wpFastestCacheKeepAlive"]) && $post["wpFastestCacheKeepAlive"] == "on"){
-				$data = "# BEGIN KeepAliveWpFastestCache"."\n".
-						"<ifModule mod_headers.c> Header set Connection keep-alive </ifModule>"."\n".
-						"# END KeepAliveWpFastestCache"."\n";
-						
-				return $data.$htaccess;
-			}
-			return $htaccess;
-		}
-
 		public function getRewriteBase($sub = ""){
 			if($sub && $this->is_subdirectory_install()){
 				return "";
@@ -443,7 +430,6 @@
 
 			$wpFastestCacheCombineCss = isset($this->options->wpFastestCacheCombineCss) ? 'checked="checked"' : "";
 			$wpFastestCacheGzip = isset($this->options->wpFastestCacheGzip) ? 'checked="checked"' : "";
-			$wpFastestCacheKeepAlive = isset($this->options->wpFastestCacheKeepAlive) ? 'checked="checked"' : "";
 			$wpFastestCacheLanguage = isset($this->options->wpFastestCacheLanguage) ? $this->options->wpFastestCacheLanguage : "eng";
 			$wpFastestCacheLBC = isset($this->options->wpFastestCacheLBC) ? 'checked="checked"' : "";
 			$wpFastestCacheLoggedInUser = isset($this->options->wpFastestCacheLoggedInUser) ? 'checked="checked"' : "";
@@ -527,12 +513,6 @@
 							<div class="questionCon">
 								<div class="question">Browser Caching</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheLBC; ?> id="wpFastestCacheLBC" name="wpFastestCacheLBC"><label for="wpFastestCacheLBC">Reduce page load times for repeat visitors</label></div>
-								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
-							</div>
-
-							<div class="questionCon">
-								<div class="question">Keep-Alive</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheKeepAlive; ?> id="wpFastestCacheKeepAlive" name="wpFastestCacheKeepAlive"><label for="wpFastestCacheKeepAlive">Reducing the latency for subsequent requests</label></div>
 								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
 							</div>
 
