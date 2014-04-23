@@ -240,6 +240,7 @@
 					'<IfModule mod_headers.c>'."\n".
 					'Header set Expires "max-age=2592000, public"'."\n".
 					'Header unset ETag'."\n".
+					'Header set Connection keep-alive'."\n".
 					'</IfModule>'."\n".
 					'FileETag None'."\n".
 					'</FilesMatch>'."\n".
