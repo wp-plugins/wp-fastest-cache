@@ -25,6 +25,9 @@
 		}else if(input.attr("id") == "wpFastestCacheCombineCss"){
 			options.h4 = "Combine CSS";
 			options.h1 = "<label>Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
+		}else if(input.attr("id") == "wpFastestCacheKeepAlive"){
+			options.h4 = "Enable Keep-Alive";
+			options.h1 = "<label>Enabling HTTP Keep-Alive or HTTP persistent connections allow the same TCP connection to send and receive multiple HTTP requests, thus reducing the latency for subsequent requests.</label>";
 		}
 
 		options.type = input.attr("id");
