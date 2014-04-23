@@ -176,7 +176,8 @@
 								}
 
 								if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
-									$content = str_replace($href, $minifiedCss["url"]."/".$cssFiles[0], $content);	
+									$prefixLink = str_replace(array("http:", "https:"), "", $minifiedCss["url"]);
+									$content = str_replace($href, $prefixLink."/".$cssFiles[0], $content);	
 								}
 							}
 						}
@@ -243,7 +244,8 @@
 						}
 
 						if($cssFiles = @scandir($cachFilePath, 1)){
-							$newLink = "<link rel='stylesheet' href='".content_url()."/cache/wpfc-minified/".$name."/".$cssFiles[0]."' type='text/css' media='all' />";
+							$prefixLink = str_replace(array("http:", "https:"), "", content_url());
+							$newLink = "<link rel='stylesheet' href='".$prefixLink."/cache/wpfc-minified/".$name."/".$cssFiles[0]."' type='text/css' media='all' />";
 							$content = $this->replaceLink($prevValue, "<!-- ".$prevValue." -->"."\n".$newLink, $content);
 						}
 					}else{
