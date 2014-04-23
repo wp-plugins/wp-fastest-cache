@@ -65,7 +65,6 @@ GNU General Public License for more details.
 				$htaccess = preg_replace("/#\s?BEGIN\s?WpFastestCache.*?#\s?END\s?WpFastestCache/s", "", $htaccess);
 				$htaccess = preg_replace("/#\s?BEGIN\s?GzipWpFastestCache.*?#\s?END\s?GzipWpFastestCache/s", "", $htaccess);
 				$htaccess = preg_replace("/#\s?BEGIN\s?LBCWpFastestCache.*?#\s?END\s?LBCWpFastestCache/s", "", $htaccess);
-				$htaccess = preg_replace("/#\s?BEGIN\s?KeepAliveWpFastestCache.*?#\s?END\s?KeepAliveWpFastestCache/s", "", $htaccess);
 				file_put_contents($path.".htaccess", $htaccess);
 			}
 
