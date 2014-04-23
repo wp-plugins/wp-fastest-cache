@@ -90,16 +90,19 @@
 			}else if(preg_match("/^(http|\/\/fonts|data:image)/", $matches[1])){
 				$matches[1] = $matches[1];
 			}else if(preg_match("/^\//", $matches[1])){
-				$matches[1] = home_url().$matches[1];
+				$homeUrl = str_replace(array("http:", "https:"), "", home_url());
+				$matches[1] = $homeUrl.$matches[1];
 			}else if(preg_match("/^(?P<up>(\.\.\/)+)(?P<name>.+)/", $matches[1], $out)){
 				$count = strlen($out["up"])/3;
 				$url = dirname($this->url);
 				for($i = 1; $i <= $count; $i++){
 					$url = substr($url, 0, strrpos($url, "/"));
 				}
+				$url = str_replace(array("http:", "https:"), "", $url);
 				$matches[1] = $url."/".$out["name"];
 			}else{
-				$matches[1] = dirname($this->url)."/".$matches[1];
+				$url = str_replace(array("http:", "https:"), "", dirname($this->url));
+				$matches[1] = $url."/".$matches[1];
 			}
 
 			return "url(".$matches[1].")";
