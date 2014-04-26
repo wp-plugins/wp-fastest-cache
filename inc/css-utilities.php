@@ -50,6 +50,7 @@
 		}
 
 		public function fixPathsInCssContent($css){
+			$css = preg_replace("/@import\s+[\"\']([^\;\"\'\)]+)[\"\'];/", "@import url($1);", $css);
 			return preg_replace_callback("/url\(([^\)]*)\)/", array($this, 'newImgPath'), $css);
 			//return preg_replace_callback("/url\((?P<path>[^\)]*)\)/", array($this, 'newImgPath'), $css);
 		}
