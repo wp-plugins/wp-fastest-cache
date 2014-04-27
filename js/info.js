@@ -8,7 +8,7 @@
 			options.h4 = "Minify HTML";
 			options.h1 = "<label>Compacting HTML code, including any inline JavaScript and CSS contained in it, can save many bytes of data and speed up downloading, parsing, and execution time.</label>";
 		}else if(input.attr("id") == "wpFastestCacheMinifyCss"){
-			options.h4 = "Minify CSS";
+			options.h4 = "Minify Css";
 			options.h1 = "<label>Compacting CSS code can save many bytes of data and speed up downloading, parsing, and execution time.</label>";
 		}else if(input.attr("id") == "wpFastestCacheGzip"){
 			options.h4 = "Enable Gzip Compression";
@@ -22,8 +22,11 @@
 						"- <label>Reduce page load times for repeat visitors</label><br>" + 
 						"- <label>Particularly effective on websites where users regularly re-visit the same areas of the website</label><br>" +
 						"- <label>Cost-benefit ratio: high</label><br>";
+		}else if(input.attr("id") == "wpFastestCacheCombineJs"){
+			options.h4 = "Combine Js";
+			options.h1 = "<label>Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
 		}else if(input.attr("id") == "wpFastestCacheCombineCss"){
-			options.h4 = "Combine CSS";
+			options.h4 = "Combine Css";
 			options.h1 = "<label>Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
 		}else if(input.attr("id") == "wpFastestCacheKeepAlive"){
 			options.h4 = "Enable Keep-Alive";
