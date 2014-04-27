@@ -45,6 +45,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Deutsch (by Hinji)
 * English
 * Español (by Diplo)
+* İtaliana (by Valerio)
 * Português
 * Русский
 * Türkçe
