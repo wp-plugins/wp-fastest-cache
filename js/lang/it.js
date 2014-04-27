@@ -16,13 +16,13 @@ window.wpfc.dictionary = {
 
 	"Server time":"Ora del server",
 
-	"You can decrease the size of page" :"Può ridurre le dimensioni della pagina",
+	"You can decrease the size of page" :"Pu&ograve; ridurre le dimensioni della pagina",
 
 	"WP Fastest Cache Options":"Opzioni di WP Fastest Cache",									 
 
 	"Options have been saved" :"Le opzioni sono state salvate",										 
 
-	".htacces is not writable": "Non si può modificare .htacces",								 
+	".htacces is not writable": "Non si pu&ograve; modificare .htacces",								 
 
 	"All cache files have been deleted" :"Tutti i file nella cache sono stati cancellati",						   
 
@@ -50,9 +50,9 @@ window.wpfc.dictionary = {
 
 	"Target folder"           :"Percorso cartella",
 
-	"It will active in the next version" : "Sarà attivo nella prossima versione",
+	"It will active in the next version" : "Sar&agrave; attivo nella prossima versione",
 
-	"You can decrease the size of css files" : "Può diminuire la dimensione dei file CSS",
+	"You can decrease the size of css files" : "Pu&ograve; diminuire la dimensione dei file CSS",
 
 	"Reduce the size of files sent from your server" : "Ridurre la dimensione dei file inviati dal server",
 
@@ -62,17 +62,17 @@ window.wpfc.dictionary = {
 
 	"WordPress support forum" : "Forum di supporto WordPress",
 
-	"Compacting HTML code, including any inline JavaScript and CSS contained in it, can save many bytes of data and speed up downloading, parsing, and execution time." : "La compressione del codice HTML, compresi eventuali JavaScript e CSS inclusi in esso, può salvare molti bytes e aumentare la velocità di scaricamento, dell'analisi e del tempo di esecuzione.",
+	"Compacting HTML code, including any inline JavaScript and CSS contained in it, can save many bytes of data and speed up downloading, parsing, and execution time." : "La compressione del codice HTML, compresi eventuali JavaScript e CSS inclusi in esso, pu&ograve; salvare molti bytes e aumentare la velocit&agrave; di scaricamento, dell'analisi e del tempo di esecuzione.",
 
-	"Compacting CSS code can save many bytes of data and speed up downloading, parsing, and execution time." : "La compressione del codice CSS può salvare molti bytes di informazioni e accelerare lo scaricamento, l'analisi e il tempo di esecuzione.",
+	"Compacting CSS code can save many bytes of data and speed up downloading, parsing, and execution time." : "La compressione del codice CSS pu&ograve; salvare molti bytes di informazioni e accelerare lo scaricamento, l'analisi e il tempo di esecuzione.",
 
 	"Enable Gzip Compression" : "Abilita la compressione Gzip",
 
-	"Increase page speed" : "Aumenta la velocità della pagina",
+	"Increase page speed" : "Aumenta la velocit&agrave; della pagina",
 
-	"Reduce sizes of pages by up to 70%" : "Riduce la velocità della pagina fino al 70%",
+	"Reduce sizes of pages by up to 70%" : "Riduce la velocit&agrave; della pagina fino al 70%",
 
-	"Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser." : "Ridurre le dimensioni dei file in modo che siano trasmessi più veloce dal server al browser.",
+	"Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser." : "Ridurre le dimensioni dei file in modo che siano trasmessi pi&ugrave; veloce dal server al browser.",
 
 	"Cost-benefit ratio: high" : "Rapporto costi-beneficii: alto",
 
@@ -104,7 +104,7 @@ window.wpfc.dictionary = {
 
 	"Reduce HTTP requests through combined files" : "Ridurre le richieste HTTP tramite file combinati",
 
-	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Diminuire il numero di componenti su una pagina riduce il numero di richieste HTTP richieste per rendere la pagina, così le pagine si caricano più velocemente.",
+	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Diminuire il numero di componenti su una pagina riduce il numero di richieste HTTP richieste per rendere la pagina, cos&igrave; le pagine si caricano pi&ugrave; velocemente.",
 
 	"Combine Css" : "Combinare CSS",
 
@@ -112,6 +112,6 @@ window.wpfc.dictionary = {
 
 	"Open .htaccess and remove this rule" : "Aprire .htaccess e rimuovere questa regola",
 
-	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : "Se il server non supporta mod_expires.c, questa opzione può causare l'errore Internel Server (500). Se riscontrate tale errore si prega di eseguire i passaggi che seguono."
+	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : "Se il server non supporta mod_expires.c, questa opzione pu&ograve; causare l'errore Internel Server (500). Se riscontrate tale errore si prega di eseguire i passaggi che seguono."
 
 };

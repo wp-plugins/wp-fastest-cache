@@ -10,7 +10,7 @@ jQuery.fn.extend({
 	    	if(el.attr("type") == "submit"){
 	    		el.val(converted);
 	    	}else{
-	    		el.text(converted);
+	    		el.html(converted);
 	    	}
     	}
     }
