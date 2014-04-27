@@ -431,6 +431,7 @@
 
 			$wpFastestCacheCombineCss = isset($this->options->wpFastestCacheCombineCss) ? 'checked="checked"' : "";
 			$wpFastestCacheGzip = isset($this->options->wpFastestCacheGzip) ? 'checked="checked"' : "";
+			$wpFastestCacheCombineJs = isset($this->options->wpFastestCacheCombineJs) ? 'checked="checked"' : "";
 			$wpFastestCacheLanguage = isset($this->options->wpFastestCacheLanguage) ? $this->options->wpFastestCacheLanguage : "eng";
 			$wpFastestCacheLBC = isset($this->options->wpFastestCacheLBC) ? 'checked="checked"' : "";
 			$wpFastestCacheLoggedInUser = isset($this->options->wpFastestCacheLoggedInUser) ? 'checked="checked"' : "";
@@ -501,9 +502,17 @@
 
 							<div class="questionCon">
 								<div class="question">Combine Css</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineCss; ?> id="wpFastestCacheCombineCss" name="wpFastestCacheCombineCss"><span id="wpfc-beta">(Beta)</span><label for="wpFastestCacheCombineCss">Reduce HTTP requests through combined files</label></div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineCss; ?> id="wpFastestCacheCombineCss" name="wpFastestCacheCombineCss"><span id="wpfc-beta">(Beta)</span><label for="wpFastestCacheCombineCss">Reduce HTTP requests through combined css files</label></div>
 								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
 							</div>
+							
+							<!--
+							<div class="questionCon">
+								<div class="question">Combine Js</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJs; ?> id="wpFastestCacheCombineJs" name="wpFastestCacheCombineJs"><span id="wpfc-beta">(Beta)</span><label for="wpFastestCacheCombineJs">Reduce HTTP requests through combined js files</label></div>
+								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
+							</div>
+							-->
 
 							<div class="questionCon">
 								<div class="question">Gzip</div>
@@ -524,7 +533,7 @@
 									  <option value="de">Deutsch</option>
 									  <option value="eng">English</option>
 									  <option value="es">Español</option>
-									  <option value="it">İtaliana</option>
+									  <option value="it">Italiana</option>
 									  <option value="pt">Português</option>
 									  <option value="ru">Русский</option>
 									  <!-- <option value="ro">Română</option> -->

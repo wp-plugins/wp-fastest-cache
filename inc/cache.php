@@ -77,7 +77,6 @@
 				$cachFilePath = $this->getWpContentDir()."/cache/all".$_SERVER["REQUEST_URI"];
 
 				$content = $this->cacheDate($buffer);
-				$content = $this->minify($content);
 
 				if(isset($this->options->wpFastestCacheCombineCss) && isset($this->options->wpFastestCacheMinifyCss)){
 					$content = $this->combineCss($content, true);
@@ -86,6 +85,11 @@
 				}else if(isset($this->options->wpFastestCacheMinifyCss)){
 					$content = $this->minifyCss($content);
 				}
+
+				if(isset($this->options->wpFastestCacheCombineJs)){
+					$content = $this->combineJs($content, false);
+				}
+				$content = $this->minify($content);
 				
 				$this->createFolder($cachFilePath, $content);
 
@@ -133,7 +137,7 @@
 			$create = false;
 			if($buffer && strlen($buffer) > 100){
 				$create = true;
-			}elseif($extension == "css" && $buffer && strlen($buffer) > 5){
+			}elseif(($extension == "css" || $extension == "js") && $buffer && strlen($buffer) > 5){
 				$create = true;
 			}
 
@@ -274,6 +278,73 @@
 				$content = preg_replace("/<link[^>]+".preg_quote($out[1], "/")."[^>]+>/", $replace, $content);
 			}
 
+			return $content;
+		}
+
+		public function combineJs($content, $minify = false){
+			$minify = true;
+			if(isset($this->options->wpFastestCacheCombineJs)){
+				require_once "js-utilities.php";
+				$js = new JsUtilities($content);
+
+				if(count($js->getJsLinks()) > 0){
+					$prev = array("content" => "", "value" => array());
+					foreach ($js->getJsLinks() as $key => $value) {
+						if($href = $js->checkInternal($value)){
+							if(strpos($js->getJsLinksExcept(), $href) === false){
+								$minifiedJs = $js->minify($href, $minify);
+
+								if($minifiedJs){
+									if(!is_dir($minifiedJs["cachFilePath"])){
+										$prefix = time();
+										$this->createFolder($minifiedJs["cachFilePath"], $minifiedJs["jsContent"], "js", $prefix);
+									}
+
+									if($jsFiles = @scandir($minifiedJs["cachFilePath"], 1)){
+										if($jsContent = $js->file_get_contents_curl($minifiedJs["url"]."/".$jsFiles[0]."?v=".time())){
+											$prev["content"] .= $jsContent;
+											array_push($prev["value"], $value);
+										}
+									}
+								}
+							}else{
+								$content = $this->mergeJs($prev, $content, $js);
+								$prev = array("content" => "", "value" => array());
+							}
+						}else{
+							$content = $this->mergeJs($prev, $content, $js);
+							$prev = array("content" => "", "value" => array());
+						}
+					}
+					$content = $this->mergeJs($prev, $content, $js);
+				}
+			}
+			return $content;
+		}
+
+		public function mergeJs($prev, $content, $js){
+			if(count($prev["value"]) > 0){
+				$name = "";
+				foreach ($prev["value"] as $prevKey => $prevValue) {
+					if($prevKey == count($prev["value"]) - 1){
+						$name = md5($name);
+						$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".$name;
+
+						if(!is_dir($cachFilePath)){
+							$this->createFolder($cachFilePath, $prev["content"], "js", time());
+						}
+
+						if($jsFiles = @scandir($cachFilePath, 1)){
+							$prefixLink = str_replace(array("http:", "https:"), "", content_url());
+							$newLink = "<script src='".$prefixLink."/cache/wpfc-minified/".$name."/".$jsFiles[0]."' type=\"text/javascript\"></script>";
+							$content = $js->replaceLink($prevValue, "<!-- ".$prevValue." -->"."\n".$newLink, $content);
+						}
+					}else{
+						$name .= $prevValue;
+						$content = $js->replaceLink($prevValue, "<!-- ".$prevValue." -->", $content);
+					}
+				}
+			}
 			return $content;
 		}
 
