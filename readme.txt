@@ -74,6 +74,14 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.1.4 =
+* to prevent creating cache for logged-in users
+* gzip for svg, x-font-ttf, vnd.ms-fontobject, font/opentype font/ttf font/eot font/otf
+* stlye files issue with https
+* <strong>[FEATURE]</strong> Keep Alive
+* compatible with @import "style.css";
+* <strong>[FEATURE]</strong> italian language has been added
+
 = 0.8.1.3 =
 * to support renamed wp-content
 
