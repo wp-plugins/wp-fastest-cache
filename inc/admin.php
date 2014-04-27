@@ -524,6 +524,7 @@
 									  <option value="de">Deutsch</option>
 									  <option value="eng">English</option>
 									  <option value="es">Español</option>
+									  <option value="it">İtaliana</option>
 									  <option value="pt">Português</option>
 									  <option value="ru">Русский</option>
 									  <!-- <option value="ro">Română</option> -->
