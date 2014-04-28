@@ -195,15 +195,17 @@
 			}
 
 			if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on") || (isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on")){
-				//include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-				if($this->isPluginActive('bwp-minify/bwp-minify.php')){
+				$htaccess = file_get_contents($path.".htaccess");
+
+				if($res = $this->checkSuperCache($path, $htaccess)){
+					return $res;
+				}else if($this->isPluginActive('bwp-minify/bwp-minify.php')){
 					return array("Better WordPress Minify needs to be deactive<br>This plugin has aldready Minify feature", "error");
 				}else if($this->isPluginActive('gzippy/gzippy.php')){
 					return array("GZippy needs to be deactive<br>This plugin has aldready Gzip feature", "error");
 				}else if(!is_file($path.".htaccess")){
 					return array(".htaccess was not found", "error");
 				}else if(is_writable($path.".htaccess")){
-					$htaccess = file_get_contents($path.".htaccess");
 					$htaccess = $this->insertLBCRule($htaccess, $post);
 					$htaccess = $this->insertGzipRule($htaccess, $post);
 					$htaccess = $this->insertRewriteRule($htaccess);
@@ -426,6 +428,30 @@
 				return true;
 
 			return false;
+		}
+
+		public function checkSuperCache($path, $htaccess){
+			if($this->isPluginActive('wp-super-cache/wp-cache.php')){
+				return array("WP Super Cache needs to be deactive", "error");
+			}else{
+				@unlink($path."wp-content/wp-cache-config.php");
+
+				$message = "";
+				
+				if(is_file($path."wp-content/wp-cache-config.php")){
+					$message .= "<br>- be sure that you removed /wp-content/wp-cache-config.php";
+				}
+				if(is_dir($path."wp-content/cache")){
+					$message .= "<br>- be sure that you removed /wp-content/cache/";
+				}
+				if(preg_match("/supercache/", $htaccess)){
+					$message .= "<br>- be sure that you removed the rules of super cache from the .htaccess";
+				}
+
+				return $message ? array("WP Super Cache is a terrible plugin so please follow the steps below".$message, "error") : "";
+			}
+
+			return "";
 		}
 
 		public function optionsPage(){
