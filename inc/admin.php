@@ -558,6 +558,7 @@
 									<select id="wpFastestCacheLanguage" name="wpFastestCacheLanguage">
 									  <option value="de">Deutsch</option>
 									  <option value="eng">English</option>
+									  <option value="fr">Français</option>
 									  <option value="es">Español</option>
 									  <option value="it">Italiana</option>
 									  <option value="pt">Português</option>
