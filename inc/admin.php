@@ -196,7 +196,9 @@
 
 			if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on") || (isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on")){
 				//include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-				if($this->isPluginActive('gzippy/gzippy.php')){
+				if($this->isPluginActive('bwp-minify/bwp-minify.php')){
+					return array("Better WordPress Minify needs to be deactive<br>This plugin has aldready Minify feature", "error");
+				}else if($this->isPluginActive('gzippy/gzippy.php')){
 					return array("GZippy needs to be deactive<br>This plugin has aldready Gzip feature", "error");
 				}else if(!is_file($path.".htaccess")){
 					return array(".htaccess was not found", "error");
