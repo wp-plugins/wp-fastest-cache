@@ -49,10 +49,9 @@
 				if($js = $this->file_get_contents_curl($url."?v=".time())){
 					if($minify){
 						$js = preg_replace("/^\s+/m", "", ((string) $js));
-						$js = preg_replace_callback('@\\s*/\\*([\\s\\S]*?)\\*/\\s*@', array($this, '_commentCB'), $js);
 					}
 
-					$js = "\n /* source --> ".$url." */ \n".$js;
+					$js = "\n// source --> ".$url." \n".$js;
 
 					return array("cachFilePath" => $cachFilePath, "jsContent" => $js, "url" => $jsLink);
 				}
@@ -87,58 +86,6 @@
 
 			return $content;
 		}
-
-		public function _commentCB($m){
-	        $hasSurroundingWs = (trim($m[0]) !== $m[1]);
-	        $m = $m[1]; 
-	        // $m is the comment content w/o the surrounding tokens, 
-	        // but the return value will replace the entire comment.
-	        if ($m === 'keep') {
-	            return '/**/';
-	        }
-	        if ($m === '" "') {
-	            // component of http://tantek.com/CSS/Examples/midpass.html
-	            return '/*" "*/';
-	        }
-	        if (preg_match('@";\\}\\s*\\}/\\*\\s+@', $m)) {
-	            // component of http://tantek.com/CSS/Examples/midpass.html
-	            return '/*";}}/* */';
-	        }
-	        if ($this->_inHack) {
-	            // inversion: feeding only to one browser
-	            if (preg_match('@
-	                    ^/               # comment started like /*/
-	                    \\s*
-	                    (\\S[\\s\\S]+?)  # has at least some non-ws content
-	                    \\s*
-	                    /\\*             # ends like /*/ or /**/
-	                @x', $m, $n)) {
-	                // end hack mode after this comment, but preserve the hack and comment content
-	                $this->_inHack = false;
-	                return "/*/{$n[1]}/**/";
-	            }
-	        }
-	        if (substr($m, -1) === '\\') { // comment ends like \*/
-	            // begin hack mode and preserve hack
-	            $this->_inHack = true;
-	            return '/*\\*/';
-	        }
-	        if ($m !== '' && $m[0] === '/') { // comment looks like /*/ foo */
-	            // begin hack mode and preserve hack
-	            $this->_inHack = true;
-	            return '/*/*/';
-	        }
-	        if ($this->_inHack) {
-	            // a regular comment ends hack mode but should be preserved
-	            $this->_inHack = false;
-	            return '/**/';
-	        }
-	        // Issue 107: if there's any surrounding whitespace, it may be important, so 
-	        // replace the comment with a single space
-	        return $hasSurroundingWs // remove all other comments
-	            ? ' '
-	            : '';
-	    }
 
 		public function file_get_contents_curl($url) {
 			$ch = curl_init();
