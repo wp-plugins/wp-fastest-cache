@@ -441,9 +441,7 @@
 				if(is_file($path."wp-content/wp-cache-config.php")){
 					$message .= "<br>- be sure that you removed /wp-content/wp-cache-config.php";
 				}
-				if(is_dir($path."wp-content/cache")){
-					$message .= "<br>- be sure that you removed /wp-content/cache/";
-				}
+
 				if(preg_match("/supercache/", $htaccess)){
 					$message .= "<br>- be sure that you removed the rules of super cache from the .htaccess";
 				}
