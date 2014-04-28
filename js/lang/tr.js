@@ -51,6 +51,7 @@ window.wpfc.dictionary = {
 	"Reduce HTTP requests through combined css files" : "CSS dosyalarını birleştirerek HTTP isteklerini azaltın",
 	"Reduce HTTP requests through combined js files" : "JS dosyalarını birleştirerek HTTP isteklerini azaltın",
 	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Sayfanızda bulunan bileşenlerin sayısını düşürmek, HTTP istek sayısını azaltacağından sayfanın daha hızlı yüklenmesini sağlar.",
+	"Decreasing the number of javascript files on a page (between <head></head>) reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Sayfanızda bulunan javascript dosyalarının (&#60;head&#62;&#60;/head&#62; arasında) sayısını düşürmek, HTTP istek sayısını azaltacağından sayfanın daha hızlı yüklenmesini sağlar.",
 	"Combine Css" : "Css Birleştir",
 	"Combine Js"  : "Js Birleştir",
 	"Minify Css"  : "Css Küçült",
