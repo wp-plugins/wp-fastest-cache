@@ -50,7 +50,7 @@ window.wpfc.dictionary = {
 	"Don't show the cached version for logged-in users" : "No mostrar los archivos en el cache a los usuarios registrados.",
 	"Support Us" : "Apóyanos",
 	"If you like it, Please vote and support us." : "Si te gusta este plugin, por favor vota y apóyanos.",
-	"Reduce HTTP requests through combined files" : "Combinar archivos para reducir las solicitudes HTTP",
+	"Reduce HTTP requests through combined css files" : "Combinar css archivos para reducir las solicitudes HTTP",
 	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Al reducir el número de objetos de una página se disminuye también el número de solicitudes HTTP, por lo cual las páginas cargarán más rápido.",
 	"Combine Css" : "Combinar CSS",
 	"*** Attention ***" : "*** Atención ***",

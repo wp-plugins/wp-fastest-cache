@@ -102,7 +102,7 @@ window.wpfc.dictionary = {
 
 	"If you like it, Please vote and support us." : "Se ti piace il plugin, per favore vota e supportaci.",
 
-	"Reduce HTTP requests through combined files" : "Ridurre le richieste HTTP tramite file combinati",
+	"Reduce HTTP requests through combined css files" : "Ridurre le richieste HTTP tramite css file combinati",
 
 	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Diminuire il numero di componenti su una pagina riduce il numero di richieste HTTP richieste per rendere la pagina, cos&igrave; le pagine si caricano pi&ugrave; velocemente.",
 
