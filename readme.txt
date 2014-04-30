@@ -45,7 +45,8 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Deutsch (by Hinji)
 * English
 * Español (by Diplo)
-* İtaliana (by Valerio)
+* Français (by PascalJ)
+* Italiana (by Valerio)
 * Português
 * Русский
 * Türkçe
@@ -74,6 +75,12 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 8. You can minify the css files
 
 == Changelog ==
+
+= 0.8.1.5 =
+* <strong>[FEATURE]</strong> JS Combine
+* to check that super cache is active or not
+* to check that better wordPress minify is active or not
+* <strong>[FEATURE]</strong> french translation
 
 = 0.8.1.4 =
 * to prevent creating cache for logged-in users
@@ -265,6 +272,9 @@ Yes, it is compatible with Http Secure (https).
 
 = Is this plugin compatible with Adsense? =
 Yes, it is compatible with Adsense %100.
+
+= Is this plugin compatible with CloudFlare? =
+Yes, it is compatible with CloudFlare %100. If the "minify html" option is active on CloudFlare, the minify system removed the comment from html so you cannot see the comment of Wpfc at the bottom of the page and you cannot be sure that it works or not. In this case, you need to look at the style files. You can see the minified css files.
 
 = Is this plugin compatible with WP-Polls? =
 Yes, it is compatible with WP-Polls %100.
