@@ -88,7 +88,7 @@
 			$matches[1] = str_replace(array("\"","'"), "", $matches[1]);
 			if(!$matches[1]){
 				$matches[1] = "";
-			}else if(preg_match("/^(http|\/\/fonts|data:image)/", $matches[1])){
+			}else if(preg_match("/^(\/\/|http|\/\/fonts|data:image)/", $matches[1])){
 				$matches[1] = $matches[1];
 			}else if(preg_match("/^\//", $matches[1])){
 				$homeUrl = str_replace(array("http:", "https:"), "", home_url());
