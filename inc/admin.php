@@ -531,15 +531,11 @@
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineCss; ?> id="wpFastestCacheCombineCss" name="wpFastestCacheCombineCss"><span id="wpfc-beta">(Beta)</span><label for="wpFastestCacheCombineCss">Reduce HTTP requests through combined css files</label></div>
 								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
 							</div>
-							
-							<!--
 							<div class="questionCon">
 								<div class="question">Combine Js</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJs; ?> id="wpFastestCacheCombineJs" name="wpFastestCacheCombineJs"><span id="wpfc-beta">(Beta)</span><label for="wpFastestCacheCombineJs">Reduce HTTP requests through combined js files</label></div>
 								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
 							</div>
-							-->
-
 							<div class="questionCon">
 								<div class="question">Gzip</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheGzip; ?> id="wpFastestCacheGzip" name="wpFastestCacheGzip"><label for="wpFastestCacheGzip">Reduce the size of files sent from your server</label></div>
