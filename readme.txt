@@ -76,6 +76,12 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.1.5 =
+* <strong>[FEATURE]</strong> JS Combine
+* to check that super cache is active or not
+* to check that better wordPress minify is active or not
+* <strong>[FEATURE]</strong> french translation
+
 = 0.8.1.4 =
 * to prevent creating cache for logged-in users
 * gzip for svg, x-font-ttf, vnd.ms-fontobject, font/opentype font/ttf font/eot font/otf
