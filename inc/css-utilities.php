@@ -147,7 +147,7 @@
 			return false;
 		}
 
-		public function minifyCss($wpfc, $content){
+		public function minifyCss($wpfc){
 			if(count($this->getCssLinks()) > 0){
 				foreach ($this->getCssLinks() as $key => $value) {
 					if($href = $this->checkInternal($value)){
@@ -161,17 +161,17 @@
 
 							if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
 								$prefixLink = str_replace(array("http:", "https:"), "", $minifiedCss["url"]);
-								$content = str_replace($href, $prefixLink."/".$cssFiles[0], $content);	
+								$this->html = str_replace($href, $prefixLink."/".$cssFiles[0], $this->html);	
 							}
 						}
 					}
 				}
 			}
 
-			return $content;
+			return $this->html;
 		}
 
-		public function combineCss($wpfc, $content, $minify = false){
+		public function combineCss($wpfc, $minify = false){
 			if(count($this->getCssLinks()) > 0){
 				$prev = array("content" => "", "value" => array());
 				foreach ($this->getCssLinks() as $key => $value) {
@@ -195,23 +195,23 @@
 							}
 						}else{
 							$prev["content"] = $this->fixRules($prev["content"]);
-							$content = $this->mergeCss($wpfc, $prev, $content);
+							$this->html = $this->mergeCss($wpfc, $prev, $this->html);
 							$prev = array("content" => "", "value" => array());
 						}
 					}else{
 						$prev["content"] = $this->fixRules($prev["content"]);
-						$content = $this->mergeCss($wpfc, $prev, $content);
+						$this->html = $this->mergeCss($wpfc, $prev, $this->html);
 						$prev = array("content" => "", "value" => array());
 					}
 				}
 				$prev["content"] = $this->fixRules($prev["content"]);
-				$content = $this->mergeCss($wpfc, $prev, $content);
+				$this->html = $this->mergeCss($wpfc, $prev, $this->html);
 			}
 
-			return $content;
+			return $this->html;
 		}
 
-		public function mergeCss($wpfc, $prev, $content){
+		public function mergeCss($wpfc, $prev){
 			if(count($prev["value"]) > 0){
 				$name = "";
 				foreach ($prev["value"] as $prevKey => $prevValue) {
@@ -226,15 +226,15 @@
 						if($cssFiles = @scandir($cachFilePath, 1)){
 							$prefixLink = str_replace(array("http:", "https:"), "", content_url());
 							$newLink = "<link rel='stylesheet' href='".$prefixLink."/cache/wpfc-minified/".$name."/".$cssFiles[0]."' type='text/css' media='all' />";
-							$content = $wpfc->replaceLink($prevValue, "<!-- ".$prevValue." -->"."\n".$newLink, $content);
+							$this->html = $wpfc->replaceLink($prevValue, "<!-- ".$prevValue." -->"."\n".$newLink, $this->html);
 						}
 					}else{
 						$name .= $prevValue;
-						$content = $wpfc->replaceLink($prevValue, "<!-- ".$prevValue." -->", $content);
+						$this->html = $wpfc->replaceLink($prevValue, "<!-- ".$prevValue." -->", $this->html);
 					}
 				}
 			}
-			return $content;
+			return $this->html;
 		}
 
 	    protected $_inHack = false;
