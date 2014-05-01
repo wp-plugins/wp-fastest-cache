@@ -79,9 +79,13 @@
 				$content = $this->cacheDate($buffer);
 
 				if(isset($this->options->wpFastestCacheCombineCss) && isset($this->options->wpFastestCacheMinifyCss)){
-					$content = $this->combineCss($content, true);
+					require_once "css-utilities.php";
+					$css = new CssUtilities($content);
+					$content = $css->combineCss($this, $content, true);
 				}else if(isset($this->options->wpFastestCacheCombineCss)){
-					$content = $this->combineCss($content, false);
+					require_once "css-utilities.php";
+					$css = new CssUtilities($content);
+					$content = $css->combineCss($this, $content, false);
 				}else if(isset($this->options->wpFastestCacheMinifyCss)){
 					require_once "css-utilities.php";
 					$css = new CssUtilities($content);
@@ -163,76 +167,6 @@
 					}
 				}
 			}
-		}
-
-		public function combineCss($content, $minify = false){
-			if(isset($this->options->wpFastestCacheCombineCss)){
-				require_once "css-utilities.php";
-				$css = new CssUtilities($content);
-
-				if(count($css->getCssLinks()) > 0){
-					$prev = array("content" => "", "value" => array());
-					foreach ($css->getCssLinks() as $key => $value) {
-						if($href = $css->checkInternal($value)){
-							if(strpos($css->getCssLinksExcept(), $href) === false){
-
-								$minifiedCss = $css->minify($href, $minify);
-
-								if($minifiedCss){
-									if(!is_dir($minifiedCss["cachFilePath"])){
-										$prefix = time();
-										$this->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
-									}
-
-									if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
-										if($cssContent = $css->file_get_contents_curl($minifiedCss["url"]."/".$cssFiles[0]."?v=".time())){
-											$prev["content"] .= $cssContent;
-											array_push($prev["value"], $value);
-										}
-									}
-								}
-							}else{
-								$prev["content"] = $css->fixRules($prev["content"]);
-								$content = $this->mergeCss($prev, $content);
-								$prev = array("content" => "", "value" => array());
-							}
-						}else{
-							$prev["content"] = $css->fixRules($prev["content"]);
-							$content = $this->mergeCss($prev, $content);
-							$prev = array("content" => "", "value" => array());
-						}
-					}
-					$prev["content"] = $css->fixRules($prev["content"]);
-					$content = $this->mergeCss($prev, $content);
-				}
-			}
-			return $content;
-		}
-
-		public function mergeCss($prev, $content){
-			if(count($prev["value"]) > 0){
-				$name = "";
-				foreach ($prev["value"] as $prevKey => $prevValue) {
-					if($prevKey == count($prev["value"]) - 1){
-						$name = md5($name);
-						$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".$name;
-
-						if(!is_dir($cachFilePath)){
-							$this->createFolder($cachFilePath, $prev["content"], "css", time());
-						}
-
-						if($cssFiles = @scandir($cachFilePath, 1)){
-							$prefixLink = str_replace(array("http:", "https:"), "", content_url());
-							$newLink = "<link rel='stylesheet' href='".$prefixLink."/cache/wpfc-minified/".$name."/".$cssFiles[0]."' type='text/css' media='all' />";
-							$content = $this->replaceLink($prevValue, "<!-- ".$prevValue." -->"."\n".$newLink, $content);
-						}
-					}else{
-						$name .= $prevValue;
-						$content = $this->replaceLink($prevValue, "<!-- ".$prevValue." -->", $content);
-					}
-				}
-			}
-			return $content;
 		}
 
 		public function replaceLink($search, $replace, $content){
