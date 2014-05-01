@@ -147,6 +147,30 @@
 			return false;
 		}
 
+		public function minifyCss($wpfc, $content){
+			if(count($this->getCssLinks()) > 0){
+				foreach ($this->getCssLinks() as $key => $value) {
+					if($href = $this->checkInternal($value)){
+						$minifiedCss = $this->minify($href);
+
+						if($minifiedCss){
+							if(!is_dir($minifiedCss["cachFilePath"])){
+								$prefix = time();
+								$wpfc->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
+							}
+
+							if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
+								$prefixLink = str_replace(array("http:", "https:"), "", $minifiedCss["url"]);
+								$content = str_replace($href, $prefixLink."/".$cssFiles[0], $content);	
+							}
+						}
+					}
+				}
+			}
+
+			return $content;
+		}
+
 	    protected $_inHack = false;
 	   
 	    /**

@@ -83,7 +83,9 @@
 				}else if(isset($this->options->wpFastestCacheCombineCss)){
 					$content = $this->combineCss($content, false);
 				}else if(isset($this->options->wpFastestCacheMinifyCss)){
-					$content = $this->minifyCss($content);
+					require_once "css-utilities.php";
+					$css = new CssUtilities($content);
+					$content = $css->minifyCss($this, $content);
 				}
 
 				if(isset($this->options->wpFastestCacheCombineJs)){
@@ -161,34 +163,6 @@
 					}
 				}
 			}
-		}
-
-		public function minifyCss($content){
-			if(isset($this->options->wpFastestCacheMinifyCss)){
-				require_once "css-utilities.php";
-				$css = new CssUtilities($content);
-
-				if(count($css->getCssLinks()) > 0){
-					foreach ($css->getCssLinks() as $key => $value) {
-						if($href = $css->checkInternal($value)){
-							$minifiedCss = $css->minify($href);
-
-							if($minifiedCss){
-								if(!is_dir($minifiedCss["cachFilePath"])){
-									$prefix = time();
-									$this->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
-								}
-
-								if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
-									$prefixLink = str_replace(array("http:", "https:"), "", $minifiedCss["url"]);
-									$content = str_replace($href, $prefixLink."/".$cssFiles[0], $content);	
-								}
-							}
-						}
-					}
-				}
-			}
-			return $content;
 		}
 
 		public function combineCss($content, $minify = false){
