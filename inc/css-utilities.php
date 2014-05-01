@@ -1,6 +1,6 @@
 <?php
 	class CssUtilities{
-		//private $html = "";
+		private $html = "";
 		private $cssLinks = array();
 		private $cssLinksExcept = "";
 		private $url = "";
