@@ -188,7 +188,7 @@
 
 								if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
 									if($cssContent = $this->file_get_contents_curl($minifiedCss["url"]."/".$cssFiles[0]."?v=".time())){
-										$prev["content"] .= $cssContent;
+										$prev["content"] .= $cssContent."\n";
 										array_push($prev["value"], $value);
 									}
 								}
