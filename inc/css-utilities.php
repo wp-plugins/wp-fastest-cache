@@ -6,7 +6,8 @@
 		private $url = "";
 
 		public function __construct($html){
-			$this->html = preg_replace("/\s+/", " ", ((string) $html));
+			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
+			$this->html = $html;
 			$this->setCssLinks();
 			$this->setCssLinksExcept();
 		}
