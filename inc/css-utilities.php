@@ -14,7 +14,6 @@
 
 		public function minify($url, $minify = true){
 			$this->url = $url;
-			//preg_match("/^.*?wp-content\/(themes|plugins)\/(.*?)$/", $url, $name);
 
 			$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($url);
 			$cssLink = content_url()."/cache/wpfc-minified/".md5($url);
