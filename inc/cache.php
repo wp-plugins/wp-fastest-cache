@@ -78,11 +78,11 @@
 
 				if(isset($this->options->wpFastestCacheCombineCss) && isset($this->options->wpFastestCacheMinifyCss)){
 					require_once "css-utilities.php";
-					$css = new CssUtilities($content);
+					$css = new CssUtilities($this, $content);
 					$content = $css->combineCss($this, true);
 				}else if(isset($this->options->wpFastestCacheCombineCss)){
 					require_once "css-utilities.php";
-					$css = new CssUtilities($content);
+					$css = new CssUtilities($this, $content);
 					$content = $css->combineCss($this, false);
 				}else if(isset($this->options->wpFastestCacheMinifyCss)){
 					require_once "css-utilities.php";

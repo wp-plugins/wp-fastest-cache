@@ -5,11 +5,35 @@
 		private $cssLinksExcept = "";
 		private $url = "";
 
-		public function __construct($html){
+		public function __construct($wpfc, $html){
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
 			$this->html = $html;
+			//$this->inlineToLink($wpfc);
 			$this->setCssLinks();
 			$this->setCssLinksExcept();
+		}
+
+		public function inlineToLink($wpfc){
+			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
+			preg_match_all("/<style[^><]*>([^<]+)<\/style>/is",$head[1],$out);
+
+			if(count($out) > 0){
+				foreach ($out[1] as $key => $value) {
+					$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($value);
+					$cssLink = content_url()."/cache/wpfc-minified/".md5($value);
+
+					if(!is_dir($cachFilePath)){
+						$prefix = time();
+						$wpfc->createFolder($cachFilePath, $value, "css", $prefix);
+					}
+
+					if($cssFiles = @scandir($cachFilePath, 1)){
+						$link = "<!-- <style>".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='all' />";
+						$this->html = preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html);
+					}
+
+				}
+			}
 		}
 
 		public function minify($url, $minify = true){
@@ -19,7 +43,7 @@
 			$cssLink = content_url()."/cache/wpfc-minified/".md5($url);
 
 			if(is_dir($cachFilePath)){
-				return array("cachFilePath" => $cachFilePath, "cssContent" => "", "url" => $cssLink);
+				return array("cachFilePath" => $cachFilePath, "cssContent" => "", "url" => $cssLink, "realUrl" => $url);
 			}else{
 				if($css = $this->file_get_contents_curl($url."?v=".time())){
 					if($minify){
@@ -30,7 +54,7 @@
 						$cssContent = $this->fixPathsInCssContent($cssContent);
 					}
 
-					return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => $cssLink);
+					return array("cachFilePath" => $cachFilePath, "cssContent" => "/* ".$url." */\n".$cssContent, "url" => $cssLink, "realUrl" => $url);
 				}
 			}
 			return false;
@@ -173,7 +197,7 @@
 
 		public function combineCss($wpfc, $minify = false){
 			if(count($this->getCssLinks()) > 0){
-				$prev = array("content" => "", "value" => array());
+				$prev = array("content" => "", "value" => array(), "name" => "");
 				foreach ($this->getCssLinks() as $key => $value) {
 					if($href = $this->checkInternal($value)){
 						if(strpos($this->getCssLinksExcept(), $href) === false){
@@ -188,6 +212,7 @@
 
 								if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
 									if($cssContent = $this->file_get_contents_curl($minifiedCss["url"]."/".$cssFiles[0]."?v=".time())){
+										$prev["name"] .= $minifiedCss["realUrl"];
 										$prev["content"] .= $cssContent."\n";
 										array_push($prev["value"], $value);
 									}
@@ -195,17 +220,17 @@
 							}
 						}else{
 							$prev["content"] = $this->fixRules($prev["content"]);
-							$this->html = $this->mergeCss($wpfc, $prev, $this->html);
+							$this->mergeCss($wpfc, $prev);
 							$prev = array("content" => "", "value" => array());
 						}
 					}else{
 						$prev["content"] = $this->fixRules($prev["content"]);
-						$this->html = $this->mergeCss($wpfc, $prev, $this->html);
+						$this->mergeCss($wpfc, $prev);
 						$prev = array("content" => "", "value" => array());
 					}
 				}
 				$prev["content"] = $this->fixRules($prev["content"]);
-				$this->html = $this->mergeCss($wpfc, $prev, $this->html);
+				$this->mergeCss($wpfc, $prev);
 			}
 
 			return $this->html;
@@ -213,10 +238,9 @@
 
 		public function mergeCss($wpfc, $prev){
 			if(count($prev["value"]) > 0){
-				$name = "";
 				foreach ($prev["value"] as $prevKey => $prevValue) {
 					if($prevKey == count($prev["value"]) - 1){
-						$name = md5($name);
+						$name = md5($prev["name"]);
 						$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".$name;
 
 						if(!is_dir($cachFilePath)){
@@ -234,7 +258,6 @@
 					}
 				}
 			}
-			return $this->html;
 		}
 
 	    protected $_inHack = false;
