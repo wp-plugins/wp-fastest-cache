@@ -8,7 +8,7 @@
 		public function __construct($wpfc, $html){
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
 			$this->html = $html;
-			//$this->inlineToLink($wpfc);
+			$this->inlineToLink($wpfc);
 			$this->setCssLinks();
 			$this->setCssLinksExcept();
 		}
