@@ -1,15 +1,15 @@
 <?php
 	class CssUtilities{
-		private $html = "";
+		//private $html = "";
 		private $cssLinks = array();
 		private $cssLinksExcept = "";
 		private $url = "";
 
 		public function __construct($html){
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
-			$this->html = $html;
-			$this->setCssLinks();
-			$this->setCssLinksExcept();
+			//$this->html = $html;
+			$this->setCssLinks($html);
+			$this->setCssLinksExcept($html);
 		}
 
 		public function minify($url, $minify = true){
@@ -109,14 +109,14 @@
 			return "url(".$matches[1].")";
 		}
 
-		public function setCssLinks(){
-			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
+		public function setCssLinks($html){
+			preg_match("/<head(.*?)<\/head>/si", $html, $head);
 			preg_match_all("/<link[^<>]*rel=[\"\']stylesheet[\"\'][^<>]*>/", $head[1], $this->cssLinks);
 			$this->cssLinks = $this->cssLinks[0];
 		}
 
 		public function setCssLinksExcept(){
-			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
+			preg_match("/<head(.*?)<\/head>/si", $html, $head);
 
 			preg_match_all("/<\!--\s*\[\s*if[^>]+>(.*?)<\!\s*\[\s*endif\s*\]\s*-->/si", $head[1], $cssLinksInIf);
 
