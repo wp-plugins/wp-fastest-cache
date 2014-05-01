@@ -11,8 +11,6 @@
 		}
 
 		public function checkActivePlugins(){
-			//include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
 			//for WP-Polls
 			if($this->isPluginActive('wp-polls/wp-polls.php')){
 				require_once "wp-polls.php";
@@ -179,10 +177,6 @@
 			}
 
 			if(count($out) > 0){
-				// $out[1] = str_replace("/", "\/", $out[1]);
-				// $out[1] = str_replace("?", "\?", $out[1]);
-				// $out[1] = str_replace(".", "\.", $out[1]);
-
 				$content = preg_replace("/<link[^>]+".preg_quote($out[1], "/")."[^>]+>/", $replace, $content);
 			}
 
