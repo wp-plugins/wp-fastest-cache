@@ -3,7 +3,7 @@ Contributors: emrevona
 Donate link: http://profiles.wordpress.org/emrevona/
 Tags: fastest wp cache, cache, caching, performance, wp-cache, plugin, page, optimize, fast, w3 total cache, apache, wp fast cache, google, mod_rewrite, accelerator, google rank, htaccess, quick cache, super cache, w3 total cache, minify, speed, performance, page cache, optimizer, wp fastest cache, facebook, shortcode, gallery, merge css, apache, minify html, availability, AWS, batcache, buddypress, bwp-minify, cache, caching, cascading style sheet, CDN, Cloud Files, cloudflare, cloudfront, combine css, compress, content delivery network, CSS, css cache, database cache, db-cache, deflate, disk cache, disk caching, eacclerator, elasticache, flash media server, google, google page speed, google rank, gzip, http compression, javascript, Amazon S3, js cache, limelight, litespeed, max cdn, media library, merge, microsoft, minify css, compressor css, mod_cloudflare, image, links, mod_pagespeed, multiple hosts, mysql, posts, plugin, Post, Autoptimize, optimize, optimizer, page cache, performance, plugin, quick cache, combine css, combine js, merge css, merge js
 Requires at least: 3.3
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
