@@ -24,7 +24,7 @@
 						"- <label>Cost-benefit ratio: high</label><br>";
 		}else if(input.attr("id") == "wpFastestCacheCombineJs"){
 			options.h4 = "Combine Js";
-			options.h1 = "<label>Decreasing the number of javascript files on a page (between &#60;head&#62;&#60;/head&#62;) reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
+			options.h1 = "<label>This feature combines the JS files between &#60;head&#62;&#60;/head&#62;. Decreasing the number of javascript files on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
 		}else if(input.attr("id") == "wpFastestCacheCombineCss"){
 			options.h4 = "Combine Css";
 			options.h1 = "<label>Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
