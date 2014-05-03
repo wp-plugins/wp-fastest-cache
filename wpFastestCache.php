@@ -34,6 +34,7 @@ GNU General Public License for more details.
 
 			if(is_admin()){
 				//for wp-panel
+				$this->setRegularCron();
 				$this->admin();
 			}else{
 				//for cache
@@ -68,7 +69,7 @@ GNU General Public License for more details.
 				file_put_contents($path.".htaccess", $htaccess);
 			}
 
-			//wp_clear_scheduled_hook("wp_fastest_cache");
+			wp_clear_scheduled_hook("wp_fastest_cache");
 			delete_option("WpFastestCache");
 			$wpfc->deleteCache();
 		}
@@ -131,6 +132,7 @@ GNU General Public License for more details.
 		}
 
 		protected function checkCronTime(){
+			add_action($this->slug(),  array($this, 'regularCrons'));
 			add_action($this->slug()."TmpDelete",  array($this, 'actionDelete'));
 		}
 
@@ -140,6 +142,16 @@ GNU General Public License for more details.
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
 					wp_schedule_single_event(time() + 60, $this->slug()."TmpDelete");
 				}
+			}
+		}
+
+		public function regularCrons(){
+			$this->actionDelete();
+		}
+
+		public function setRegularCron(){
+			if(!wp_next_scheduled("wp_fastest_cache")){
+				wp_schedule_event( time() + 60, 'hourly', "wp_fastest_cache");
 			}
 		}
 
