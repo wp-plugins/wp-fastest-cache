@@ -55,6 +55,8 @@ window.wpfc.dictionary = {
 	"Don't show the cached version for logged-in users" : "Ne pas afficher la version mise en cache pour les utilisateurs inscrits",
 	"Already deleted" : "Déjà supprimé",
 	"Support Us" : "Soutenez-nous",
+	"Reduce HTTP requests through combined js files" : "Réduire les requêtes HTTP par js combinés",
+	"This feature combines the JS files between <head></head>. Decreasing the number of javascript files on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Cette fonction fusionne les fichiers JS entre &#60;head&#62;&#60;/head&#62;. Fusionner du nombre de fichiers javascript en une même page réduit le nombre de requêtes HTTP nécessaires pour transmettre la page, ce qui accélère chargement de celle-ci.",
 	"If you like it, Please vote and support us." : "Si vous aimez ce Plugin, S'il vous plaît, votez et soutenez-nous !",
 	"Reduce HTTP requests through combined css files" : "Réduire les requêtes HTTP via des css fichiers combinés",
 	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "La diminution du nombre de composants sur une page réduit le nombre de requêtes HTTP nécessaires pour rendre la page, ce qui accélère chargement de celle-ci.",
