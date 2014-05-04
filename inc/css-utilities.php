@@ -54,7 +54,8 @@
 						$cssContent = $this->fixPathsInCssContent($cssContent);
 					}
 
-					return array("cachFilePath" => $cachFilePath, "cssContent" => "/* ".$url." */\n".$cssContent, "url" => $cssLink, "realUrl" => $url);
+					return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => $cssLink, "realUrl" => $url);
+					//return array("cachFilePath" => $cachFilePath, "cssContent" => "/* ".$url." */\n".$cssContent, "url" => $cssLink, "realUrl" => $url);
 				}
 			}
 			return false;
