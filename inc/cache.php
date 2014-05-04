@@ -86,7 +86,7 @@
 					$content = $css->combineCss($this, false);
 				}else if(isset($this->options->wpFastestCacheMinifyCss)){
 					require_once "css-utilities.php";
-					$css = new CssUtilities($content);
+					$css = new CssUtilities($this, $content);
 					$content = $css->minifyCss($this);
 				}
 
