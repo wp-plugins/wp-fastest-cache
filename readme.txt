@@ -81,6 +81,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * to check that super cache is active or not
 * to check that better wordPress minify is active or not
 * <strong>[FEATURE]</strong> french translation
+* optimization of deletion cache
 
 = 0.8.1.4 =
 * to prevent creating cache for logged-in users
@@ -259,7 +260,7 @@ Wpfc does not create .htaccess automatically so you need to create empty one.
 When the cached files are deleted, they are moved to "tmpWpfc" instead of being deleted and a cron-job is set. Delete all files are so difficult for server so cron-job is set not to use a lot of CPU resources. Cron-job is set and it deletes 100 files every 5 minutes. When all files in "tmpWpfc" are deleted, cron-job is unset.
 
 = How can stop caching for some pages? =
-If you add &lt;!--[wpfcNOT]--&gt; into source coude, creating cache stops.
+If you add &lt;!--[wpfcNOT]--&gt; into source coude, creating cache stops. You can find it on visual and text editor after opening Add New Post panel.
 
 = Does Wpfc work with WPMU (Wordpress Multisite) properly? =
 No. Wpfc does not support Wordpress Multisite yet.
