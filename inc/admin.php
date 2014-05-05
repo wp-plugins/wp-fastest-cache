@@ -17,8 +17,19 @@
 			$this->setCronJobSettings();
 			$this->addButtonOnEditor();
 			add_action('admin_enqueue_scripts', array($this, 'addJavaScript'));
+			$this->checkActivePlugins();
 
 		}
+
+		public function checkActivePlugins(){
+			//for WP-Polls
+			if($this->isPluginActive('wp-polls/wp-polls.php')){
+				require_once "wp-polls.php";
+				$wp_polls = new WpPollsForWpFc();
+				$wp_polls->hook();
+			}
+		}
+
 
 		public function addButtonOnEditor(){
 			add_action('admin_print_footer_scripts', array($this, 'addButtonOnQuicktagsEditor'));

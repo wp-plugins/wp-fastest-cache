@@ -1,7 +1,13 @@
 <?php
 	class WpPollsForWpFc{
 		public function __construct(){
-			add_action( 'wp_ajax_nopriv_example_ajax_request', array($this, "example_ajax_request"));
+			
+		}
+
+		public function hook(){
+			add_action( 'wp_ajax_nopriv_wpfc_wppolls_ajax_request', array($this, "wpfc_wppolls_ajax_request"));
+			add_action( 'wp_ajax_wpfc_wppolls_ajax_request', array($this, "wpfc_wppolls_ajax_request"));
+
 		}
 
 		public function execute(){
@@ -20,7 +26,7 @@
 							type: 'POST', 
 							url: pollsL10n.ajax_url,
 							dataType : "json",
-							data : {"action": "example_ajax_request", "poll_id": poll_id},
+							data : {"action": "wpfc_wppolls_ajax_request", "poll_id": poll_id},
 							cache: false, 
 							success: function(data){
 								if(data === true){
@@ -35,7 +41,7 @@
 			</script><?php
 		}
 
-		public function example_ajax_request() {
+		public function wpfc_wppolls_ajax_request() {
 			$id = strip_tags($_POST["poll_id"]);
 			$id = mysql_real_escape_string($id);
 
