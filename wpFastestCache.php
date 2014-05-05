@@ -34,6 +34,7 @@ GNU General Public License for more details.
 
 			if(is_admin()){
 				//for wp-panel
+				$this->setRegularCron();
 				$this->admin();
 			}else{
 				//for cache
@@ -69,6 +70,8 @@ GNU General Public License for more details.
 			}
 
 			wp_clear_scheduled_hook("wp_fastest_cache");
+			wp_clear_scheduled_hook($wpfc->slug()."_regular");
+
 			delete_option("WpFastestCache");
 			$wpfc->deleteCache();
 		}
@@ -116,11 +119,11 @@ GNU General Public License for more details.
 				//$this->rm_folder_recursively($this->getWpContentDir()."/cache/all");
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
 					rename($this->getWpContentDir()."/cache/all", $this->getWpContentDir()."/cache/tmpWpfc/".time());
-					wp_schedule_single_event(time() + 60, $this->slug()."TmpDelete");
+					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
 				}else if(@mkdir($this->getWpContentDir()."/cache/tmpWpfc", 0755, true)){
 					rename($this->getWpContentDir()."/cache/all", $this->getWpContentDir()."/cache/tmpWpfc/".time());
-					wp_schedule_single_event(time() + 60, $this->slug()."TmpDelete");
+					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
 				}else{
 					$this->systemMessage = array("Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>", "error");
@@ -130,22 +133,33 @@ GNU General Public License for more details.
 			}
 		}
 
-		protected function checkCronTime(){
+		public function checkCronTime(){
 			add_action($this->slug(),  array($this, 'setSchedule'));
-			add_action($this->slug()."TmpDelete",  array($this, 'actionDelete'));
+			add_action($this->slug()."_TmpDelete",  array($this, 'actionDelete'));
+			add_action($this->slug()."_regular",  array($this, 'regularCrons'));
 		}
 
 		public function actionDelete(){
 			if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
 				$this->rm_folder_recursively($this->getWpContentDir()."/cache/tmpWpfc");
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
-					wp_schedule_single_event(time() + 60, $this->slug()."TmpDelete");
+					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 				}
 			}
 		}
 
+		public function regularCrons(){
+			$this->actionDelete();
+		}
+
 		public function setSchedule(){
 			$this->deleteCache();
+		}
+
+		public function setRegularCron(){
+			if(!wp_next_scheduled($this->slug()."_regular")){
+				wp_schedule_event( time() + 60, 'hourly', $this->slug()."_regular");
+			}
 		}
 
 		public function getABSPATH(){
