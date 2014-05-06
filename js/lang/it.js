@@ -50,9 +50,11 @@ window.wpfc.dictionary = {
 	"Don't show the cached version for logged-in users" : "Non mostrare la cache per gli utenti connessi",
 	"Support Us" : "Supportaci",
 	"If you like it, Please vote and support us." : "Se ti piace il plugin, per favore vota e supportaci.",
-	"Reduce HTTP requests through combined css files" : "Ridurre le richieste HTTP tramite css file combinati",
+	"Reduce HTTP requests through combined css files" : "Ridurre le richieste HTTP tramite file css combinati",
 	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Diminuire il numero di componenti su una pagina riduce il numero di richieste HTTP necessarie per generare la pagina, ci&ograve; rende il caricamento della pagina pi&ugrave; veloce.",
+	"This feature combines the JS files between <head></head>. Decreasing the number of javascript files on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Questa opzione combina i file js presenti tra i tag &#60;head&#62;&#60;/head&#62;. Diminuire il numero di file javascript su una pagina riduce il numero di richieste HTTP necessarie per generare la pagina, ciò rende il caricamento della pagina più veloce.",
 	"Combine Css" : "Combinare CSS",
+	"Reduce HTTP requests through combined js files" : "Ridurre le richieste HTTP tramite file js combinati",
 	"*** Attention ***" : "*** Attenzione ***",
 	"Open .htaccess and remove this rule" : "Aprire .htaccess e rimuovere questa regola",
 	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : "Se il server non supporta mod_expires.c, questa opzione pu&ograve; causare l'errore Internel Server (500). Se riscontrate tale errore si prega di eseguire i passaggi che seguono."
