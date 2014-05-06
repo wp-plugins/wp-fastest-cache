@@ -49,6 +49,8 @@ window.wpfc.dictionary = {
 	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "Muy eficiente en sitios cuyos usuarios visitan las mismas páginas con frecuencia",
 	"Don't show the cached version for logged-in users" : "No mostrar los archivos en el cache a los usuarios registrados.",
 	"Support Us" : "Apóyanos",
+	"Reduce HTTP requests through combined js files" : "Combinar los archivos JS para reducir las solicitudes HTTP",
+	"This feature combines the JS files between <head></head>. Decreasing the number of javascript files on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Al integrar todos los archivos JS entre las etiquetas &#60;head&#62;&#60;/head&#62; se disminuyen las solicitudes HTTP, logrando que las páginas carguen más rápido.",
 	"If you like it, Please vote and support us." : "Si te gusta este plugin, por favor vota y apóyanos.",
 	"Reduce HTTP requests through combined css files" : "Combinar css archivos para reducir las solicitudes HTTP",
 	"Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads." : "Al reducir el número de objetos de una página se disminuye también el número de solicitudes HTTP, por lo cual las páginas cargarán más rápido.",
