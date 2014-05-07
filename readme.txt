@@ -39,6 +39,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 4. Enable Gzip Compression - Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser.
 5. Leverage browser caching - Reduce page load times for repeat visitors
 6. Combine CSS - Reduce number of HTTP round-trips by combining multiple CSS resources into one
+7. Combine JS
 
 <h4>Supported languages: </h4>
 
