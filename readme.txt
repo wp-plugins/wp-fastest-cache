@@ -77,6 +77,11 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.1.7 =
+* wp-polls issue
+* cache timeout issue
+* minify css issue for data:application/x-font-woff
+
 = 0.8.1.6 =
 * optimization of deletion cache
 * creating cache problem when combine css is unchecked
