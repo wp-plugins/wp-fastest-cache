@@ -204,35 +204,31 @@
 			if($this->is_subdirectory_install()){
 				$path = $this->getABSPATH();
 			}
+
+			$htaccess = file_get_contents($path.".htaccess");
+
 			if(!get_option('permalink_structure')){
 				return array("You have to set <strong><u><a href='".admin_url()."options-permalink.php"."'>permalinks</a></u></strong>", "error");
-			}else if(!isset($post["wpFastestCacheStatus"])){
-				//disable
-				$this->deleteCache();
-				return array("Options have been saved", "success");
-			}else if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on") || (isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on")){
-				$htaccess = file_get_contents($path.".htaccess");
+			}else if($res = $this->checkSuperCache($path, $htaccess)){
+				return $res;
+			}else if($this->isPluginActive('bwp-minify/bwp-minify.php')){
+				return array("Better WordPress Minify needs to be deactive<br>This plugin has aldready Minify feature", "error");
+			}else if($this->isPluginActive('gzippy/gzippy.php')){
+				return array("GZippy needs to be deactive<br>This plugin has aldready Gzip feature", "error");
+			}else if(!is_file($path.".htaccess")){
+				return array(".htaccess was not found", "error");
+			}else if(is_writable($path.".htaccess")){
+				$htaccess = $this->insertLBCRule($htaccess, $post);
+				$htaccess = $this->insertGzipRule($htaccess, $post);
+				$htaccess = $this->insertRewriteRule($htaccess, $post);
+				$htaccess = preg_replace("/\n+/","\n", $htaccess);
 
-				if($res = $this->checkSuperCache($path, $htaccess)){
-					return $res;
-				}else if($this->isPluginActive('bwp-minify/bwp-minify.php')){
-					return array("Better WordPress Minify needs to be deactive<br>This plugin has aldready Minify feature", "error");
-				}else if($this->isPluginActive('gzippy/gzippy.php')){
-					return array("GZippy needs to be deactive<br>This plugin has aldready Gzip feature", "error");
-				}else if(!is_file($path.".htaccess")){
-					return array(".htaccess was not found", "error");
-				}else if(is_writable($path.".htaccess")){
-					$htaccess = $this->insertLBCRule($htaccess, $post);
-					$htaccess = $this->insertGzipRule($htaccess, $post);
-					$htaccess = $this->insertRewriteRule($htaccess);
-					$htaccess = preg_replace("/\n+/","\n", $htaccess);
-
-					file_put_contents($path.".htaccess", $htaccess);
-				}else{
-					return array(".htaccess is not writable", "error");
-				}
-				return array("Options have been saved", "success");
+				file_put_contents($path.".htaccess", $htaccess);
+			}else{
+				return array(".htaccess is not writable", "error");
 			}
+			return array("Options have been saved", "success");
+
 		}
 
 		public function insertLBCRule($htaccess, $post){
@@ -312,9 +308,14 @@
 			}
 		}
 
-		public function insertRewriteRule($htaccess){
-			$htaccess = preg_replace("/#\s?BEGIN\s?WpFastestCache.*?#\s?END\s?WpFastestCache/s", "", $htaccess);
-			$htaccess = $this->getHtaccess().$htaccess;
+		public function insertRewriteRule($htaccess, $post){
+			if(isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on"){
+				$htaccess = preg_replace("/#\s?BEGIN\s?WpFastestCache.*?#\s?END\s?WpFastestCache/s", "", $htaccess);
+				$htaccess = $this->getHtaccess().$htaccess;
+			}else{
+				$htaccess = preg_replace("/#\s?BEGIN\s?WpFastestCache.*?#\s?END\s?WpFastestCache/s", "", $htaccess);
+				$this->deleteCache();
+			}
 
 			return $htaccess;
 		}
