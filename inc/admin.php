@@ -204,8 +204,9 @@
 			if($this->is_subdirectory_install()){
 				$path = $this->getABSPATH();
 			}
-
-			if(!isset($post["wpFastestCacheStatus"])){
+			if(!get_option('permalink_structure')){
+				return array("You have to set <strong><u><a href='".admin_url()."options-permalink.php"."'>permalinks</a></u></strong>", "error");
+			}else if(!isset($post["wpFastestCacheStatus"])){
 				//disable
 				$this->deleteCache();
 				return array("Options have been saved", "success");
