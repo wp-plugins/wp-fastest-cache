@@ -205,7 +205,11 @@
 				$path = $this->getABSPATH();
 			}
 
-			if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on") || (isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on")){
+			if(!isset($post["wpFastestCacheStatus"])){
+				//disable
+				$this->deleteCache();
+				return array("Options have been saved", "success");
+			}else if((isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on") || (isset($post["wpFastestCacheGzip"]) && $post["wpFastestCacheGzip"] == "on") || (isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on")){
 				$htaccess = file_get_contents($path.".htaccess");
 
 				if($res = $this->checkSuperCache($path, $htaccess)){
@@ -226,10 +230,6 @@
 				}else{
 					return array(".htaccess is not writable", "error");
 				}
-				return array("Options have been saved", "success");
-			}else{
-				//disable
-				$this->deleteCache();
 				return array("Options have been saved", "success");
 			}
 		}
