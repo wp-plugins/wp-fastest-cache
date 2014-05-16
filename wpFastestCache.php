@@ -114,7 +114,7 @@ GNU General Public License for more details.
 			}
 		}
 
-		public function deleteCache(){
+		public function deleteCache($minified = false){
 			if(is_dir($this->getWpContentDir()."/cache/all")){
 				//$this->rm_folder_recursively($this->getWpContentDir()."/cache/all");
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
@@ -129,7 +129,11 @@ GNU General Public License for more details.
 					$this->systemMessage = array("Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>", "error");
 				}
 			}else{
-				$this->systemMessage = array("Already deleted","success");
+				if($minified){
+					$this->systemMessage = array("Minified CSS and JS files have been deleted","success");
+				}else{
+					$this->systemMessage = array("Already deleted","success");
+				}
 			}
 		}
 

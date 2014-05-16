@@ -103,7 +103,7 @@
 		public function deleteCssAndJsCache(){
 			if(is_dir($this->getWpContentDir()."/cache/wpfc-minified")){
 				$this->rm_folder_recursively($this->getWpContentDir()."/cache/wpfc-minified");
-				$this->deleteCache();
+				$this->deleteCache(true);
 			}else{
 				$this->systemMessage = array("Already deleted","success");
 			}
