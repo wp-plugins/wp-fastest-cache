@@ -242,6 +242,9 @@
 				$this->mergeCss($wpfc, $prev);
 			}
 
+			$this->html = preg_replace("/(<!-- )+/","<!-- ", $this->html);
+			$this->html = preg_replace("/( -->)+/"," -->", $this->html);
+
 			return $this->html;
 		}
 
