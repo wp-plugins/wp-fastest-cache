@@ -18,6 +18,9 @@
 			preg_match_all("/<style[^><]*>([^<]+)<\/style>/is",$head[1],$out);
 
 			if(count($out) > 0){
+
+				$countStyle = array_count_values($out[1]);
+
 				foreach ($out[1] as $key => $value) {
 					$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($value);
 					$cssLink = content_url()."/cache/wpfc-minified/".md5($value);
@@ -28,8 +31,13 @@
 					}
 
 					if($cssFiles = @scandir($cachFilePath, 1)){
-						$link = "<!-- <style>".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='all' />";
-						$this->html = preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html);
+						if($countStyle[$value] == 1){
+							$link = "<!-- <style>".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='all' />";
+							$this->html = preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html);
+						}else{
+							$this->html = preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", "", $this->html, 1);
+							$countStyle[$value] = $countStyle[$value] - 1;
+						}
 					}
 
 				}
