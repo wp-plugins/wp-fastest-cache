@@ -75,6 +75,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 7. You can minify your html
 8. You can minify the css files
 
+
 == Changelog ==
 
 = 0.8.1.8 =
