@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 0.8.1.7
+Version: 0.8.1.8
 Author: Emre Vona
 Author URI: http://tr.linkedin.com/in/emrevona
 

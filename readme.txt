@@ -77,6 +77,12 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.1.8 =
+* to fix disable the plugin
+* to check permalinks was set or not
+* modified of deletion of minified files' warning
+* to fix inserting extra comment tag
+
 = 0.8.1.7 =
 * wp-polls issue
 * cache timeout issue
@@ -306,5 +312,8 @@ Yes, it is NOT compatible with AdRotate.
 
 = Is this plugin compatible with WP-PostViews? =
 No, it is NOT compatible with WP-PostViews.
+
+= Is this plugin compatible with MobilePress? =
+No, it is NOT compatible with MobilePress. We advise WPtouch Mobile.
 
 == Upgrade notice ==
