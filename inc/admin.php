@@ -211,8 +211,10 @@
 				return array("You have to set <strong><u><a href='".admin_url()."options-permalink.php"."'>permalinks</a></u></strong>", "error");
 			}else if($res = $this->checkSuperCache($path, $htaccess)){
 				return $res;
+			}else if($this->isPluginActive('adrotate/adrotate.php')){
+				return $this->warningIncompatible("AdRotate");
 			}else if($this->isPluginActive('mobilepress/mobilepress.php')){
-				return array("MobilePress <label>needs to be deactive</label><br><label>We advise</label> <a id='alternative-plugin' target='_blank' href='https://wordpress.org/plugins/wptouch/'>WPtouch Mobile</a>", "error");
+				return $this->warningIncompatible("MobilePress", array("name" => "WPtouch Mobile", "url" => "https://wordpress.org/plugins/wptouch/"));
 			}else if($this->isPluginActive('bwp-minify/bwp-minify.php')){
 				return array("Better WordPress Minify needs to be deactive<br>This plugin has aldready Minify feature", "error");
 			}else if($this->isPluginActive('gzippy/gzippy.php')){
@@ -231,6 +233,14 @@
 			}
 			return array("Options have been saved", "success");
 
+		}
+
+		public function warningIncompatible($incompatible, $alternative = false){
+			if($alternative){
+				return array($incompatible." <label>needs to be deactive</label><br><label>We advise</label> <a id='alternative-plugin' target='_blank' href='".$alternative["url"]."'>".$alternative["name"]."</a>", "error");
+			}else{
+				return array($incompatible." <label>needs to be deactive</label>", "error");
+			}
 		}
 
 		public function insertLBCRule($htaccess, $post){
