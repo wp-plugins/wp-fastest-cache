@@ -97,6 +97,7 @@ GNU General Public License for more details.
 		protected function detectNewPost(){
 			if(isset($this->options->wpFastestCacheNewPost) && isset($this->options->wpFastestCacheStatus)){
 				add_filter ('publish_post', array($this, 'deleteCache'));
+				add_filter ('publish_page', array($this, 'deleteCache'));
 				add_filter ('delete_post', array($this, 'deleteCache'));
 				add_filter ('wp_set_comment_status', array($this, 'singleDeleteCache'));
 			}
