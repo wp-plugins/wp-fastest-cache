@@ -207,7 +207,9 @@
 
 			$htaccess = file_get_contents($path.".htaccess");
 
-			if(!get_option('permalink_structure')){
+			if(defined('DONOTCACHEPAGE')){
+				return array("DONOTCACHEPAGE <label>has been defined as TRUE. It must be FALSE</label>", "error");
+			}else if(!get_option('permalink_structure')){
 				return array("You have to set <strong><u><a href='".admin_url()."options-permalink.php"."'>permalinks</a></u></strong>", "error");
 			}else if($res = $this->checkSuperCache($path, $htaccess)){
 				return $res;
