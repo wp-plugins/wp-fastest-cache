@@ -70,6 +70,8 @@
 		}
 
 		public function file_get_contents_curl($url) {
+			$url = preg_replace("/^\/\//", "http://", $url);
+			
 			$ch = curl_init();
 		 
 			curl_setopt($ch, CURLOPT_HEADER, 0);
