@@ -60,8 +60,6 @@
 		}
 
 		public function checkInternal($link){
-			$contentUrl = str_replace(array("http://www.", "http://", "https://www.", "https://"), "", content_url());
-
 			$httpHost = str_replace("www.", "", $_SERVER["HTTP_HOST"]); 
 			if(preg_match("/src=[\"\'](.*?)[\"\']/", $link, $src)){
 				if(@strpos($src[1], $httpHost)){
