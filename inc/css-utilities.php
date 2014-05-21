@@ -167,14 +167,10 @@
 		}
 
 		public function checkInternal($link){
-			$contentUrl = str_replace(array("http://www.", "http://", "https://www.", "https://"), "", content_url());
-
 			$httpHost = str_replace("www.", "", $_SERVER["HTTP_HOST"]); 
 			if(preg_match("/href=[\"\'](.*?)[\"\']/", $link, $href)){
 				if(@strpos($href[1], $httpHost)){
 					return $href[1];
-					// if(strpos($href[1], $contentUrl."/themes") || strpos($href[1], $contentUrl."/plugins")){
-					// }
 				}
 			}
 			return false;
