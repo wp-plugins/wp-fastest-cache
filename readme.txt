@@ -317,4 +317,8 @@ No, it is NOT compatible with WP-PostViews.
 = Is this plugin compatible with MobilePress? =
 No, it is NOT compatible with MobilePress. We advise WPtouch Mobile.
 
+= DONOTCACHEPAGE is defined as TRUE =
+If you get a such warning, you need to read this tutorial. <a href="http://wordpress.org/support/topic/donotcachepage-constant-is-defined-what-should-i-do">Read me!</a>
+
+
 == Upgrade notice ==
