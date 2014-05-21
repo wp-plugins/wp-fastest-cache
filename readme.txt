@@ -322,4 +322,4 @@ If you get a such warning, you need to read this tutorial. <a href="http://wordp
 
 
 == Upgrade notice ==
-.
+..
