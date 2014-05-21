@@ -97,7 +97,7 @@
 				
 				$this->createFolder($cachFilePath, $content);
 
-				return $buffer;
+				return $buffer."<!-- need to refresh to see cached version -->";
 			}
 		}
 
