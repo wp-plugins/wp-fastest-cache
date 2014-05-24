@@ -208,7 +208,7 @@
 				$prev = array("content" => "", "value" => array(), "name" => "");
 				foreach ($this->getCssLinks() as $key => $value) {
 					if($href = $this->checkInternal($value)){
-						if(strpos($this->getCssLinksExcept(), $href) === false){
+						if(strpos($this->getCssLinksExcept(), $href) === false && preg_match("/media=[\'\"]all[\'\"]/", $value)){
 
 							$minifiedCss = $this->minify($href, $minify);
 
