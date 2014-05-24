@@ -93,6 +93,7 @@
 		public function fixRules($css){
 			$css = $this->fixImportRules($css);
 			$css = $this->fixCharset($css);
+			$css = preg_replace("/@media/i","\n@media",$css);
 			return $css;
 		}
 
