@@ -475,7 +475,7 @@
 					$message .= "<br>- be sure that you removed the rules of super cache from the .htaccess";
 				}
 
-				return $message ? array("WP Super Cache is a terrible plugin so please follow the steps below".$message, "error") : "";
+				return $message ? array("WP Super Cache cannot remove its own remnants so please follow the steps below".$message, "error") : "";
 			}
 
 			return "";
