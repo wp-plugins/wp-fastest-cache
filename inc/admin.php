@@ -433,8 +433,16 @@
 
 		public function getRewriteBase($sub = ""){
 			if($sub && $this->is_subdirectory_install()){
-				return "";
+				$trimedProtocol = preg_replace("/http:\/\/|https:\/\//", "", trim(home_url(), "/"));
+				$path = strstr($trimedProtocol, '/');
+
+				if($path){
+					return trim($path, "/")."/";
+				}else{
+					return "";
+				}
 			}
+			
 			$url = rtrim(site_url(), "/");
 			preg_match("/https?:\/\/[^\/]+(.*)/", $url, $out);
 
