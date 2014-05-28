@@ -418,6 +418,15 @@
 
 			$data = $data.'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n".
 					"</IfModule>"."\n".
+					"<FilesMatch \"\.(html|htm)$\">"."\n".
+					"FileETag None"."\n".
+					"<ifModule mod_headers.c>"."\n".
+					"Header unset ETag"."\n".
+					"Header set Cache-Control \"max-age=0, no-cache, no-store, must-revalidate\""."\n".
+					"Header set Pragma \"no-cache\""."\n".
+					"Header set Expires \"Mon, 29 Oct 1923 20:30:00 GMT\""."\n".
+					"</ifModule>"."\n".
+					"</FilesMatch>"."\n".
 					"# END WpFastestCache"."\n";
 			return $data;
 		}
