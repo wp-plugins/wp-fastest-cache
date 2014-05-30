@@ -22,7 +22,7 @@
 		public function checkShortCode($content){
 			preg_match("/\[wpfcNOT\]/", $content, $wpfcNOT);
 			if(count($wpfcNOT) > 0){
-				if(is_single() || is_page()){
+				if(!is_home() || !is_archive()){
 					$this->blockCache = true;
 				}
 				$content = str_replace("[wpfcNOT]", "", $content);
@@ -64,7 +64,7 @@
 			}else if($this->ignored()){
 				return $buffer;
 			}else if($this->blockCache === true){
-				return $buffer."<!-- not cached -->";
+				return $buffer."<!-- wpfcNOT has been detected -->";
 			}else if(isset($_GET["preview"])){
 				return $buffer."<!-- not cached -->";
 			}else if($this->checkHtml($buffer)){
