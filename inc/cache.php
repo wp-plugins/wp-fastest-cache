@@ -3,6 +3,7 @@
 		private $options = array();
 		private $startTime;
 		private $blockCache = false;
+		private $err = "";
 
 		public function __construct(){
 			$this->options = $this->getOptions();
@@ -97,7 +98,7 @@
 				
 				$this->createFolder($cachFilePath, $content);
 
-				return $buffer."<!-- need to refresh to see cached version -->";
+				return $this->err ? $buffer."<!-- ".$this->err." -->" : $buffer."<!-- need to refresh to see cached version -->";
 			}
 		}
 
@@ -164,6 +165,8 @@
 						}
 					}
 				}
+			}elseif($extension == "html"){
+				$this->err = "Buffer is empty so the cache cannot be created";
 			}
 		}
 
