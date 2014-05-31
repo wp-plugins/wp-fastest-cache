@@ -79,6 +79,16 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.1.9 =
+* to delete cachen when page is edited or published
+* warning of DONOTCACHEPAGE has been added
+* file_get_contents_curl() issue for the files which start with //
+* to combine the css files which has media="all" attribute
+* to fix re-write rule for sub-directory installation
+* [FEATURE] to prevent 304 browser caching to see new post
+* [FEATURE] wpfcNOT works for pages as well except the themes
+* the warning has been added for empty buffer
+
 = 0.8.1.8 =
 * to fix disable the plugin
 * to check permalinks was set or not
