@@ -37,14 +37,14 @@
 							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
 								$this->html = $tmpHtml;
 							}else{
-								$this->err = "inline css is too large. save it as a file and call in the html.".$value;
+								$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
 							}
 						}else{
 							$link = "<!-- <style>".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='all' />";
 							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
 								$this->html = $tmpHtml;
 							}else{
-								$this->err = "inline css is too large. save it as a file and call in the html.".$value;
+								$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
 							}
 							$countStyle[$value] = $countStyle[$value] - 1;
 						}
