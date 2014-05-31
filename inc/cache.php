@@ -89,16 +89,20 @@
 					require_once "css-utilities.php";
 					$css = new CssUtilities($this, $content);
 					$content = $css->minifyCss($this);
+					$this->err = $css->getError();
 				}
 
 				if(isset($this->options->wpFastestCacheCombineJs)){
 					$content = $this->combineJs($content, false);
 				}
-				$content = $this->minify($content);
-				
-				$this->createFolder($cachFilePath, $content);
 
-				return $this->err ? $buffer."<!-- ".$this->err." -->" : $buffer."<!-- need to refresh to see cached version -->";
+				if($this->err){
+					return $buffer."<!-- ".$this->err." -->";
+				}else{
+					$content = $this->minify($content);
+					$this->createFolder($cachFilePath, $content);
+					return $buffer."<!-- need to refresh to see cached version -->";
+				}
 			}
 		}
 

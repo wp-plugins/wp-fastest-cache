@@ -4,6 +4,7 @@
 		private $cssLinks = array();
 		private $cssLinksExcept = "";
 		private $url = "";
+		private $err = "";
 
 		public function __construct($wpfc, $html){
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
@@ -33,9 +34,18 @@
 					if($cssFiles = @scandir($cachFilePath, 1)){
 						if($countStyle[$value] == 1){
 							$link = "<!-- <style>".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='all' />";
-							$this->html = preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html);
+							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
+								$this->html = $tmpHtml;
+							}else{
+								$this->err = "inline css is too large. save it as a file and call in the html.".$value;
+							}
 						}else{
-							$this->html = preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", "", $this->html, 1);
+							$link = "<!-- <style>".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='all' />";
+							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
+								$this->html = $tmpHtml;
+							}else{
+								$this->err = "inline css is too large. save it as a file and call in the html.".$value;
+							}
 							$countStyle[$value] = $countStyle[$value] - 1;
 						}
 					}
@@ -269,6 +279,10 @@
 					}
 				}
 			}
+		}
+
+		public function getError(){
+			return $this->err;
 		}
 
 	    protected $_inHack = false;
