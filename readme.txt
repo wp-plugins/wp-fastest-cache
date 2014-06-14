@@ -63,8 +63,6 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 3. Permission of .htacces must 644
 4. Enable this plugin on option page
 
-== Frequently asked questions ==
-
 == Screenshots ==
 
 1. Main Page
@@ -73,9 +71,6 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 4. All cached files are deleted at the determinated time
 5. Block caching for post and pages (TinyMCE)
 6. Block caching for post and pages (Quicktags)
-7. You can minify your html
-8. You can minify the css files
-
 
 == Changelog ==
 
