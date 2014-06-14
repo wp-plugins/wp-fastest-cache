@@ -92,8 +92,31 @@
 		public function addCacheTimeout(){
 			if(isset($_POST["wpFastestCacheTimeOut"])){
 				if($_POST["wpFastestCacheTimeOut"]){
-					wp_clear_scheduled_hook($this->slug());
-					wp_schedule_event(time() + 120, $_POST["wpFastestCacheTimeOut"], $this->slug());
+					if(isset($_POST["wpFastestCacheTimeOutHour"]) && $_POST["wpFastestCacheTimeOutHour"] && is_numeric($_POST["wpFastestCacheTimeOutHour"])){
+						if(isset($_POST["wpFastestCacheTimeOutMinute"]) && $_POST["wpFastestCacheTimeOutMinute"] && is_numeric($_POST["wpFastestCacheTimeOutMinute"])){
+							$selected = mktime($_POST["wpFastestCacheTimeOutHour"], $_POST["wpFastestCacheTimeOutMinute"], 0, date("n"), date("j"), date("Y"));
+
+							if($selected > time()){
+								$timestamp = $selected;
+							}else{
+								if(time() - $selected < 60){
+									$timestamp = $selected + 60;
+								}else{
+									// if selected time is less than now, 24hours is added
+									$timestamp = $selected + 24*60*60;
+								}
+							}
+
+							wp_clear_scheduled_hook($this->slug());
+							wp_schedule_event($timestamp, $_POST["wpFastestCacheTimeOut"], $this->slug());
+						}else{
+							echo "Minute was not set";
+							exit;
+						}
+					}else{
+						echo "Hour was not set";
+						exit;
+					}
 				}else{
 					wp_clear_scheduled_hook($this->slug());
 				}
@@ -121,10 +144,11 @@
 		}
 
 		public function addJavaScript(){
-			wp_enqueue_script("language", plugins_url("wp-fastest-cache/js/language.js"), array(), time(), false);
-			wp_enqueue_script("info", plugins_url("wp-fastest-cache/js/info.js"), array(), time(), true);
+			wp_enqueue_script("wpfc-language", plugins_url("wp-fastest-cache/js/language.js"), array(), time(), false);
+			wp_enqueue_script("wpfc-info", plugins_url("wp-fastest-cache/js/info.js"), array(), time(), true);
+			wp_enqueue_script("wpfc-schedule", plugins_url("wp-fastest-cache/js/schedule.js"), array(), time(), true);
 			if(isset($this->options->wpFastestCacheLanguage) && $this->options->wpFastestCacheLanguage != "eng"){
-				wp_enqueue_script("dictionary", plugins_url("wp-fastest-cache/js/lang/".$this->options->wpFastestCacheLanguage.".js"), array(), time(), false);
+				wp_enqueue_script("wpfc-dictionary", plugins_url("wp-fastest-cache/js/lang/".$this->options->wpFastestCacheLanguage.".js"), array(), time(), false);
 			}
 		}
 
@@ -649,25 +673,47 @@
 				    </div>
 
 				    <div class="tab4">
-				    	<form method="post" name="wp_manager">
+				    	<form method="post" name="wp_manager" id="wpfc-schedule-panel">
 				    		<input type="hidden" value="cacheTimeout" name="wpFastestCachePage">
 				    		<div class="questionCon">
 				    			<label style="padding-left:11px;">All cached files are deleted at the determinated time.</label>
 				    		</div>
 				    		<div class="questionCon" style="text-align: center;padding-top: 10px;">
-									<select id="wpFastestCacheTimeOut" name="wpFastestCacheTimeOut">
-										<?php
-											$arrSettings = array(array("value" => "", "text" => "Choose One"),
-																array("value" => "hourly", "text" => "Once an hour"),
-																array("value" => "daily", "text" => "Once a day"),
-																array("value" => "twicedaily", "text" => "Twice a day"));
 
-											foreach ($arrSettings as $key => $value) {
-												$checked = $value["value"] == $wpFastestCacheTimeOut ? 'selected=""' : "";
-												echo "<option {$checked} value='{$value["value"]}'>{$value["text"]}</option>";
-											}
-										?>
-									</select> 
+				    			<select id="wpFastestCacheTimeOutHour" name="wpFastestCacheTimeOutHour">
+				    				<option selected="" value="">Hour</option>
+				    				<?php
+				    					for($i = 0; $i < 24; $i++){
+				    						echo "<option value='".$i."'>".$i."</option>";
+				    					}
+
+				    				?>
+				    			</select>
+
+				    			<select id="wpFastestCacheTimeOutMinute" name="wpFastestCacheTimeOutMinute">
+				    				<option selected="" value="">Minute</option>
+				    				<?php
+				    					for($i = 0; $i < 60; $i++){
+				    						echo "<option value='".$i."'>".$i."</option>";
+				    					}
+
+				    				?>
+				    			</select>
+
+
+								<select id="wpFastestCacheTimeOut" name="wpFastestCacheTimeOut">
+									<?php
+										$arrSettings = array(array("value" => "", "text" => "Choose One"),
+															array("value" => "hourly", "text" => "Once an hour"),
+															array("value" => "daily", "text" => "Once a day"),
+															array("value" => "twicedaily", "text" => "Twice a day"));
+
+										foreach ($arrSettings as $key => $value) {
+											//$checked = $value["value"] == $wpFastestCacheTimeOut ? 'selected=""' : "";
+											echo "<option value='{$value["value"]}'>{$value["text"]}</option>";
+										}
+									?>
+								</select> 
 							</div>
 							<?php if($wpFastestCacheTimeOut){ ?>
 								<div class="questionCon">
@@ -682,15 +728,7 @@
 												<tr>
 													<th scope="row" style="border-left:1px solid #DEDBD1;"><?php echo date("d-m-Y @ H:i", $this->cronJobSettings["time"]); ?></th>
 													<td style="border-right:1px solid #DEDBD1;"><?php echo $this->cronJobSettings["period"]; ?>
-														<label id="deleteCron" style="float:right;padding-right:5px;">[ x ]</label>
-														<script>
-															jQuery("#deleteCron").click(function(){
-																var selectPeriod = jQuery("#wpFastestCacheTimeOut");
-																selectPeriod.val("");
-																var submit = selectPeriod.closest("form").find('input[type="submit"]');
-																submit.click();
-															})
-														</script>
+														<label id="deleteCron">[ x ]</label>
 													</td>
 												</tr>
 											</tbody>
@@ -698,7 +736,7 @@
 					    		</div>
 				    		<?php } ?>
 				    		<div class="questionCon" style="text-align: center;padding-top: 10px;">
-				    			<strong><label>Server time</label>: <?php echo date("Y-m-d H:i:s"); ?></strong>
+				    			<strong><label>Server time</label>: <label id="wpfc-server-time"><?php echo date("Y-m-d H:i:s"); ?></label></strong>
 				    		</div>
 				    		<div class="questionCon qsubmit">
 				    			<div class="submit"><input type="submit" value="Submit" class="button-primary"></div>

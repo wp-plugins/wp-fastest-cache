@@ -211,3 +211,13 @@ h1.summary-rec {
     font-weight: bold;
     color: red;
 }
+
+#deleteCron{
+    float:right;
+    margin-right:5px;
+    padding: 3px;
+}
+
+#deleteCron:hover{
+    background-color:#FAEBD7;
+}
