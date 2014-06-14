@@ -631,7 +631,7 @@
 									  <option value="ru">Русский</option>
 									  <!-- <option value="ro">Română</option> -->
 									  <option value="tr">Türkçe</option>
-									  <option value="ukr">Українська</option>
+									  <!-- <option value="ukr">Українська</option> -->
 									</select> 
 								</div>
 							</div>
