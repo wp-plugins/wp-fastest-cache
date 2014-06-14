@@ -74,6 +74,11 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.2.0 =
+* warning of regular expression is too large has been added
+* [FEATURE] to be able to choose specific time
+* js and css merging is not beta anymore
+
 = 0.8.1.9 =
 * to delete cachen when page is edited or published
 * warning of DONOTCACHEPAGE has been added
