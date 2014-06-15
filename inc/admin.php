@@ -28,8 +28,13 @@
 				$wp_polls = new WpPollsForWpFc();
 				$wp_polls->hook();
 			}
-		}
 
+			if($this->isPluginActive('wp-postviews/wp-postviews.php')){
+				$wp_postviews_options = get_option("views_options");
+				$wp_postviews_options["use_ajax"] = true;
+				update_option("views_options", $wp_postviews_options);
+			}
+		}
 
 		public function addButtonOnEditor(){
 			add_action('admin_print_footer_scripts', array($this, 'addButtonOnQuicktagsEditor'));
@@ -237,8 +242,6 @@
 				return array("You have to set <strong><u><a href='".admin_url()."options-permalink.php"."'>permalinks</a></u></strong>", "error");
 			}else if($res = $this->checkSuperCache($path, $htaccess)){
 				return $res;
-			}else if($this->isPluginActive('wp-postviews/wp-postviews.php')){
-				return $this->warningIncompatible("WP-PostViews");
 			}else if($this->isPluginActive('adrotate/adrotate.php')){
 				return $this->warningIncompatible("AdRotate");
 			}else if($this->isPluginActive('mobilepress/mobilepress.php')){

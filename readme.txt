@@ -323,7 +323,7 @@ Yes, it is compatible with WPtouch Mobile Plugin %100.
 No, it is NOT compatible with AdRotate.
 
 = Is this plugin compatible with WP-PostViews? =
-No, it is NOT compatible with WP-PostViews.
+Yes, it is compatible with WP-PostViews.
 
 = Is this plugin compatible with MobilePress? =
 No, it is NOT compatible with MobilePress. We advise WPtouch Mobile.
