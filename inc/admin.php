@@ -550,11 +550,16 @@
 					<?php
 						$tabs = array(array("id"=>"wpfc-options","title"=>"Settings"),
 									  array("id"=>"wpfc-deleteCache","title"=>"Delete Cache"),
-									  array("id"=>"wpfc-deleteCssAndJsCache","title"=>"Delete Minified Css"),
 									  array("id"=>"wpfc-cacheTimeout","title"=>"Cache Timeout"));
 
 						foreach ($tabs as $key => $value){
 							$checked = "";
+
+							//tab of "delete css and js" has been removed so there is need to check it
+							if(isset($_POST["wpFastestCachePage"]) && $_POST["wpFastestCachePage"] && $_POST["wpFastestCachePage"] == "deleteCssAndJsCache"){
+								$_POST["wpFastestCachePage"] = "deleteCache";
+							}
+
 							if(!isset($_POST["wpFastestCachePage"]) && $value["id"] == "wpfc-options"){
 								$checked = ' checked="checked" ';
 							}else if((isset($_POST["wpFastestCachePage"])) && ("wpfc-".$_POST["wpFastestCachePage"] == $value["id"])){
@@ -653,13 +658,11 @@
 				    			</div>
 				    		</div>
 				    		<div class="questionCon qsubmit">
-				    			<div class="submit"><input type="submit" value="Delete Now" class="button-primary"></div>
+				    			<div class="submit"><input type="submit" value="Delete Cache" class="button-primary"></div>
 				    		</div>
 				   		</form>
-				    </div>
 
-				    <div class="tab3">
-				    	<form method="post" name="wp_manager">
+				   		<form method="post" name="wp_manager">
 				    		<input type="hidden" value="deleteCssAndJsCache" name="wpFastestCachePage">
 				    		<div class="questionCon">
 				    			<div style="padding-left:11px;">
@@ -670,12 +673,12 @@
 				    			</div>
 				    		</div>
 				    		<div class="questionCon qsubmit">
-				    			<div class="submit"><input type="submit" value="Delete Now" class="button-primary"></div>
+				    			<div class="submit"><input type="submit" value="Delete Cache and Minified CSS/JS" class="button-primary"></div>
 				    		</div>
 				   		</form>
 				    </div>
 
-				    <div class="tab4">
+				    <div class="tab3">
 				    	<form method="post" name="wp_manager" id="wpfc-schedule-panel">
 				    		<input type="hidden" value="cacheTimeout" name="wpFastestCachePage">
 				    		<div class="questionCon">
