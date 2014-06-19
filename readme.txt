@@ -280,6 +280,12 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 = How do I know my blog is being cached? =
 You need to refresh a page twice. If a page is cached, at the bottom of the page there is a text like "&lt;!-- WP Fastest Cache file was created in 0.330816984177 seconds, on 08-01-14 9:01:35 --&gt;".
 
+= Does it work with Nginx? =
+No, it does not work with Nginx.
+
+= Does it work with IIS (Windows Server) ? =
+No, it does not work with IIS.
+
 = What does ".htaccess not found" warning mean? =
 Wpfc does not create .htaccess automatically so you need to create empty one.
 
