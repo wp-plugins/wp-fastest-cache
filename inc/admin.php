@@ -236,6 +236,10 @@
 
 			$htaccess = file_get_contents($path.".htaccess");
 
+			if(isset($_SERVER["SERVER_SOFTWARE"]) && $_SERVER["SERVER_SOFTWARE"] && preg_match("/iis/i", $_SERVER["SERVER_SOFTWARE"])){
+				return array("The plugin does not work with Microsoft IIS only with Apache", "error");
+			}
+
 			if(defined('DONOTCACHEPAGE')){
 				return array("DONOTCACHEPAGE <label>constant is defined as TRUE. It must be FALSE</label>", "error");
 			}else if(!get_option('permalink_structure')){
