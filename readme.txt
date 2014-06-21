@@ -52,7 +52,6 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Português
 * Русский
 * Türkçe
-* Українська
 
 <img src="http://www.alastyr.com/sss/wp-content/uploads/2012/11/alastyrlogo.png" />
 
