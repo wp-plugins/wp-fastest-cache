@@ -3,7 +3,6 @@ Contributors: emrevona
 Donate link: http://profiles.wordpress.org/emrevona/
 Tags: cache, caching, performance, wp-cache, optimize
 
-
 Requires at least: 3.3
 Tested up to: 3.9
 Stable tag: 4.3
