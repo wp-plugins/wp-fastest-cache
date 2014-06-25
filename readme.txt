@@ -83,7 +83,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 = 0.8.2.0 =
 * warning of regular expression is too large has been added
-* [FEATURE] to be able to choose specific time
+* <strong>[FEATURE]</strong> to be able to choose specific time
 * js and css merging is not beta anymore
 
 = 0.8.1.9 =
@@ -92,8 +92,8 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * file_get_contents_curl() issue for the files which start with //
 * to combine the css files which has media="all" attribute
 * to fix re-write rule for sub-directory installation
-* [FEATURE] to prevent 304 browser caching to see new post
-* [FEATURE] wpfcNOT works for pages as well except the themes
+* <strong>[FEATURE]</strong> to prevent 304 browser caching to see new post
+* <strong>[FEATURE]</strong> wpfcNOT works for pages as well except the themes
 * the warning has been added for empty buffer
 
 = 0.8.1.8 =
