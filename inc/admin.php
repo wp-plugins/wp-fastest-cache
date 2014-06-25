@@ -240,7 +240,9 @@
 				return array("The plugin does not work with Microsoft IIS only with Apache", "error");
 			}
 
-			if(defined('DONOTCACHEPAGE')){
+			if(is_multisite()){
+				return array("The plugin does not work with Multisite", "error");
+			}else if(defined('DONOTCACHEPAGE')){
 				return array("DONOTCACHEPAGE <label>constant is defined as TRUE. It must be FALSE</label>", "error");
 			}else if(!get_option('permalink_structure')){
 				return array("You have to set <strong><u><a href='".admin_url()."options-permalink.php"."'>permalinks</a></u></strong>", "error");
