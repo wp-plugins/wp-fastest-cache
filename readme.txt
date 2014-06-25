@@ -73,6 +73,14 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.2.1 =
+* to support WP-PostViews
+* tab of minified css and js has been removed
+* warning about Microsoft IIS has been added
+* to prevent minify and combine css if returns 404
+* to prevent combine js if returns 404
+* warning about Multisite has been added
+
 = 0.8.2.0 =
 * warning of regular expression is too large has been added
 * [FEATURE] to be able to choose specific time
