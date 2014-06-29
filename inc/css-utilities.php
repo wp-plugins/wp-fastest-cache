@@ -193,10 +193,15 @@
 			return false;
 		}
 
-		public function minifyCss($wpfc){
+		public function minifyCss($wpfc, $exceptMediaAll){
 			if(count($this->getCssLinks()) > 0){
 				foreach ($this->getCssLinks() as $key => $value) {
 					if($href = $this->checkInternal($value)){
+
+						if($exceptMediaAll && preg_match("/media=[\'\"]all[\'\"]/", $value)){
+							continue;
+						}
+
 						$minifiedCss = $this->minify($href);
 
 						if($minifiedCss){
