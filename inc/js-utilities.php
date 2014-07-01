@@ -97,7 +97,7 @@
 			$data = curl_exec($ch);
 			curl_close($ch);
 		 
-			if(preg_match("/<[^>]*html[^>]*>/", $data)){
+			if(preg_match("/<\/\s*html\s*>\s*$/i", $data)){
 				return false;
 			}else{
 				return $data;	
