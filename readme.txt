@@ -336,7 +336,7 @@ Yes, it is compatible with WPtouch Mobile Plugin %100.
 No, it is NOT compatible with AdRotate.
 
 = Is this plugin compatible with WP-PostViews? =
-Yes, it is compatible with WP-PostViews.
+Yes, it is compatible with WP-PostViews. The current post views appear on the admin panel. The visitors cannot see the current post views. The developer of WP-PostViews needs to fix this issue.
 
 = Is this plugin compatible with MobilePress? =
 No, it is NOT compatible with MobilePress. We advise WPtouch Mobile.
