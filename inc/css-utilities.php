@@ -80,6 +80,11 @@
 		}
 
 		public function file_get_contents_curl($url) {
+
+			if(preg_match("/^\/[^\/]/", $url)){
+				$url = home_url().$url;
+			}
+
 			$url = preg_replace("/^\/\//", "http://", $url);
 			
 			$ch = curl_init();
@@ -186,6 +191,11 @@
 		public function checkInternal($link){
 			$httpHost = str_replace("www.", "", $_SERVER["HTTP_HOST"]); 
 			if(preg_match("/href=[\"\'](.*?)[\"\']/", $link, $href)){
+
+				if(preg_match("/^\/[^\/]/", $href[1])){
+					return $href[1];
+				}
+
 				if(@strpos($href[1], $httpHost)){
 					return $href[1];
 				}
@@ -212,7 +222,11 @@
 
 							if($cssFiles = @scandir($minifiedCss["cachFilePath"], 1)){
 								$prefixLink = str_replace(array("http:", "https:"), "", $minifiedCss["url"]);
-								$this->html = str_replace($href, $prefixLink."/".$cssFiles[0], $this->html);	
+								
+								//$this->html = str_replace($href, $prefixLink."/".$cssFiles[0], $this->html);
+
+								$newLink = str_replace($href, $prefixLink."/".$cssFiles[0], $value);
+								$this->html = $wpfc->replaceLink($value, $newLink, $this->html);
 							}
 						}
 					}
