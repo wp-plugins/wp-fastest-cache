@@ -28,12 +28,6 @@
 				$wp_polls = new WpPollsForWpFc();
 				$wp_polls->hook();
 			}
-
-			if($this->isPluginActive('wp-postviews/wp-postviews.php')){
-				$wp_postviews_options = get_option("views_options");
-				$wp_postviews_options["use_ajax"] = true;
-				update_option("views_options", $wp_postviews_options);
-			}
 		}
 
 		public function addButtonOnEditor(){
@@ -238,6 +232,24 @@
 
 			if(isset($_SERVER["SERVER_SOFTWARE"]) && $_SERVER["SERVER_SOFTWARE"] && preg_match("/iis/i", $_SERVER["SERVER_SOFTWARE"])){
 				return array("The plugin does not work with Microsoft IIS only with Apache", "error");
+			}
+
+			if($this->isPluginActive('wp-postviews/wp-postviews.php')){
+				$wp_postviews_options = get_option("views_options");
+				$wp_postviews_options["use_ajax"] = true;
+				update_option("views_options", $wp_postviews_options);
+
+				if(!WP_CACHE){
+					if($wp_config = @file_get_contents(ABSPATH."wp-config.php")){
+						$wp_config = str_replace("\$table_prefix", "define('WP_CACHE', true);\n\$table_prefix", $wp_config);
+
+						if(!@file_put_contents(ABSPATH."wp-config.php", $wp_config)){
+							return array("define('WP_CACHE', true); is needed to be added into wp-config.php", "error");
+						}
+					}else{
+						return array("define('WP_CACHE', true); is needed to be added into wp-config.php", "error");
+					}
+				}
 			}
 
 			if(is_multisite()){
