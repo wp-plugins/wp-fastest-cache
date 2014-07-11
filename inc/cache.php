@@ -90,7 +90,7 @@
 				}else if(isset($this->options->wpFastestCacheMinifyCss)){
 					require_once "css-utilities.php";
 					$css = new CssUtilities($this, $content);
-					$content = $css->minifyCss($this);
+					$content = $css->minifyCss($this, false);
 					$this->err = $css->getError();
 				}
 
