@@ -66,10 +66,9 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 1. Main Page
 2. Delete All File Page
-3. Delete Minified Css and Js Files
-4. All cached files are deleted at the determinated time
-5. Block caching for post and pages (TinyMCE)
-6. Block caching for post and pages (Quicktags)
+3. All cached files are deleted at the determinated time
+4. Block caching for post and pages (TinyMCE)
+5. Block caching for post and pages (Quicktags)
 
 == Changelog ==
 
