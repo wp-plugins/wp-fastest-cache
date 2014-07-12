@@ -72,6 +72,13 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.2.2 =
+* to minify css files which are NOT "media='all'"
+* to support selecting the css files which do not include home_url()
+* to insert define('WP_CACHE', true) into wp-config.php for wp-postviews
+* to fix PHP Warning: Missing argument 2 for CssUtilities::minifyCss()
+* to fix PHP Warning: scandir warning
+
 = 0.8.2.1 =
 * to support WP-PostViews
 * tab of minified css and js has been removed
