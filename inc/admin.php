@@ -91,8 +91,8 @@
 		public function addCacheTimeout(){
 			if(isset($_POST["wpFastestCacheTimeOut"])){
 				if($_POST["wpFastestCacheTimeOut"]){
-					if(isset($_POST["wpFastestCacheTimeOutHour"]) && $_POST["wpFastestCacheTimeOutHour"] && is_numeric($_POST["wpFastestCacheTimeOutHour"])){
-						if(isset($_POST["wpFastestCacheTimeOutMinute"]) && $_POST["wpFastestCacheTimeOutMinute"] && is_numeric($_POST["wpFastestCacheTimeOutMinute"])){
+					if(isset($_POST["wpFastestCacheTimeOutHour"]) && is_numeric($_POST["wpFastestCacheTimeOutHour"])){
+						if(isset($_POST["wpFastestCacheTimeOutMinute"]) && is_numeric($_POST["wpFastestCacheTimeOutMinute"])){
 							$selected = mktime($_POST["wpFastestCacheTimeOutHour"], $_POST["wpFastestCacheTimeOutMinute"], 0, date("n"), date("j"), date("Y"));
 
 							if($selected > time()){
