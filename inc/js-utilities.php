@@ -6,7 +6,8 @@
 		private $url = "";
 
 		public function __construct($html){
-			$this->html = preg_replace("/\s+/", " ", ((string) $html));
+			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
+			$this->html = $html;
 			$this->setJsLinks();
 			$this->setJsLinksExcept();
 		}
@@ -83,6 +84,33 @@
 			}
 
 			return $content;
+		}
+
+
+		public function mergeJs($prev, $wpfc){
+			if(count($prev["value"]) > 0){
+				$name = "";
+				foreach ($prev["value"] as $prevKey => $prevValue) {
+					if($prevKey == count($prev["value"]) - 1){
+						$name = md5($name);
+						$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".$name;
+
+						if(!is_dir($cachFilePath)){
+							$wpfc->createFolder($cachFilePath, $prev["content"], "js", time());
+						}
+
+						if($jsFiles = @scandir($cachFilePath, 1)){
+							$prefixLink = str_replace(array("http:", "https:"), "", content_url());
+							$newLink = "<script src='".$prefixLink."/cache/wpfc-minified/".$name."/".$jsFiles[0]."' type=\"text/javascript\"></script>";
+							$this->html = $this->replaceLink($prevValue, "<!-- ".$prevValue." -->"."\n".$newLink, $this->html);
+						}
+					}else{
+						$name .= $prevValue;
+						$this->html = $this->replaceLink($prevValue, "<!-- ".$prevValue." -->", $this->html);
+					}
+				}
+			}
+			return $this->html;
 		}
 
 		public function file_get_contents_curl($url) {

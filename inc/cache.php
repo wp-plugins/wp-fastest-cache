@@ -219,41 +219,15 @@
 									}
 								}
 							}else{
-								$content = $this->mergeJs($prev, $content, $js);
+								$content = $js->mergeJs($prev, $this);
 								$prev = array("content" => "", "value" => array());
 							}
 						}else{
-							$content = $this->mergeJs($prev, $content, $js);
+							$content = $js->mergeJs($prev, $this);
 							$prev = array("content" => "", "value" => array());
 						}
 					}
-					$content = $this->mergeJs($prev, $content, $js);
-				}
-			}
-			return $content;
-		}
-
-		public function mergeJs($prev, $content, $js){
-			if(count($prev["value"]) > 0){
-				$name = "";
-				foreach ($prev["value"] as $prevKey => $prevValue) {
-					if($prevKey == count($prev["value"]) - 1){
-						$name = md5($name);
-						$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".$name;
-
-						if(!is_dir($cachFilePath)){
-							$this->createFolder($cachFilePath, $prev["content"], "js", time());
-						}
-
-						if($jsFiles = @scandir($cachFilePath, 1)){
-							$prefixLink = str_replace(array("http:", "https:"), "", content_url());
-							$newLink = "<script src='".$prefixLink."/cache/wpfc-minified/".$name."/".$jsFiles[0]."' type=\"text/javascript\"></script>";
-							$content = $js->replaceLink($prevValue, "<!-- ".$prevValue." -->"."\n".$newLink, $content);
-						}
-					}else{
-						$name .= $prevValue;
-						$content = $js->replaceLink($prevValue, "<!-- ".$prevValue." -->", $content);
-					}
+					$content = $js->mergeJs($prev, $this);
 				}
 			}
 			return $content;
