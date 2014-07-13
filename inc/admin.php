@@ -760,7 +760,7 @@
 					    		</div>
 				    		<?php } ?>
 				    		<div class="questionCon" style="text-align: center;padding-top: 10px;">
-				    			<strong><label>Server time</label>: <label id="wpfc-server-time"><?php echo date("Y-m-d H:i:s"); ?></label></strong>
+				    			<strong><label>Server time</label>: <label id="wpfc-server-time"><?php echo date("Y/m/d H:i:s"); ?></label></strong>
 				    		</div>
 				    		<div class="questionCon qsubmit">
 				    			<div class="submit"><input type="submit" value="Submit" class="button-primary"></div>
