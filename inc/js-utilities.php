@@ -63,6 +63,11 @@
 		public function checkInternal($link){
 			$httpHost = str_replace("www.", "", $_SERVER["HTTP_HOST"]); 
 			if(preg_match("/src=[\"\'](.*?)[\"\']/", $link, $src)){
+
+				if(preg_match("/^\/[^\/]/", $src[1])){
+					return $src[1];
+				}
+
 				if(@strpos($src[1], $httpHost)){
 					return $src[1];
 				}
@@ -114,6 +119,11 @@
 		}
 
 		public function file_get_contents_curl($url) {
+
+			if(preg_match("/^\/[^\/]/", $url)){
+				$url = home_url().$url;
+			}
+
 			$url = preg_replace("/^\/\//", "http://", $url);
 			
 			$ch = curl_init();
