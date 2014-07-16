@@ -83,6 +83,7 @@
 					$content = $css->combineCss($this, true);
 					//to minify css files which are NOT "media='all'"
 					$content = $css->minifyCss($this, true);
+					$this->err = $css->getError();
 				}else if(isset($this->options->wpFastestCacheCombineCss)){
 					require_once "css-utilities.php";
 					$css = new CssUtilities($this, $content);
