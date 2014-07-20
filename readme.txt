@@ -72,6 +72,14 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.2.3 =
+* to support setting hour and minute as a 0
+* to fix server time NaN
+* to check the length of inline css for combine css
+* to support selecting the css files which do not include home_url()
+* to support selecting the js files which do not include home_url()
+* publish_page to save_post
+
 = 0.8.2.2 =
 * to minify css files which are NOT "media='all'"
 * to support selecting the css files which do not include home_url()
