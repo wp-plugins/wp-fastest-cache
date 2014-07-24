@@ -1,7 +1,7 @@
 === WP Fastest Cache ===
 Contributors: emrevona
 Donate link: http://profiles.wordpress.org/emrevona/
-Tags: cache, caching, performance, wp-cache, optimize
+Tags: cache, caching, performance, wp-cache, optimize, minify
 
 Requires at least: 3.3
 Tested up to: 3.9
