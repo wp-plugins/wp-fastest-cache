@@ -458,6 +458,7 @@
 			if(ABSPATH == "//"){
 				$data = $data."RewriteCond %{DOCUMENT_ROOT}/wp-content/cache/all/$1/index.html -f"."\n";
 			}else{
+				$data = $data."RewriteCond %{DOCUMENT_ROOT}/wp-content/cache/all/$1/index.html -f [or]"."\n";
 				$data = $data."RewriteCond ".ABSPATH."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n";
 			}
 
