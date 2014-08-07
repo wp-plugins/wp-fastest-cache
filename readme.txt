@@ -72,11 +72,6 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
-= 0.8.2.4 =
-* rewrite rule issue has been solved
-* to remove empty chars from url()
-* to add media type for inline css after minify
-
 = 0.8.2.3 =
 * to support setting hour and minute as a 0
 * to fix server time NaN
