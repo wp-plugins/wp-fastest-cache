@@ -315,6 +315,9 @@
 	        $css = preg_replace_callback('@\\s*/\\*([\\s\\S]*?)\\*/\\s*@'
 	            ,array($this, '_commentCB'), $css);
 
+	        //to remove empty chars from url()
+			$css = preg_replace("/url\((\s+)([^\)]+)(\s+)\)/", "url($2)", $css);
+
 	        return trim($css);
 	    }
 	    
