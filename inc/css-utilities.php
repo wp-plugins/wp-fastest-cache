@@ -16,15 +16,20 @@
 
 		public function inlineToLink($wpfc){
 			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
-			preg_match_all("/<style[^><]*>([^<]+)<\/style>/is",$head[1],$out);
+			preg_match_all("/<style([^><]*)>([^<]+)<\/style>/is",$head[1],$out);
 
 			if(count($out) > 0){
 
-				$countStyle = array_count_values($out[1]);
+				$countStyle = array_count_values($out[2]);
 
-				foreach ($out[1] as $key => $value) {
+				$i = 0;
+
+				foreach ($out[2] as $key => $value) {
 					$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($value);
 					$cssLink = content_url()."/cache/wpfc-minified/".md5($value);
+
+					preg_match("/media=[\"\']([^\"\']+)[\"\']/", $out[1][$i], $tmpMedia);
+					$media = (isset($tmpMedia[1]) && $tmpMedia[1]) ? $tmpMedia[1] : "all";
 
 					if(!is_dir($cachFilePath)){
 						$prefix = time();
@@ -33,14 +38,14 @@
 
 					if($cssFiles = @scandir($cachFilePath, 1)){
 						if($countStyle[$value] == 1){
-							$link = "<!-- <style>".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='all' />";
+							$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
 							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
 								$this->html = $tmpHtml;
 							}else{
 								$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
 							}
 						}else{
-							$link = "<!-- <style>".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='all' />";
+							$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
 							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
 								$this->html = $tmpHtml;
 							}else{
@@ -49,6 +54,8 @@
 							$countStyle[$value] = $countStyle[$value] - 1;
 						}
 					}
+
+					$i++;
 
 				}
 			}
