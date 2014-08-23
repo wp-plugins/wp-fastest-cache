@@ -40,14 +40,18 @@
 						if($countStyle[$value] == 1){
 							$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
 							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
-								$this->html = $tmpHtml;
+								if($this->_process($value)){
+									$this->html = $tmpHtml;
+								}
 							}else{
 								$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
 							}
 						}else{
 							$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
 							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
-								$this->html = $tmpHtml;
+								if($this->_process($value)){
+									$this->html = $tmpHtml;
+								}
 							}else{
 								$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
 							}
