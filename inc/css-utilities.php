@@ -24,6 +24,8 @@
 
 				$i = 0;
 
+				$out[2] = array_unique($out[2]);
+
 				foreach ($out[2] as $key => $value) {
 					$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($value);
 					$cssLink = content_url()."/cache/wpfc-minified/".md5($value);
@@ -178,7 +180,7 @@
 		public function setCssLinks(){
 			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
 			preg_match_all("/<link[^<>]*rel=[\"\']stylesheet[\"\'][^<>]*>/", $head[1], $this->cssLinks);
-			$this->cssLinks = $this->cssLinks[0];
+			$this->cssLinks = array_unique($this->cssLinks[0]);
 		}
 
 		public function setCssLinksExcept(){
