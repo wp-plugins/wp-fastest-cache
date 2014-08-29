@@ -27,6 +27,7 @@ GNU General Public License for more details.
 		public function __construct(){
 			$this->options = $this->getOptions();
 			$this->detectNewPost();
+			$this->commentHooks();
 
 			$this->checkCronTime();
 
@@ -97,9 +98,20 @@ GNU General Public License for more details.
 		protected function detectNewPost(){
 			if(isset($this->options->wpFastestCacheNewPost) && isset($this->options->wpFastestCacheStatus)){
 				add_filter ('save_post', array($this, 'deleteCache'));
-				//add_filter ('publish_page', array($this, 'deleteCache'));
-				//add_filter ('delete_post', array($this, 'deleteCache'));
-				add_filter ('wp_set_comment_status', array($this, 'singleDeleteCache'));
+			}
+		}
+
+		protected function commentHooks(){
+			//it works when the status of a comment changes
+			add_filter ('wp_set_comment_status', array($this, 'singleDeleteCache'));
+
+			//it works when a comment is saved in the database
+			add_filter ('comment_post', array($this, 'detectNewComment'));
+		}
+
+		public function detectNewComment($comment_id){
+			if(current_user_can( 'manage_options') || !get_option('comment_moderation')){
+				$this->singleDeleteCache($comment_id);
 			}
 		}
 
