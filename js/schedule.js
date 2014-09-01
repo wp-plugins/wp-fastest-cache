@@ -24,6 +24,14 @@ var WpfcSchedule = {
 			if(e.attr("value")){
 				e.css("background-color", "");
 			}
+
+			if(e.attr("id") == "wpFastestCacheTimeOut"){
+				if(e.val() == "hourly"){
+					jQuery("#wpFastestCacheTimeOutHour, #wpFastestCacheTimeOutMinute").prop('disabled', true);
+				}else{
+					jQuery("#wpFastestCacheTimeOutHour, #wpFastestCacheTimeOutMinute").prop('disabled', false);
+				}
+			}
 		});
 	},
 	setServerTime: function(){
