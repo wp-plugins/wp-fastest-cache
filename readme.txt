@@ -73,7 +73,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 == Changelog ==
 
 = 0.8.2.5 =
-* to prevent converting style rules to link
+* to prevent converting style rules to link more than once
 * to clear cache after admin writes a comment
 * to clear cache if comment has not ben manually approved 
 * to disable minute and hour when hourly is selected
