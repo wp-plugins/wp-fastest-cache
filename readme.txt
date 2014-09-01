@@ -72,6 +72,13 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.2.5 =
+* to prevent converting style rules to link
+* to clear cache after admin writes a comment
+* to clear cache if comment has not ben manually approved 
+* to disable minute and hour when hourly is selected
+* to show both time when twice daily is selected on cache timeout panel
+
 = 0.8.2.4 =
 * rewrite rule issue has been solved
 * to remove empty chars from url()
