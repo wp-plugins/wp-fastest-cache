@@ -761,7 +761,7 @@
 														<th scope="row" style="border-left:1px solid #DEDBD1;"><?php echo date("d-m-Y @ H:i", $this->cronJobSettings["time"] + 12*60*60); ?></th>
 														<td style="border-right:1px solid #DEDBD1;"><?php echo $this->cronJobSettings["period"]; ?></td>
 													</tr>
-												<? } ?>
+												<?php } ?>
 											</tbody>
 									</table>
 					    		</div>
