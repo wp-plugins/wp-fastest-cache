@@ -17,26 +17,35 @@
 		public function wpfc_wp_polls() { ?>
 			<script type="text/javascript">
 				jQuery(document).ready(function(){
-					var poll = jQuery('div[id^=\"polls-\"][id$=\"-loading\"]');
-					if(poll.length > 0){
-						poll_id = poll.attr('id').match(/\d+/)[0];
-						poll_nonce = jQuery('#poll_' + poll_id + '_nonce').val();
+					var wpfcWpfcAjaxCall = function(polls){
+						if(polls.length > 0){
+							poll_id = polls.last().attr('id').match(/\d+/)[0];
+							poll_nonce = jQuery('#poll_' + poll_id + '_nonce').val();
 
-						jQuery.ajax({
-							type: 'POST', 
-							url: pollsL10n.ajax_url,
-							dataType : "json",
-							data : {"action": "wpfc_wppolls_ajax_request", "poll_id": poll_id},
-							cache: false, 
-							success: function(data){
-								if(data === true){
-									poll_result(poll_id);
-								}else if(data === false){
-									poll_booth(poll_id);
+							jQuery.ajax({
+								type: 'POST', 
+								url: pollsL10n.ajax_url,
+								dataType : "json",
+								data : {"action": "wpfc_wppolls_ajax_request", "poll_id": poll_id},
+								cache: false, 
+								success: function(data){
+									if(data === true){
+										poll_result(poll_id);
+									}else if(data === false){
+										poll_booth(poll_id);
+									}
+									polls.length = polls.length - 1;
+
+									setTimeout(function(){
+										wpfcWpfcAjaxCall(polls);
+									}, 1000);
 								}
-							}
-						});
-					}
+							});
+						}
+					};
+
+					var polls = jQuery('div[id^=\"polls-\"][id$=\"-loading\"]');
+					wpfcWpfcAjaxCall(polls);
 				});
 			</script><?php
 		}
