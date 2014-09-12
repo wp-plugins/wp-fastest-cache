@@ -228,7 +228,9 @@
 				$path = $this->getABSPATH();
 			}
 
-			$htaccess = file_get_contents($path.".htaccess");
+			if(!is_file($path.".htaccess")){
+				return array(".htaccess was not found", "error");
+			}
 
 			if(isset($_SERVER["SERVER_SOFTWARE"]) && $_SERVER["SERVER_SOFTWARE"] && preg_match("/iis/i", $_SERVER["SERVER_SOFTWARE"])){
 				return array("The plugin does not work with Microsoft IIS only with Apache", "error");
@@ -252,6 +254,8 @@
 				}
 			}
 
+			$htaccess = file_get_contents($path.".htaccess");
+
 			if(is_multisite()){
 				return array("The plugin does not work with Multisite", "error");
 			}else if(defined('DONOTCACHEPAGE')){
@@ -268,8 +272,6 @@
 				return array("Better WordPress Minify needs to be deactive<br>This plugin has aldready Minify feature", "error");
 			}else if($this->isPluginActive('gzippy/gzippy.php')){
 				return array("GZippy needs to be deactive<br>This plugin has aldready Gzip feature", "error");
-			}else if(!is_file($path.".htaccess")){
-				return array(".htaccess was not found", "error");
 			}else if(is_writable($path.".htaccess")){
 				$htaccess = $this->insertLBCRule($htaccess, $post);
 				$htaccess = $this->insertGzipRule($htaccess, $post);
