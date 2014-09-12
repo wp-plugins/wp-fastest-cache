@@ -39,7 +39,7 @@
 		}
 
 		public function ignored(){
-			if(preg_match("/\/(wp\-login\.php|robots\.txt|wp\-cron\.php|wp\-content|wp\-admin|wp\-includes)/", $_SERVER["REQUEST_URI"])){
+			if(preg_match("/\/(sitemap\.xml|wp\-login\.php|robots\.txt|wp\-cron\.php|wp\-content|wp\-admin|wp\-includes)/", $_SERVER["REQUEST_URI"])){
 				return true;
 			}
 
