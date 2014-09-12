@@ -39,13 +39,10 @@
 		}
 
 		public function ignored(){
-			$ignored = array("robots.txt", "wp-login.php", "wp-cron.php", "wp-content", "wp-admin", "wp-includes");
-			foreach ($ignored as $key => $value) {
-				if (strpos($_SERVER["REQUEST_URI"], $value) === false) {
-				}else{
-					return true;
-				}
+			if(preg_match("/\/(wp\-login\.php|robots\.txt|wp\-cron\.php|wp\-content|wp\-admin|wp\-includes)/", $_SERVER["REQUEST_URI"])){
+				return true;
 			}
+
 			return false;
 		}
 
