@@ -228,6 +228,10 @@
 					$content = $js->mergeJs($prev, $this);
 				}
 			}
+
+			$content = preg_replace("/(<!-- )+/","<!-- ", $content);
+			$content = preg_replace("/( -->)+/"," -->", $content);
+
 			return $content;
 		}
 
