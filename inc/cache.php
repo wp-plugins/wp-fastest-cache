@@ -194,7 +194,7 @@
 			$minify = true;
 			if(isset($this->options->wpFastestCacheCombineJs)){
 				require_once "js-utilities.php";
-				$js = new JsUtilities($content);
+				$js = new JsUtilities($this, $content);
 
 				if(count($js->getJsLinks()) > 0){
 					$prev = array("content" => "", "value" => array());

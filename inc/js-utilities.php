@@ -5,11 +5,56 @@
 		private $jsLinksExcept = "";
 		private $url = "";
 
-		public function __construct($html){
+		public function __construct($wpfc, $html){
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
 			$this->html = $html;
+			$this->inlineToScript($wpfc);
 			$this->setJsLinks();
 			$this->setJsLinksExcept();
+		}
+
+		public function inlineToScript($wpfc){
+			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
+			preg_match_all("/<script([^\>]*)>((?:(?!<\/script).)+)<\/script\s*>/is",$head[1],$out);
+
+			if(count($out) > 0){
+				$countStyle = array_count_values($out[2]);
+
+				$i = 0;
+
+				$out[2] = array_unique($out[2]);
+
+				foreach ($out[2] as $key => $value) {
+					$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($value);
+					$jsScript = content_url()."/cache/wpfc-minified/".md5($value);
+
+					if(!is_dir($cachFilePath)){
+						$prefix = time();
+						$wpfc->createFolder($cachFilePath, $value, "js", $prefix);
+					}
+
+					if($jsFiles = @scandir($cachFilePath, 1)){
+						if($countStyle[$value] == 1){
+							$script = "<!-- <script".$out[1][$i].">".$value."</script> -->"."\n"."<script type='text/javascript' src='".$jsScript."/".$jsFiles[0]."'></script>";
+							if($tmpHtml = @preg_replace("/<script[^<>]*>".preg_quote($value, "/")."<\/script\s*>/", $script, $this->html)){
+								$this->html = $tmpHtml;
+							}else{
+								$this->err = "inline js is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
+							}
+						}else{
+							$script = "<!-- <script".$out[1][$i].">".$value."</script> -->"."\n"."<script type='text/javascript' src='".$jsScript."/".$jsFiles[0]."'></script>";
+							if($tmpHtml = @preg_replace("/<script[^<>]*>".preg_quote($value, "/")."<\/script\s*>/", $script, $this->html)){
+								$this->html = $tmpHtml;
+							}else{
+								$this->err = "inline js is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
+							}
+							$countStyle[$value] = $countStyle[$value] - 1;
+						}
+					}
+
+					$i++;
+				}
+			}
 		}
 
 		public function setJsLinks(){
