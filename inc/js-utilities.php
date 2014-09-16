@@ -92,7 +92,7 @@
 			if(is_dir($cachFilePath)){
 				return array("cachFilePath" => $cachFilePath, "jsContent" => "", "url" => $jsLink);
 			}else{
-				if($js = $this->file_get_contents_curl($url."?v=".time())){
+				if($js = $this->file_get_contents_curl($url)){
 					if($minify){
 						$js = preg_replace("/^\s+/m", "", ((string) $js));
 					}
@@ -164,6 +164,10 @@
 		}
 
 		public function file_get_contents_curl($url) {
+
+			if(!preg_match("/\.php$/", $url)){
+				$url = $url."?v=".time();
+			}
 
 			if(preg_match("/^\/[^\/]/", $url)){
 				$url = home_url().$url;
