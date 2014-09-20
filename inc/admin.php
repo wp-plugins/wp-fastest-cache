@@ -670,31 +670,31 @@
 						</form>
 				    </div>
 				    <div class="tab2">
-				    	<form method="post" name="wp_manager">
+				    	<form method="post" name="wp_manager" class="delete-line">
 				    		<input type="hidden" value="deleteCache" name="wpFastestCachePage">
-				    		<div class="questionCon">
+				    		<div class="questionCon qsubmit left">
+				    			<div class="submit"><input type="submit" value="Delete Cache" class="button-primary"></div>
+				    		</div>
+				    		<div class="questionCon right">
 				    			<div style="padding-left:11px;">
 				    			<label>You can delete all cache files</label><br>
 				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/all</b>
 				    			</div>
 				    		</div>
-				    		<div class="questionCon qsubmit">
-				    			<div class="submit"><input type="submit" value="Delete Cache" class="button-primary"></div>
-				    		</div>
 				   		</form>
 
-				   		<form method="post" name="wp_manager">
+				   		<form method="post" name="wp_manager" class="delete-line">
 				    		<input type="hidden" value="deleteCssAndJsCache" name="wpFastestCachePage">
-				    		<div class="questionCon">
+				    		<div class="questionCon qsubmit left">
+				    			<div class="submit"><input type="button" value="Delete Cache and Minified CSS/JS" class="button-primary"></div>
+				    		</div>
+				    		<div class="questionCon right">
 				    			<div style="padding-left:11px;">
 				    			<label>If you modify any css file, you have to delete minified css files</label><br>
 				    			<label>All cache files will be removed as well</label><br>
 				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/wpfc-minified</b><br>
 				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/all</b>
 				    			</div>
-				    		</div>
-				    		<div class="questionCon qsubmit">
-				    			<div class="submit"><input type="submit" value="Delete Cache and Minified CSS/JS" class="button-primary"></div>
 				    		</div>
 				   		</form>
 				    </div>

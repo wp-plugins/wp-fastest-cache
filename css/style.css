@@ -221,3 +221,27 @@ h1.summary-rec {
 #deleteCron:hover{
     background-color:#FAEBD7;
 }
+form.delete-line{
+    height: 100px;
+    width: 100%;
+    float: left;
+}
+form.delete-line .left{
+    width: 25%;
+    float: left;
+}
+form.delete-line .right{
+    width: 75%;
+    float: left;
+}
+
+form.delete-line .left .submit{
+    padding-top: 0;
+    float: left;
+    padding-left: 20px;
+}
+form.delete-line .left .submit input{
+    height: 65px;
+    width: 165px;
+    white-space: pre-line !important;
+}
