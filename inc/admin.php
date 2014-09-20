@@ -686,7 +686,7 @@
 				   		<form method="post" name="wp_manager" class="delete-line">
 				    		<input type="hidden" value="deleteCssAndJsCache" name="wpFastestCachePage">
 				    		<div class="questionCon qsubmit left">
-				    			<div class="submit"><input type="button" value="Delete Cache and Minified CSS/JS" class="button-primary"></div>
+				    			<div class="submit"><input type="submit" value="Delete Cache and Minified CSS/JS" class="button-primary"></div>
 				    		</div>
 				    		<div class="questionCon right">
 				    			<div style="padding-left:11px;">
