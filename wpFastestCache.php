@@ -197,7 +197,8 @@ GNU General Public License for more details.
 		}
 
 		protected function rm_folder_recursively($dir, $i = 1) {
-		    foreach(@scandir($dir) as $file) {
+			$files = @scandir($dir);
+		    foreach((array)$files as $file) {
 		    	if($i > 500){
 		    		return true;
 		    	}else{
