@@ -72,6 +72,16 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.2.6 =
+* to fix sub-domain redirect issue with www
+* to prevent caching of sitemap.xml
+* to fix getting error when .htaccess is not found
+* to improve combine css
+* to prevent caching wp-comments-post.php
+* to prevent combine comment out js files
+* to prevent caching js files whose type is application/ld+json
+* style changes of delete cache panel
+
 = 0.8.2.5 =
 * to prevent converting style rules to link more than once
 * to clear cache after admin writes a comment
