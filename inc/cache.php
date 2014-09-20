@@ -212,20 +212,25 @@
 					foreach ($js->getJsLinks() as $key => $value) {
 						if($href = $js->checkInternal($value)){
 							if(strpos($js->getJsLinksExcept(), $href) === false){
-								$minifiedJs = $js->minify($href, $minify);
+								if(!preg_match("/<script[^>]+json[^>]+>.+/", $value)){
+									$minifiedJs = $js->minify($href, $minify);
 
-								if($minifiedJs){
-									if(!is_dir($minifiedJs["cachFilePath"])){
-										$prefix = time();
-										$this->createFolder($minifiedJs["cachFilePath"], $minifiedJs["jsContent"], "js", $prefix);
-									}
+									if($minifiedJs){
+										if(!is_dir($minifiedJs["cachFilePath"])){
+											$prefix = time();
+											$this->createFolder($minifiedJs["cachFilePath"], $minifiedJs["jsContent"], "js", $prefix);
+										}
 
-									if($jsFiles = @scandir($minifiedJs["cachFilePath"], 1)){
-										if($jsContent = $js->file_get_contents_curl($minifiedJs["url"]."/".$jsFiles[0]."?v=".time())){
-											$prev["content"] .= $jsContent;
-											array_push($prev["value"], $value);
+										if($jsFiles = @scandir($minifiedJs["cachFilePath"], 1)){
+											if($jsContent = $js->file_get_contents_curl($minifiedJs["url"]."/".$jsFiles[0]."?v=".time())){
+												$prev["content"] .= $jsContent;
+												array_push($prev["value"], $value);
+											}
 										}
 									}
+								}else{
+									$content = $js->mergeJs($prev, $this);
+									$prev = array("content" => "", "value" => array());
 								}
 							}else{
 								$content = $js->mergeJs($prev, $this);
