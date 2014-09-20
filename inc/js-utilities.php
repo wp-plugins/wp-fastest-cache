@@ -39,14 +39,14 @@
 
 						if($jsFiles = @scandir($cachFilePath, 1)){
 							if($countStyle[$value] == 1){
-								$script = "<!-- <script".$out[1][$i].">".$value."</script> -->"."\n"."<script type='text/javascript' src='".$jsScript."/".$jsFiles[0]."'></script>";
+								$script = "<!-- <script".$out[1][$i].">".$value."</script> -->"."\n"."<script".$out[1][$i]." src='".$jsScript."/".$jsFiles[0]."'></script>";
 								if($tmpHtml = @preg_replace("/<script[^<>]*>".preg_quote($value, "/")."<\/script\s*>/", $script, $this->html)){
 									$this->html = $tmpHtml;
 								}else{
 									$this->err = "inline js is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
 								}
 							}else{
-								$script = "<!-- <script".$out[1][$i].">".$value."</script> -->"."\n"."<script type='text/javascript' src='".$jsScript."/".$jsFiles[0]."'></script>";
+								$script = "<!-- <script".$out[1][$i].">".$value."</script> -->"."\n"."<script".$out[1][$i]." src='".$jsScript."/".$jsFiles[0]."'></script>";
 								if($tmpHtml = @preg_replace("/<script[^<>]*>".preg_quote($value, "/")."<\/script\s*>/", $script, $this->html)){
 									$this->html = $tmpHtml;
 								}else{
