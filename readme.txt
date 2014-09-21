@@ -81,7 +81,8 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * to prevent combine comment out js files
 * to prevent caching js files whose type is application/ld+json
 * style changes of delete cache panel
-* to fix php warning which is Invalid argument supplied for foreach() 
+* to fix php warning which is Invalid argument supplied for foreach()
+* to fix "File not found" message when trying to leave a comment
 
 = 0.8.2.5 =
 * to prevent converting style rules to link more than once
