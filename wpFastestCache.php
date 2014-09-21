@@ -74,6 +74,7 @@ GNU General Public License for more details.
 			wp_clear_scheduled_hook($wpfc->slug()."_regular");
 
 			delete_option("WpFastestCache");
+			delete_option("WpFcDeleteCacheLogs");
 			$wpfc->deleteCache();
 		}
 
@@ -128,22 +129,30 @@ GNU General Public License for more details.
 		}
 
 		public function deleteCache($minified = false){
+
+			include_once "inc/logs.php";
+			$log = new WpFastestCacheLogs("delete");
+
+
 			if(is_dir($this->getWpContentDir()."/cache/all")){
 				//$this->rm_folder_recursively($this->getWpContentDir()."/cache/all");
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
 					rename($this->getWpContentDir()."/cache/all", $this->getWpContentDir()."/cache/tmpWpfc/".time());
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
+					$log->action();
 				}else if(@mkdir($this->getWpContentDir()."/cache/tmpWpfc", 0755, true)){
 					rename($this->getWpContentDir()."/cache/all", $this->getWpContentDir()."/cache/tmpWpfc/".time());
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
+					$log->action();
 				}else{
 					$this->systemMessage = array("Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>", "error");
 				}
 			}else{
 				if($minified){
 					$this->systemMessage = array("Minified CSS and JS files have been deleted","success");
+					$log->action();
 				}else{
 					$this->systemMessage = array("Already deleted","success");
 				}
