@@ -26,7 +26,9 @@ GNU General Public License for more details.
 
 		public function __construct(){
 			$this->options = $this->getOptions();
-			$this->detectNewPost();
+
+			add_action('transition_post_status',  array($this, 'on_all_status_transitions'), 10, 3 );
+
 			$this->commentHooks();
 
 			$this->checkCronTime();
@@ -96,9 +98,26 @@ GNU General Public License for more details.
 			return $this->systemMessage;
 		}
 
-		protected function detectNewPost(){
+		// protected function detectNewPost(){
+		// 	if(isset($this->options->wpFastestCacheNewPost) && isset($this->options->wpFastestCacheStatus)){
+		// 		add_filter ('save_post', array($this, 'deleteCache'));
+		// 	}
+		// }
+
+		public function on_all_status_transitions($new_status, $old_status, $post) {
 			if(isset($this->options->wpFastestCacheNewPost) && isset($this->options->wpFastestCacheStatus)){
-				add_filter ('save_post', array($this, 'deleteCache'));
+				if ( ! wp_is_post_revision($post->ID) ){
+					if($new_status == "publish" && $old_status != "publish"){
+						$this->deleteCache();
+					}else if($new_status == "publish" && $old_status == "publish"){
+						$this->singleDeleteCache(false, $post->ID);
+					}else if($new_status == "trash" && $old_status == "publish"){
+						$this->deleteCache();
+					}else if(($new_status == "draft" || $new_status == "pending") && $old_status == "publish"){
+						$this->deleteCache();
+					}
+
+				}
 			}
 		}
 
@@ -116,9 +135,14 @@ GNU General Public License for more details.
 			}
 		}
 
-		public function singleDeleteCache($comment_id){
-			$comment = get_comment($comment_id);
-			$permalink = get_permalink($comment->comment_post_ID);
+		public function singleDeleteCache($comment_id = false, $post_id = false){
+			if($comment_id){
+				$comment = get_comment($comment_id);
+			}
+
+			$post_id = $post_id ? $post_id : $comment->comment_post_ID;
+
+			$permalink = get_permalink($post_id);
 
 			if(preg_match("/http:\/\/[^\/]+\/(.+)/", $permalink, $out)){
 				$path = $this->getWpContentDir()."/cache/all/".$out[1];
