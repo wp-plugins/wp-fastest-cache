@@ -147,6 +147,11 @@ GNU General Public License for more details.
 			if(preg_match("/http:\/\/[^\/]+\/(.+)/", $permalink, $out)){
 				$path = $this->getWpContentDir()."/cache/all/".$out[1];
 				if(is_dir($path)){
+					
+					include_once "inc/logs.php";
+					$log = new WpFastestCacheLogs("delete");
+					$log->action();
+
 					$this->rm_folder_recursively($path);
 				}
 			}

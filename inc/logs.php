@@ -54,26 +54,44 @@
 		}
 
 		public function getVia(){
+			$arr = array();
 			$via = debug_backtrace();
 
-			if($via[3]["function"] == "do_action" || $via[3]["function"] == "call_user_func_array"){
-				//mail("bizimplanet.com@gmail.com", "rrr", json_encode($via));
+			if($via[3]["function"] == "on_all_status_transitions"){
+				$arr["args"] = $via[3]["args"];
+				$arr["function"] = $via[3]["function"];
+			}else if($via[5]["function"] == "wp_set_comment_status"){
+				$arr["args"] = $via[5]["args"];
+				$arr["function"] = $via[5]["function"];
+			}else{
+				$arr["function"] = $via[3]["function"];
 			}
-			return $via[3]["function"];
+
+			return $arr;
 		}
 
 		//to detect which function called deleteCache()
 		public function decodeVia($data){
-			if($data == "setSchedule"){
+			if($data->function == "setSchedule"){
 				return "Cache Timeout";
-			}else if($data == "optionsPageRequest"){
+			}else if($data->function == "optionsPageRequest"){
 				return "Delete Cache Button";
-			}else if($data == "call_user_func_array"){
+			}else if($data->function == "call_user_func_array"){
 				return "New Post";
-			}else if($data == "deleteCssAndJsCache"){
+			}else if($data->function == "deleteCssAndJsCache"){
 				return "Delete Cache and Minified CSS/JS Button";
+			}else if($data->function == "on_all_status_transitions"){
+				if($data->args[0] == "publish" && $data->args[1] == "publish"){
+					return "<span>Post has been updated.</span><span> #ID:".$data->args[2]->ID."</span>";
+				}else if($data->args[0] == "publish" && $data->args[1] != "publish"){
+					return "<span>New Post</span><span> #ID:".$data->args[2]->ID."</span>";
+				}
+				return "<span>Post status has been changed.</span><span> ".$data->args[1]." > ".$data->args[0]."</span><span> #ID:".$data->args[2]->ID."</span>";
+			}else if($data->function == "wp_set_comment_status"){
+					return "<span>Comment has been marked as </span>"."<span>".$data->args[1]."</span>"."<span> #Comment ID: ".$data->args[0]."</span>";
 			}
-			return $data;
+
+			return $data->function;
 		}
 	}
 ?>
