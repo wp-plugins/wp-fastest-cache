@@ -25,6 +25,10 @@ GNU General Public License for more details.
 		private $options = array();
 
 		public function __construct(){
+			if(file_exists($this->getProLibraryPath("logs.php"))){
+				include_once $this->getProLibraryPath("logs.php");
+			}
+
 			$this->options = $this->getOptions();
 
 			add_action('transition_post_status',  array($this, 'on_all_status_transitions'), 10, 3 );
@@ -148,8 +152,7 @@ GNU General Public License for more details.
 				$path = $this->getWpContentDir()."/cache/all/".$out[1];
 				if(is_dir($path)){
 					
-					if(file_exists($this->getProLibraryPath("logs.php"))){
-						include_once $this->getProLibraryPath("logs.php");
+					if(class_exists("WpFastestCacheLogs")){
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
@@ -168,8 +171,7 @@ GNU General Public License for more details.
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
-					if(file_exists($this->getProLibraryPath("logs.php"))){
-						include_once $this->getProLibraryPath("logs.php");
+					if(class_exists("WpFastestCacheLogs")){
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
@@ -179,8 +181,7 @@ GNU General Public License for more details.
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
-					if(file_exists($this->getProLibraryPath("logs.php"))){
-						include_once $this->getProLibraryPath("logs.php");
+					if(class_exists("WpFastestCacheLogs")){
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}

@@ -702,8 +702,7 @@
 				    		</div>
 				   		</form>
 				   		<?php 
-				   			if(file_exists($this->getProLibraryPath("logs.php"))){
-				   				include_once $this->getProLibraryPath("logs.php");
+				   			if(class_exists("WpFastestCacheLogs")){
 				   				$logs = new WpFastestCacheLogs("delete");
 				   				$logs->printLogs();
 				   			}
