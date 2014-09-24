@@ -546,13 +546,6 @@
 			return "";
 		}
 
-		public function getProLibraryPath($file){
-			$currentPath = plugin_dir_path( __FILE__ );
-			$pluginMainPath = str_replace("inc/", "", $currentPath);
-
-			return $pluginMainPath."pro/".$file;
-		}
-
 		public function optionsPage(){
 			$this->systemMessage = count($this->systemMessage) > 0 ? $this->systemMessage : $this->getSystemMessage();
 
