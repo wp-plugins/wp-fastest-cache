@@ -710,7 +710,7 @@
 					   			$logs = new WpFastestCacheLogs("delete");
 					   		?>
 
-							<h2 style="padding-left:20px;padding-bottom:10px;">Logs</h2>
+							<h2 style="padding-left:20px;padding-bottom:10px;">Delete Cache Logs</h2>
 
 							<table style="border:0;border-top:1px solid #DEDBD1;border-radius:0;margin-left: 20px;width: 95%;box-shadow:none;border-bottom: 1px solid #E5E5E5;" class="widefat fixed">
 								<thead>
