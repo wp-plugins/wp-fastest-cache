@@ -546,6 +546,13 @@
 			return "";
 		}
 
+		public function getProLibraryPath($file){
+			$currentPath = plugin_dir_path( __FILE__ );
+			$pluginMainPath = str_replace("inc/", "", $currentPath);
+
+			return $pluginMainPath."pro/".$file;
+		}
+
 		public function optionsPage(){
 			$this->systemMessage = count($this->systemMessage) > 0 ? $this->systemMessage : $this->getSystemMessage();
 
@@ -670,12 +677,10 @@
 						</form>
 				    </div>
 				    <div class="tab2">
-				    	<?php if(get_bloginfo("language") == "tr-TR"){ ?>
-					    	<div style="float:right; padding-right:20px; cursor:pointer;">
-					    		<span id="show-delete-log">Show Logs</span>
-					    		<span id="hide-delete-log" style="display:none;">Hide Logs</span>
-					    	</div>
-				    	<?php } ?>
+				    	<div id="container-show-hide-logs" style="display:none; float:right; padding-right:20px; cursor:pointer;">
+				    		<span id="show-delete-log">Show Logs</span>
+				    		<span id="hide-delete-log" style="display:none;">Hide Logs</span>
+				    	</div>
 
 				    	<form method="post" name="wp_manager" class="delete-line">
 				    		<input type="hidden" value="deleteCache" name="wpFastestCachePage">
@@ -703,54 +708,13 @@
 				    			</div>
 				    		</div>
 				   		</form>
-
-					   	<div id="delete-logs" style="display:none; padding-bottom:10px;">
-					    	<?php 
-					   			include_once "logs.php";
-					   			$logs = new WpFastestCacheLogs("delete");
-					   		?>
-
-							<h2 style="padding-left:20px;padding-bottom:10px;">Delete Cache Logs</h2>
-
-							<table style="border:0;border-top:1px solid #DEDBD1;border-radius:0;margin-left: 20px;width: 95%;box-shadow:none;border-bottom: 1px solid #E5E5E5;" class="widefat fixed">
-								<thead>
-									<tr>
-										<th style="border-left:1px solid #DEDBD1;border-top-left-radius:0;" scope="col">Date</th>
-										<th style="border-right:1px solid #DEDBD1;border-top-right-radius:0;" scope="col">Via</th>
-									</tr>
-								</thead>
-									<tbody>
-										<?php if(count($logs->getLogs()) > 0){ ?>
-											<?php foreach ($logs->getLogs() as $key => $log) { ?>
-												<tr>
-													<th style="vertical-align:top;border-left:1px solid #DEDBD1;" scope="row"><?php echo $log->date;?></th>
-													<th style="border-right:1px solid #DEDBD1;"><?php echo isset($log->via) ? $logs->decodeVia($log->via) : ""; ?></th>
-												</tr>
-											<?php } ?>
-										<?php }else{ ?>
-												<tr>
-													<th style="border-left:1px solid #DEDBD1;" scope="row"><label>No Log</label></th>
-													<th style="border-right:1px solid #DEDBD1;"></th>
-												</tr>
-										<?php } ?>
-									</tbody>
-							</table>
-						</div>
-						<script>
-							jQuery("#show-delete-log, #hide-delete-log").click(function(e){
-								if(e.target.id == "show-delete-log"){
-									jQuery(e.target).hide();
-									jQuery("#hide-delete-log").show();
-									jQuery("#delete-logs").show();
-									jQuery("div.tab2 form.delete-line").hide();
-								}else if(e.target.id == "hide-delete-log"){
-									jQuery(e.target).hide();
-									jQuery("#delete-logs").hide();
-									jQuery("#show-delete-log").show();
-									jQuery("div.tab2 form.delete-line").show();
-								}
-							});
-						</script>
+				   		<?php 
+				   			if(file_exists($this->getProLibraryPath("logs.php"))){
+				   				include_once $this->getProLibraryPath("logs.php");
+				   				$logs = new WpFastestCacheLogs("delete");
+				   				$logs->printLogs();
+				   			}
+				   		?>
 				    </div>
 				    <div class="tab3">
 				    	<form method="post" name="wp_manager" id="wpfc-schedule-panel">
