@@ -723,7 +723,7 @@
 										<?php if(count($logs->getLogs()) > 0){ ?>
 											<?php foreach ($logs->getLogs() as $key => $log) { ?>
 												<tr>
-													<th style="border-left:1px solid #DEDBD1;" scope="row"><?php echo $log->date;?></th>
+													<th style="vertical-align:top;border-left:1px solid #DEDBD1;" scope="row"><?php echo $log->date;?></th>
 													<th style="border-right:1px solid #DEDBD1;"><?php echo isset($log->via) ? $logs->decodeVia($log->via) : ""; ?></th>
 												</tr>
 											<?php } ?>
