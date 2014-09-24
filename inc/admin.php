@@ -670,10 +670,12 @@
 						</form>
 				    </div>
 				    <div class="tab2">
-				    	<div style="display:none; float:right; padding-right:20px; cursor:pointer;">
-				    		<span id="show-delete-log">Show Logs</span>
-				    		<span id="hide-delete-log" style="display:none;">Hide Logs</span>
-				    	</div>
+				    	<?php if(get_bloginfo("language") == "tr-TR"){ ?>
+					    	<div style="float:right; padding-right:20px; cursor:pointer;">
+					    		<span id="show-delete-log">Show Logs</span>
+					    		<span id="hide-delete-log" style="display:none;">Hide Logs</span>
+					    	</div>
+				    	<?php } ?>
 
 				    	<form method="post" name="wp_manager" class="delete-line">
 				    		<input type="hidden" value="deleteCache" name="wpFastestCachePage">
