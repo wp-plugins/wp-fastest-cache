@@ -73,23 +73,21 @@
 		//to detect which function called deleteCache()
 		public function decodeVia($data){
 			if($data->function == "setSchedule"){
-				return "Cache Timeout";
+				return "- Cache Timeout";
 			}else if($data->function == "optionsPageRequest"){
-				return "Delete Cache Button";
-			}else if($data->function == "call_user_func_array"){
-				return "New Post";
+				return "- Delete Cache Button";
 			}else if($data->function == "deleteCssAndJsCache"){
-				return "Delete Cache and Minified CSS/JS Button";
+				return "- Delete Cache and Minified CSS/JS Button";
 			}else if($data->function == "on_all_status_transitions"){
 				$type = $data->args[2]->post_type;
 				if($data->args[0] == "publish" && $data->args[1] == "publish"){
 					return "<span>- The ".$type." has been updated</span><br><span>- #ID:".$data->args[2]->ID."</span><br><span>- One cached file has been removed</span>";
 				}else if($data->args[0] == "publish" && $data->args[1] != "publish"){
-					return "<span>New ".$type." has been published</span><br><span> #ID:".$data->args[2]->ID."</span>";
+					return "<span>- New ".$type." has been published</span><br><span>- ".$type." ID:".$data->args[2]->ID."</span>";
 				}
-				return "<span>The ".$type." status has been changed.</span><br><span> ".$data->args[1]." > ".$data->args[0]."</span><span> #ID:".$data->args[2]->ID."</span>";
+				return "<span>- The ".$type." status has been changed.</span><br><span>- ".$data->args[1]." > ".$data->args[0]."</span><span> #ID:".$data->args[2]->ID."</span>";
 			}else if($data->function == "wp_set_comment_status"){
-					return "<span>Comment has been marked as </span>"."<span>".$data->args[1]."</span><br><span> #Comment ID: ".$data->args[0]."</span><br><span>- One cached file has been removed</span>";
+					return "<span>- Comment has been marked as </span>"."<span>".$data->args[1]."</span><br><span>- Comment ID: ".$data->args[0]."</span><br><span>- One cached file has been removed</span>";
 			}
 
 			return $data->function;
