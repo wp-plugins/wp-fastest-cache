@@ -29,6 +29,10 @@ GNU General Public License for more details.
 				include_once $this->getProLibraryPath("logs.php");
 			}
 
+			if(file_exists($this->getProLibraryPath("image.php"))){
+				include_once $this->getProLibraryPath("image.php");
+			}
+
 			$this->options = $this->getOptions();
 
 			add_action('transition_post_status',  array($this, 'on_all_status_transitions'), 10, 3 );
@@ -192,7 +196,10 @@ GNU General Public License for more details.
 			}else{
 				if($minified){
 					$this->systemMessage = array("Minified CSS and JS files have been deleted","success");
-					$log->action();
+					if(class_exists("WpFastestCacheLogs")){
+						$log = new WpFastestCacheLogs("delete");
+						$log->action();
+					}
 				}else{
 					$this->systemMessage = array("Already deleted","success");
 				}
