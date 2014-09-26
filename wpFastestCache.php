@@ -33,6 +33,8 @@ GNU General Public License for more details.
 				include_once $this->getProLibraryPath("image.php");
 			}
 
+			$this->setCustomInterval();
+
 			$this->options = $this->getOptions();
 
 			add_action('transition_post_status',  array($this, 'on_all_status_transitions'), 10, 3 );
@@ -46,6 +48,11 @@ GNU General Public License for more details.
 			if(is_admin()){
 				//for wp-panel
 				$this->setRegularCron();
+				
+				if(file_exists($this->getProLibraryPath("image.php"))){
+					$this->setImageOptimisationCron();
+				}
+
 				$this->admin();
 			}else{
 				//for cache
@@ -82,6 +89,7 @@ GNU General Public License for more details.
 
 			wp_clear_scheduled_hook("wp_fastest_cache");
 			wp_clear_scheduled_hook($wpfc->slug()."_regular");
+			wp_clear_scheduled_hook($wpfc->slug()."_imageOptimisation");
 
 			delete_option("WpFastestCache");
 			delete_option("WpFcDeleteCacheLogs");
@@ -210,6 +218,8 @@ GNU General Public License for more details.
 			add_action($this->slug(),  array($this, 'setSchedule'));
 			add_action($this->slug()."_TmpDelete",  array($this, 'actionDelete'));
 			add_action($this->slug()."_regular",  array($this, 'regularCrons'));
+
+			add_action($this->slug()."_imageOptimisation", array($this, 'imageOptimize'));
 		}
 
 		public function actionDelete(){
@@ -219,6 +229,9 @@ GNU General Public License for more details.
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 				}
 			}
+		}
+
+		public function imageOptimize(){
 		}
 
 		public function regularCrons(){
@@ -231,7 +244,13 @@ GNU General Public License for more details.
 
 		public function setRegularCron(){
 			if(!wp_next_scheduled($this->slug()."_regular")){
-				wp_schedule_event( time() + 60, 'hourly', $this->slug()."_regular");
+				wp_schedule_event( time() + 360, 'everyfifteenminute', $this->slug()."_regular");
+			}
+		}
+
+		public function setImageOptimisationCron(){
+			if(!wp_next_scheduled($this->slug()."_imageOptimisation")){
+				wp_schedule_event( time() + 60, 'everyfifteenminute', $this->slug()."_imageOptimisation");
 			}
 		}
 
@@ -285,6 +304,18 @@ GNU General Public License for more details.
 			$pluginMainPath = str_replace("inc/", "", $currentPath);
 
 			return $pluginMainPath."pro/".$file;
+		}
+
+		public function cron_add_minute( $schedules ) {
+		   	$schedules['everyfifteenminute'] = array(
+			    'interval' => 60*15,
+			    'display' => __( 'Once Every 15 Minutes' )
+		    );
+		    return $schedules;
+		}
+
+		public function setCustomInterval(){
+			add_filter( 'cron_schedules', array($this, 'cron_add_minute'));
 		}
 	}
 
