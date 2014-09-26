@@ -307,10 +307,31 @@ GNU General Public License for more details.
 		}
 
 		public function cron_add_minute( $schedules ) {
-		   	$schedules['everyfifteenminute'] = array(
+		   	$schedules['everyfifteenminutes'] = array(
 			    'interval' => 60*15,
 			    'display' => __( 'Once Every 15 Minutes' )
 		    );
+
+		    $schedules['twiceanhour'] = array(
+			    'interval' => 60*30,
+			    'display' => __( 'Twice an Hour' )
+		    );
+
+		    $schedules['everysixhours'] = array(
+			    'interval' => 60*60*6,
+			    'display' => __( 'Once Every 6 Hours' )
+		    );
+
+		    $schedules['weekly'] = array(
+			    'interval' => 60*60*24*7,
+			    'display' => __( 'Once a Week' )
+		    );
+
+		    $schedules['montly'] = array(
+			    'interval' => 60*60*24*30,
+			    'display' => __( 'Once a Month' )
+		    );
+
 		    return $schedules;
 		}
 
