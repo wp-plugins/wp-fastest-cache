@@ -573,6 +573,10 @@
 									  array("id"=>"wpfc-deleteCache","title"=>"Delete Cache"),
 									  array("id"=>"wpfc-cacheTimeout","title"=>"Cache Timeout"));
 
+						if(class_exists("WpFastestCacheImageOptimisation")){
+							array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimisation"));
+						}
+
 						foreach ($tabs as $key => $value){
 							$checked = "";
 
@@ -784,6 +788,16 @@
 				    			<div class="submit"><input type="submit" value="Submit" class="button-primary"></div>
 				    		</div>
 				   		</form>
+				    </div>
+				    <div class="tab4">
+				    	<?php
+				    		if(class_exists("WpFastestCacheLogs")){
+				    			$xxx = new WpFastestCacheImageOptimisation();
+				    			//$xxx->getAllImages();
+
+				    			$xxx->getLastImage();
+				    		}
+				    	?>
 				    </div>
 				</div>
 				<div class="omni_admin_sidebar">
