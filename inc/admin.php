@@ -358,12 +358,6 @@
 				$htaccess = preg_replace("/#\s?BEGIN\s?GzipWpFastestCache.*?#\s?END\s?GzipWpFastestCache/s", "", $htaccess);
 				return $data.$htaccess;
 
-				// preg_match("/BEGIN GzipWpFastestCache/", $htaccess, $check);
-				// if(count($check) === 0){
-				// 	return $data.$htaccess;
-				// }else{
-				// 	return $htaccess;
-				// }	
 			}else{
 				//delete gzip rules
 				$htaccess = preg_replace("/#\s?BEGIN\s?GzipWpFastestCache.*?#\s?END\s?GzipWpFastestCache/s", "", $htaccess);
@@ -720,6 +714,7 @@
 				    		</div>
 				    		<div class="questionCon" style="text-align: center;padding-top: 10px;">
 
+				    			<span>First Job Time:</span>
 				    			<select id="wpFastestCacheTimeOutHour" name="wpFastestCacheTimeOutHour">
 				    				<option selected="" value="">Hour</option>
 				    				<?php
@@ -729,7 +724,6 @@
 
 				    				?>
 				    			</select>
-
 				    			<select id="wpFastestCacheTimeOutMinute" name="wpFastestCacheTimeOutMinute">
 				    				<option selected="" value="">Minute</option>
 				    				<?php
@@ -738,20 +732,30 @@
 				    					}
 
 				    				?>
-				    			</select>
-
-
+				    			</select>&ensp;&ensp;&ensp;
+				    			<span>Frequency: </span>
 								<select id="wpFastestCacheTimeOut" name="wpFastestCacheTimeOut">
 									<?php
-										$arrSettings = array(array("value" => "", "text" => "Choose One"),
-															array("value" => "hourly", "text" => "Once an hour"),
-															array("value" => "daily", "text" => "Once a day"),
-															array("value" => "twicedaily", "text" => "Twice a day"));
 
-										foreach ($arrSettings as $key => $value) {
-											//$checked = $value["value"] == $wpFastestCacheTimeOut ? 'selected=""' : "";
-											echo "<option value='{$value["value"]}'>{$value["text"]}</option>";
+										$schedules = wp_get_schedules();
+										$first = true;
+										foreach ($schedules as $key => $value) {
+											if($first){
+												echo "<option value=''>Choose One</option>";
+												$first = false;
+											}
+											echo "<option value='{$key}'>{$value["display"]}</option>";
 										}
+
+										// $arrSettings = array(array("value" => "", "text" => "Choose One"),
+										// 					array("value" => "hourly", "text" => "Once an hour"),
+										// 					array("value" => "daily", "text" => "Once a day"),
+										// 					array("value" => "twicedaily", "text" => "Twice a day"));
+
+										// foreach ($arrSettings as $key => $value) {
+										// 	//$checked = $value["value"] == $wpFastestCacheTimeOut ? 'selected=""' : "";
+										// 	echo "<option value='{$value["value"]}'>{$value["text"]}</option>";
+										// }
 									?>
 								</select> 
 							</div>
@@ -795,7 +799,7 @@
 				    			$xxx = new WpFastestCacheImageOptimisation();
 				    			//$xxx->getAllImages();
 
-				    			$xxx->getLastImage();
+				    			//$xxx->getLastImage();
 				    		}
 				    	?>
 				    </div>
