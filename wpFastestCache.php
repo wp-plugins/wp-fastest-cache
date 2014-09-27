@@ -25,9 +25,6 @@ GNU General Public License for more details.
 		private $options = array();
 
 		public function __construct(){
-			if(file_exists($this->getProLibraryPath("logs.php"))){
-				include_once $this->getProLibraryPath("logs.php");
-			}
 
 			if(file_exists($this->getProLibraryPath("image.php"))){
 				include_once $this->getProLibraryPath("image.php");
@@ -164,7 +161,8 @@ GNU General Public License for more details.
 				$path = $this->getWpContentDir()."/cache/all/".$out[1];
 				if(is_dir($path)){
 					
-					if(class_exists("WpFastestCacheLogs")){
+					if(file_exists($this->getProLibraryPath("logs.php"))){
+						include_once $this->getProLibraryPath("logs.php");
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
@@ -183,7 +181,8 @@ GNU General Public License for more details.
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
-					if(class_exists("WpFastestCacheLogs")){
+					if(file_exists($this->getProLibraryPath("logs.php"))){
+						include_once $this->getProLibraryPath("logs.php");
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
@@ -193,7 +192,8 @@ GNU General Public License for more details.
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
-					if(class_exists("WpFastestCacheLogs")){
+					if(file_exists($this->getProLibraryPath("logs.php"))){
+						include_once $this->getProLibraryPath("logs.php");
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
@@ -204,10 +204,13 @@ GNU General Public License for more details.
 			}else{
 				if($minified){
 					$this->systemMessage = array("Minified CSS and JS files have been deleted","success");
-					if(class_exists("WpFastestCacheLogs")){
+					
+					if(file_exists($this->getProLibraryPath("logs.php"))){
+						include_once $this->getProLibraryPath("logs.php");
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
+					
 				}else{
 					$this->systemMessage = array("Already deleted","success");
 				}
