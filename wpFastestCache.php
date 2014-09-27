@@ -307,7 +307,7 @@ GNU General Public License for more details.
 		}
 
 		public function cron_add_minute( $schedules ) {
-		   	$schedules['everyfifteenminutes'] = array(
+		   	$schedules['everyfifteenminute'] = array(
 			    'interval' => 60*15,
 			    'display' => __( 'Once Every 15 Minutes' )
 		    );
