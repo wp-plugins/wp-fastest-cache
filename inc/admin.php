@@ -127,6 +127,7 @@
 				$this->rm_folder_recursively($this->getWpContentDir()."/cache/wpfc-minified");
 				$this->deleteCache(true);
 			}else{
+				$this->deleteCache();
 				$this->systemMessage = array("Already deleted","success");
 			}
 		}
@@ -700,10 +701,12 @@
 				    		</div>
 				   		</form>
 				   		<?php 
-				   			if(class_exists("WpFastestCacheLogs")){
-				   				$logs = new WpFastestCacheLogs("delete");
-				   				$logs->printLogs();
-				   			}
+
+					   		if(file_exists($this->getProLibraryPath("logs.php"))){
+					   			include_once $this->getProLibraryPath("logs.php");
+					   			$logs = new WpFastestCacheLogs("delete");
+					   			$logs->printLogs();
+					   		}
 				   		?>
 				    </div>
 				    <div class="tab3">
