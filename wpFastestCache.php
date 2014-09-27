@@ -26,10 +26,6 @@ GNU General Public License for more details.
 
 		public function __construct(){
 
-			if(file_exists($this->getProLibraryPath("image.php"))){
-				include_once $this->getProLibraryPath("image.php");
-			}
-
 			$this->setCustomInterval();
 
 			$this->options = $this->getOptions();
@@ -47,6 +43,7 @@ GNU General Public License for more details.
 				$this->setRegularCron();
 				
 				if(file_exists($this->getProLibraryPath("image.php"))){
+					include_once $this->getProLibraryPath("image.php");
 					$this->setImageOptimisationCron();
 				}
 

@@ -798,7 +798,7 @@
 				    </div>
 				    <div class="tab4">
 				    	<?php
-				    		if(class_exists("WpFastestCacheLogs")){
+				    		if(class_exists("WpFastestCacheImageOptimisation")){
 				    			$xxx = new WpFastestCacheImageOptimisation();
 				    			//$xxx->getAllImages();
 
