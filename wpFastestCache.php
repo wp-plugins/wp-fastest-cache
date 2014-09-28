@@ -232,6 +232,11 @@ GNU General Public License for more details.
 		}
 
 		public function imageOptimize(){
+			if(class_exists("WpFastestCacheImageOptimisation")){
+				echo "rrr";
+				$image = new WpFastestCacheImageOptimisation();
+				$image->optimizeLastImage();
+			}
 		}
 
 		public function regularCrons(){

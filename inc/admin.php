@@ -803,6 +803,8 @@
 				    			//$xxx->getAllImages();
 
 				    			//$xxx->getLastImage();
+
+				    			$this->imageOptimize();
 				    		}
 				    	?>
 				    </div>
