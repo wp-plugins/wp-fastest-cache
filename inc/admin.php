@@ -438,7 +438,7 @@
 			}
 
 			if(isset($_POST["wpFastestCacheLoggedInUser"]) && $_POST["wpFastestCacheLoggedInUser"] == "on"){
-				$loggedInUser = "RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$"."\n";
+				$loggedInUser = "RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_|wp_woocommerce_session).*$"."\n";
 			}
 
 			$data = "# BEGIN WpFastestCache"."\n".
