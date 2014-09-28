@@ -62,7 +62,7 @@
 
 			if (is_user_logged_in() || $this->isCommenter()){
 				return $buffer;
-			}else if(defined('DONOTCACHEPAGE')){ // for Wordfence: not to cache 503 pages
+			}else if(defined('DONOTCACHEPAGE') && $this->isPluginActive('wordfence/wordfence.php')){ // for Wordfence: not to cache 503 pages
 				return $buffer."<!-- DONOTCACHEPAGE is defined as TRUE -->";
 			}else if($this->isPasswordProtected()){
 				return $buffer;
