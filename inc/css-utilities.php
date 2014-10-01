@@ -9,6 +9,9 @@
 		public function __construct($wpfc, $html){
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
 			$this->html = $html;
+
+			$this->setCssLinksExcept();
+
 			$this->inlineToLink($wpfc);
 			$this->setCssLinks();
 			$this->setCssLinksExcept();
@@ -33,31 +36,33 @@
 					preg_match("/media=[\"\']([^\"\']+)[\"\']/", $out[1][$i], $tmpMedia);
 					$media = (isset($tmpMedia[1]) && $tmpMedia[1]) ? $tmpMedia[1] : "all";
 
-					if(!is_dir($cachFilePath)){
-						$prefix = time();
-						$wpfc->createFolder($cachFilePath, $value, "css", $prefix);
-					}
+					if(strpos($this->getCssLinksExcept(), $out[0][$i]) === false){
+						if(!is_dir($cachFilePath)){
+							$prefix = time();
+							$wpfc->createFolder($cachFilePath, $value, "css", $prefix);
+						}
 
-					if($cssFiles = @scandir($cachFilePath, 1)){
-						if($countStyle[$value] == 1){
-							$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
-							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
-								if($this->_process($value)){
-									$this->html = $tmpHtml;
+						if($cssFiles = @scandir($cachFilePath, 1)){
+							if($countStyle[$value] == 1){
+								$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
+								if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
+									if($this->_process($value)){
+										$this->html = $tmpHtml;
+									}
+								}else{
+									$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
 								}
 							}else{
-								$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
-							}
-						}else{
-							$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
-							if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
-								if($this->_process($value)){
-									$this->html = $tmpHtml;
+								$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
+								if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
+									if($this->_process($value)){
+										$this->html = $tmpHtml;
+									}
+								}else{
+									$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
 								}
-							}else{
-								$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
+								$countStyle[$value] = $countStyle[$value] - 1;
 							}
-							$countStyle[$value] = $countStyle[$value] - 1;
 						}
 					}
 
