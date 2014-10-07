@@ -72,6 +72,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+
 = 0.8.2.7 =
 * to implement single post cache deletion when a post/page is modified
 * <strong>[FEATURE]</strong> to implement new frequency values for cache timeout
