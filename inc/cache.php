@@ -68,6 +68,8 @@
 				return $buffer."<!-- DONOTCACHEPAGE is defined as TRUE -->";
 			}else if($this->isPasswordProtected()){
 				return $buffer;
+			}else if($this->isWpLogin($buffer)){
+				return $buffer;
 			}else if($this->isMobile()){
 				return $buffer;
 			}else if(is_404()){
@@ -279,6 +281,14 @@
 			  if(preg_match("/^wp\_woocommerce\_session/", $key)){
 			  	return true;
 			  }
+			}
+
+			return false;
+		}
+
+		public function isWpLogin($buffer){
+			if(preg_match("/<form[^\>]+loginform[^\>]+>((?:(?!<\/form).)+)user_login((?:(?!<\/form).)+)user_pass((?:(?!<\/form).)+)<\/form>/si", $buffer)){
+				return true;
 			}
 
 			return false;
