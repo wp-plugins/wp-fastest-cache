@@ -128,13 +128,11 @@
 		}
 
 		public function checkHtml($buffer){
-			preg_match('/<\/html>/', $buffer, $htmlTag);
-			preg_match('/<\/body>/', $buffer, $bodyTag);
-			if(count($htmlTag) > 0 && count($bodyTag) > 0){
-				return 0;
-			}else{
-				return 1;
+			if(preg_match('/<\/html>/si', $buffer) && preg_match('/<\/body>/si', $buffer)){
+				return false;
 			}
+
+			return true;
 		}
 
 		public function cacheDate($buffer){
