@@ -70,6 +70,8 @@
 				return $buffer;
 			}else if($this->isWpLogin($buffer)){
 				return $buffer;
+			}else if($this->hasContactForm7($buffer)){
+				return $buffer."<!-- This page has a form which has been created by ContactForm7 -->";
 			}else if($this->isMobile()){
 				return $buffer;
 			}else if(is_404()){
@@ -291,6 +293,16 @@
 				return true;
 			}
 
+			return false;
+		}
+
+		public function hasContactForm7($buffer){
+			if(is_single() || is_page()){
+				if(preg_match("/<input[^\>]+name=\"_wpcf7\"[^\>]+>/", $buffer)){
+					return true;
+				}
+			}
+			
 			return false;
 		}
 	}
