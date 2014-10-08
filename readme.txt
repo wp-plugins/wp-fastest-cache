@@ -209,7 +209,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * <strong>[FEATURE]</strong> Compatible with WP-Polls
 * <strong>[FEATURE]</strong> Enable/Disable cache option for mobile devices has been added
 * <strong>[FEATURE]</strong> "[wpfcNOT]" shortcode has been converted to the image
-* Optimisation of CSS minify
+* Optimization of CSS minify
 * r10.net support forum url has been added
 * Some style changes
 * to correct misspelling
@@ -228,7 +228,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Update of Ukrainian translation
 
 = 0.7.7 =
-* Optimisation of CSS minify
+* Optimization of CSS minify
 * rmdir, mkdir and rename error_log problem
 * modify .htaccess problem
 * Update of Spanish translation
