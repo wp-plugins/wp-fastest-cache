@@ -245,3 +245,43 @@ form.delete-line .left .submit input{
     width: 165px;
     white-space: pre-line !important;
 }
+.revert{
+    width:16px;
+    height:16px;
+    vertical-align: middle;
+    margin: auto;
+    position:relative;
+    cursor:pointer;
+    
+    -moz-border-radius: 3px 3px;
+    -webkit-border-radius: 3px 3px;
+    border-radius: 3px 3px;
+    border:1px solid #aaa;
+    background:#ddd;
+    padding:3px;
+    
+    background: rgb(255,255,255) url("../images/cancel.png") no-repeat center; /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%) url("../images/cancel.png") no-repeat center; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))) url("../images/cancel.png") no-repeat center; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%) url("../images/cancel.png") no-repeat center; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%) url("../images/cancel.png") no-repeat center; /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%) url("../images/cancel.png") no-repeat center; /* IE10+ */
+    background: linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%) no-repeat center; /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ) url("../images/cancel.png") no-repeat center; /* IE6-9 */
+}
+
+.revert:hover{
+    border-color:#000;
+    
+    background: rgb(255,255,255) url("../images/cancel.png") no-repeat center; /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%) url("../images/cancel.png") no-repeat center; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))) url("../images/cancel.png") no-repeat center; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%) url("../images/cancel.png") no-repeat center; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%) url("../images/cancel.png") no-repeat center; /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%) url("../images/cancel.png") no-repeat center; /* IE10+ */
+    background: linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%) url("../images/cancel.png") no-repeat center; /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ) url("../images/cancel.png") no-repeat center; /* IE6-9 */
+}
+
+
+
