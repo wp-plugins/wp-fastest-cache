@@ -83,6 +83,11 @@
 						$this->deleteCssAndJsCache();
 					}else if($_POST["wpFastestCachePage"] == "cacheTimeout"){
 						$this->addCacheTimeout();
+					}else if($_POST["wpFastestCachePage"] == "imageOptimisation"){
+						if(class_exists("WpFastestCacheImageOptimisation")){
+							$img = new WpFastestCacheImageOptimisation();
+							$this->systemMessage = array($img->optimizeLastImage(),"success");
+						}
 					}
 				}
 			}
@@ -797,16 +802,24 @@
 				   		</form>
 				    </div>
 				    <div class="tab4">
-				    	<?php
-				    		if(class_exists("WpFastestCacheImageOptimisation")){
-				    			$xxx = new WpFastestCacheImageOptimisation();
-				    			//$xxx->getAllImages();
+				    	<?php if(class_exists("WpFastestCacheImageOptimisation")){ ?>
+					    	<form method="post" name="wp_manager">
+					    		<input type="hidden" value="imageOptimisation" name="wpFastestCachePage">
+					    		<div class="questionCon qsubmit">
+					    			<div class="submit"><input type="submit" value="Optimize Manually" class="button-primary"></div>
+					    		</div>
+					    	</form>
+					    	<?php
 
-				    			//$xxx->getLastImage();
+					    			$xxx = new WpFastestCacheImageOptimisation();
+					    			$xxx->imageList();
 
-				    			$this->imageOptimize();
-				    		}
-				    	?>
+					    			//$xxx->getLastImage();
+
+					    			//$this->imageOptimize();
+
+					    	?>
+				    	<?php } ?>
 				    </div>
 				</div>
 				<div class="omni_admin_sidebar">
