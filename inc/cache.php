@@ -82,10 +82,10 @@
 				return $buffer."<!-- wpfcNOT has been detected -->";
 			}else if(isset($_GET["preview"])){
 				return $buffer."<!-- not cached -->";
-			}else if($this->checkHtml($buffer)){
-				return $buffer."<!-- html is corrupted -->";
 			}else if(preg_match("/\?/", $_SERVER["REQUEST_URI"])){
 				return $buffer;
+			}else if($this->checkHtml($buffer)){
+				return $buffer."<!-- html is corrupted -->";
 			}else{
 				$cachFilePath = $this->getWpContentDir()."/cache/all".$_SERVER["REQUEST_URI"];
 
