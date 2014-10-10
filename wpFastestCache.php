@@ -25,32 +25,39 @@ GNU General Public License for more details.
 		private $options = array();
 
 		public function __construct(){
-
-			$this->setCustomInterval();
-
-			$this->options = $this->getOptions();
-
-			add_action('transition_post_status',  array($this, 'on_all_status_transitions'), 10, 3 );
-
-			$this->commentHooks();
-
-			$this->checkCronTime();
-
-			register_deactivation_hook( __FILE__, array('WpFastestCache', 'deactivate') );
-
-			if(is_admin()){
-				//for wp-panel
-				$this->setRegularCron();
-				
+			if(isset($_POST) && isset($_POST["action"]) && $_POST["action"] == "wpfc_revert_image_ajax_request"){
 				if(file_exists($this->getProLibraryPath("image.php"))){
 					include_once $this->getProLibraryPath("image.php");
-					$this->setImageOptimisationCron();
+					$img = new WpFastestCacheImageOptimisation();
+					$img->hook();
 				}
-
-				$this->admin();
 			}else{
-				//for cache
-				$this->cache();
+				$this->setCustomInterval();
+
+				$this->options = $this->getOptions();
+
+				add_action('transition_post_status',  array($this, 'on_all_status_transitions'), 10, 3 );
+
+				$this->commentHooks();
+
+				$this->checkCronTime();
+
+				register_deactivation_hook( __FILE__, array('WpFastestCache', 'deactivate') );
+
+				if(is_admin()){
+					//for wp-panel
+					$this->setRegularCron();
+					
+					if(file_exists($this->getProLibraryPath("image.php"))){
+						include_once $this->getProLibraryPath("image.php");
+						//$this->setImageOptimisationCron();
+					}
+
+					$this->admin();
+				}else{
+					//for cache
+					$this->cache();
+				}
 			}
 		}
 
