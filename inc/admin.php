@@ -86,7 +86,8 @@
 					}else if($_POST["wpFastestCachePage"] == "imageOptimisation"){
 						if(class_exists("WpFastestCacheImageOptimisation")){
 							$img = new WpFastestCacheImageOptimisation();
-							$this->systemMessage = array($img->optimizeLastImage(),"success");
+							$res = $img->optimizeLastImage();
+							$this->systemMessage = array($res[0], $res[1]);
 						}
 					}
 				}
