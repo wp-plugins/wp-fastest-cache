@@ -803,23 +803,20 @@
 				   		</form>
 				    </div>
 				    <div class="tab4">
+				    	<h2 style="padding-left:20px;padding-bottom:10px;">Optimize Image Tool</h2>
+
 				    	<?php if(class_exists("WpFastestCacheImageOptimisation")){ ?>
-					    	<form method="post" name="wp_manager">
-					    		<input type="hidden" value="imageOptimisation" name="wpFastestCachePage">
-					    		<div class="questionCon qsubmit">
-					    			<div class="submit"><input type="submit" value="Optimize Manually" class="button-primary"></div>
-					    		</div>
-					    	</form>
-					    	<?php
-
-					    			$xxx = new WpFastestCacheImageOptimisation();
-					    			$xxx->imageList();
-
-					    			//$xxx->getLastImage();
-
-					    			//$this->imageOptimize();
-
-					    	?>
+				    		<?php $xxx = new WpFastestCacheImageOptimisation(); ?>
+				    		<?php $xxx->statics(); ?>
+				    		<div>
+						    	<form method="post" name="wp_manager">
+						    		<input type="hidden" value="imageOptimisation" name="wpFastestCachePage">
+						    		<div class="questionCon qsubmit">
+						    			<div class="submit"><input type="submit" value="Optimize Manually" class="button-primary"></div>
+						    		</div>
+						    	</form>
+					    	</div>
+					    	<?php $xxx->imageList(); ?>
 				    	<?php } ?>
 				    </div>
 				</div>
