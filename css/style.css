@@ -283,6 +283,10 @@ form.delete-line .left .submit input{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ) url("../images/cancel.png") no-repeat center; /* IE6-9 */
 }
 
+.revert:active{
+    background-color: #F5F5F5;
+}
+
 #revert-loader{
     display: none;
     background: rgba(255, 255, 255, .7) url(../images/loader.gif) no-repeat center;
