@@ -25,7 +25,7 @@ GNU General Public License for more details.
 		private $options = array();
 
 		public function __construct(){
-			if(isset($_POST) && isset($_POST["action"]) && $_POST["action"] == "wpfc_revert_image_ajax_request"){
+			if(isset($_POST) && isset($_POST["action"]) && ($_POST["action"] == "wpfc_revert_image_ajax_request" || $_POST["action"] == "wpfc_statics_ajax_request")){
 				if(file_exists($this->getProLibraryPath("image.php"))){
 					include_once $this->getProLibraryPath("image.php");
 					$img = new WpFastestCacheImageOptimisation();
