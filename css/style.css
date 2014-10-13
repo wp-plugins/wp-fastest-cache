@@ -298,4 +298,9 @@ form.delete-line .left .submit input{
     z-index: 9998;
 }
 
+div.wpfc-loading-statics{
+    height: 16px;
+    background: url(../images/loader-statics.gif) no-repeat;
+}
+
 
