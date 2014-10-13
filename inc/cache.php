@@ -62,6 +62,8 @@
 
 			if (is_user_logged_in() || $this->isCommenter()){
 				return $buffer;
+			} else if(preg_match("/json/i", $_SERVER["HTTP_ACCEPT"])){
+				return $buffer;
 			}else if($this->checkWoocommerceSession()){
 				return $buffer."<!-- \$_COOKIE['wp_woocommerce_session'] has been set -->";
 			}else if(defined('DONOTCACHEPAGE') && $this->isPluginActive('wordfence/wordfence.php')){ // for Wordfence: not to cache 503 pages
