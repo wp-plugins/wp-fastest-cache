@@ -72,8 +72,8 @@
 				return $buffer;
 			}else if($this->isWpLogin($buffer)){
 				return $buffer;
-			}else if($this->hasContactForm7($buffer)){
-				return $buffer."<!-- This page has a form which has been created by ContactForm7 -->";
+			}else if($this->hasContactForm7WithCaptcha($buffer)){
+				return $buffer."<!-- This page was not cached because ContactForm7's captcha -->";
 			}else if($this->isMobile()){
 				return $buffer;
 			}else if(is_404()){
@@ -296,9 +296,9 @@
 			return false;
 		}
 
-		public function hasContactForm7($buffer){
+		public function hasContactForm7WithCaptcha($buffer){
 			if(is_single() || is_page()){
-				if(preg_match("/<input[^\>]+name=\"_wpcf7\"[^\>]+>/", $buffer)){
+				if(preg_match("/<input[^\>]+_wpcf7_captcha[^\>]+>/i", $buffer)){
 					return true;
 				}
 			}
