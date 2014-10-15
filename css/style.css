@@ -297,10 +297,17 @@ form.delete-line .left .submit input{
     height: 100%;
     z-index: 9998;
 }
-
+.wpfc-loading-statics{
+    background-repeat: no-repeat;
+    background-image: url(../images/loader-statics.gif);
+    background-position: 0 0;
+}
 div.wpfc-loading-statics{
     height: 16px;
-    background: url(../images/loader-statics.gif) no-repeat;
+}
+p.wpfc-loading-statics{
+    background-position: 44px 6px;
+    height: 27px;
 }
 
 
