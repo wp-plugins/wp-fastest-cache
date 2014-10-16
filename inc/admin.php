@@ -83,12 +83,6 @@
 						$this->deleteCssAndJsCache();
 					}else if($_POST["wpFastestCachePage"] == "cacheTimeout"){
 						$this->addCacheTimeout();
-					}else if($_POST["wpFastestCachePage"] == "imageOptimisation"){
-						if(class_exists("WpFastestCacheImageOptimisation")){
-							$img = new WpFastestCacheImageOptimisation();
-							$res = $img->optimizeLastImage();
-							$this->systemMessage = array($res[0], $res[1]);
-						}
 					}
 				}
 			}
