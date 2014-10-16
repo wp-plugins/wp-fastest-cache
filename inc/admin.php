@@ -809,14 +809,6 @@
 				    	<?php if(class_exists("WpFastestCacheImageOptimisation")){ ?>
 				    		<?php $xxx = new WpFastestCacheImageOptimisation(); ?>
 				    		<?php $xxx->statics(); ?>
-				    		<div>
-						    	<form method="post" name="wp_manager">
-						    		<input type="hidden" value="imageOptimisation" name="wpFastestCachePage">
-						    		<div class="questionCon qsubmit">
-						    			<div class="submit"><input type="submit" value="Optimize Manually" class="button-primary"></div>
-						    		</div>
-						    	</form>
-					    	</div>
 					    	<?php $xxx->imageList(); ?>
 				    	<?php } ?>
 				    </div>

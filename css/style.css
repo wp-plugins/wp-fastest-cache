@@ -309,5 +309,19 @@ p.wpfc-loading-statics{
     background-position: 44px 6px;
     height: 27px;
 }
-
-
+#wpfc-optimized-statics-reduction:not(.wpfc-loading-statics):after{
+    content: " KB";
+}
+#wpfc-statics-right ul li{
+    height:35px;
+    padding:0;
+    margin-bottom:15px;
+    width:150px;
+}
+#wpfc-statics-right ul:last-child{
+    padding-left: 10px;
+}
+#wpfc-statics-right ul:last-child li{
+    width: 220px;
+    height: 70px;
+}
