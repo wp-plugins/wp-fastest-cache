@@ -390,13 +390,11 @@
 							   "RewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
 							   "RewriteRule ^(.*)$ https://www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n";
 				}else{
-					$forceTo = "\nRewriteCond %{HTTPS} !=on"."\n".
-							   "RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"."\n".
-							   "RewriteRule ^(.*)$ http://%1/$1 [R=301,L]"."\n\n".
-
+					$forceTo = "\nRewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
+							   "RewriteRule ^(.*)$ https://".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n".
 							   "RewriteCond %{HTTPS} !=on"."\n".
-							   "RewriteCond %{HTTP_HOST} !^www\."."\n".
-							   "RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]"."\n\n";
+							   "RewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
+							   "RewriteRule ^(.*)$ https://".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n";
 				}
 			}else{
 				if(preg_match("/^http:\/\/www\./", home_url())){
