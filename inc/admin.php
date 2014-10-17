@@ -386,45 +386,27 @@
 				if(preg_match("/^https:\/\/www\./", home_url())){
 					$forceTo = "\nRewriteCond %{HTTPS} !=on"."\n".
 							   "RewriteCond %{HTTP_HOST} !^www\."."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
 							   "RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]"."\n\n".
 
 							   "RewriteCond %{HTTPS} !=on"."\n".
 							   "RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
 							   "RewriteRule ^(.*)$ https://www.%1/$1 [R=301,L]"."\n\n";
 				}else{
 					$forceTo = "\nRewriteCond %{HTTPS} !=on"."\n".
 							   "RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
 							   "RewriteRule ^(.*)$ http://%1/$1 [R=301,L]"."\n\n".
 
 							   "RewriteCond %{HTTPS} !=on"."\n".
 							   "RewriteCond %{HTTP_HOST} !^www\."."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
 							   "RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]"."\n\n";
 				}
 			}else{
 				if(preg_match("/^http:\/\/www\./", home_url())){
 					$forceTo = "\nRewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
-							   "RewriteRule ^(.*)$ http://www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n\n";
+							   "RewriteRule ^(.*)$ http://www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n";
 				}else{
 					$forceTo = "\nRewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
-							   "RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
-							   "RewriteRule ^(.*)$ http://%1/$1 [R=301,L]"."\n\n";
+							   "RewriteRule ^(.*)$ http://%1/$1 [R=301,L]"."\n";
 				}
 			}
 			return $forceTo;
@@ -448,6 +430,9 @@
 					"RewriteBase /"."\n".
 					"AddDefaultCharset UTF-8"."\n".$this->ruleForWpContent().
 					$this->prefixRedirect().
+					"RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
+					"RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
+					"RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".$loggedInUser.
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
