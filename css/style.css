@@ -323,5 +323,5 @@ p.wpfc-loading-statics{
 }
 #wpfc-statics-right ul:last-child li{
     width: 220px;
-    height: 70px;
+    height: auto;
 }

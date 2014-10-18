@@ -72,6 +72,10 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.2.8 =
+* to prevent caching wp-login.php if renamed
+* to prevent caching if the page has a contactform7 form with captcha
+* to prevent caching for ajax call
 
 = 0.8.2.7 =
 * to implement single post cache deletion when a post/page is modified
