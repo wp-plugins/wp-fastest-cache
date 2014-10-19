@@ -187,11 +187,11 @@ GNU General Public License for more details.
 		}
 
 		public function deleteCache($minified = false){
+			$cache_path = $this->getWpContentDir()."/cache/all";
 
-			if(is_dir($this->getWpContentDir()."/cache/all")){
-				//$this->rm_folder_recursively($this->getWpContentDir()."/cache/all");
+			if(is_dir($cache_path)){
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
-					rename($this->getWpContentDir()."/cache/all", $this->getWpContentDir()."/cache/tmpWpfc/".time());
+					rename($cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
@@ -202,7 +202,7 @@ GNU General Public License for more details.
 					}
 
 				}else if(@mkdir($this->getWpContentDir()."/cache/tmpWpfc", 0755, true)){
-					rename($this->getWpContentDir()."/cache/all", $this->getWpContentDir()."/cache/tmpWpfc/".time());
+					rename($cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
