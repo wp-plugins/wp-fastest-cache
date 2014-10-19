@@ -426,9 +426,6 @@
 					"RewriteBase /"."\n".
 					"AddDefaultCharset UTF-8"."\n".$this->ruleForWpContent().
 					$this->prefixRedirect().
-					"RewriteCond %{REQUEST_URI} !^/wp-login.php"."\n".
-					"RewriteCond %{REQUEST_URI} !^/wp-admin"."\n".
-					"RewriteCond %{REQUEST_URI} !^/wp-content"."\n".
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".$loggedInUser.
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
