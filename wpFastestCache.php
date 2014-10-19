@@ -50,6 +50,10 @@ GNU General Public License for more details.
 
 				register_deactivation_hook( __FILE__, array('WpFastestCache', 'deactivate') );
 
+				if(file_exists($this->getProLibraryPath("mobile-cache.php"))){
+					include_once $this->getProLibraryPath("mobile-cache.php");
+				}
+
 				if(is_admin()){
 					//for wp-panel
 					$this->setRegularCron();

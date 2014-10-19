@@ -430,6 +430,7 @@
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".$loggedInUser.
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
 					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile;
+			
 
 			if(ABSPATH == "//"){
 				$data = $data."RewriteCond %{DOCUMENT_ROOT}/wp-content/cache/all/$1/index.html -f"."\n";
@@ -438,8 +439,14 @@
 				$data = $data."RewriteCond ".ABSPATH."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n";
 			}
 
-			$data = $data.'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n".
-					"</IfModule>"."\n".
+			$data = $data.'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n";
+
+			if(class_exists("WpFcMobileCache")){
+				$wpfc_mobile = new WpFcMobileCache();
+				$data = $data."\n\n\n".$wpfc_mobile->update_htaccess($data);
+			}
+
+			$data = $data."</IfModule>"."\n".
 					"<FilesMatch \"\.(html|htm)$\">"."\n".
 					"FileETag None"."\n".
 					"<ifModule mod_headers.c>"."\n".

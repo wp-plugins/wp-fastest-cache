@@ -74,7 +74,7 @@
 				return $buffer;
 			}else if($this->hasContactForm7WithCaptcha($buffer)){
 				return $buffer."<!-- This page was not cached because ContactForm7's captcha -->";
-			}else if($this->isMobile()){
+			}else if($this->isMobile() && !class_exists("WpFcMobileCache")){
 				return $buffer;
 			}else if(is_404()){
 				return $buffer;
@@ -89,7 +89,12 @@
 			}else if($this->checkHtml($buffer)){
 				return $buffer."<!-- html is corrupted -->";
 			}else{
-				$cachFilePath = $this->getWpContentDir()."/cache/all".$_SERVER["REQUEST_URI"];
+				if($this->isMobile() && class_exists("WpFcMobileCache")){
+					$wpfc_mobile = new WpFcMobileCache();
+					$cachFilePath = $this->getWpContentDir()."/cache/".$wpfc_mobile->get_folder_name()."".$_SERVER["REQUEST_URI"];
+				}else{
+					$cachFilePath = $this->getWpContentDir()."/cache/all".$_SERVER["REQUEST_URI"];
+				}
 
 				$content = $this->cacheDate($buffer);
 
@@ -138,7 +143,11 @@
 		}
 
 		public function cacheDate($buffer){
-			return $buffer."<!-- WP Fastest Cache file was created in ".$this->creationTime()." seconds, on ".date("d-m-y G:i:s")." -->";
+			if($this->isMobile() && class_exists("WpFcMobileCache")){
+				return $buffer."<!-- Mobile: WP Fastest Cache file was created in ".$this->creationTime()." seconds, on ".date("d-m-y G:i:s")." -->";
+			}else{
+				return $buffer."<!-- WP Fastest Cache file was created in ".$this->creationTime()." seconds, on ".date("d-m-y G:i:s")." -->";
+			}
 		}
 
 		public function creationTime(){
