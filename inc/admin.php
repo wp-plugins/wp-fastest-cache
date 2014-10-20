@@ -389,24 +389,24 @@
 			if(preg_match("/^https:\/\//", home_url())){
 				if(preg_match("/^https:\/\/www\./", home_url())){
 					$forceTo = "\nRewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
-							   "RewriteRule ^(.*)$ https://www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n".
+							   "RewriteRule ^(.*)$ ".home_url()."/$1 [R=301,L]"."\n".
 							   "RewriteCond %{HTTPS} !=on"."\n".
 							   "RewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
-							   "RewriteRule ^(.*)$ https://www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n";
+							   "RewriteRule ^(.*)$ ".home_url()."/$1 [R=301,L]"."\n";
 				}else{
 					$forceTo = "\nRewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
 							   "RewriteRule ^(.*)$ https://".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n".
 							   "RewriteCond %{HTTPS} !=on"."\n".
 							   "RewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
-							   "RewriteRule ^(.*)$ https://".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n";
+							   "RewriteRule ^(.*)$ ".home_url()."/$1 [R=301,L]"."\n";
 				}
 			}else{
 				if(preg_match("/^http:\/\/www\./", home_url())){
 					$forceTo = "\nRewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
-							   "RewriteRule ^(.*)$ http://www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n";
+							   "RewriteRule ^(.*)$ ".home_url()."/$1 [R=301,L]"."\n";
 				}else{
 					$forceTo = "\nRewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])." [NC]"."\n".
-							   "RewriteRule ^(.*)$ http://".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n";
+							   "RewriteRule ^(.*)$ ".home_url()."/$1 [R=301,L]"."\n";
 				}
 			}
 			return $forceTo;
