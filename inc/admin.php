@@ -447,6 +447,7 @@
 
 			if(class_exists("WpFcMobileCache")){
 				$wpfc_mobile = new WpFcMobileCache();
+				$wpfc_mobile->set_wptouch($this->isPluginActive('wptouch/wptouch.php'));
 				$data = $data."\n\n\n".$wpfc_mobile->update_htaccess($data);
 			}
 
