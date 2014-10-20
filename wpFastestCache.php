@@ -187,12 +187,19 @@ GNU General Public License for more details.
 		}
 
 		public function deleteCache($minified = false){
+			if(class_exists("WpFcMobileCache")){
+				$wpfc_mobile = new WpFcMobileCache();
+				$wpfc_mobile->delete_cache($this->getWpContentDir());
+
+				wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
+			}
+
 			$cache_path = $this->getWpContentDir()."/cache/all";
 
 			if(is_dir($cache_path)){
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
 					rename($cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
-					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
+					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
 					if(file_exists($this->getProLibraryPath("logs.php"))){
@@ -203,7 +210,7 @@ GNU General Public License for more details.
 
 				}else if(@mkdir($this->getWpContentDir()."/cache/tmpWpfc", 0755, true)){
 					rename($cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
-					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
+					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
 					if(file_exists($this->getProLibraryPath("logs.php"))){
