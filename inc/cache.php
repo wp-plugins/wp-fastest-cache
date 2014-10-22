@@ -176,6 +176,8 @@
 				$create = true;
 			}
 
+			$cachFilePath = urldecode($cachFilePath);
+
 			if($create){
 				if (!is_user_logged_in() && !$this->isCommenter()){
 					if(!is_dir($cachFilePath)){
