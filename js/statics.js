@@ -9,11 +9,16 @@ var WpFcStatics = {
 			jQuery("[id^='wpfc-optimized-statics-']").addClass("wpfc-loading-statics");
 			jQuery("[id^='wpfc-optimized-statics-']").html("");
 			self.optimize_image(self);
-		})
+		});
+
+		jQuery("#wpfc-image-search-button").click(function(){
+			self.update_image_list(self);
+		});
 	},
-	update_image_list: function(){
+
+	update_image_list: function(self){
 		jQuery.ajax({
-			type: 'POST', 
+			type: 'POST',
 			url: self.url,
 			data : {"action": "wpfc_update_image_list_ajax_request"},
 			cache: false, 
@@ -84,6 +89,8 @@ var WpFcStatics = {
 			data : {"action": "wpfc_statics_ajax_request"},
 			cache: false, 
 			success: function(data){
+				jQuery("#wpfc-total-pages").html(Math.ceil(data.total_image_number/data.per_page));
+				
 				jQuery.each(data, function(e, i){
 					var el = jQuery("#wpfc-optimized-statics-" + e);
 					if(el.length === 1){
