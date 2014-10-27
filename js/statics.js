@@ -12,7 +12,7 @@ var WpFcStatics = {
 	},
 	set_click_event_clear_search_text: function(){
 		var self = this;
-		
+
 		jQuery("span.deleteicon span").click(function(e){
 			jQuery("#wpfc-image-search-input").val("");
 			jQuery(e.target).addClass("cleared");
@@ -24,6 +24,10 @@ var WpFcStatics = {
 				jQuery("span.deleteicon span").removeClass("cleared");
 			}else{
 				jQuery("span.deleteicon span").addClass("cleared");
+			}
+
+			if(e.keyCode == 13){
+				self.update_image_list(0);
 			}
 		});
 	},
