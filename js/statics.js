@@ -26,7 +26,7 @@ var WpFcStatics = {
 	set_click_event_search_button: function(){
 		var self = this;
 		jQuery("#wpfc-image-search-button").click(function(){
-			self.update_image_list(0, jQuery("#wpfc-image-search-input").val());
+			self.update_image_list(0);
 		});
 	},
 	set_click_event_optimize_image_button: function(){
@@ -39,10 +39,12 @@ var WpFcStatics = {
 	},
 	update_image_list: function(page, search){
 		var self = this;
-console.log(page, "page", self.total_page, "total_page");
+
 		if(page > -1 && page < self.total_page){
 		}
 			jQuery("#revert-loader").show();
+
+			var search = jQuery("#wpfc-image-search-input").val();
 
 			jQuery.ajax({
 				type: 'POST',
