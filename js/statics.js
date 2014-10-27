@@ -24,6 +24,10 @@ var WpFcStatics = {
 				jQuery("span.deleteicon span").removeClass("cleared");
 			}else{
 				jQuery("span.deleteicon span").addClass("cleared");
+
+				if(e.keyCode == 8){
+					self.update_image_list(0);
+				}
 			}
 
 			if(e.keyCode == 13){
