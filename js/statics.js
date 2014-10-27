@@ -1,42 +1,90 @@
 var WpFcStatics = {
 	url: "",
+	current_page: 0,
+	total_page: 0,
 	init: function(url){
 		this.url = url;
 		this.set_click_event_show_hide_button();
-
-		self = this;
-		jQuery("#wpfc-optimized-images").click(function(){
+		this.set_click_event_optimize_image_button();
+		this.set_click_event_search_button();
+		this.set_click_event_paging();
+	},
+	set_click_event_paging: function(){
+		var self = this;
+		jQuery(".wpfc-image-list-next-page, .wpfc-image-list-prev-page, .wpfc-image-list-first-page, .wpfc-image-list-last-page").click(function(e){
+			if(jQuery(e.target).hasClass("wpfc-image-list-next-page")){
+				self.update_image_list(self.current_page + 1);
+			}else if(jQuery(e.target).hasClass("wpfc-image-list-prev-page")){
+				self.update_image_list(self.current_page - 1);
+			}else if(jQuery(e.target).hasClass("wpfc-image-list-first-page")){
+				self.update_image_list(0);
+			}else if(jQuery(e.target).hasClass("wpfc-image-list-last-page")){
+				self.update_image_list(self.total_page - 1);
+			}
+		});
+	},
+	set_click_event_search_button: function(){
+		var self = this;
+		jQuery("#wpfc-image-search-button").click(function(){
+			self.update_statics();
+			self.update_image_list(0, jQuery("#wpfc-image-search-input").val());
+		});
+	},
+	set_click_event_optimize_image_button: function(){
+		var self = this;
+		jQuery("#wpfc-optimize-images-button").click(function(){
 			jQuery("[id^='wpfc-optimized-statics-']").addClass("wpfc-loading-statics");
 			jQuery("[id^='wpfc-optimized-statics-']").html("");
 			self.optimize_image(self);
 		});
-
-		jQuery("#wpfc-image-search-button").click(function(){
-			self.update_image_list(self);
-		});
 	},
+	update_image_list: function(page, search){
+		var self = this;
 
-	update_image_list: function(self){
-		jQuery.ajax({
-			type: 'POST',
-			url: self.url,
-			data : {"action": "wpfc_update_image_list_ajax_request"},
-			cache: false, 
-			success: function(data){
-				jQuery("#the-list").fadeToggle("500", function(){
-					jQuery(this).html(data);
-					jQuery(this).fadeToggle("500");
-				});
-			}
-		});
+		if(page > -1 && page < self.total_page){
+			jQuery("#revert-loader").show();
+
+			jQuery.ajax({
+				type: 'POST',
+				url: self.url,
+				data : {"action": "wpfc_update_image_list_ajax_request", "page": page, "search" : search},
+				cache: false, 
+				success: function(data){
+					self.current_page = page;
+
+					jQuery(".wpfc-current-page").text(self.current_page + 1);
+					jQuery("#the-list").html(data);
+					jQuery("#revert-loader").hide();
+
+					jQuery(".wpfc-image-list-prev-page").removeClass("disabled");
+					jQuery(".wpfc-image-list-next-page").removeClass("disabled");
+					jQuery(".wpfc-image-list-first-page").removeClass("disabled");
+					jQuery(".wpfc-image-list-last-page").removeClass("disabled");
+
+					if((self.current_page + 1) == self.total_page){
+						jQuery(".wpfc-image-list-next-page").addClass("disabled");
+						jQuery(".wpfc-image-list-last-page").addClass("disabled");
+					}
+
+					if(self.current_page === 0){
+						jQuery(".wpfc-image-list-prev-page").addClass("disabled");
+						jQuery(".wpfc-image-list-first-page").addClass("disabled");
+					}
+
+					self.revert_image();
+				}
+			});
+		}
 	},
 	set_click_event_show_hide_button: function(){
+		var self = this;
 		jQuery("#show-image-list, #hide-image-list").click(function(e){
 			if(e.target.id == "show-image-list"){
 				jQuery(e.target).hide();
 				jQuery("#hide-image-list").show();
 				jQuery("#wpfc-image-list").show();
 				jQuery("#wpfc-image-static-panel").hide();
+				self.update_image_list(0);
 			}else if(e.target.id == "hide-image-list"){
 				jQuery(e.target).hide();
 				jQuery("#show-image-list").show();
@@ -89,7 +137,9 @@ var WpFcStatics = {
 			data : {"action": "wpfc_statics_ajax_request"},
 			cache: false, 
 			success: function(data){
-				jQuery("#wpfc-total-pages").html(Math.ceil(data.total_image_number/data.per_page));
+				self.total_page = Math.ceil(data.optimized_exist/data.per_page);
+				self.total_page = self.total_page > 0 ? self.total_page : 1;
+				jQuery(".wpfc-total-pages").html(self.total_page);
 				
 				jQuery.each(data, function(e, i){
 					var el = jQuery("#wpfc-optimized-statics-" + e);
