@@ -325,3 +325,23 @@ p.wpfc-loading-statics{
     width: 220px;
     height: auto;
 }
+
+span.deleteicon {
+    position: relative;
+}
+span.deleteicon input {
+    padding-right: 16px;
+}
+span.deleteicon span {
+    position: absolute;
+    display: block;
+    top: 0px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    background: url("../images/search_reset.jpg") no-repeat scroll;
+    cursor: pointer;
+}
+span.deleteicon span.cleared {
+    background: none;
+}

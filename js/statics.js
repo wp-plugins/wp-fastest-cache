@@ -8,6 +8,24 @@ var WpFcStatics = {
 		this.set_click_event_optimize_image_button();
 		this.set_click_event_search_button();
 		this.set_click_event_paging();
+		this.set_click_event_clear_search_text();
+	},
+	set_click_event_clear_search_text: function(){
+		var self = this;
+		
+		jQuery("span.deleteicon span").click(function(e){
+			jQuery("#wpfc-image-search-input").val("");
+			jQuery(e.target).addClass("cleared");
+			self.update_image_list(0);
+		});
+
+		jQuery("#wpfc-image-search-input").keyup(function(e){
+			if(jQuery(e.target).val().length > 0){
+				jQuery("span.deleteicon span").removeClass("cleared");
+			}else{
+				jQuery("span.deleteicon span").addClass("cleared");
+			}
+		});
 	},
 	set_click_event_paging: function(){
 		var self = this;
