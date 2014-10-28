@@ -133,6 +133,9 @@ var WpFcStatics = {
 		});
 	},
 	optimize_image: function(self){
+		jQuery("[id^='wpfc-optimized-statics-']").addClass("wpfc-loading-statics");
+		jQuery("[id^='wpfc-optimized-statics-']").html("");
+
 		jQuery.ajax({
 			type: 'GET', 
 			url: self.url,
@@ -164,7 +167,6 @@ var WpFcStatics = {
 	update_statics: function(callback){
 		var self = this;
 		
-		if(callback){ callback(); }
 
 		jQuery("[id^='wpfc-optimized-statics-']").addClass("wpfc-loading-statics");
 		jQuery("[id^='wpfc-optimized-statics-']").html("");
@@ -176,6 +178,7 @@ var WpFcStatics = {
 			data : {"action": "wpfc_statics_ajax_request"},
 			cache: false, 
 			success: function(data){
+				if(callback){ callback(); }
 				
 				jQuery.each(data, function(e, i){
 					var el = jQuery("#wpfc-optimized-statics-" + e);
