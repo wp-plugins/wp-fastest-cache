@@ -75,7 +75,7 @@ var WpFcStatics = {
 		var search = jQuery("#wpfc-image-search-input").val();
 
 		jQuery.ajax({
-			type: 'POST',
+			type: 'GET',
 			url: self.url,
 			data : {"action": "wpfc_update_image_list_ajax_request", "page": page, "search" : search},
 			dataType : "json",
@@ -134,7 +134,7 @@ var WpFcStatics = {
 	},
 	optimize_image: function(self){
 		jQuery.ajax({
-			type: 'POST', 
+			type: 'GET', 
 			url: self.url,
 			dataType : "json",
 			data : {"action": "wpfc_optimize_image_ajax_request"},
@@ -170,7 +170,7 @@ var WpFcStatics = {
 		jQuery("[id^='wpfc-optimized-statics-']").html("");
 
 		jQuery.ajax({
-			type: 'POST', 
+			type: 'GET', 
 			url: self.url,
 			dataType : "json",
 			data : {"action": "wpfc_statics_ajax_request"},
@@ -227,7 +227,7 @@ var WpFcStatics = {
 			var id = jQuery(e.target).find("input")[0].value;
 
 			jQuery.ajax({
-				type: 'POST', 
+				type: 'GET', 
 				url: self.url,
 				dataType : "json",
 				data : {"action": "wpfc_revert_image_ajax_request", "id" : id},

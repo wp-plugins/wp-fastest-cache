@@ -31,7 +31,7 @@ GNU General Public License for more details.
 												  "wpfc_update_image_list_ajax_request"
 												  );
 
-			if(isset($_POST) && isset($_POST["action"]) && in_array($_POST["action"], $optimize_image_ajax_requests)){
+			if(isset($_GET) && isset($_GET["action"]) && in_array($_GET["action"], $optimize_image_ajax_requests)){
 				if(file_exists($this->getProLibraryPath("image.php"))){
 					include_once $this->getProLibraryPath("image.php");
 					$img = new WpFastestCacheImageOptimisation();
