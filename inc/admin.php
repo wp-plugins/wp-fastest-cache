@@ -278,6 +278,8 @@
 				return array("Better WordPress Minify needs to be deactive<br>This plugin has aldready Minify feature", "error");
 			}else if($this->isPluginActive('gzippy/gzippy.php')){
 				return array("GZippy needs to be deactive<br>This plugin has aldready Gzip feature", "error");
+			}else if($this->isPluginActive('wordpress-gzip-compression/ezgz.php')){
+				return array("WordPress Gzip Compression needs to be deactive<br>This plugin has aldready Gzip feature", "error");
 			}else if(is_writable($path.".htaccess")){
 				$htaccess = $this->insertLBCRule($htaccess, $post);
 				$htaccess = $this->insertGzipRule($htaccess, $post);
