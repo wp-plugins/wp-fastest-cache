@@ -73,6 +73,10 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.2.9 =
+* to fix 301 redirection issue of sub-folder
+* to support non-english characters on search
+
 = 0.8.2.8 =
 * to prevent caching wp-login.php if renamed
 * to prevent caching if the page has a contactform7 form with captcha
