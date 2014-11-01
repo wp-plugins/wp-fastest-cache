@@ -9,6 +9,14 @@ var WpFcStatics = {
 		this.set_click_event_search_button();
 		this.set_click_event_paging();
 		this.set_click_event_clear_search_text();
+		this.set_click_event_filter();
+	},
+	set_click_event_filter: function(){
+		var self = this;
+		
+		jQuery("#wpfc-image-list-filter").change(function(e){
+			self.update_image_list();
+		});
 	},
 	set_click_event_clear_search_text: function(){
 		var self = this;
@@ -73,11 +81,12 @@ var WpFcStatics = {
 		jQuery("#revert-loader").show();
 
 		var search = jQuery("#wpfc-image-search-input").val();
+		var filter = jQuery("#wpfc-image-list-filter").val();
 
 		jQuery.ajax({
 			type: 'GET',
 			url: self.url,
-			data : {"action": "wpfc_update_image_list_ajax_request", "page": page, "search" : search},
+			data : {"action": "wpfc_update_image_list_ajax_request", "page": page, "search" : search, "filter" : filter},
 			dataType : "json",
 			cache: false, 
 			success: function(data){
