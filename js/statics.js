@@ -248,8 +248,13 @@ var WpFcStatics = {
 					try{
 						if(data.success == "true"){
 							self.update_statics(function(){
-								jQuery("#revert-loader").hide();
-								jQuery("tr[post-id='" + id + "']").fadeOut();
+								jQuery("tr[post-id='" + id + "']").hide(100, function(){
+									if(jQuery("#the-list tr:visible").length === 0){
+										self.update_image_list(0);
+									}else{
+										jQuery("#revert-loader").hide();
+									}
+								});
 							});
 						}else if(data.success == "false"){
 							jQuery("#revert-loader").hide();
