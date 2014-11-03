@@ -40,7 +40,7 @@
             });
             ed.onBeforeSetContent.add(function(ed, o) {
                 if ( o.content ) {
-                    o.content = o.content.replace(/<!--(.*?)[wpfcNOT](.*?)-->/g, self.wpfcNotHTML);
+                    o.content = o.content.replace(/<\!--\s*\[wpfcNOT\]\s*-->/, self.wpfcNotHTML);
                 }
             });
             ed.onPostProcess.add(function(ed, o) {
