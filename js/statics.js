@@ -150,7 +150,15 @@ var WpFcStatics = {
 			url: self.url,
 			dataType : "json",
 			data : {"action": "wpfc_optimize_image_ajax_request"},
-			cache: false, 
+			cache: false,
+			timeout: 10000,
+			error: function(x, t, m) {
+				if(t === "timeout") {
+					self.update_statics();
+				} else {
+					alert(t);
+				}
+			},
 			success: function(data){
 				if(data && data.success == "success"){
 					if(data.message != "finish"){
