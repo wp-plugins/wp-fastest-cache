@@ -47,7 +47,8 @@
 						"wp\-cron\.php",
 						"wp\-content",
 						"wp\-admin",
-						"wp\-includes"
+						"wp\-includes",
+						"index\.php"
 					);
 
 			if(preg_match("/\/".implode("|", $list)."/", $_SERVER["REQUEST_URI"])){
