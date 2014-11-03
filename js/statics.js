@@ -152,7 +152,7 @@ var WpFcStatics = {
 			data : {"action": "wpfc_optimize_image_ajax_request"},
 			cache: false, 
 			success: function(data){
-				if(data.success == "success"){
+				if(data && data.success == "success"){
 					if(data.message != "finish"){
 						self.update_statics(function(){
 							setTimeout(function(){
@@ -164,10 +164,10 @@ var WpFcStatics = {
 					}
 				}else{
 					self.update_statics();
-					if(typeof data.message != "undefined" && data.message){
+					if(data && typeof data.message != "undefined" && data.message){
 						alert(data.message);
 					}else{
-						alert("Unknown Error: 1");
+						alert("Please try later...");
 					}
 				}
 			}
