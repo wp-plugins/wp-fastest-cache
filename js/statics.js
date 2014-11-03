@@ -116,7 +116,7 @@ var WpFcStatics = {
 						jQuery(".wpfc-image-list-first-page").addClass("disabled");
 					}
 
-					self.revert_image();
+					self.set_click_event_revert_image();
 
 				}else{
 					alert("Error: Image List Problem. Please refresh...");
@@ -231,7 +231,7 @@ var WpFcStatics = {
 			}
 		});
 	},
-	revert_image: function(){
+	set_click_event_revert_image: function(){
 		var self = this;
 		jQuery("div.revert").click(function(e){
 			jQuery("#revert-loader").show();
