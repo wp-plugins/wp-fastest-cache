@@ -91,7 +91,7 @@ var WpFcStatics = {
 			cache: false, 
 			success: function(data){
 				if(typeof data != "undefined" && data){
-					self.total_page = Math.ceil(data.optimized_exist/data.per_page);
+					self.total_page = Math.ceil(data.result_count/data.per_page);
 					self.total_page = self.total_page > 0 ? self.total_page : 1;
 
 					self.current_page = page;
