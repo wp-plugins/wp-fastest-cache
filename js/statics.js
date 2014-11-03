@@ -15,7 +15,7 @@ var WpFcStatics = {
 		var self = this;
 		
 		jQuery("#wpfc-image-list-filter").change(function(e){
-			self.update_image_list();
+			self.update_image_list(0);
 		});
 	},
 	set_click_event_clear_search_text: function(){
