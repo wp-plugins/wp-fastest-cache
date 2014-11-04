@@ -2,6 +2,7 @@ var WpFcStatics = {
 	url: "",
 	current_page: 0,
 	total_page: 0,
+	statics: {},
 	init: function(url){
 		this.url = url;
 		this.set_click_event_show_hide_button();
@@ -154,7 +155,7 @@ var WpFcStatics = {
 			timeout: 10000,
 			error: function(x, t, m) {
 				if(t === "timeout") {
-					self.update_statics();
+					self.modify_statics_html();
 				} else {
 					alert(t);
 				}
@@ -196,46 +197,48 @@ var WpFcStatics = {
 			cache: false, 
 			success: function(data){
 				if(callback){ callback(); }
-				
-				jQuery.each(data, function(e, i){
-					var el = jQuery("#wpfc-optimized-statics-" + e);
-					if(el.length === 1){
-						if(e == "percent"){
-							var percent = i*3.6;
+				self.statics = data;
+				self.modify_statics_html();
+			}
+		});
+	},
+	modify_statics_html: function(){
+		var self = this;
+		jQuery.each(this.statics, function(e, i){
+			var el = jQuery("#wpfc-optimized-statics-" + e);
+			if(el.length === 1){
+				if(e == "percent"){
+					var percent = i*3.6;
 
-							if(percent > 180){
-								jQuery("#wpfc-pie-chart-big-container-first").show();
-								jQuery("#wpfc-pie-chart-big-container-second-right").show();
-								jQuery('#wpfc-pie-chart-big-container-second-left').animate({  borderSpacing: (percent - 180) }, {
-								    step: function(now,fx) {
-								      jQuery(this).css('-webkit-transform','rotate('+now+'deg)'); 
-								      jQuery(this).css('-moz-transform','rotate('+now+'deg)');
-								      jQuery(this).css('transform','rotate('+now+'deg)');
-								    },
-								    duration:'slow'
-								},'linear');
+					if(percent > 180){
+						jQuery("#wpfc-pie-chart-big-container-first").show();
+						jQuery("#wpfc-pie-chart-big-container-second-right").show();
+						jQuery('#wpfc-pie-chart-big-container-second-left').animate({  borderSpacing: (percent - 180) }, {
+						    step: function(now,fx) {
+						      jQuery(this).css('-webkit-transform','rotate('+now+'deg)'); 
+						      jQuery(this).css('-moz-transform','rotate('+now+'deg)');
+						      jQuery(this).css('transform','rotate('+now+'deg)');
+						    },
+						    duration:'slow'
+						},'linear');
 
-							}else{
-								jQuery("#wpfc-pie-chart-big-container-first").hide();
-								jQuery("#wpfc-pie-chart-big-container-second-right").hide();
+					}else{
+						jQuery("#wpfc-pie-chart-big-container-first").hide();
+						jQuery("#wpfc-pie-chart-big-container-second-right").hide();
 
-								jQuery('#wpfc-pie-chart-little').animate({  borderSpacing: percent }, {
-								    step: function(now,fx) {
-								      jQuery(this).css('-webkit-transform','rotate('+now+'deg)'); 
-								      jQuery(this).css('-moz-transform','rotate('+now+'deg)');
-								      jQuery(this).css('transform','rotate('+now+'deg)');
-								    },
-								    duration:'slow'
-								},'linear');
-
-
-							}
-						}
-
-						el.removeClass("wpfc-loading-statics");
-						el.html(i);
+						jQuery('#wpfc-pie-chart-little').animate({  borderSpacing: percent }, {
+						    step: function(now,fx) {
+						      jQuery(this).css('-webkit-transform','rotate('+now+'deg)'); 
+						      jQuery(this).css('-moz-transform','rotate('+now+'deg)');
+						      jQuery(this).css('transform','rotate('+now+'deg)');
+						    },
+						    duration:'slow'
+						},'linear');
 					}
-				});
+				}
+
+				el.removeClass("wpfc-loading-statics");
+				el.html(i);
 			}
 		});
 	},
