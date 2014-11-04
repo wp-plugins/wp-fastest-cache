@@ -1,0 +1,2 @@
+# to prevent the directory access
+Options -Indexes 
