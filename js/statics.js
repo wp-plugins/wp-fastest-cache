@@ -152,7 +152,7 @@ var WpFcStatics = {
 			dataType : "json",
 			data : {"action": "wpfc_optimize_image_ajax_request"},
 			cache: false,
-			timeout: 10000,
+			timeout: 20000,
 			error: function(x, t, m) {
 				if(t === "timeout") {
 					self.modify_statics_html();

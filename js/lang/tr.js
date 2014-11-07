@@ -43,7 +43,7 @@ window.wpfc.dictionary = {
 	"Don't show the cached version for mobile devices" : "Mobile kullanıcılar için cache'i gösterme",
 	"Browser Caching" : "Tarayıcı Önbellekleme",
 	"Reduce the load times of pages by storing commonly used files from your website on your visitors browser." : "Çok kullanılan dosyaları ziyaretçilerinizin tarayıcısında saklayarak sayfanın yüklenme zamanını azaltın.",
-	"Reduce page load times for repeat visitors" : "Sürekli gelen kullanıcılar için sayfa yüklenme hızını azaltma",
+	"Reduce page load times for repeat visitors" : "Sürekli gelen kullanıcılar için sayfa yüklenme hızını azalt",
 	"Particularly effective on websites where users regularly re-visit the same areas of the website" : "Kullanıcıların düzenli olarak ziyaret ettiği alanlarda çok verimlidir",
 	"Don't show the cached version for logged-in users" : "Login olan kullanıcılara önbelleği gösterme",
 	"Support Us" : "Bizi Destekleyin",
