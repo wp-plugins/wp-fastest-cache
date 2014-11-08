@@ -11,6 +11,11 @@
 
 		public function __construct(){
 			$this->options = $this->getOptions();
+
+			// second precaution for XSS: to remove XSS if XSS has already been added
+			if(strlen($this->options->wpFastestCacheLanguage) > 3){
+				$this->options->wpFastestCacheLanguage = "eng";
+			}
 			
 			$this->optionsPageRequest();
 			$this->iconUrl = plugins_url("wp-fastest-cache/images/icon-left.png");
@@ -75,14 +80,18 @@
 		public function optionsPageRequest(){
 			if(!empty($_POST)){
 				if(isset($_POST["wpFastestCachePage"])){
-					if($_POST["wpFastestCachePage"] == "options"){
-						$this->saveOption();
-					}else if($_POST["wpFastestCachePage"] == "deleteCache"){
-						$this->deleteCache();
-					}else if($_POST["wpFastestCachePage"] == "deleteCssAndJsCache"){
-						$this->deleteCssAndJsCache();
-					}else if($_POST["wpFastestCachePage"] == "cacheTimeout"){
-						$this->addCacheTimeout();
+					if(preg_match("/admin\.php\?page=WpFastestCacheOptions/", $_SERVER["REQUEST_URI"])){
+						if($_POST["wpFastestCachePage"] == "options"){
+							$this->saveOption();
+						}else if($_POST["wpFastestCachePage"] == "deleteCache"){
+							$this->deleteCache();
+						}else if($_POST["wpFastestCachePage"] == "deleteCssAndJsCache"){
+							$this->deleteCssAndJsCache();
+						}else if($_POST["wpFastestCachePage"] == "cacheTimeout"){
+							$this->addCacheTimeout();
+						}
+					}else{
+						die("Forbidden");
 					}
 				}
 			}
