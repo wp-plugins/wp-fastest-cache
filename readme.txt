@@ -73,6 +73,12 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.3.0 =
+* to fix <!--[wpfcNOT]--> issue of text to visual
+* refactoring of redirect rule
+* to prevent the directory access
+* to prevent from xss attacks (Kacper Szurek)
+
 = 0.8.2.9 =
 * to fix 301 redirection issue of sub-folder
 * to support non-english characters on search
