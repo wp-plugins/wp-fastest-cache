@@ -30,7 +30,6 @@ var Wpfclang = {
 		if(typeof window.wpfc != "undefined" && typeof window.wpfc.dictionary != "undefined"){
 			var self = this;
 			jQuery('#wpbody-content label, div.question, .questionCon input[type="submit"], #message p, .wrap h2, #nextVerAct, select option, th, #rule-help-tip h4, #rule-help-tip label, .omni_admin_sidebar h3').each(function(){
-				console.log(this);
 				jQuery(this).wpfclang();
 			});
 		}
