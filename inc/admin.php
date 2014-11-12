@@ -24,6 +24,28 @@
 			add_action('admin_enqueue_scripts', array($this, 'addJavaScript'));
 			$this->checkActivePlugins();
 
+			// if(file_exists(plugin_dir_path(__FILE__)."admin-toolbar.php")){
+			// 	add_action( 'wp_loaded', array($this, "load_admin_toolbar") );
+			// }
+		}
+		public function load_admin_toolbar(){
+			if ( current_user_can( 'manage_options' ) ) {
+				include_once plugin_dir_path(__FILE__)."admin-toolbar.php";
+
+				add_action('wp_ajax_wpfc_delete_cache', array($this, "deleteCacheToolbar"));
+				add_action('wp_ajax_wpfc_delete_cache_and_minified', array($this, "deleteCssAndJsCacheToolbar"));
+				
+				$toolbar = new WpFastestCacheAdminToolbar();
+				$toolbar->add();
+			}
+		}
+
+		public function deleteCacheToolbar(){
+			$this->deleteCache();
+		}
+
+		public function deleteCssAndJsCacheToolbar(){
+			$this->deleteCssAndJsCache();
 		}
 
 		public function checkActivePlugins(){
@@ -171,6 +193,8 @@
 				add_menu_page($this->pageTitle, $this->menuTitle, 'manage_options', "WpFastestCacheOptions", array($this, 'optionsPage'), $this->iconUrl, 99 );
 				wp_enqueue_style("wp-fastest-cache", plugins_url("wp-fastest-cache/css/style.css"), array(), time(), "all");
 			}
+			wp_enqueue_style("wp-fastest-cache-toolbar", plugins_url("wp-fastest-cache/css/toolbar.css"), array(), time(), "all");
+
 		}
 
 		public function saveOption(){
