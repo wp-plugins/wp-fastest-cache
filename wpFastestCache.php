@@ -63,6 +63,10 @@ GNU General Public License for more details.
 						//$this->setImageOptimisationCron();
 					}
 
+					if(file_exists($this->getProLibraryPath("logs.php"))){
+						include_once $this->getProLibraryPath("logs.php");
+					}
+
 					$this->admin();
 				}else{
 					//for cache

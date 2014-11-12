@@ -727,12 +727,10 @@
 				    		</div>
 				   		</form>
 				   		<?php 
-
-					   		if(file_exists($this->getProLibraryPath("logs.php"))){
-					   			include_once $this->getProLibraryPath("logs.php");
-					   			$logs = new WpFastestCacheLogs("delete");
-					   			$logs->printLogs();
-					   		}
+				   				if(class_exists("WpFastestCacheLogs")){
+					   				$logs = new WpFastestCacheLogs("delete");
+					   				$logs->printLogs();
+				   				}
 				   		?>
 				    </div>
 				    <div class="tab3">
