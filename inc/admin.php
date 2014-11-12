@@ -595,7 +595,7 @@
 									  array("id"=>"wpfc-cacheTimeout","title"=>"Cache Timeout"));
 
 						if(class_exists("WpFastestCacheImageOptimisation")){
-							array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimisation"));
+							array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimization"));
 						}
 
 						foreach ($tabs as $key => $value){
