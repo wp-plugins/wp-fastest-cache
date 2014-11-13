@@ -248,6 +248,13 @@
 
 									if($minifiedJs){
 										if(!is_dir($minifiedJs["cachFilePath"])){
+
+											if(isset($this->options->wpFastestCacheCombineJsPowerFul)){
+												$powerful_html = new WpFastestCachePowerfulHtml();
+												$minifiedJs["jsContent"] = $powerful_html->minify_js($minifiedJs["jsContent"]);
+											}
+
+
 											$prefix = time();
 											$this->createFolder($minifiedJs["cachFilePath"], $minifiedJs["jsContent"], "js", $prefix);
 										}

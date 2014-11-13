@@ -573,6 +573,9 @@
 			$wpFastestCacheCombineCss = isset($this->options->wpFastestCacheCombineCss) ? 'checked="checked"' : "";
 			$wpFastestCacheGzip = isset($this->options->wpFastestCacheGzip) ? 'checked="checked"' : "";
 			$wpFastestCacheCombineJs = isset($this->options->wpFastestCacheCombineJs) ? 'checked="checked"' : "";
+			
+			$wpFastestCacheCombineJsPowerFul = isset($this->options->wpFastestCacheCombineJsPowerFul) ? 'checked="checked"' : "";
+
 			$wpFastestCacheLanguage = isset($this->options->wpFastestCacheLanguage) ? $this->options->wpFastestCacheLanguage : "eng";
 			$wpFastestCacheLBC = isset($this->options->wpFastestCacheLBC) ? 'checked="checked"' : "";
 			$wpFastestCacheLoggedInUser = isset($this->options->wpFastestCacheLoggedInUser) ? 'checked="checked"' : "";
@@ -677,10 +680,22 @@
 								<div class="get-info"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></div>
 							</div>
 
+
+
+							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
+							<div class="questionCon">
+								<div class="question">Combine Js Plus</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJsPowerFul; ?> id="wpFastestCacheCombineJsPowerFul" name="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label></div>
+							</div>
+							<? } ?>
+
+
+
+
 							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
 							<div class="questionCon">
 								<div class="question">Remove Comments</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRemoveComments; ?> id="wpFastestCacheRemoveComments" name="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comments after combine css and js</label></div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRemoveComments; ?> id="wpFastestCacheRemoveComments" name="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comments after combine css and combine js</label></div>
 							</div>
 							<? } ?>
 
