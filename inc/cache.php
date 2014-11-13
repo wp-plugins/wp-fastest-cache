@@ -122,7 +122,8 @@
 				}
 
 				if(class_exists("WpFastestCachePowerfulHtml")){
-					$powerful_html = new WpFastestCachePowerfulHtml($content);
+					$powerful_html = new WpFastestCachePowerfulHtml();
+					$powerful_html->set_html($content);
 					
 					if(isset($this->options->wpFastestCacheRemoveComments)){
 						$content = $powerful_html->remove_head_comments();
