@@ -54,6 +54,10 @@ GNU General Public License for more details.
 					include_once $this->getProLibraryPath("mobile-cache.php");
 				}
 
+				if(file_exists($this->getProLibraryPath("powerful-html.php"))){
+					include_once $this->getProLibraryPath("powerful-html.php");
+				}
+
 				if(is_admin()){
 					//for wp-panel
 					$this->setRegularCron();
@@ -69,10 +73,6 @@ GNU General Public License for more details.
 
 					$this->admin();
 				}else{
-					if(file_exists($this->getProLibraryPath("remove-comments.php"))){
-						include_once $this->getProLibraryPath("remove-comments.php");
-					}
-					
 					//for cache
 					$this->cache();
 				}

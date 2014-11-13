@@ -121,6 +121,12 @@
 					$content = $this->combineJs($content, false);
 				}
 
+				if(class_exists("WpFastestCachePowerfulHtml")){
+					if(isset($this->options->wpFastestCacheRemoveComments)){
+
+					}
+				}
+
 				if($this->err){
 					return $buffer."<!-- ".$this->err." -->";
 				}else{
