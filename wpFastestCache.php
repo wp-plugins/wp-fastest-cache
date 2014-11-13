@@ -69,6 +69,10 @@ GNU General Public License for more details.
 
 					$this->admin();
 				}else{
+					if(file_exists($this->getProLibraryPath("remove-comments.php"))){
+						include_once $this->getProLibraryPath("remove-comments.php");
+					}
+					
 					//for cache
 					$this->cache();
 				}
