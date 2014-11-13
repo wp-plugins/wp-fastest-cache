@@ -626,7 +626,7 @@
 						}
 					?>
 				    <br>
-				    <div class="tab1">
+				    <div class="tab1" style="padding-left:10px;">
 						<form method="post" name="wp_manager">
 							<input type="hidden" value="options" name="wpFastestCachePage">
 							<div class="questionCon">
