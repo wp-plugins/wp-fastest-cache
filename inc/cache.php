@@ -127,6 +127,10 @@
 					if(isset($this->options->wpFastestCacheRemoveComments)){
 						$content = $powerful_html->remove_head_comments();
 					}
+
+					if(isset($this->options->wpFastestCacheMinifyHtmlPowerFul)){
+						$content = $powerful_html->minify_html();
+					}
 				}
 
 				if($this->err){
