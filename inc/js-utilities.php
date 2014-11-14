@@ -85,7 +85,7 @@
 		}
 
 		public function getJsLinks(){
-			return $this->jsLinks;
+			return array_unique($this->jsLinks);
 		}
 
 		public function minify($url, $minify = true){
