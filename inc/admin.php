@@ -659,7 +659,7 @@
 								<div class="question">Minify HTML Plus</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMinifyHtmlPowerFul; ?> id="wpFastestCacheMinifyHtmlPowerFul" name="wpFastestCacheMinifyHtmlPowerFul"><label for="wpFastestCacheMinifyHtmlPowerFul">More powerful minify html</label></div>
 							</div>
-							<? } ?>
+							<?php } ?>
 
 
 
@@ -687,7 +687,7 @@
 								<div class="question">Combine Js Plus</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJsPowerFul; ?> id="wpFastestCacheCombineJsPowerFul" name="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label></div>
 							</div>
-							<? } ?>
+							<?php } ?>
 
 
 
@@ -697,7 +697,7 @@
 								<div class="question">Remove Comments</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRemoveComments; ?> id="wpFastestCacheRemoveComments" name="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comments after combine css and combine js</label></div>
 							</div>
-							<? } ?>
+							<?php } ?>
 
 
 
