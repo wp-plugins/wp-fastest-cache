@@ -158,26 +158,34 @@
 		}
 
 		public function newImgPath($matches){
-			$matches[1] = str_replace(array("\"","'"), "", $matches[1]);
-			if(!$matches[1]){
-				$matches[1] = "";
-			}else if(preg_match("/^(\/\/|http|\/\/fonts|data:image|data:application)/", $matches[1])){
+
+			if(preg_match("/data\:image\/svg\+xml/", $matches[1])){
 				$matches[1] = $matches[1];
-			}else if(preg_match("/^\//", $matches[1])){
-				$homeUrl = str_replace(array("http:", "https:"), "", home_url());
-				$matches[1] = $homeUrl.$matches[1];
-			}else if(preg_match("/^(?P<up>(\.\.\/)+)(?P<name>.+)/", $matches[1], $out)){
-				$count = strlen($out["up"])/3;
-				$url = dirname($this->url);
-				for($i = 1; $i <= $count; $i++){
-					$url = substr($url, 0, strrpos($url, "/"));
-				}
-				$url = str_replace(array("http:", "https:"), "", $url);
-				$matches[1] = $url."/".$out["name"];
 			}else{
-				$url = str_replace(array("http:", "https:"), "", dirname($this->url));
-				$matches[1] = $url."/".$matches[1];
+				$matches[1] = str_replace(array("\"","'"), "", $matches[1]);
+				if(!$matches[1]){
+					$matches[1] = "";
+				}else if(preg_match("/^(\/\/|http|\/\/fonts|data:image|data:application)/", $matches[1])){
+					$matches[1] = $matches[1];
+				}else if(preg_match("/^\//", $matches[1])){
+					$homeUrl = str_replace(array("http:", "https:"), "", home_url());
+					$matches[1] = $homeUrl.$matches[1];
+				}else if(preg_match("/^(?P<up>(\.\.\/)+)(?P<name>.+)/", $matches[1], $out)){
+					$count = strlen($out["up"])/3;
+					$url = dirname($this->url);
+					for($i = 1; $i <= $count; $i++){
+						$url = substr($url, 0, strrpos($url, "/"));
+					}
+					$url = str_replace(array("http:", "https:"), "", $url);
+					$matches[1] = $url."/".$out["name"];
+				}else{
+					$url = str_replace(array("http:", "https:"), "", dirname($this->url));
+					$matches[1] = $url."/".$matches[1];
+				}
 			}
+
+
+
 
 			return "url(".$matches[1].")";
 		}
