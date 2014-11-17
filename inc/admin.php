@@ -24,9 +24,9 @@
 			add_action('admin_enqueue_scripts', array($this, 'addJavaScript'));
 			$this->checkActivePlugins();
 
-			// if(file_exists(plugin_dir_path(__FILE__)."admin-toolbar.php")){
-			// 	add_action( 'wp_loaded', array($this, "load_admin_toolbar") );
-			// }
+			if(file_exists(plugin_dir_path(__FILE__)."admin-toolbar.php")){
+				add_action( 'wp_loaded', array($this, "load_admin_toolbar") );
+			}
 		}
 		public function load_admin_toolbar(){
 			if ( current_user_can( 'manage_options' ) ) {

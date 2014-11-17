@@ -73,6 +73,12 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.3.1 =
+* index.html files have been added intead of .htaccess
+* to prevent comment out inline js rules twice
+* [FEATURE] to add delete button on the admin bar
+* to fix url() problem for data:image/svg+xml
+
 = 0.8.3.0 =
 * to fix <!--[wpfcNOT]--> issue of text to visual
 * refactoring of redirect rule
