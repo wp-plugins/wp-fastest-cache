@@ -70,6 +70,7 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 3. All cached files are deleted at the determinated time
 4. Block caching for post and pages (TinyMCE)
 5. Block caching for post and pages (Quicktags)
+6. Clean cached files via admin toolbar easly
 
 == Changelog ==
 
