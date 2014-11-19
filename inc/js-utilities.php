@@ -76,8 +76,10 @@
 			preg_match_all("/<\!--\s*\[\s*if[^>]+>(.*?)<\!\s*\[\s*endif\s*\]\s*-->/si", $head[1], $jsLinksInIf);
 
 			preg_match_all("/<\!--(?!\[if)(.*?)(?!<\!\s*\[\s*endif\s*\]\s*)-->/si", $head[1], $jsLinksCommentOut);
+
+			preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)GoogleAnalyticsObject((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalytics);
 			
-			$this->jsLinksExcept = implode(" ", array_merge($jsLinksInIf[0], $jsLinksCommentOut[0]));
+			$this->jsLinksExcept = implode(" ", array_merge($jsLinksInIf[0], $jsLinksCommentOut[0], $jsLinksGoogleAnalytics[0]));
 		}
 
 		public function getJsLinksExcept(){
