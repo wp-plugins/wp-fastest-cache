@@ -68,8 +68,8 @@
 				return $buffer."<!-- \$_COOKIE['wp_woocommerce_session'] has been set -->";
 			}else if(defined('DONOTCACHEPAGE') && $this->isPluginActive('wordfence/wordfence.php')){ // for Wordfence: not to cache 503 pages
 				return $buffer."<!-- DONOTCACHEPAGE is defined as TRUE -->";
-			}else if($this->isPasswordProtected()){
-				return $buffer;
+			}else if($this->isPasswordProtected($buffer)){
+				return $buffer."<!-- Password protected content has been detected -->";
 			}else if($this->isWpLogin($buffer)){
 				return $buffer;
 			}else if($this->hasContactForm7WithCaptcha($buffer)){
@@ -171,14 +171,22 @@
 			$commenter = wp_get_current_commenter();
 			return isset($commenter["comment_author_email"]) && $commenter["comment_author_email"] ? true : false;
 		}
-		public function isPasswordProtected(){
-			if(count($_COOKIE) > 0){
-				if(preg_match("/wp-postpass/", implode(" ",array_keys($_COOKIE)))){
-					return true;
-				}
+		public function isPasswordProtected($buffer){
 
+			if(preg_match("/action\=[\'\"].+postpass.*[\'\"]/", $buffer)){
+				return true;
 			}
+
 			return false;
+
+
+			// if(count($_COOKIE) > 0){
+			// 	if(preg_match("/wp-postpass/", implode(" ",array_keys($_COOKIE)))){
+			// 		return true;
+			// 	}
+
+			// }
+			// return false;
 		}
 
 		public function createFolder($cachFilePath, $buffer, $extension = "html", $prefix = ""){
