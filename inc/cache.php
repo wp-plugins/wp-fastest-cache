@@ -21,8 +21,7 @@
 		}
 
 		public function checkShortCode($content){
-			preg_match("/\[wpfcNOT\]/", $content, $wpfcNOT);
-			if(count($wpfcNOT) > 0){
+			if(preg_match("/\[wpfcNOT\]/", $content)){
 				if(!is_home() || !is_archive()){
 					$this->blockCache = true;
 				}
