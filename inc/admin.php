@@ -695,7 +695,7 @@
 							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
 							<div class="questionCon">
 								<div class="question">Remove Comments</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRemoveComments; ?> id="wpFastestCacheRemoveComments" name="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comments after combine css and combine js</label></div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRemoveComments; ?> id="wpFastestCacheRemoveComments" name="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comment tags between &#60;head&#62;&#60;/head&#62;</label></div>
 							</div>
 							<?php } ?>
 
