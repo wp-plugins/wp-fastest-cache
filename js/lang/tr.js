@@ -58,5 +58,12 @@ window.wpfc.dictionary = {
 	"Minify HTML" : "Html Küçült",
 	"*** Attention ***" : "*** Dikkat ***",
 	"Open .htaccess and remove this rule" : ".htaccess dosyasını açın ve aşağıda yer alan kuralı kaldırın",
-	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : "Eğer serveriniz mod_expires.c'i desteklemiyorsa, Internel Server Error (500) hatası ile karşılaşabilirsiniz. Bu durumda lütfen aşağıda yer alan adımları uygulayın."
+	"If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below." : "Eğer serveriniz mod_expires.c'i desteklemiyorsa, Internel Server Error (500) hatası ile karşılaşabilirsiniz. Bu durumda lütfen aşağıda yer alan adımları uygulayın.",
+	"Remove Comments" : "Yorumları Kaldır",
+	"Remove the comment tags between <head></head>" : "&#60;head&#62;&#60;/head&#62; arasında bulunan yorum taglerini kaldır",
+	"More powerful minify html" : "Daha güçlü html küçültme aracı",
+	"Minify the combined js files" : "Birleştirilmiş JS dosyalarının boyutunu küçült",
+	".htaccess is not writable" : ".htaccess dosyası değiştirilemiyor",
+	"WP Super Cache needs to be deactive" : "WP Super Cache etkisizleştirilmeli",
+	"The plugin does not work with Multisite" : "Multisite özelliği desteklenmiyor"
 };
