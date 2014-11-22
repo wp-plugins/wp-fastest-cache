@@ -2,6 +2,7 @@ var WpFcStatics = {
 	url: "",
 	current_page: 0,
 	total_page: 0,
+	per_page: 5,
 	statics: {},
 	init: function(url){
 		this.url = url;
@@ -11,6 +12,14 @@ var WpFcStatics = {
 		this.set_click_event_paging();
 		this.set_click_event_clear_search_text();
 		this.set_click_event_filter();
+		this.set_click_event_per_page();
+	},
+	set_click_event_per_page: function(){
+		var self = this;
+		
+		jQuery("#wpfc-image-per-page").change(function(e){
+			self.update_image_list(0);
+		});
 	},
 	set_click_event_filter: function(){
 		var self = this;
@@ -74,6 +83,7 @@ var WpFcStatics = {
 	},
 	update_image_list: function(page, search){
 		var self = this;
+		self.per_page = jQuery("#wpfc-image-per-page").val();
 
 		if(page !== 0 && (page < 0 || (page > self.total_page - 1))){
 			return;
@@ -87,12 +97,12 @@ var WpFcStatics = {
 		jQuery.ajax({
 			type: 'GET',
 			url: self.url,
-			data : {"action": "wpfc_update_image_list_ajax_request", "page": page, "search" : search, "filter" : filter},
+			data : {"action": "wpfc_update_image_list_ajax_request", "page": page, "search" : search, "filter" : filter, 'per_page' : self.per_page},
 			dataType : "json",
 			cache: false, 
 			success: function(data){
 				if(typeof data != "undefined" && data){
-					self.total_page = Math.ceil(data.result_count/data.per_page);
+					self.total_page = Math.ceil(data.result_count/self.per_page);
 					self.total_page = self.total_page > 0 ? self.total_page : 1;
 
 					self.current_page = page;
