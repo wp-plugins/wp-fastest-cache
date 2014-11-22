@@ -345,7 +345,7 @@ span.deleteicon span {
 span.deleteicon span.cleared {
     background: none;
 }
-#wpfc-image-list-filter:-moz-focusring {
+#wpfc-image-list-filter:-moz-focusring, #wpfc-image-per-page:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
 }
