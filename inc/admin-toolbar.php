@@ -11,7 +11,7 @@
 
 			$wp_admin_bar->add_node(array(
 				'id'    => 'wpfc-toolbar-parent',
-				'title' => 'Fastest Cache'
+				'title' => ''
 			));
 
 			$wp_admin_bar->add_menu( array(
