@@ -29,7 +29,7 @@
 			}
 		}
 		public function load_admin_toolbar(){
-			if ( current_user_can( 'manage_options' ) ) {
+			if (current_user_can( 'manage_options' ) || current_user_can('edit_others_pages')) {
 				include_once plugin_dir_path(__FILE__)."admin-toolbar.php";
 
 				add_action('wp_ajax_wpfc_delete_cache', array($this, "deleteCacheToolbar"));
