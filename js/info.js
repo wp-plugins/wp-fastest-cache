@@ -83,7 +83,7 @@
 
 			Wpfclang.init(Wpfclang.language);
 			
-			windowHeight = ($(window).height() - helpTip.height())/2;
+			windowHeight = ($(window).height() - helpTip.height())/2 + $(window).scrollTop();
 			windowWidth = ($(window).width() - helpTip.width())/2;
 			helpTip.css({"top": windowHeight, "left": windowWidth});
 		}
