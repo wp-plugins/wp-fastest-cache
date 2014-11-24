@@ -74,7 +74,7 @@
 				return $buffer;
 			}else if($this->hasContactForm7WithCaptcha($buffer)){
 				return $buffer."<!-- This page was not cached because ContactForm7's captcha -->";
-			}else if($this->isMobile() && !class_exists("WpFcMobileCache")){
+			}else if($this->isMobile() && (class_exists("WpFcMobileCache") && !isset($this->options->wpFastestCacheMobileTheme))){
 				return $buffer;
 			}else if(is_404()){
 				return $buffer;

@@ -480,7 +480,7 @@
 
 			$data = $data.'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n";
 
-			if(class_exists("WpFcMobileCache")){
+			if(class_exists("WpFcMobileCache") && $this->options->wpFastestCacheMobileTheme){
 				$wpfc_mobile = new WpFcMobileCache();
 				$wpfc_mobile->set_wptouch($this->isPluginActive('wptouch/wptouch.php'));
 				$data = $data."\n\n\n".$wpfc_mobile->update_htaccess($data);
@@ -574,6 +574,8 @@
 
 
 			$wpFastestCacheMobile = isset($this->options->wpFastestCacheMobile) ? 'checked="checked"' : "";
+			$wpFastestCacheMobileTheme = isset($this->options->wpFastestCacheMobileTheme) ? 'checked="checked"' : "";
+
 			$wpFastestCacheNewPost = isset($this->options->wpFastestCacheNewPost) ? 'checked="checked"' : "";
 			
 			$wpFastestCacheRemoveComments = isset($this->options->wpFastestCacheRemoveComments) ? 'checked="checked"' : "";
@@ -631,6 +633,13 @@
 								<div class="question">Mobile</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMobile; ?> id="wpFastestCacheMobile" name="wpFastestCacheMobile"><label for="wpFastestCacheMobile">Don't show the cached version for mobile devices</label></div>
 							</div>
+
+							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
+							<div class="questionCon">
+								<div class="question">Mobile Theme</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMobileTheme; ?> id="wpFastestCacheMobileTheme" name="wpFastestCacheMobileTheme"><label for="wpFastestCacheMobileTheme">Create cache for mobile theme</label></div>
+							</div>
+							<?php } ?>
 
 							<div class="questionCon">
 								<div class="question">New Post</div>
