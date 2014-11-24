@@ -32,8 +32,8 @@ GNU General Public License for more details.
 												  );
 
 			if(isset($_GET) && isset($_GET["action"]) && in_array($_GET["action"], $optimize_image_ajax_requests)){
-				if(file_exists($this->getProLibraryPath("image.php"))){
-					include_once $this->getProLibraryPath("image.php");
+				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+					include_once $this->get_premium_path("image.php");
 					$img = new WpFastestCacheImageOptimisation();
 					$img->hook();
 				}
@@ -62,13 +62,13 @@ GNU General Public License for more details.
 					//for wp-panel
 					$this->setRegularCron();
 					
-					if(file_exists($this->getProLibraryPath("image.php"))){
-						include_once $this->getProLibraryPath("image.php");
+					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+						include_once $this->get_premium_path("image.php");
 						//$this->setImageOptimisationCron();
 					}
 
-					if(file_exists($this->getProLibraryPath("logs.php"))){
-						include_once $this->getProLibraryPath("logs.php");
+					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+						include_once $this->get_premium_path("logs.php");
 					}
 
 					$this->admin();
@@ -183,8 +183,8 @@ GNU General Public License for more details.
 				$path = $this->getWpContentDir()."/cache/all/".$out[1];
 				if(is_dir($path)){
 					
-					if(file_exists($this->getProLibraryPath("logs.php"))){
-						include_once $this->getProLibraryPath("logs.php");
+					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+						include_once $this->get_premium_path("logs.php");
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
@@ -210,8 +210,8 @@ GNU General Public License for more details.
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
-					if(file_exists($this->getProLibraryPath("logs.php"))){
-						include_once $this->getProLibraryPath("logs.php");
+					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+						include_once $this->get_premium_path("logs.php");
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
@@ -221,8 +221,8 @@ GNU General Public License for more details.
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
 					$this->systemMessage = array("All cache files have been deleted","success");
 					
-					if(file_exists($this->getProLibraryPath("logs.php"))){
-						include_once $this->getProLibraryPath("logs.php");
+					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+						include_once $this->get_premium_path("logs.php");
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
@@ -234,8 +234,8 @@ GNU General Public License for more details.
 				if($minified){
 					$this->systemMessage = array("Minified CSS and JS files have been deleted","success");
 					
-					if(file_exists($this->getProLibraryPath("logs.php"))){
-						include_once $this->getProLibraryPath("logs.php");
+					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+						include_once $this->get_premium_path("logs.php");
 						$log = new WpFastestCacheLogs("delete");
 						$log->action();
 					}
@@ -334,6 +334,10 @@ GNU General Public License for more details.
 
 		protected function getMobileUserAgents(){
 			return "iphone|sony|symbos|nokia|samsung|mobile|epoc|ericsson|panasonic|philips|sanyo|sharp|sie-|portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|android|blackberry|playbook|ipad|ipod|iemobile|palmos|webos|googlebot-mobile|bb10|xoom|p160u|nexus";
+		}
+
+		public function get_premium_path($name){
+			return $this->getWpContentDir()."/plugins/wp-fastest-cache-premium/pro/library/".$name;
 		}
 
 		public function getProLibraryPath($file){
