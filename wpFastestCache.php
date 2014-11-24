@@ -54,8 +54,8 @@ GNU General Public License for more details.
 					include_once $this->getProLibraryPath("mobile-cache.php");
 				}
 
-				if(file_exists($this->getProLibraryPath("powerful-html.php"))){
-					include_once $this->getProLibraryPath("powerful-html.php");
+				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+					include_once $this->get_premium_path("powerful-html.php");
 				}
 
 				if(is_admin()){
