@@ -42,7 +42,7 @@ window.wpfc.dictionary = {
 	"If you modify any css file, you have to delete minified css files" : "Al modificar cualquier archivo CSS deberá de eliminar los archivos CSS minificados",
 	"Delete Minified Css & Js" : "Borrar los archivos CSS & JS minificados",
 	"Delete Minified Css" : "Eliminar CSS minificado",
-	"Don't show the cached version for desktop to mobile devices" : "",
+	"Don't show the cached version for desktop to mobile devices" : "No mostrar el cache de la versión del ordenador de escritorio en dispositivos móviles",
 	"Leverage Browser Caching" : "Aumentar el uso del cache del navegador",
 	"Reduce the load times of pages by storing commonly used files from your website on your visitors browser." : "Guarda archivos en el navegador del visitante para que las páginas carguen más rápido",
 	"Reduce page load times for repeat visitors" : "Reducir el tiempo de carga para visitantes frecuentes",
