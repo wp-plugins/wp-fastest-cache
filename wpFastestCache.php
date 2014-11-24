@@ -50,8 +50,8 @@ GNU General Public License for more details.
 
 				register_deactivation_hook( __FILE__, array('WpFastestCache', 'deactivate') );
 
-				if(file_exists($this->getProLibraryPath("mobile-cache.php"))){
-					include_once $this->getProLibraryPath("mobile-cache.php");
+				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+					include_once $this->get_premium_path("mobile-cache.php");
 				}
 
 				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
