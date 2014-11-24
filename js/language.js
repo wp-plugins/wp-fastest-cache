@@ -29,7 +29,7 @@ var Wpfclang = {
 	translate: function(){
 		if(typeof window.wpfc != "undefined" && typeof window.wpfc.dictionary != "undefined"){
 			var self = this;
-			jQuery('#wpbody-content label, div.question, .questionCon input[type="submit"], #message p, .wrap h2, #nextVerAct, select option, th, #rule-help-tip h4, #rule-help-tip label, .omni_admin_sidebar h3, #message p').each(function(){
+			jQuery('#wpbody-content label, div.question, .questionCon input[type="submit"], #message p, .wrap h2, #nextVerAct, select option, th, #rule-help-tip h4, #rule-help-tip label, .omni_admin_sidebar h3, #message p, #wpfc-image-static-panel span, #wpfc-statics-right div, #wpfc-image-static-panel p, #container-show-hide-image-list span, #wpfc-image-list th').each(function(){
 				jQuery(this).wpfclang();
 			});
 		}

@@ -631,7 +631,7 @@
 
 							<div class="questionCon">
 								<div class="question">Mobile</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMobile; ?> id="wpFastestCacheMobile" name="wpFastestCacheMobile"><label for="wpFastestCacheMobile">Don't show the cached version for mobile devices</label></div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMobile; ?> id="wpFastestCacheMobile" name="wpFastestCacheMobile"><label for="wpFastestCacheMobile">Don't show the cached version for desktop to mobile devices</label></div>
 							</div>
 
 							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
