@@ -375,6 +375,21 @@ GNU General Public License for more details.
 		public function setCustomInterval(){
 			add_filter( 'cron_schedules', array($this, 'cron_add_minute'));
 		}
+
+		public function isPluginActive( $plugin ) {
+			return in_array( $plugin, (array) get_option( 'active_plugins', array() ) ) || $this->isPluginActiveForNetwork( $plugin );
+		}
+		
+		public function isPluginActiveForNetwork( $plugin ) {
+			if ( !is_multisite() )
+				return false;
+
+			$plugins = get_site_option( 'active_sitewide_plugins');
+			if ( isset($plugins[$plugin]) )
+				return true;
+
+			return false;
+		}
 	}
 
 	$wpfc = new WpFastestCache();
