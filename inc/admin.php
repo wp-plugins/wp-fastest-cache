@@ -754,7 +754,7 @@
 				    			</div>
 				    		</div>
 				   		</form>
-				   		<form method="post" name="wp_manager" class="delete-line">
+				   		<form method="post" name="wp_manager" class="delete-line" style="height: 120px;">
 				    		<input type="hidden" value="deleteCssAndJsCache" name="wpFastestCachePage">
 				    		<div class="questionCon qsubmit left">
 				    			<div class="submit"><input type="submit" value="Delete Cache and Minified CSS/JS" class="button-primary"></div>
@@ -763,8 +763,9 @@
 				    			<div style="padding-left:11px;">
 				    			<label>If you modify any css file, you have to delete minified css files</label><br>
 				    			<label>All cache files will be removed as well</label><br>
-				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/wpfc-minified</b><br>
-				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/all</b>
+				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/all</b><br>
+				    			<!-- <label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/wpfc-mobile-cache</b><br> -->
+				    			<label>Target folder</label> <b><?php echo $this->getWpContentDir(); ?>/cache/wpfc-minified</b>
 				    			</div>
 				    		</div>
 				   		</form>
