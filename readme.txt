@@ -74,6 +74,11 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 
 == Changelog ==
 
+= 0.8.3.2 =
+* to prevent comment out google analitics code
+* refactoring of isPasswordProtected()
+* the clear cache button on toolbar is available for editors
+
 = 0.8.3.1 =
 * index.html files have been added intead of .htaccess
 * to prevent comment out inline js rules twice
