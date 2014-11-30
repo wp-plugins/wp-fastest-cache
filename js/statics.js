@@ -13,6 +13,63 @@ var WpFcStatics = {
 		this.set_click_event_clear_search_text();
 		this.set_click_event_filter();
 		this.set_click_event_per_page();
+		this.set_click_event_buy_image_credit();
+	},
+	set_click_event_buy_image_credit: function(){
+		var self = this;
+
+		jQuery("#buy-image-credit").click(function(){
+
+			var shop = jQuery('<div id="wpfc-shop-modal" style="width: 500px;height: 100px;"></div>');
+			jQuery("body").append(shop);
+
+			var windowHeight = (jQuery(window).height() - shop.height())/2 + jQuery(window).scrollTop();
+			var windowWidth = (jQuery(window).width() - shop.width())/2;
+			shop.css({"top": windowHeight, "left": windowWidth});
+
+
+			jQuery.ajax({
+				type: 'GET', 
+				url: "http://berkatan.com/web/wp-content/plugins/wp-fastest-cache-premium/pro/templates/buy_credit.php",
+				cache: false,
+				error: function(x, t, m) {
+					alert(t);
+				},
+				success: function(data){
+					jQuery("#wpfc-shop-modal").css({"background" : "white"});
+					jQuery("#wpfc-shop-modal").html(data);
+
+					windowHeight = 35 + jQuery(window).scrollTop();
+					windowWidth = (jQuery(window).width() - shop.width())/2;
+					shop.css({"top": windowHeight, "left": windowWidth});
+
+					self.event_on_shop();
+
+				}
+			});
+		});
+	},
+	event_on_shop: function(){
+		jQuery("#wpfc-product-selection-list li").hover(function(e){
+			jQuery("#wpfc-product-selection-list li label").removeClass("hover");
+			jQuery(e.target).addClass("hover");
+		});
+
+		jQuery("#wpfc-product-selection-list li").click(function(e){
+			if(jQuery(e.target).prop("tagName") == "LABEL"){
+				jQuery("#wpfc-product-selection-list li label").removeClass("checked");
+				jQuery(e.target).addClass("checked");
+			}
+
+			if(jQuery(e.target).prop("tagName") == "INPUT"){
+				jQuery("#wpfc-product-selection-list li input").attr("checked", false);
+				jQuery(e.target).attr("checked", true);
+			}
+		});
+
+		jQuery("#wpfc-cancel-buy-credit").click(function(){
+			jQuery("#wpfc-shop-modal").remove();
+		});
 	},
 	set_click_event_per_page: function(){
 		var self = this;
