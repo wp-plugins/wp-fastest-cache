@@ -74,8 +74,6 @@
 				return $buffer;
 			}else if($this->hasContactForm7WithCaptcha($buffer)){
 				return $buffer."<!-- This page was not cached because ContactForm7's captcha -->";
-			}else if($this->isMobile() && (class_exists("WpFcMobileCache") && !isset($this->options->wpFastestCacheMobileTheme))){
-				return $buffer;
 			}else if(is_404()){
 				return $buffer;
 			}else if($this->ignored()){
@@ -88,10 +86,14 @@
 				return $buffer;
 			}else if($this->checkHtml($buffer)){
 				return $buffer."<!-- html is corrupted -->";
-			}else{
-				if($this->isMobile() && class_exists("WpFcMobileCache")){
-					$wpfc_mobile = new WpFcMobileCache();
-					$cachFilePath = $this->getWpContentDir()."/cache/".$wpfc_mobile->get_folder_name()."".$_SERVER["REQUEST_URI"];
+			}else{				
+				if($this->isMobile()){
+					if(class_exists("WpFcMobileCache") && isset($this->options->wpFastestCacheMobileTheme)){
+						$wpfc_mobile = new WpFcMobileCache();
+						$cachFilePath = $this->getWpContentDir()."/cache/".$wpfc_mobile->get_folder_name()."".$_SERVER["REQUEST_URI"];
+					}else{
+						return $buffer."<!-- mobile user -->";
+					}
 				}else{
 					$cachFilePath = $this->getWpContentDir()."/cache/all".$_SERVER["REQUEST_URI"];
 				}
