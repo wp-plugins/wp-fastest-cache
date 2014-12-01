@@ -61,6 +61,11 @@ var WpFcStatics = {
 				jQuery(e.target).addClass("checked");
 			}
 
+			if(jQuery(e.target).prop("tagName") == "SPAN"){
+				jQuery("#wpfc-product-selection-list li label").removeClass("checked");
+				jQuery(e.target).closest("LABEL").addClass("checked");
+			}
+
 			if(jQuery(e.target).prop("tagName") == "INPUT"){
 				jQuery("#wpfc-product-selection-list li input").attr("checked", false);
 				jQuery(e.target).attr("checked", true);
