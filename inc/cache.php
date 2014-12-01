@@ -157,9 +157,9 @@
 
 		public function cacheDate($buffer){
 			if($this->isMobile() && class_exists("WpFcMobileCache")){
-				return $buffer."<!-- Mobile: WP Fastest Cache file was created in ".$this->creationTime()." seconds, on ".date("d-m-y G:i:s")." -->";
+				return $buffer."<!-- Mobile: WP Fastest Cache file was created in ".$this->creationTime()." seconds, on ".date("d-m-y G:i:s")." ".$_SERVER['HTTP_USER_AGENT']."-->";
 			}else{
-				return $buffer."<!-- WP Fastest Cache file was created in ".$this->creationTime()." seconds, on ".date("d-m-y G:i:s")." -->";
+				return $buffer."<!-- WP Fastest Cache file was created in ".$this->creationTime()." seconds, on ".date("d-m-y G:i:s")." ".$_SERVER['HTTP_USER_AGENT']."-->";
 			}
 		}
 
