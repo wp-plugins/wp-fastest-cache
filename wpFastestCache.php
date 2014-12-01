@@ -64,7 +64,6 @@ GNU General Public License for more details.
 					
 					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
 						include_once $this->get_premium_path("image.php");
-						//$this->setImageOptimisationCron();
 					}
 
 					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
@@ -108,7 +107,6 @@ GNU General Public License for more details.
 
 			wp_clear_scheduled_hook("wp_fastest_cache");
 			wp_clear_scheduled_hook($wpfc->slug()."_regular");
-			wp_clear_scheduled_hook($wpfc->slug()."_imageOptimisation");
 
 			delete_option("WpFastestCache");
 			delete_option("WpFcDeleteCacheLogs");
@@ -250,8 +248,6 @@ GNU General Public License for more details.
 			add_action($this->slug(),  array($this, 'setSchedule'));
 			add_action($this->slug()."_TmpDelete",  array($this, 'actionDelete'));
 			add_action($this->slug()."_regular",  array($this, 'regularCrons'));
-
-			add_action($this->slug()."_imageOptimisation", array($this, 'imageOptimize'));
 		}
 
 		public function actionDelete(){
@@ -260,14 +256,6 @@ GNU General Public License for more details.
 				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
 					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete");
 				}
-			}
-		}
-
-		public function imageOptimize(){
-			if(class_exists("WpFastestCacheImageOptimisation")){
-				echo "rrr";
-				$image = new WpFastestCacheImageOptimisation();
-				$image->optimizeLastImage();
 			}
 		}
 
@@ -282,12 +270,6 @@ GNU General Public License for more details.
 		public function setRegularCron(){
 			if(!wp_next_scheduled($this->slug()."_regular")){
 				wp_schedule_event( time() + 360, 'everyfifteenminute', $this->slug()."_regular");
-			}
-		}
-
-		public function setImageOptimisationCron(){
-			if(!wp_next_scheduled($this->slug()."_imageOptimisation")){
-				wp_schedule_event( time() + 60, 'everyfifteenminute', $this->slug()."_imageOptimisation");
 			}
 		}
 
