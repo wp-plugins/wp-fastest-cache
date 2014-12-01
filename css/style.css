@@ -349,3 +349,11 @@ span.deleteicon span.cleared {
     color: transparent;
     text-shadow: 0 0 0 #000;
 }
+#buy-image-credit{
+    border: 1px solid; 
+    color: white; 
+    border-radius: 26px; 
+    background-color: rgb(61, 207, 60); 
+    cursor: pointer; 
+    padding: 5px 15px;
+}
