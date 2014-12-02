@@ -601,7 +601,7 @@ strong{display:block;position:relative}.tooltip-message{display:none;position:re
 .arrow{display:block;position:absolute;top: -12px;width:18px;height:12px;z-index: -190;background:url("../images/icons/icons-sprite.png") no-repeat;background-position: -90px 0}.tooltip-message .arrow::before{content:"";display:block;width:14px;height:14px;background-color:#D9F3FD;border-color:#D9F3FD;border-style:solid;border-left-width:1px;border-top-width:1px;border-right-width:0px;border-bottom-width:0px;top:22px;right:20px;position:relative;-webkit-transform:translate(-23px, -16px) rotate(45deg) skew(10deg, 10deg);-moz-transform:translate(-23px, -16px) rotate(45deg) skew(10deg, 10deg);-ms-transform:translate(-23px, -16px) rotate(45deg) skew(10deg, 10deg);-o-transform:translate(-23px, -16px) rotate(45deg) skew(10deg, 10deg);transform:translate(-23px, -16px) rotate(45deg) skew(10deg, 10deg);border-right-width:0px;border-bottom-width:0px;z-index: -100}
 
 #wpfc-shop-modal{
-    position: absolute; style=
+    position: absolute;
     display: block;
     background: url("../images/loader.gif") no-repeat scroll center center #ffffff;
 
