@@ -269,7 +269,12 @@ GNU General Public License for more details.
 
 		public function setRegularCron(){
 			if(!wp_next_scheduled($this->slug()."_regular")){
-				wp_schedule_event( time() + 360, 'everyfifteenminute', $this->slug()."_regular");
+				wp_schedule_event( time() + 360, 'everyfiveminute', $this->slug()."_regular");
+			}else{
+				if(wp_get_schedule($this->slug()."_regular") == "everyfifteenminute"){
+					wp_clear_scheduled_hook($this->slug()."_regular");
+					wp_schedule_event( time() + 360, 'everyfiveminute', $this->slug()."_regular");
+				}
 			}
 		}
 
@@ -330,6 +335,11 @@ GNU General Public License for more details.
 		}
 
 		public function cron_add_minute( $schedules ) {
+			$schedules['everyfiveminute'] = array(
+			    'interval' => 60*5,
+			    'display' => __( 'Once Every 5 Minutes' )
+		    );
+
 		   	$schedules['everyfifteenminute'] = array(
 			    'interval' => 60*15,
 			    'display' => __( 'Once Every 15 Minutes' )
