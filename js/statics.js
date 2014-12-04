@@ -1,11 +1,13 @@
 var WpFcStatics = {
 	ajax_url: "",
+	plugin_dir_url: "",
 	current_page: 0,
 	total_page: 0,
 	per_page: 5,
 	statics: {},
-	init: function(ajax_url){
+	init: function(ajax_url, plugin_dir_url){
 		this.ajax_url = ajax_url;
+		this.plugin_dir_url = plugin_dir_url;
 		this.set_click_event_show_hide_button();
 		this.set_click_event_optimize_image_button();
 		this.set_click_event_search_button();
@@ -30,7 +32,7 @@ var WpFcStatics = {
 
 			jQuery.ajax({
 				type: 'GET', 
-				url: "http://berkatan.com/web/wp-content/plugins/wp-fastest-cache-premium/pro/templates/buy_credit.php",
+				url: self.plugin_dir_url + "/wp-fastest-cache-premium/pro/templates/buy_credit.php",
 				cache: false,
 				error: function(x, t, m) {
 					alert(t);
