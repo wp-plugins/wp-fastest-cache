@@ -197,6 +197,10 @@
 				$create = true;
 			}elseif(($extension == "css" || $extension == "js") && $buffer && strlen($buffer) > 5){
 				$create = true;
+				$buffer = trim($buffer);
+				if(substr($buffer, -1) != ";"){
+					$buffer .= ";";
+				}
 			}
 
 			$cachFilePath = urldecode($cachFilePath);
