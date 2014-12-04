@@ -1,11 +1,11 @@
 var WpFcStatics = {
-	url: "",
+	ajax_url: "",
 	current_page: 0,
 	total_page: 0,
 	per_page: 5,
 	statics: {},
-	init: function(url){
-		this.url = url;
+	init: function(ajax_url){
+		this.ajax_url = ajax_url;
 		this.set_click_event_show_hide_button();
 		this.set_click_event_optimize_image_button();
 		this.set_click_event_search_button();
@@ -158,7 +158,7 @@ var WpFcStatics = {
 
 		jQuery.ajax({
 			type: 'GET',
-			url: self.url,
+			url: self.ajax_url,
 			data : {"action": "wpfc_update_image_list_ajax_request", "page": page, "search" : search, "filter" : filter, 'per_page' : self.per_page},
 			dataType : "json",
 			cache: false, 
@@ -220,7 +220,7 @@ var WpFcStatics = {
 
 		jQuery.ajax({
 			type: 'GET', 
-			url: self.url,
+			url: self.ajax_url,
 			dataType : "json",
 			data : {"action": "wpfc_optimize_image_ajax_request"},
 			cache: false,
@@ -263,7 +263,7 @@ var WpFcStatics = {
 
 		jQuery.ajax({
 			type: 'GET', 
-			url: self.url,
+			url: self.ajax_url,
 			dataType : "json",
 			data : {"action": "wpfc_statics_ajax_request"},
 			cache: false, 
@@ -323,7 +323,7 @@ var WpFcStatics = {
 
 			jQuery.ajax({
 				type: 'GET', 
-				url: self.url,
+				url: self.ajax_url,
 				dataType : "json",
 				data : {"action": "wpfc_revert_image_ajax_request", "id" : id},
 				cache: false, 
