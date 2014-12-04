@@ -599,6 +599,9 @@
 							array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimization"));
 						}
 
+						//array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
+
+
 						foreach ($tabs as $key => $value){
 							$checked = "";
 
@@ -811,11 +814,13 @@
 										$schedules = wp_get_schedules();
 										$first = true;
 										foreach ($schedules as $key => $value) {
-											if($first){
-												echo "<option value=''>Choose One</option>";
-												$first = false;
+											if(isset($value["wpfc"]) && $value["wpfc"]){
+												if($first){
+													echo "<option value=''>Choose One</option>";
+													$first = false;
+												}
+												echo "<option value='{$key}'>{$value["display"]}</option>";
 											}
-											echo "<option value='{$key}'>{$value["display"]}</option>";
 										}
 
 										// $arrSettings = array(array("value" => "", "text" => "Choose One"),
@@ -872,6 +877,142 @@
 				    		<?php $xxx->statics(); ?>
 					    	<?php $xxx->imageList(); ?>
 				    	<?php } ?>
+				    </div>
+				    <div class="tab5">
+				    	<style type="text/css">
+				    		#wpfc-premium-container{
+				    			overflow: hidden;
+				    		}
+				    		.wpfc-premium-step{
+				    			width: 246px;
+				    			float: left;
+				    			margin-left: 3px;
+				    		}
+				    		.wpfc-premium-step div{
+				    			float: left !important;
+				    		}
+				    		.wpfc-premium-step-header{
+				    			width: 100%; 
+				    			background-color: rgb(58, 158, 235); 
+				    			padding-top: 12px;
+				    			padding-bottom: 11px;
+				    			text-align: center;
+				    		}
+				    		.wpfc-premium-step-header label{
+				    			font-size: 17pt !important;
+				    			color: white !important;
+				    		}
+				    		.wpfc-premium-step-content{
+				    			font-size: 16px !important;
+				    			line-height: 20px !important;
+				    			padding-top: 25px !important;
+				    			padding-left: 25px !important;
+				    			height: 100px;
+				    		}
+				    		.wpfc-premium-step-footer p{
+				    			font-size: 15px !important;
+				    		}
+				    		.wpfc-premium-step-footer ul li{
+				    			background: url("<?php echo plugins_url("wp-fastest-cache/images/blue-check.png"); ?>") no-repeat scroll 0 2px transparent;
+				    			padding: 3px 30px;
+				    			font-size: 15px;
+				    		}
+				    		.wpfc-premium-step-footer{
+				    			padding-left: 25px;
+				    		}
+				    		.wpfc-premium-step-image{
+				    			width: 100%; 
+				    			height: 180px;
+				    			text-align: center;
+				    		}
+				    	</style>
+				    	<div id="wpfc-premium-container">
+				    		<div class="wpfc-premium-step">
+				    			<div class="wpfc-premium-step-header">
+				    				<label>Discover Feautures</label>
+				    			</div>
+				    			<div class="wpfc-premium-step-content">
+				    				In the premium version there are some new features which speed up the sites more.
+				    			</div>
+				    			<div class="wpfc-premium-step-image">
+				    				<img src="<?php echo plugins_url("wp-fastest-cache/images/rocket.png"); ?>" />
+				    			</div>
+				    			<div class="wpfc-premium-step-footer">
+				    				<h1>New Features</h1>
+				    				<ul>
+				    					<li>Image Optimization</li>
+				    					<li>Mobile Cache</li>
+				    					<li>Delete Cache Logs</li>
+				    					<li>Minify Html Plus</li>
+				    					<li>Combine JS Plus</li>
+				    				</ul>
+				    			</div>
+				    		</div>
+				    		<div class="wpfc-premium-step">
+				    			<div class="wpfc-premium-step-header">
+				    				<label>Checkout</label>
+				    			</div>
+				    			<div class="wpfc-premium-step-content">
+				    				You need to pay before download the premium version.
+				    			</div>
+				    			<div class="wpfc-premium-step-image">
+				    				<img width="140px" height="140px" src="<?php echo plugins_url("wp-fastest-cache/images/wallet.png"); ?>" />
+				    			</div>
+				    			<div class="wpfc-premium-step-footer">
+				    				<h1>Just $<span id="wpfc-premium-price"></span></h1>
+				    				<p>The download button will be available after paid. You can buy the premium version now.</p>
+				    				<form action="http://api.wpfastestcache.net/paypal/buypremium/" method="post">
+				    					<input type="hidden" name="hostname" value="<?php echo str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"]); ?>">
+					    				<button type="submit" class="btn primaryCta" style="width:200px;">
+					    					<span>Buy</span>
+					    				</button>
+				    				</form>
+				    			</div>
+				    		</div>
+				    		<div class="wpfc-premium-step">
+				    			<div class="wpfc-premium-step-header">
+				    				<label>Download & Update</label>
+				    			</div>
+				    			<div class="wpfc-premium-step-content">
+				    				You can download and update the premium when you want if you paid.
+				    			</div>
+				    			<div class="wpfc-premium-step-image" style="">
+				    				<img src="<?php echo plugins_url("wp-fastest-cache/images/download-128x128.png"); ?>" />
+				    			</div>
+				    			<div class="wpfc-premium-step-footer">
+				    				<h1>Get Now!</h1>
+				    				<p>Please don't delete free version. Premium version works with free version.</p>
+				    				<button class="btn primaryNegativeCta" style="width:200px;">
+				    					<span>Download</span>
+				    				</button>
+				    				<!--
+				    				<button class="btn primaryNegativeCta" style="width:200px;">
+				    					<span>Update</span>
+				    					<label>(v 1.0)</label>
+				    				</button>
+				    			-->
+				    			</div>
+				    		</div>
+				    	</div>
+				    	<script type="text/javascript">
+				    		jQuery("#wpfc-premium").change(function(e){
+				    			jQuery("#revert-loader-toolbar").show();
+				    			jQuery.ajax({
+									type: 'GET', 
+									url: "http://api.wpfastestcache.net/prices/premium/",
+									cache: false,
+									error: function(x, t, m) {
+										alert(t);
+									},
+									success: function(data){
+										jQuery("#revert-loader-toolbar").hide();
+										console.log(data);
+										jQuery("#wpfc-premium-price").text(data);
+									}
+								});
+				    		});
+				    		jQuery(".primaryNegativeCta").css({"backgroundColor" : "#E4EEF2"});
+				    	</script>
 				    </div>
 				</div>
 				<div class="omni_admin_sidebar">
