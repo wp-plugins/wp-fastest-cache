@@ -879,6 +879,11 @@
 				    	<?php } ?>
 				    </div>
 				    <div class="tab5">
+				    	<?php
+				    		if(!get_option("WpFc_api_key")){
+				    			update_option("WpFc_api_key", md5(microtime(true)));
+				    		}
+				    	?>
 				    	<style type="text/css">
 				    		#wpfc-premium-container{
 				    			overflow: hidden;
@@ -983,37 +988,20 @@
 				    				<h1>Get Now!</h1>
 				    				<p>Please don't delete free version. Premium version works with free version.</p>
 
-		    						<?php
-		    							$current_version_number = "";
-		    							$update_button_class = "btn primaryDisableCta";
-										$response = wp_remote_get("http://api.wpfastestcache.net/premium/version", array('timeout' => 10 ) );
-
-										if ( !$response || is_wp_error( $response ) ) {
-											$update_button_class = "btn primaryDisableCta";
-										}else{
-											if(wp_remote_retrieve_response_code($response) == 200){
-												$current_version_number = wp_remote_retrieve_body( $response );
-												if(!$current_version_number){
-													$update_button_class = "btn primaryDisableCta";
-												}
-											}
-										}
-		    						?>
 
 
-				    				<button id="wpfc-download-premium-button" class="<?php echo $update_button_class; ?>" style="width:200px;">
+				    				<button id="wpfc-download-premium-button" class="btn primaryDisableCta" style="width:200px;">
+				    					<?php $wpfc_premium_version = ""; ?>
 				    					<?php if(file_exists(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){ ?>
 				    						<?php
 				    							if($data = @file_get_contents(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){
 				    								preg_match("/Version:\s*(.+)/", $data, $out);
 				    								if(isset($out[1]) && $out[1]){
-					    								if(trim($out[1]) != $current_version_number){
-					    									$update_button_class = "btn primaryCta";
-					    								}
+				    									$wpfc_premium_version = trim($out[1]);
 				    								}
 				    							}
 				    						?>
-				    						<span>Update - <?php echo $current_version_number; ?></span>
+				    						<span>Update</span>
 				    					<?php }else{ ?>
 				    						<span data-type="download">Download</span>
 				    					<?php } ?>
@@ -1049,11 +1037,26 @@
 											success: function(credit){
 												jQuery("#revert-loader-toolbar").hide();
 												if(credit == "premium"){
+													var version_in_site = "<?php echo $wpfc_premium_version; ?>";
+													var download_button_span = jQuery("#wpfc-download-premium-button span");
+
 													jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
 													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
-													var download_button_span = jQuery("#wpfc-download-premium-button span");
+
 													if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
 														jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+													}else{
+										    			jQuery.ajax({
+															type: 'GET', 
+															url: "http://api.wpfastestcache.net/premium/version/",
+															cache: false,
+															error: function(x, t, m) {
+																alert(t);
+															},
+															success: function(version){
+																console.log(version, "version", version_in_site);
+															}
+														});
 													}
 												}
 											}
