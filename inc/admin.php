@@ -982,9 +982,38 @@
 				    			<div class="wpfc-premium-step-footer">
 				    				<h1>Get Now!</h1>
 				    				<p>Please don't delete free version. Premium version works with free version.</p>
-				    				<button id="wpfc-download-premium-button" class="btn primaryDisableCta" style="width:200px;">
-				    					<?php if($this->isPluginActive('wp-fastest-cache-premium/wpFastestCachePremium.php')){ ?>
-				    						<span>Update</span>
+
+		    						<?php
+		    							$current_version_number = "";
+		    							$update_button_class = "btn primaryDisableCta";
+										$response = wp_remote_get("http://api.wpfastestcache.net/premium/version", array('timeout' => 10 ) );
+
+										if ( !$response || is_wp_error( $response ) ) {
+											$update_button_class = "btn primaryDisableCta";
+										}else{
+											if(wp_remote_retrieve_response_code($response) == 200){
+												$current_version_number = wp_remote_retrieve_body( $response );
+												if(!$current_version_number){
+													$update_button_class = "btn primaryDisableCta";
+												}
+											}
+										}
+		    						?>
+
+
+				    				<button id="wpfc-download-premium-button" class="<?php echo $update_button_class; ?>" style="width:200px;">
+				    					<?php if(file_exists(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){ ?>
+				    						<?php
+				    							if($data = @file_get_contents(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){
+				    								preg_match("/Version:\s*(.+)/", $data, $out);
+				    								if(isset($out[1]) && $out[1]){
+					    								if(trim($out[1]) != $current_version_number){
+					    									$update_button_class = "btn primaryCta";
+					    								}
+				    								}
+				    							}
+				    						?>
+				    						<span>Update - <?php echo $current_version_number; ?></span>
 				    					<?php }else{ ?>
 				    						<span>Download</span>
 				    					<?php } ?>
@@ -1021,7 +1050,7 @@
 												jQuery("#revert-loader-toolbar").hide();
 												if(credit == "premium"){
 													jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
-													jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+													//jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
 													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
 												}
 											}
