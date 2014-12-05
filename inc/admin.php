@@ -1015,7 +1015,7 @@
 				    						?>
 				    						<span>Update - <?php echo $current_version_number; ?></span>
 				    					<?php }else{ ?>
-				    						<span>Download</span>
+				    						<span data-type="download">Download</span>
 				    					<?php } ?>
 				    				</button>
 				    				<!--
@@ -1050,8 +1050,11 @@
 												jQuery("#revert-loader-toolbar").hide();
 												if(credit == "premium"){
 													jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
-													//jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
 													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
+													var download_button_span = jQuery("#wpfc-download-premium-button span");
+													if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
+														jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+													}
 												}
 											}
 										});
