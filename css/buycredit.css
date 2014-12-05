@@ -653,3 +653,9 @@ strong{display:block;position:relative}.tooltip-message{display:none;position:re
     color: #333534;
     border-color: #c0dce6
 }
+
+.btn.primaryDisableCta {
+    background-color: #e4eef2;
+    color: #333534;
+    border-color: #c0dce6
+}

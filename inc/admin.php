@@ -963,7 +963,7 @@
 				    				<p>The download button will be available after paid. You can buy the premium version now.</p>
 				    				<form action="http://api.wpfastestcache.net/paypal/buypremium/" method="post">
 				    					<input type="hidden" name="hostname" value="<?php echo str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"]); ?>">
-					    				<button type="submit" class="btn primaryCta" style="width:200px;">
+					    				<button id="wpfc-buy-premium-button" type="submit" class="btn primaryCta" style="width:200px;">
 					    					<span>Buy</span>
 					    				</button>
 				    				</form>
@@ -982,8 +982,12 @@
 				    			<div class="wpfc-premium-step-footer">
 				    				<h1>Get Now!</h1>
 				    				<p>Please don't delete free version. Premium version works with free version.</p>
-				    				<button class="btn primaryNegativeCta" style="width:200px;">
-				    					<span>Download</span>
+				    				<button id="wpfc-download-premium-button" class="btn primaryDisableCta" style="width:200px;">
+				    					<?php if($this->isPluginActive('wp-fastest-cache-premium/wpFastestCachePremium.php')){ ?>
+				    						<span>Update</span>
+				    					<?php }else{ ?>
+				    						<span>Download</span>
+				    					<?php } ?>
 				    				</button>
 				    				<!--
 				    				<button class="btn primaryNegativeCta" style="width:200px;">
@@ -1004,14 +1008,27 @@
 									error: function(x, t, m) {
 										alert(t);
 									},
-									success: function(data){
-										jQuery("#revert-loader-toolbar").hide();
-										console.log(data);
-										jQuery("#wpfc-premium-price").text(data);
+									success: function(price){
+										jQuery("#wpfc-premium-price").text(price);
+						    			jQuery.ajax({
+											type: 'GET', 
+											url: "http://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/type/<?php echo get_option("WpFc_api_key"); ?>",
+											cache: false,
+											error: function(x, t, m) {
+												alert(t);
+											},
+											success: function(credit){
+												jQuery("#revert-loader-toolbar").hide();
+												if(credit == "premium"){
+													jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
+													jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
+												}
+											}
+										});
 									}
 								});
 				    		});
-				    		jQuery(".primaryNegativeCta").css({"backgroundColor" : "#E4EEF2"});
 				    	</script>
 				    </div>
 				</div>
