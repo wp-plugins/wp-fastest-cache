@@ -1016,64 +1016,18 @@
 				    		</div>
 				    	</div>
 				    	<script type="text/javascript">
+				    		if(jQuery(".tab5").is(":visible")){
+				    			jQuery(document).ready(function(){
+					    			wpfc_premium_page();
+				    			});
+				    		}
+
 				    		jQuery("#wpfc-premium").change(function(e){
-				    			jQuery("#revert-loader-toolbar").show();
-				    			jQuery.ajax({
-									type: 'GET', 
-									url: "http://api.wpfastestcache.net/prices/premium/",
-									cache: false,
-									error: function(x, t, m) {
-										alert(t);
-									},
-									success: function(price){
-										jQuery("#wpfc-premium-price").text(price);
-						    			jQuery.ajax({
-											type: 'GET', 
-											url: "http://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/type/<?php echo get_option("WpFc_api_key"); ?>",
-											cache: false,
-											error: function(x, t, m) {
-												alert(t);
-											},
-											success: function(credit){
-												if(credit == "premium"){
-													var version_in_site = "<?php echo $wpfc_premium_version; ?>";
-													var download_button_span = jQuery("#wpfc-download-premium-button span");
-
-													jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
-													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
-
-													if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
-														jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
-													}else{
-										    			jQuery.ajax({
-															type: 'GET', 
-															url: "http://api.wpfastestcache.net/premium/version/",
-															cache: false,
-															error: function(x, t, m) {
-																alert(t);
-															},
-															success: function(version){
-																jQuery("#revert-loader-toolbar").hide();
-																if(version_in_site == version){
-																	download_button_span.text("Version - " + version);
-																	jQuery("#wpfc-download-premium-button").attr("disabled", true);
-																}else{
-																	download_button_span.text("Update - " + version);
-																	jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
-																}
-																console.log(version, "version", version_in_site, download_button_span);
-															}
-														});
-													}
-												}else{
-													jQuery("#revert-loader-toolbar").hide();
-												}
-											}
-										});
-									}
-								});
+				    			wpfc_premium_page();
 				    		});
+
 							jQuery("#wpfc-download-premium-button").click(function(){
+								jQuery("#revert-loader-toolbar").show();
 								jQuery.ajax({
 									type: 'GET',
 									url: "<?php echo admin_url(); ?>admin-ajax.php",
@@ -1090,6 +1044,64 @@
 									}
 								});
 							});
+
+							function wpfc_premium_page(){
+								jQuery("#revert-loader-toolbar").show();
+					    			jQuery.ajax({
+										type: 'GET', 
+										url: "http://api.wpfastestcache.net/prices/premium/",
+										cache: false,
+										error: function(x, t, m) {
+											alert(t);
+										},
+										success: function(price){
+											jQuery("#wpfc-premium-price").text(price);
+							    			jQuery.ajax({
+												type: 'GET', 
+												url: "http://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/type/<?php echo get_option("WpFc_api_key"); ?>",
+												cache: false,
+												error: function(x, t, m) {
+													alert(t);
+												},
+												success: function(credit){
+													if(credit == "premium"){
+														var version_in_site = "<?php echo $wpfc_premium_version; ?>";
+														var download_button_span = jQuery("#wpfc-download-premium-button span");
+
+														jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
+														jQuery("#wpfc-buy-premium-button").attr("disabled", true);
+
+														if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
+															jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+														}else{
+											    			jQuery.ajax({
+																type: 'GET', 
+																url: "http://api.wpfastestcache.net/premium/version/",
+																cache: false,
+																error: function(x, t, m) {
+																	alert(t);
+																},
+																success: function(version){
+																	jQuery("#revert-loader-toolbar").hide();
+																	if(version_in_site == version){
+																		download_button_span.text("Version - " + version);
+																		jQuery("#wpfc-download-premium-button").attr("disabled", true);
+																	}else{
+																		download_button_span.text("Update - " + version);
+																		jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+																	}
+																	console.log(version, "version", version_in_site, download_button_span);
+																}
+															});
+														}
+													}else{
+														jQuery("#revert-loader-toolbar").hide();
+													}
+												}
+											});
+										}
+									});
+							}
 				    	</script>
 				    </div>
 				</div>
