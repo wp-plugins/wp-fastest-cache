@@ -31,7 +31,62 @@ GNU General Public License for more details.
 												  "wpfc_update_image_list_ajax_request"
 												  );
 
-			if(isset($_GET) && isset($_GET["action"]) && in_array($_GET["action"], $optimize_image_ajax_requests)){
+			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_download_premium"){
+				$res = array();
+				$response = wp_remote_get("http://api.wpfastestcache.net/premium/download/".str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"])."/".get_option("WpFc_api_key"), array('timeout' => 10 ) );
+
+				if ( !$response || is_wp_error( $response ) ) {
+					$res = array("success" => false, "error_message" => $response->get_error_message());
+				}else{
+					if(wp_remote_retrieve_response_code($response) == 200){
+						$wpfc_premium_download_link = wp_remote_retrieve_body( $response );
+						if($wpfc_premium_download_link){
+							if($wpfc_zip_data = @file_get_contents($wpfc_premium_download_link)){
+
+								$wpfc_zip_dest_path = $this->getWpContentDir()."/plugins/wp-fastest-cache-premium.zip";
+
+								if(@file_put_contents($wpfc_zip_dest_path, $wpfc_zip_data)){
+
+									include_once ABSPATH."wp-admin/includes/file.php";
+									include_once ABSPATH."wp-admin/includes/plugin.php";
+
+									if(function_exists("unzip_file")){
+										$this->rm_folder_recursively($this->getWpContentDir()."/plugins/wp-fastest-cache-premium");
+										
+										WP_Filesystem();
+										$unzipfile = unzip_file($wpfc_zip_dest_path, $this->getWpContentDir()."/plugins/");
+
+
+										if ( $unzipfile ) {
+											$result = activate_plugin( 'wp-fastest-cache-premium/wpFastestCachePremium.php' );
+
+											if ( is_wp_error( $result ) ) {
+												$res = array("success" => false, "error_message" => "Please activate Wp Fastest Cache Premium"); 
+											}else{
+												$res = array("success" => true);   
+											}
+										} else {
+											$res = array("success" => false, "error_message" => 'There was an error unzipping the file.');      
+										}
+									}else{
+										$res = array("success" => false, "error_message" => "/wp-content/plugins/ is not writable");
+									}
+								}else{
+									$res = array("success" => false, "error_message" => "/wp-content/plugins/ is not writable");
+								}
+							}else{
+								$res = array("success" => false, "error_message" => "Error: Service is unavailable. Try later...");
+							}
+						}else{
+							$res = array("success" => false, "error_message" => "Error: Link is empty");
+						}
+					}else{
+						$res = array("success" => false, "error_message" => "Error: Try later...");
+					}
+				}
+				echo json_encode($res);
+				exit;
+			}else if(isset($_GET) && isset($_GET["action"]) && in_array($_GET["action"], $optimize_image_ajax_requests)){
 				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
 					include_once $this->get_premium_path("image.php");
 					$img = new WpFastestCacheImageOptimisation();

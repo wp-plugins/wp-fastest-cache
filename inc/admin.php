@@ -1064,6 +1064,23 @@
 									}
 								});
 				    		});
+							jQuery("#wpfc-download-premium-button").click(function(){
+								jQuery.ajax({
+									type: 'GET',
+									url: "<?php echo admin_url(); ?>admin-ajax.php",
+									data : {"action": "wpfc_download_premium"},
+									dataType : "json",
+									cache: false, 
+									success: function(data){
+										if(data.success){
+											 location.reload();
+										}else{
+											alert(data.error_message);
+										}
+										console.log(data, "data");
+									}
+								});
+							});
 				    	</script>
 				    </div>
 				</div>
