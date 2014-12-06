@@ -1035,7 +1035,6 @@
 												alert(t);
 											},
 											success: function(credit){
-												jQuery("#revert-loader-toolbar").hide();
 												if(credit == "premium"){
 													var version_in_site = "<?php echo $wpfc_premium_version; ?>";
 													var download_button_span = jQuery("#wpfc-download-premium-button span");
@@ -1054,10 +1053,20 @@
 																alert(t);
 															},
 															success: function(version){
-																console.log(version, "version", version_in_site);
+																jQuery("#revert-loader-toolbar").hide();
+																if(version_in_site == version){
+																	download_button_span.text("Version - " + version);
+																	jQuery("#wpfc-download-premium-button").attr("disabled", true);
+																}else{
+																	download_button_span.text("Update - " + version);
+																	jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+																}
+																console.log(version, "version", version_in_site, download_button_span);
 															}
 														});
 													}
+												}else{
+													jQuery("#revert-loader-toolbar").hide();
 												}
 											}
 										});
