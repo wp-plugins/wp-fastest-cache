@@ -599,7 +599,9 @@
 							array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimization"));
 						}
 
-						//array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
+						if(get_bloginfo( "language" ) == "tr-TR"){
+							array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
+						}
 
 
 						foreach ($tabs as $key => $value){
@@ -1073,6 +1075,7 @@
 
 														if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
 															jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+															jQuery("#revert-loader-toolbar").hide();
 														}else{
 											    			jQuery.ajax({
 																type: 'GET', 
