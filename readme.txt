@@ -54,6 +54,10 @@ http://www.youtube.com/watch?v=5XzkiLr1FYE
 * Русский
 * Türkçe
 
+<h4>Official Web Site</h4>
+
+You can find the more information on our web site which is <a href="http://www.wpfastestcache.com/">Wordpress Plugin</a>
+
 <img src="http://www.alastyr.com/sss/wp-content/uploads/2012/11/alastyrlogo.png" />
 
 == Installation ==
