@@ -1,41 +1,41 @@
 ;(function($) {
-	$(".get-info").click(function(e){
-		var input = $(this).prev(".inputCon").find("input");
-		var options = {"h4": "", "h1" : ""};
-		if(input.attr("id") == "wpFastestCacheNewPost"){
+	// $(".get-info").click(function(e){
+	// 	var input = $(this).prev(".inputCon").find("input");
+	// 	var options = {"h4": "", "h1" : ""};
+	// 	if(input.attr("id") == "wpFastestCacheNewPost"){
 
-		}else if(input.attr("id") == "wpFastestCacheMinifyHtml"){
-			options.h4 = "Minify HTML";
-			options.h1 = "<label>Compacting HTML code, including any inline JavaScript and CSS contained in it, can save many bytes of data and speed up downloading, parsing, and execution time.</label>";
-		}else if(input.attr("id") == "wpFastestCacheMinifyCss"){
-			options.h4 = "Minify Css";
-			options.h1 = "<label>Compacting CSS code can save many bytes of data and speed up downloading, parsing, and execution time.</label>";
-		}else if(input.attr("id") == "wpFastestCacheGzip"){
-			options.h4 = "Enable Gzip Compression";
-			options.h1 = "<label>Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser.</label><br><br>" + 
-						"- <label>Reduce sizes of pages by up to 70%</label><br>" + 
-						"- <label>Increase page speed</label><br>" +
-						"- <label>Cost-benefit ratio: high</label><br>";
-		}else if(input.attr("id") == "wpFastestCacheLBC"){
-			options.h4 = "Leverage Browser Caching";
-			options.h1 = "<label>Reduce the load times of pages by storing commonly used files from your website on your visitors browser.</label><br><br>" + 
-						"- <label>Reduce page load times for repeat visitors</label><br>" + 
-						"- <label>Particularly effective on websites where users regularly re-visit the same areas of the website</label><br>" +
-						"- <label>Cost-benefit ratio: high</label><br>";
-		}else if(input.attr("id") == "wpFastestCacheCombineJs"){
-			options.h4 = "Combine Js";
-			options.h1 = "<label>This feature combines the JS files between &#60;head&#62;&#60;/head&#62;. Decreasing the number of javascript files on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
-		}else if(input.attr("id") == "wpFastestCacheCombineCss"){
-			options.h4 = "Combine Css";
-			options.h1 = "<label>Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
-		}else if(input.attr("id") == "wpFastestCacheKeepAlive"){
-			options.h4 = "Enable Keep-Alive";
-			options.h1 = "<label>Enabling HTTP Keep-Alive or HTTP persistent connections allow the same TCP connection to send and receive multiple HTTP requests, thus reducing the latency for subsequent requests.</label>";
-		}
+	// 	}else if(input.attr("id") == "wpFastestCacheMinifyHtml"){
+	// 		options.h4 = "Minify HTML";
+	// 		options.h1 = "<label>Compacting HTML code, including any inline JavaScript and CSS contained in it, can save many bytes of data and speed up downloading, parsing, and execution time.</label>";
+	// 	}else if(input.attr("id") == "wpFastestCacheMinifyCss"){
+	// 		options.h4 = "Minify Css";
+	// 		options.h1 = "<label>Compacting CSS code can save many bytes of data and speed up downloading, parsing, and execution time.</label>";
+	// 	}else if(input.attr("id") == "wpFastestCacheGzip"){
+	// 		options.h4 = "Enable Gzip Compression";
+	// 		options.h1 = "<label>Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser.</label><br><br>" + 
+	// 					"- <label>Reduce sizes of pages by up to 70%</label><br>" + 
+	// 					"- <label>Increase page speed</label><br>" +
+	// 					"- <label>Cost-benefit ratio: high</label><br>";
+	// 	}else if(input.attr("id") == "wpFastestCacheLBC"){
+	// 		options.h4 = "Leverage Browser Caching";
+	// 		options.h1 = "<label>Reduce the load times of pages by storing commonly used files from your website on your visitors browser.</label><br><br>" + 
+	// 					"- <label>Reduce page load times for repeat visitors</label><br>" + 
+	// 					"- <label>Particularly effective on websites where users regularly re-visit the same areas of the website</label><br>" +
+	// 					"- <label>Cost-benefit ratio: high</label><br>";
+	// 	}else if(input.attr("id") == "wpFastestCacheCombineJs"){
+	// 		options.h4 = "Combine Js";
+	// 		options.h1 = "<label>This feature combines the JS files between &#60;head&#62;&#60;/head&#62;. Decreasing the number of javascript files on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
+	// 	}else if(input.attr("id") == "wpFastestCacheCombineCss"){
+	// 		options.h4 = "Combine Css";
+	// 		options.h1 = "<label>Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads.</label>";
+	// 	}else if(input.attr("id") == "wpFastestCacheKeepAlive"){
+	// 		options.h4 = "Enable Keep-Alive";
+	// 		options.h1 = "<label>Enabling HTTP Keep-Alive or HTTP persistent connections allow the same TCP connection to send and receive multiple HTTP requests, thus reducing the latency for subsequent requests.</label>";
+	// 	}
 
-		options.type = input.attr("id");
-		modifyHelpTip(options);
-	});
+	// 	options.type = input.attr("id");
+	// 	modifyHelpTip(options);
+	// });
 	lbcWarning();
 	function lbcWarning(){
 		$('#wpFastestCacheLBC').click(function(e){
