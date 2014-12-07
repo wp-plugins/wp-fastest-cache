@@ -78,6 +78,11 @@ You can find the more information on our web site which is <a href="http://www.w
 
 == Changelog ==
 
+= 0.8.3.3 =
+* WPtouch issue has been solved
+* improvement of cache delete
+* to add ";" at the end of JS file if it does not exist
+
 = 0.8.3.2 =
 * to prevent comment out google analitics code
 * refactoring of isPasswordProtected()
