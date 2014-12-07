@@ -599,7 +599,7 @@
 							array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimization"));
 						}
 
-						if(get_bloginfo( "language" ) == "tr-TR"){
+						if(get_bloginfo( "language" ) == "tr-TR" || get_bloginfo( "language" ) == "it-IT"){
 							array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
 						}
 
