@@ -1,4 +1,4 @@
-;(function($) {
+(function() {
 	// $(".get-info").click(function(e){
 	// 	var input = $(this).prev(".inputCon").find("input");
 	// 	var options = {"h4": "", "h1" : ""};
@@ -36,56 +36,63 @@
 	// 	options.type = input.attr("id");
 	// 	modifyHelpTip(options);
 	// });
-	lbcWarning();
-	function lbcWarning(){
-		$('#wpFastestCacheLBC').click(function(e){
-			var options = {"h4": "", "h1" : ""};
 
-			options.h4 = "*** Attention ***";
-			options.h1 = "<label>If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below.</label><br><br>" + 
-						"<label>Open .htaccess and remove this rule</label><br><br>"+
-						"<label>&#60;IfModule mod_expires.c&#62;</label><br>"+
-						"<label>ExpiresActive On</label><br>"+
-						"<label>ExpiresDefault A0</label><br>"+
-						"<label>ExpiresByType image/gif A2592000</label><br>"+
-						"<label>ExpiresByType image/png A2592000</label><br>"+
-						"<label>ExpiresByType image/jpg A2592000</label><br>"+
-						"<label>ExpiresByType image/jpeg A2592000</label><br>"+
-						"<label>ExpiresByType image/ico A2592000</label><br>"+
-						"<label>ExpiresByType text/css A2592000</label><br>"+
-						"<label>ExpiresByType text/javascript A2592000</label><br>"+
-						"<label>&#60;/IfModule&#62;</label><br>";
+	var WpfcAlert = {
+		init: function(){
+			this.lbcWarning();
+		},
+		modifyHelpTip: function(options){
+			var helpTip = jQuery('<div id="rule-help-tip" style="display: block;"><div title="Close Window" class="close-window"> </div><h4></h4><h1 class="summary-rec"></h1><p></p></div>');
+			var windowHeight;
+			var windowWidth;
 
-			modifyHelpTip(options);
-		});
-	}
-	function modifyHelpTip(options){
-		var helpTip = $('<div id="rule-help-tip" style="display: block;"><div title="Close Window" class="close-window"> </div><h4></h4><h1 class="summary-rec"></h1><p></p></div>');
-		var windowHeight;
-		var windowWidth;
+			helpTip.find("div.close-window").click(function(){
+				helpTip.remove();
+			});
 
-		helpTip.find("div.close-window").click(function(){
-			helpTip.remove();
-		});
+			helpTip.attr("data-type", options.type);
+			helpTip.find("h4").text(options.h4);
+			helpTip.find("h1").html(options.h1);
 
-		helpTip.attr("data-type", options.type);
-		helpTip.find("h4").text(options.h4);
-		helpTip.find("h1").html(options.h1);
+			var prevHelpTip = jQuery('div[data-type="' + options.type + '"]');
+			if(prevHelpTip.length > 0){
+				prevHelpTip.remove();
+			}else{
+				if(jQuery('#rule-help-tip').length > 0){
+					jQuery('#rule-help-tip').remove();
+				}
+				jQuery("body").append(helpTip);
 
-		var prevHelpTip = $('div[data-type="' + options.type + '"]');
-		if(prevHelpTip.length > 0){
-			prevHelpTip.remove();
-		}else{
-			if($('#rule-help-tip').length > 0){
-				$('#rule-help-tip').remove();
+				Wpfclang.init(Wpfclang.language);
+				
+				windowHeight = (jQuery(window).height() - helpTip.height())/2 + jQuery(window).scrollTop();
+				windowWidth = (jQuery(window).width() - helpTip.width())/2;
+				helpTip.css({"top": windowHeight, "left": windowWidth});
 			}
-			$("body").append(helpTip);
+		},
+		lbcWarning: function(){
+			jQuery('#wpFastestCacheLBC').click(function(e){
+				var options = {"h4": "", "h1" : ""};
 
-			Wpfclang.init(Wpfclang.language);
-			
-			windowHeight = ($(window).height() - helpTip.height())/2 + $(window).scrollTop();
-			windowWidth = ($(window).width() - helpTip.width())/2;
-			helpTip.css({"top": windowHeight, "left": windowWidth});
+				options.h4 = "*** Attention ***";
+				options.h1 = "<label>If your server does not support mod_expires.c, this option can cause the Internel Server Error (500). If you see such error please do the steps below.</label><br><br>" + 
+							"<label>Open .htaccess and remove this rule</label><br><br>"+
+							"<label>&#60;IfModule mod_expires.c&#62;</label><br>"+
+							"<label>ExpiresActive On</label><br>"+
+							"<label>ExpiresDefault A0</label><br>"+
+							"<label>ExpiresByType image/gif A2592000</label><br>"+
+							"<label>ExpiresByType image/png A2592000</label><br>"+
+							"<label>ExpiresByType image/jpg A2592000</label><br>"+
+							"<label>ExpiresByType image/jpeg A2592000</label><br>"+
+							"<label>ExpiresByType image/ico A2592000</label><br>"+
+							"<label>ExpiresByType text/css A2592000</label><br>"+
+							"<label>ExpiresByType text/javascript A2592000</label><br>"+
+							"<label>&#60;/IfModule&#62;</label><br>";
+
+				WpfcAlert.modifyHelpTip(options);
+			});
 		}
-	}
-})(jQuery);
+	};
+
+	WpfcAlert.init();
+})();
