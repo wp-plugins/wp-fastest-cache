@@ -198,8 +198,10 @@
 			}elseif(($extension == "css" || $extension == "js") && $buffer && strlen($buffer) > 5){
 				$create = true;
 				$buffer = trim($buffer);
-				if(substr($buffer, -1) != ";"){
-					$buffer .= ";";
+				if($extension == "js"){
+					if(substr($buffer, -1) != ";"){
+						$buffer .= ";";
+					}
 				}
 			}
 
