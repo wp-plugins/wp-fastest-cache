@@ -30,6 +30,15 @@
 				$out[2] = array_unique($out[2]);
 
 				foreach ($out[2] as $key => $value) {
+
+					$value = trim($value);
+
+					// to prevent inline to external if the style is used in the javascript
+					if(in_array($value[0], array(";","'",'"'))){
+						continue;
+					}
+
+
 					$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($value);
 					$cssLink = content_url()."/cache/wpfc-minified/".md5($value);
 
