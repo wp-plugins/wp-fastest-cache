@@ -125,6 +125,12 @@ GNU General Public License for more details.
 						include_once $this->get_premium_path("logs.php");
 					}
 
+					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+						if(file_exists(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/pro/library/statics.php")){
+							include_once $this->get_premium_path("statics.php");
+						}
+					}
+
 					$this->admin();
 				}else{
 					//for cache

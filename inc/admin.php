@@ -751,6 +751,13 @@
 				    		<span id="hide-delete-log" style="display:none;">Hide Logs</span>
 				    	</div>
 
+				    	<?php 
+			   				if(class_exists("WpFastestCacheStatics")){
+				   				$cache_statics = new WpFastestCacheStatics();
+				   				$cache_statics->statics();
+			   				}
+				   		?>
+
 				    	<form method="post" name="wp_manager" class="delete-line">
 				    		<input type="hidden" value="deleteCache" name="wpFastestCachePage">
 				    		<div class="questionCon qsubmit left">
