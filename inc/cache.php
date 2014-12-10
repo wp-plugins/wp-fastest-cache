@@ -212,7 +212,14 @@
 					if(!is_dir($cachFilePath)){
 						if(is_writable($this->getWpContentDir()) || ((is_dir($this->getWpContentDir()."/cache")) && (is_writable($this->getWpContentDir()."/cache")))){
 							if (@mkdir($cachFilePath, 0755, true)){
+
 								file_put_contents($cachFilePath."/".$prefix."index.".$extension, $buffer);
+								
+								if(class_exists("WpFastestCacheStatics")){
+					   				$cache_statics = new WpFastestCacheStatics();
+					   				$cache_statics->update($extension);
+				   				}
+
 							}else{
 							}
 						}else{
@@ -222,7 +229,13 @@
 						if(file_exists($cachFilePath."/".$prefix."index.".$extension)){
 
 						}else{
+
 							file_put_contents($cachFilePath."/".$prefix."index.".$extension, $buffer);
+							
+							if(class_exists("WpFastestCacheStatics")){
+				   				$cache_statics = new WpFastestCacheStatics();
+				   				$cache_statics->update($extension);
+			   				}
 						}
 					}
 				}
