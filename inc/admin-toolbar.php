@@ -49,7 +49,11 @@
 							dataType : "json",
 							cache: false, 
 							success: function(data){
-								jQuery("#revert-loader-toolbar").hide();
+								if(typeof WpFcCacheStatics != "undefined"){
+									WpFcCacheStatics.update();
+								}else{
+									jQuery("#revert-loader-toolbar").hide();
+								}
 							}
 						});
 					});
