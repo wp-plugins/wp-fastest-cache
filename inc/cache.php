@@ -216,8 +216,8 @@
 								file_put_contents($cachFilePath."/".$prefix."index.".$extension, $buffer);
 								
 								if(class_exists("WpFastestCacheStatics")){
-					   				$cache_statics = new WpFastestCacheStatics();
-					   				$cache_statics->update($extension);
+					   				$cache_statics = new WpFastestCacheStatics($extension, strlen($buffer));
+					   				$cache_statics->update_db();
 				   				}
 
 							}else{
@@ -233,8 +233,8 @@
 							file_put_contents($cachFilePath."/".$prefix."index.".$extension, $buffer);
 							
 							if(class_exists("WpFastestCacheStatics")){
-				   				$cache_statics = new WpFastestCacheStatics();
-				   				$cache_statics->update($extension);
+				   				$cache_statics = new WpFastestCacheStatics($extension, strlen($buffer));
+				   				$cache_statics->update_db();
 			   				}
 						}
 					}
