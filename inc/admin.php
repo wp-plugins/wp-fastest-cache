@@ -1035,7 +1035,7 @@
 				    	</div>
 				    	<script type="text/javascript">
 					    	function GetUserInfo(data) {
-					    		window.wpfc.country = data.country;
+					    		window.wpfc_country = data.country;
 							}
 				    	</script>
 				    	<script type="text/javascript" src="//ipinfo.io/json?callback=GetUserInfo"></script>
@@ -1126,7 +1126,7 @@
 										});
 										jQuery.ajax({
 											type: 'GET', 
-											url: "http://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/update_country/<?php echo get_option("WpFc_api_key"); ?>" + "/" + window.wpfc.country,
+											url: "http://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/update_country/<?php echo get_option("WpFc_api_key"); ?>" + "/" + window.wpfc_country,
 											cache: false,
 											success: function(){}
 										});
