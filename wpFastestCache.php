@@ -264,6 +264,11 @@ GNU General Public License for more details.
 		}
 
 		public function deleteCache($minified = false){
+			delete_option("WpFastestCacheHTML");
+			delete_option("WpFastestCacheHTMLSIZE");
+			delete_option("WpFastestCacheMOBILE");
+			delete_option("WpFastestCacheMOBILESIZE");
+
 			if(class_exists("WpFcMobileCache")){
 				$wpfc_mobile = new WpFcMobileCache();
 				$wpfc_mobile->delete_cache($this->getWpContentDir());

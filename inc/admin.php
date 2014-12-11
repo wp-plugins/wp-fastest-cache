@@ -154,6 +154,11 @@
 		}
 
 		public function deleteCssAndJsCache(){
+			delete_option("WpFastestCacheCSS");
+			delete_option("WpFastestCacheCSSSIZE");
+			delete_option("WpFastestCacheJS");
+			delete_option("WpFastestCacheJSSIZE");
+
 			if(is_dir($this->getWpContentDir()."/cache/wpfc-minified")){
 				$this->rm_folder_recursively($this->getWpContentDir()."/cache/wpfc-minified");
 				$this->deleteCache(true);
