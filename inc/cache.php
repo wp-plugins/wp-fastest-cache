@@ -216,6 +216,11 @@
 								file_put_contents($cachFilePath."/".$prefix."index.".$extension, $buffer);
 								
 								if(class_exists("WpFastestCacheStatics")){
+
+									if(preg_match("/wpfc\-mobile\-cache/", $cachFilePath)){
+										$extension = "mobile";
+									}
+									
 					   				$cache_statics = new WpFastestCacheStatics($extension, strlen($buffer));
 					   				$cache_statics->update_db();
 				   				}
@@ -233,6 +238,11 @@
 							file_put_contents($cachFilePath."/".$prefix."index.".$extension, $buffer);
 							
 							if(class_exists("WpFastestCacheStatics")){
+								
+								if(preg_match("/wpfc\-mobile\-cache/", $cachFilePath)){
+									$extension = "mobile";
+								}
+
 				   				$cache_statics = new WpFastestCacheStatics($extension, strlen($buffer));
 				   				$cache_statics->update_db();
 			   				}
