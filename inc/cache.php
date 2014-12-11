@@ -47,7 +47,8 @@
 						"wp\-content",
 						"wp\-admin",
 						"wp\-includes",
-						"index\.php" 
+						"index\.php",
+						"xmlrpc\.php"
 					);
 
 			if(preg_match("/\/".implode("|", $list)."/", $_SERVER["REQUEST_URI"])){
