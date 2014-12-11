@@ -30,8 +30,18 @@ GNU General Public License for more details.
 												  "wpfc_optimize_image_ajax_request",
 												  "wpfc_update_image_list_ajax_request"
 												  );
-
-			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_download_premium"){
+			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_cache_statics_get"){
+				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+					if(file_exists(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/pro/library/statics.php")){
+						include_once $this->get_premium_path("statics.php");
+						
+						$cache_statics = new WpFastestCacheStatics();
+						$res = $cache_statics->get();
+						echo json_encode($res);
+						exit;
+					}
+				}
+			}else if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_download_premium"){
 				$res = array();
 				$response = wp_remote_get("http://api.wpfastestcache.net/premium/download/".str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"])."/".get_option("WpFc_api_key"), array('timeout' => 10 ) );
 
