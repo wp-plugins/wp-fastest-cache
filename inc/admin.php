@@ -488,6 +488,9 @@
 			}
 
 			$data = $data.'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n";
+			
+			//RewriteRule !/  "/wp-content/cache/all/index.html" [L]
+
 
 			if(class_exists("WpFcMobileCache") && $this->options->wpFastestCacheMobileTheme){
 				$wpfc_mobile = new WpFcMobileCache();
