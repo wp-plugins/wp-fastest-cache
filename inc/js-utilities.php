@@ -182,19 +182,35 @@
 
 			$url = preg_replace("/^\/\//", "http://", $url);
 			
-			$ch = curl_init();
+			// $ch = curl_init();
 		 
-			curl_setopt($ch, CURLOPT_HEADER, 0);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
-			curl_setopt($ch, CURLOPT_URL, $url);
+			// curl_setopt($ch, CURLOPT_HEADER, 0);
+			// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
+			// curl_setopt($ch, CURLOPT_URL, $url);
 		 
-			$data = curl_exec($ch);
-			curl_close($ch);
+			// $data = curl_exec($ch);
+			// curl_close($ch);
 		 
-			if(preg_match("/<\/\s*html\s*>\s*$/i", $data)){
+			// if(preg_match("/<\/\s*html\s*>\s*$/i", $data)){
+			// 	return false;
+			// }else{
+			// 	return $data;	
+			// }
+
+			$response = wp_remote_get($url, array('timeout' => 10 ) );
+
+			if ( !$response || is_wp_error( $response ) ) {
 				return false;
 			}else{
-				return $data;	
+				if(wp_remote_retrieve_response_code($response) == 200){
+					$data = wp_remote_retrieve_body( $response );
+
+					if(preg_match("/<\/\s*html\s*>\s*$/i", $data)){
+						return false;
+					}else{
+						return $data;	
+					}
+				}
 			}
 		}
 	}
