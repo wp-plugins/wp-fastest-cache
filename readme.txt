@@ -78,6 +78,12 @@ You can find the more information on our web site which is <a href="http://www.w
 
 == Changelog ==
 
+= 0.8.3.4 =
+* to prevent inline to external if the style is used in the javascript
+* to prevent creating cache for xmlrpc.php
+* to fix white page issue because of combine css and js
+* icons for premium version
+
 = 0.8.3.3 =
 * WPtouch issue has been solved
 * improvement of cache delete
