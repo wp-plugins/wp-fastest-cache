@@ -172,9 +172,9 @@
 		}
 
 		public function fixCharset($css){
-			preg_match_all('/@charset.+;/i', $css, $charsets);
+			preg_match_all('/@charset[^\;]+\;/i', $css, $charsets);
 			if(count($charsets[0]) > 0){
-				$css = preg_replace('/@charset.+;/i', "/* @charset is moved to the top */", $css);
+				$css = preg_replace('/@charset[^\;]+\;/i', "/* @charset is moved to the top */", $css);
 				foreach($charsets[0] as $charset){
 					$css = $charset."\n".$css;
 				}
