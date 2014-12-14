@@ -102,7 +102,10 @@
 		public function optionsPageRequest(){
 			if(!empty($_POST)){
 				if(isset($_POST["wpFastestCachePage"])){
-					if(preg_match("/admin\.php\?page=WpFastestCacheOptions/", $_SERVER["REQUEST_URI"])){
+					include_once ABSPATH."wp-includes/capabilities.php";
+					include_once ABSPATH."wp-includes/pluggable.php";
+
+					if(current_user_can('manage_options')){
 						if($_POST["wpFastestCachePage"] == "options"){
 							$this->saveOption();
 						}else if($_POST["wpFastestCachePage"] == "deleteCache"){
