@@ -429,6 +429,12 @@ GNU General Public License for more details.
 			    'wpfc' => true
 		    );
 
+		    $schedules['onceanhour'] = array(
+			    'interval' => 60*60,
+			    'display' => __( 'Once an Hour' ),
+			    'wpfc' => true
+		    );
+
 		    $schedules['everysixhours'] = array(
 			    'interval' => 60*60*6,
 			    'display' => __( 'Once Every 6 Hours' ),
