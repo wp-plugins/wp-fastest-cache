@@ -277,7 +277,7 @@
 				$path = $this->getABSPATH();
 			}
 
-			if(!is_file($path.".htaccess")){
+			if(!file_exists($path.".htaccess")){
 				return array("<label>.htaccess was not found</label> <a target='_blank' href='http://www.wpfastestcache.com/warnings/htaccess-was-not-found/'>Read More</a>", "error");
 			}
 
