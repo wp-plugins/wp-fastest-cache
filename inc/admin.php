@@ -971,10 +971,11 @@
 				    				<ul>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/image-optimization/">Image Optimization</a></li>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/mobile-cache/">Mobile Cache</a></li>
-				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/delete-cache-logs/">Delete Cache Logs</a></li>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/minify-html-plus/">Minify Html Plus</a></li>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/combine-js-plus/">Combine JS Plus</a></li>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/remove-comments/">Remove Comments</a></li>
+				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/delete-cache-logs/">Delete Cache Logs</a></li>
+				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/cache-statics/">Cache Statics</a></li>
 				    				</ul>
 				    			</div>
 				    		</div>
@@ -1057,25 +1058,6 @@
 				    			wpfc_premium_page();
 				    		});
 
-							jQuery("#wpfc-download-premium-button").click(function(){
-								jQuery("#revert-loader-toolbar").show();
-								jQuery.ajax({
-									type: 'GET',
-									url: "<?php echo admin_url(); ?>admin-ajax.php",
-									data : {"action": "wpfc_download_premium"},
-									dataType : "json",
-									cache: false, 
-									success: function(data){
-										if(data.success){
-											 location.reload();
-										}else{
-											alert(data.error_message);
-										}
-										console.log(data, "data");
-									}
-								});
-							});
-
 							function wpfc_premium_page(){
 								jQuery("#revert-loader-toolbar").show();
 				    			jQuery.ajax({
@@ -1096,6 +1078,25 @@
 											},
 											success: function(credit){
 												if(credit == "premium"){
+													jQuery("#wpfc-download-premium-button").click(function(){
+														jQuery("#revert-loader-toolbar").show();
+														jQuery.ajax({
+															type: 'GET',
+															url: "<?php echo admin_url(); ?>admin-ajax.php",
+															data : {"action": "wpfc_download_premium"},
+															dataType : "json",
+															cache: false, 
+															success: function(data){
+																if(data.success){
+																	 location.reload();
+																}else{
+																	alert(data.error_message);
+																}
+																console.log(data, "data");
+															}
+														});
+													});
+
 													var version_in_site = "<?php echo $wpfc_premium_version; ?>";
 													var download_button_span = jQuery("#wpfc-download-premium-button span");
 
