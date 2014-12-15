@@ -67,16 +67,16 @@ GNU General Public License for more details.
 										$unzipfile = unzip_file($wpfc_zip_dest_path, $this->getWpContentDir()."/plugins/");
 
 
-										if ( $unzipfile ) {
+										if ($unzipfile) {
 											$result = activate_plugin( 'wp-fastest-cache-premium/wpFastestCachePremium.php' );
 
 											if ( is_wp_error( $result ) ) {
-												$res = array("success" => false, "error_message" => "Please activate Wp Fastest Cache Premium"); 
+												$res = array("success" => false, "error_message" => "Go to: http://www.wpfastestcache.com/warnings/how-to-activate-premium-version/"); 
 											}else{
 												$res = array("success" => true);   
 											}
 										} else {
-											$res = array("success" => false, "error_message" => 'There was an error unzipping the file.');      
+											$res = array("success" => false, "error_message" => 'Go to: http://www.wpfastestcache.com/warnings/how-to-activate-premium-version/');      
 										}
 									}else{
 										$res = array("success" => false, "error_message" => "/wp-content/plugins/ is not writable");
