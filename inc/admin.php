@@ -620,6 +620,8 @@
 							array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
 						}
 
+						//array_push($tabs, array("id"=>"wpfc-exclude","title"=>"Exclude"));
+
 						foreach ($tabs as $key => $value){
 							$checked = "";
 
@@ -1142,6 +1144,54 @@
 									}
 								});
 							}
+				    	</script>
+				    </div>
+				    <div class="tab6">
+				    	<h2 style="padding-left:20px;padding-bottom:10px;">Exclude Pages</h2>
+				    	<form method="post" name="wp_manager" id="wpfc-schedule-panel">
+				    		<div class="wpfc-exclude-rule-container" style="margin-left:20px;">
+					    		<div class="wpfc-exclude-rule-line">
+					    			<div class="wpfc-exclude-rule-line-left">
+							    		<select>
+							    				<option selected="" value=""></option>
+							    				<option value="startwith">Start With</option>
+							    				<option value="contain">Contain</option>
+							    		</select>
+					    			</div>
+					    			<div class="wpfc-exclude-rule-line-middle">
+						    			<input type="text">
+					    			</div>
+					    			<div class="wpfc-exclude-rule-line-add">
+					    				<img src="<?php echo plugins_url("wp-fastest-cache/images/add.png"); ?>">
+					    			</div>
+					    			<div class="wpfc-exclude-rule-line-delete">
+					    				<img src="<?php echo plugins_url("wp-fastest-cache/images/delete.png"); ?>">
+					    			</div>
+					    		</div>
+				    		</div>
+				    	</form>
+				    	<script type="text/javascript">
+				    		var WpFcExcludePages = {
+				    			init: function(){
+				    				this.click_event_for_add_button();
+				    			},
+				    			click_event_for_add_button: function(){
+				    				var line;
+				    				jQuery(".wpfc-exclude-rule-line-add").click(function(e){
+				    					line = jQuery(e.target).closest(".wpfc-exclude-rule-line").clone();
+
+				    					line.find(".wpfc-exclude-rule-line-add").remove();
+				    					line.find(".wpfc-exclude-rule-line-delete").show();
+
+				    					line.find(".wpfc-exclude-rule-line-delete").click(function(e){
+				    						jQuery(e.target).closest(".wpfc-exclude-rule-line").remove();
+				    					});
+
+				    					jQuery(".wpfc-exclude-rule-container").append(line);
+				    				});
+				    			}
+				    		};
+				    		WpFcExcludePages.init();
 				    	</script>
 				    </div>
 				</div>
