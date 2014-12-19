@@ -114,11 +114,36 @@
 							$this->deleteCssAndJsCache();
 						}else if($_POST["wpFastestCachePage"] == "cacheTimeout"){
 							$this->addCacheTimeout();
+						}else if($_POST["wpFastestCachePage"] == "excludePages"){
+							$this->save_exclude_pages();
 						}
 					}else{
 						die("Forbidden");
 					}
 				}
+			}
+		}
+
+		public function save_exclude_pages(){
+			$rules = array();
+
+			for($i = 1; $i < count($_POST); $i++){
+				$rule = array();
+
+				if(isset($_POST["wpfc-exclude-rule-prefix-".$i]) && $_POST["wpfc-exclude-rule-prefix-".$i] && $_POST["wpfc-exclude-rule-content-".$i]){
+					$rule["prefix"] = $_POST["wpfc-exclude-rule-prefix-".$i];
+					$rule["content"] = $_POST["wpfc-exclude-rule-content-".$i];
+
+					array_push($rules, $rule);
+				}
+			}
+
+			$data = json_encode($rules);
+
+			if(get_option("WpFastestCacheExclude")){
+				update_option("WpFastestCacheExclude", $data);
+			}else{
+				add_option("WpFastestCacheExclude", $data, null, "yes");
 			}
 		}
 
@@ -1148,18 +1173,20 @@
 				    </div>
 				    <div class="tab6">
 				    	<h2 style="padding-left:20px;padding-bottom:10px;">Exclude Pages</h2>
-				    	<form method="post" name="wp_manager" id="wpfc-schedule-panel">
+				    	<form method="post" name="wp_manager">
+				    		<input type="hidden" value="excludePages" name="wpFastestCachePage">
 				    		<div class="wpfc-exclude-rule-container" style="margin-left:20px;">
 					    		<div class="wpfc-exclude-rule-line">
 					    			<div class="wpfc-exclude-rule-line-left">
-							    		<select>
+							    		<select name="wpfc-exclude-rule-prefix-1">
 							    				<option selected="" value=""></option>
 							    				<option value="startwith">Start With</option>
 							    				<option value="contain">Contain</option>
+							    				<option value="exact">Exact</option>
 							    		</select>
 					    			</div>
 					    			<div class="wpfc-exclude-rule-line-middle">
-						    			<input type="text">
+						    			<input type="text" name="wpfc-exclude-rule-content-1">
 					    			</div>
 					    			<div class="wpfc-exclude-rule-line-add">
 					    				<img src="<?php echo plugins_url("wp-fastest-cache/images/add.png"); ?>">
@@ -1169,29 +1196,63 @@
 					    			</div>
 					    		</div>
 				    		</div>
+				    		<div class="questionCon qsubmit">
+								<div class="submit"><input type="submit" class="button-primary" value="Submit"></div>
+							</div>
 				    	</form>
 				    	<script type="text/javascript">
 				    		var WpFcExcludePages = {
-				    			init: function(){
+				    			rules: [],
+				    			init: function(rules){
+				    				this.rules = rules;
+				    				this.update_rules();
 				    				this.click_event_for_add_button();
 				    			},
-				    			click_event_for_add_button: function(){
-				    				var line;
-				    				jQuery(".wpfc-exclude-rule-line-add").click(function(e){
-				    					line = jQuery(e.target).closest(".wpfc-exclude-rule-line").clone();
+				    			update_rules: function(){
+				    				var self = this;
 
-				    					line.find(".wpfc-exclude-rule-line-add").remove();
-				    					line.find(".wpfc-exclude-rule-line-delete").show();
+				    				if(typeof this.rules != "undefined" && this.rules.length > 0){
+				    					jQuery.each(self.rules, function(i, e){
+				    						if(i > 0){
+				    							self.add_line(i + 1);
+				    						}
 
-				    					line.find(".wpfc-exclude-rule-line-delete").click(function(e){
-				    						jQuery(e.target).closest(".wpfc-exclude-rule-line").remove();
+			    							jQuery("input[name='wpfc-exclude-rule-content-" + (i+1) + "']").val(e.content);
+			    							jQuery("select[name='wpfc-exclude-rule-prefix-" + (i+1) + "']").val(e.prefix);
 				    					});
+				    				}
+				    			},
+				    			add_line: function(number){
+				    				var line = jQuery(".wpfc-exclude-rule-line").first().closest(".wpfc-exclude-rule-line").clone();
+			    					line.find(".wpfc-exclude-rule-line-add").remove();
+			    					line.find(".wpfc-exclude-rule-line-delete").show();
 
-				    					jQuery(".wpfc-exclude-rule-container").append(line);
+			    					line.find("select").attr("name", "wpfc-exclude-rule-prefix-" + number);
+			    					line.find("input").attr("name", "wpfc-exclude-rule-content-" + number);
+
+			    					line.find(".wpfc-exclude-rule-line-delete").click(function(e){
+			    						jQuery(e.target).closest(".wpfc-exclude-rule-line").remove();
+			    					});
+
+			    					jQuery(".wpfc-exclude-rule-container").append(line);
+				    			},
+				    			click_event_for_add_button: function(){
+				    				var self = this;
+				    				var line_length = 0;
+
+				    				jQuery(".wpfc-exclude-rule-line-add").click(function(e){
+				    					line_length = jQuery("div.wpfc-exclude-rule-line").length;
+				    					self.add_line(line_length + 1);
 				    				});
 				    			}
 				    		};
-				    		WpFcExcludePages.init();
+					    	<?php 
+					    		if($rules_json = get_option("WpFastestCacheExclude")){
+					    			?>WpFcExcludePages.init(<?php echo $rules_json; ?>);<?php
+					    		}else{
+					    			?>WpFcExcludePages.init();<?php
+					    		}
+					    	?>
 				    	</script>
 				    </div>
 				</div>
