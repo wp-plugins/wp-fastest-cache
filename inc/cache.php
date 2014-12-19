@@ -58,10 +58,23 @@
 			return false;
 		}
 
+		public function exclude_page(){
+			if($json_data = get_option("WpFastestCacheExclude")){
+				$std = json_decode($json_data);
+
+				foreach($std as $key => $value){
+				}
+
+			}
+			return false;
+		}
+
 		public function callback($buffer){
 			$buffer = $this->checkShortCode($buffer);
 
-			if (is_user_logged_in() || $this->isCommenter()){
+			if($this->exclude_page()){
+				return $buffer;
+			}else if (is_user_logged_in() || $this->isCommenter()){
 				return $buffer;
 			} else if(preg_match("/json/i", $_SERVER["HTTP_ACCEPT"])){
 				return $buffer;
