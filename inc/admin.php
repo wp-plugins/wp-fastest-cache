@@ -639,7 +639,7 @@
 							array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimization"));
 						}
 						
-						$arr_lang = array("tr-TR", "it-IT", "zh-CN", "ja");
+						$arr_lang = array("tr-TR", "it-IT", "zh-CN", "ja", "es-ES");
 
 						if(in_array(get_bloginfo( "language" ), $arr_lang)){
 							array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
