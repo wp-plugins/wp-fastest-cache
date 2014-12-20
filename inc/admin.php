@@ -114,7 +114,7 @@
 							$this->deleteCssAndJsCache();
 						}else if($_POST["wpFastestCachePage"] == "cacheTimeout"){
 							$this->addCacheTimeout();
-						}else if($_POST["wpFastestCachePage"] == "excludePages"){
+						}else if($_POST["wpFastestCachePage"] == "exclude"){
 							$this->save_exclude_pages();
 						}
 					}else{
@@ -1174,7 +1174,7 @@
 				    <div class="tab6">
 				    	<h2 style="padding-left:20px;padding-bottom:10px;">Exclude Pages</h2>
 				    	<form method="post" name="wp_manager">
-				    		<input type="hidden" value="excludePages" name="wpFastestCachePage">
+				    		<input type="hidden" value="exclude" name="wpFastestCachePage">
 				    		<div class="wpfc-exclude-rule-container" style="margin-left:20px;">
 					    		<div class="wpfc-exclude-rule-line">
 					    			<div class="wpfc-exclude-rule-line-left">
