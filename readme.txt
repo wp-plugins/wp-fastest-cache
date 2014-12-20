@@ -75,6 +75,7 @@ You can find the more information on our web site which is <a href="http://www.w
 4. Block caching for post and pages (TinyMCE)
 5. Block caching for post and pages (Quicktags)
 6. Clean cached files via admin toolbar easly
+7. Exclude page
 
 == Changelog ==
 
