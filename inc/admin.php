@@ -645,7 +645,7 @@
 							array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
 						}
 
-						//array_push($tabs, array("id"=>"wpfc-exclude","title"=>"Exclude"));
+						array_push($tabs, array("id"=>"wpfc-exclude","title"=>"Exclude"));
 
 						foreach ($tabs as $key => $value){
 							$checked = "";
@@ -1171,11 +1171,14 @@
 							}
 				    	</script>
 				    </div>
-				    <div class="tab6">
-				    	<h2 style="padding-left:20px;padding-bottom:10px;">Exclude Pages</h2>
+				    <div class="tab6" style="padding-left:20px;">
+				    	<h2 style="padding-bottom:10px;">Exclude Pages</h2>
+				    	<p>Start With: http://example.com/<strong style="font-size:20px;">sample</strong>-page.html</p>
+				    	<p>Contain: http://example.com/sample-<strong style="font-size:20px;">page</strong>.html</p>
+				    	<p>Exact: http://example.com/<strong style="font-size:20px;">sample-page.html</strong></p>
 				    	<form method="post" name="wp_manager">
 				    		<input type="hidden" value="exclude" name="wpFastestCachePage">
-				    		<div class="wpfc-exclude-rule-container" style="margin-left:20px;">
+				    		<div class="wpfc-exclude-rule-container">
 					    		<div class="wpfc-exclude-rule-line">
 					    			<div class="wpfc-exclude-rule-line-left">
 							    		<select name="wpfc-exclude-rule-prefix-1">
