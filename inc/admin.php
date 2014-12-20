@@ -1173,9 +1173,9 @@
 				    </div>
 				    <div class="tab6" style="padding-left:20px;">
 				    	<h2 style="padding-bottom:10px;">Exclude Pages</h2>
-				    	<p>Start With: http://example.com/<strong style="font-size:20px;">sample</strong>-page.html</p>
-				    	<p>Contain: http://example.com/sample-<strong style="font-size:20px;">page</strong>.html</p>
-				    	<p>Exact: http://example.com/<strong style="font-size:20px;">sample-page.html</strong></p>
+				    	<div class="questionCon">
+				    			<label style="padding-bottom:10px;">You can stop to create cache for specific pages <a target="_blank" href="http://www.wpfastestcache.com/features/exclude-page/">[Read More]</a></label>
+				    	</div>
 				    	<form method="post" name="wp_manager">
 				    		<input type="hidden" value="exclude" name="wpFastestCachePage">
 				    		<div class="wpfc-exclude-rule-container">
