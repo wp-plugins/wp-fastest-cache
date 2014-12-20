@@ -59,10 +59,32 @@
 		}
 
 		public function exclude_page(){
+			$preg_match_rule = "";
+			$request_url = trim($_SERVER["REQUEST_URI"], "/");
+
 			if($json_data = get_option("WpFastestCacheExclude")){
 				$std = json_decode($json_data);
 
 				foreach($std as $key => $value){
+					if(isset($value->prefix) && $value->prefix){
+						$value->content = trim($value->content, "/");
+
+						if($value->prefix == "exact"){
+							if($value->content == $request_url){
+								return true;	
+							}
+						}else{
+							if($value->prefix == "startwith"){
+								$preg_match_rule = "^".preg_quote($value->content, "/");
+							}else if($value->prefix == "contain"){
+								$preg_match_rule = preg_quote($value->content, "/");
+							}
+
+							if(preg_match("/".$preg_match_rule."/", $request_url)){
+								return true;
+							}
+						}
+					}
 				}
 
 			}
@@ -73,7 +95,7 @@
 			$buffer = $this->checkShortCode($buffer);
 
 			if($this->exclude_page()){
-				return $buffer;
+				return $buffer."<!-- Wp Fastest Cache: Exclude Page -->";
 			}else if (is_user_logged_in() || $this->isCommenter()){
 				return $buffer;
 			} else if(preg_match("/json/i", $_SERVER["HTTP_ACCEPT"])){
