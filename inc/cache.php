@@ -186,7 +186,10 @@
 		}
 
 		public function checkHtml($buffer){
-			if(preg_match('/<\/html>/si', $buffer) && preg_match('/<\/body>/si', $buffer)){
+			// if(preg_match('/<\/html>/si', $buffer) && preg_match('/<\/body>/si', $buffer)){
+			// 	return false;
+			// }
+			if(strlen($buffer) > 10){
 				return false;
 			}
 
