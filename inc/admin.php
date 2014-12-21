@@ -1189,7 +1189,7 @@
 							    		</select>
 					    			</div>
 					    			<div class="wpfc-exclude-rule-line-middle">
-						    			<input type="text" name="wpfc-exclude-rule-content-1">
+						    			<input type="text" name="wpfc-exclude-rule-content-1" style="width:390px;">
 					    			</div>
 					    			<div class="wpfc-exclude-rule-line-add">
 					    				<img src="<?php echo plugins_url("wp-fastest-cache/images/add.png"); ?>">
@@ -1232,6 +1232,7 @@
 
 			    					line.find("select").attr("name", "wpfc-exclude-rule-prefix-" + number);
 			    					line.find("input").attr("name", "wpfc-exclude-rule-content-" + number);
+			    					line.find("input").val("");
 
 			    					line.find(".wpfc-exclude-rule-line-delete").click(function(e){
 			    						jQuery(e.target).closest(".wpfc-exclude-rule-line").remove();
