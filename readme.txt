@@ -79,6 +79,12 @@ You can find the more information on our web site which is <a href="http://www.w
 
 == Changelog ==
 
+= 0.8.3.5 =
+* to fix vulnerability (discoverd by 0pc0deFR aka Kevin FALCOZ)
+* to fix issue of moving chartset to the top
+* to prevent combine Google Fonts javascripts
+* [FEATURE] exclude page
+
 = 0.8.3.4 =
 * to prevent inline to external if the style is used in the javascript
 * to prevent creating cache for xmlrpc.php
