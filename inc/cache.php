@@ -91,11 +91,20 @@
 			return false;
 		}
 
+		public function is_xml($buffer){
+			if(preg_match("/\<\?xml/i", $buffer) && preg_match("/\<sitemapindex/i", $buffer)){
+				return true;
+			}
+			return false;
+		}
+
 		public function callback($buffer){
 			$buffer = $this->checkShortCode($buffer);
 
 			if($this->exclude_page()){
 				return $buffer."<!-- Wp Fastest Cache: Exclude Page -->";
+			}else if($this->is_xml($buffer)){
+				return $buffer."<!-- Wp Fastest Cache: XML Content -->";
 			}else if (is_user_logged_in() || $this->isCommenter()){
 				return $buffer;
 			} else if(preg_match("/json/i", $_SERVER["HTTP_ACCEPT"])){
