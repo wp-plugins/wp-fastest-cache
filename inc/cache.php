@@ -92,7 +92,7 @@
 		}
 
 		public function is_xml($buffer){
-			if(preg_match("/\<\?xml/i", $buffer) && preg_match("/\<sitemapindex/i", $buffer)){
+			if(preg_match("/\<\?xml/i", $buffer)){
 				return true;
 			}
 			return false;
