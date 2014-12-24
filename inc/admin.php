@@ -105,6 +105,11 @@
 					include_once ABSPATH."wp-includes/capabilities.php";
 					include_once ABSPATH."wp-includes/pluggable.php";
 
+					if(is_multisite()){
+						$this->systemMessage = array("The plugin does not work with Multisite", "error");
+						return 0;
+					}
+
 					if(current_user_can('manage_options')){
 						if($_POST["wpFastestCachePage"] == "options"){
 							$this->saveOption();
@@ -333,9 +338,7 @@
 
 			$htaccess = file_get_contents($path.".htaccess");
 
-			if(is_multisite()){
-				return array("The plugin does not work with Multisite", "error");
-			}else if(defined('DONOTCACHEPAGE')){
+			if(defined('DONOTCACHEPAGE')){
 				return array("DONOTCACHEPAGE <label>constant is defined as TRUE. It must be FALSE</label>", "error");
 			}else if(!get_option('permalink_structure')){
 				return array("You have to set <strong><u><a href='".admin_url()."options-permalink.php"."'>permalinks</a></u></strong>", "error");
