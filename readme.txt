@@ -69,13 +69,15 @@ You can find the more information on our web site which is <a href="http://www.w
 
 == Screenshots ==
 
-1. Main Page
-2. Delete All File Page
-3. All cached files are deleted at the determinated time
-4. Block caching for post and pages (TinyMCE)
-5. Block caching for post and pages (Quicktags)
-6. Clean cached files via admin toolbar easly
-7. Exclude page
+1. Without Cache
+2. With Cache
+3. Main Page
+4. Delete All File Page
+5. All cached files are deleted at the determinated time
+6. Block caching for post and pages (TinyMCE)
+7. Block caching for post and pages (Quicktags)
+8. Clean cached files via admin toolbar easly
+9. Exclude page
 
 == Changelog ==
 
