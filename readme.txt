@@ -54,7 +54,7 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 
 <h4>Official Web Site</h4>
 
-You can find the more information on our web site which is <a href="http://www.wpfastestcache.com/">Wordpress Plugin</a>
+You can find the more information on our web site (<a href="http://www.wpfastestcache.com/">wpfastestcache.com</a>)
 
 <img src="http://www.alastyr.com/sss/wp-content/uploads/2012/11/alastyrlogo.png" />
 
