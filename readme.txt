@@ -19,8 +19,6 @@ Cache system generates a static html file and saves. Other users reach to static
 <br><br>
 Setup of this plugin is so easy. You don't need to modify .htacces file. It will modified automatically.
 
-http://www.youtube.com/watch?v=5XzkiLr1FYE
-
 <h4>Features</h4>
 
 1. Mod_Rewrite which is the fastest method is used in this plugin
