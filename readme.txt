@@ -79,6 +79,9 @@ You can find the more information on our web site (<a href="http://www.wpfastest
 
 == Changelog ==
 
+= 0.8.3.6 =
+* MIDP has been added into mobile user agent list
+
 = 0.8.3.5 =
 * to fix vulnerability (discoverd by 0pc0deFR aka Kevin FALCOZ)
 * to fix issue of moving chartset to the top
