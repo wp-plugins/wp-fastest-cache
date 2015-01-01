@@ -641,10 +641,8 @@
 						if(class_exists("WpFastestCacheImageOptimisation")){
 							array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimization"));
 						}
-
-						if(!preg_match("/en/", get_bloginfo( "language" ))){
-							array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
-						}
+						
+						array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
 
 						array_push($tabs, array("id"=>"wpfc-exclude","title"=>"Exclude"));
 
