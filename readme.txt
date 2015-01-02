@@ -11,6 +11,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
+<h4>Official Web Site</h4>
+
+You can find the more information on our web site (<a href="http://www.wpfastestcache.com/">wpfastestcache.com</a>)
+
 This plugin creates static html files from your dynamic WordPress blog.
 When a page is rendered, php and mysql are used. Therefor, system needs RAM and CPU. 
 If many visitors come to a site, system uses lots of RAM and CPU so page is rendered so slowly. 
@@ -51,12 +55,6 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 * Português
 * Русский
 * Türkçe
-
-<h4>Official Web Site</h4>
-
-You can find the more information on our web site (<a href="http://www.wpfastestcache.com/">wpfastestcache.com</a>)
-
-<img src="http://www.alastyr.com/sss/wp-content/uploads/2012/11/alastyrlogo.png" />
 
 == Installation ==
 
