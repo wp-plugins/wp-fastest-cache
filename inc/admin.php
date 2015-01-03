@@ -1089,7 +1089,7 @@
 								jQuery("#revert-loader-toolbar").show();
 				    			jQuery.ajax({
 									type: 'GET', 
-									url: "http://api.wpfastestcache.net/prices/premium/",
+									url: "https://api.wpfastestcache.net/prices/premium/",
 									cache: false,
 									error: function(x, t, m) {
 										alert(t);
@@ -1098,7 +1098,7 @@
 										jQuery("#wpfc-premium-price").text(price);
 						    			jQuery.ajax({
 											type: 'GET', 
-											url: "http://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/type/<?php echo get_option("WpFc_api_key"); ?>",
+											url: "https://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/type/<?php echo get_option("WpFc_api_key"); ?>",
 											cache: false,
 											error: function(x, t, m) {
 												alert(t);
@@ -1136,7 +1136,7 @@
 													}else{
 										    			jQuery.ajax({
 															type: 'GET', 
-															url: "http://api.wpfastestcache.net/premium/version/",
+															url: "https://api.wpfastestcache.net/premium/version/",
 															cache: false,
 															error: function(x, t, m) {
 																alert(t);
@@ -1161,7 +1161,7 @@
 										});
 										jQuery.ajax({
 											type: 'GET', 
-											url: "http://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/update_country/<?php echo get_option("WpFc_api_key"); ?>" + "/" + window.wpfc_country,
+											url: "https://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/update_country/<?php echo get_option("WpFc_api_key"); ?>" + "/" + window.wpfc_country,
 											cache: false,
 											success: function(){}
 										});
