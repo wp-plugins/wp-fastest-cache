@@ -441,6 +441,12 @@ GNU General Public License for more details.
 			    'wpfc' => true
 		    );
 
+		    $schedules['onceaday'] = array(
+			    'interval' => 60*60*24,
+			    'display' => __( 'Once a Day' ),
+			    'wpfc' => true
+		    );
+
 		    $schedules['weekly'] = array(
 			    'interval' => 60*60*24*7,
 			    'display' => __( 'Once a Week' ),
