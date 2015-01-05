@@ -181,19 +181,17 @@ h1.summary-rec {
     padding-top: 5px !important;
 }
 .success-wpfc{
-    background-color: #DFF2BF !important;
     border-color: #4F8A10 !important;
     color: #4F8A10 !important;
-    background: url("../images/success.png") no-repeat;
+    background: #DFF2BF url("../images/success.png") no-repeat 10px !important;
 }
 .success-wpfc p, .error-wpfc p{
     padding: 2px 2px 2px 40px !important;
 }
 .error-wpfc{
-    background-color: #FFBABA !important;
     border-color: #D8000C !important;
     color: #D8000C !important;
-    background: url("../images/error.png") no-repeat;
+    background: #FFBABA url("../images/error.png") no-repeat 10px !important;
 }
 .omni_admin_sidebar_section label {
     font-size: 11px;
