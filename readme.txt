@@ -77,6 +77,10 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 
 == Changelog ==
 
+= 0.8.3.7 =
+* to prevent confliction on left menu
+* to fix error and success message icon
+
 = 0.8.3.6 =
 * MIDP has been added into mobile user agent list
 
