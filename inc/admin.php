@@ -150,6 +150,8 @@
 			}else{
 				add_option("WpFastestCacheExclude", $data, null, "yes");
 			}
+
+			$this->systemMessage = array("Options have been saved", "success");
 		}
 
 		public function addCacheTimeout(){
