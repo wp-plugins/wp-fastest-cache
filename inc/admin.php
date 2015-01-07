@@ -18,7 +18,7 @@
 			}
 			
 			$this->optionsPageRequest();
-			$this->iconUrl = plugins_url("wp-fastest-cache/images/icon-left.png");
+			$this->iconUrl = plugins_url("wp-fastest-cache/images/icon-32x32.png");
 			$this->setCronJobSettings();
 			$this->addButtonOnEditor();
 			add_action('admin_enqueue_scripts', array($this, 'addJavaScript'));

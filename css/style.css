@@ -99,7 +99,7 @@ div.questionCon.qsubmit{
     margin-left: 5px !important;
 }
 #toplevel_page_WpFastestCacheOptions div.wp-menu-name{
-    margin-left: 46px !important;
+    margin-left: 0 !important;
 }
 .question:after {
     content: ":";
