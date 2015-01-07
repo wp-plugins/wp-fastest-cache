@@ -356,7 +356,7 @@ strong{display:block;padding-bottom:6px}.fieldRow .message span:last-child{paddi
 .arrow{background-position: -32px -115px;left:280px;display:none}.rtl .fieldRow.tip
 .arrow{background-position: -2px -115px;right:277px;display:none}.fieldRow.tip.active
 .arrow{display:block}.fieldRow.tip.active
-.message.tip{display:block}.radioList{font-weight:600;font-size:36px;padding-bottom:0px}.radioList
+.message.tip{display:block}.radioList{font-weight:600;font-size:36px !important;padding-bottom:0px}.radioList
 li.radioLink{height:23px;padding-top:6px;line-height:23px}.radioList .radioLink
 a{padding:0;font-size:16px;line-height:23px;font-weight:400;vertical-align:top}.radioList
 label{position:relative;display:block;min-height:71px;line-height:71px;padding:0
