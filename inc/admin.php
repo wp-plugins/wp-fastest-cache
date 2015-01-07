@@ -1150,7 +1150,7 @@
 															success: function(version){
 																jQuery("#revert-loader-toolbar").hide();
 																if(version_in_site == version){
-																	download_button_span.text("Version - " + version);
+																	download_button_span.text("No Update");
 																	jQuery("#wpfc-download-premium-button").attr("disabled", true);
 																}else{
 																	download_button_span.text("Update - " + version);
