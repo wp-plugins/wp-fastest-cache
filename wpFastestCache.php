@@ -51,7 +51,23 @@ GNU General Public License for more details.
 					if(wp_remote_retrieve_response_code($response) == 200){
 						$wpfc_premium_download_link = wp_remote_retrieve_body( $response );
 						if($wpfc_premium_download_link){
-							if($wpfc_zip_data = @file_get_contents($wpfc_premium_download_link)){
+
+							$response_download = wp_remote_get($wpfc_premium_download_link);
+
+							if ( !$response_download || is_wp_error( $response_download ) ) {
+								$res = array("success" => false, "error_message" => $response_download->get_error_message());
+							}else{
+								if(wp_remote_retrieve_response_code($response_download) == 200){
+									if(!$wpfc_zip_data = wp_remote_retrieve_body( $response_download )){
+										$res = array("success" => false, "error_message" => ".zip file is empty");
+									}
+								}else{
+									$res = array("success" => false, "error_message" => "Download Source is unavailable");
+								}
+							}
+
+
+							if($wpfc_zip_data){
 
 								$wpfc_zip_dest_path = $this->getWpContentDir()."/plugins/wp-fastest-cache-premium.zip";
 
