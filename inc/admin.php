@@ -1294,6 +1294,30 @@
 				  </div>
 				</div>
 			</div>
+			<div id="wpfc-promotion" style="bottom: -153px; position: fixed; z-index: 20; right: 20px;">
+				<img src="<?php echo plugins_url("wp-fastest-cache/images/promotions/promotion-1.jpg"); ?>">
+			</div>
+			<script type="text/javascript">
+				var promotion_id = "wpfc-promotion";
+				var promotion_bottom = jQuery("#wpfc-promotion").css("bottom");
+
+				jQuery("#" + promotion_id).mouseenter(function(){
+					jQuery("#" + promotion_id).animate({
+						bottom: "5px"
+					}, 300, function() {});
+				});
+
+				jQuery("#" + promotion_id).mouseleave(function(){
+					jQuery("#" + promotion_id).animate({
+						bottom: promotion_bottom
+					}, 300, function() {});
+				});
+
+				jQuery("#" + promotion_id).click(function(){
+					jQuery("#wpfc-premium").attr("checked", true);
+					jQuery("#wpfc-premium").trigger("change");
+				});
+			</script>
 			<script>Wpfclang.init("<?php echo $wpFastestCacheLanguage; ?>");</script>
 			<?php
 		}
