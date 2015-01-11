@@ -77,6 +77,14 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 
 == Changelog ==
 
+= 0.8.3.8 =
+* to prevent using GZip Ninja Speed Compression
+* to prevent using GZIP Output
+* to show success message after saving exclude page
+* style of left panel
+* opera mini has been added into mobile user agent list
+* to fix download premium version issue
+
 = 0.8.3.7 =
 * to prevent confliction on left menu
 * to fix error and success message icon
