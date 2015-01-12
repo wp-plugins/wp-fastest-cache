@@ -143,6 +143,15 @@
 					$cachFilePath = $this->getWpContentDir()."/cache/all".$_SERVER["REQUEST_URI"];
 				}
 
+				//to show cache version of home page via php if htaccess rewrite rule does not work
+				if($_SERVER["REQUEST_URI"] == "/"){
+					if(file_exists($cachFilePath."index.html")){
+						if($content = @file_get_contents($cachFilePath."index.html")){
+							return $content."<!-- via php -->";
+						}
+					}
+				}
+
 				$content = $this->cacheDate($buffer);
 
 				if(isset($this->options->wpFastestCacheCombineCss) && isset($this->options->wpFastestCacheMinifyCss)){
