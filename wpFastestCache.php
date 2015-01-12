@@ -498,8 +498,5 @@ GNU General Public License for more details.
 		}
 	}
 
-	$wpfc = new WpFastestCache();
-
-
-
+	$GLOBALS["wp_fastest_cache"] = new WpFastestCache();
 ?>
