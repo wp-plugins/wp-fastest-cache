@@ -252,7 +252,9 @@
 			$create = false;
 			if($buffer && strlen($buffer) > 100){
 				$create = true;
-			}elseif(($extension == "css" || $extension == "js") && $buffer && strlen($buffer) > 5){
+			}
+
+			if(($extension == "css" || $extension == "js") && $buffer && strlen($buffer) > 5){
 				$create = true;
 				$buffer = trim($buffer);
 				if($extension == "js"){
