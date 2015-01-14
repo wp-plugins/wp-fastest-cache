@@ -250,7 +250,8 @@
 
 		public function createFolder($cachFilePath, $buffer, $extension = "html", $prefix = ""){
 			$create = false;
-			if($buffer && strlen($buffer) > 100){
+			
+			if($buffer && strlen($buffer) > 100 && $extension == "html"){
 				$create = true;
 			}
 
