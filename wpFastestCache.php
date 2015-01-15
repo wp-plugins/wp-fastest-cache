@@ -34,7 +34,7 @@ GNU General Public License for more details.
 												  );
 			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_cache_statics_get"){
 				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
-					if(file_exists(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/pro/library/statics.php")){
+					if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/statics.php")){
 						include_once $this->get_premium_path("statics.php");
 						
 						$cache_statics = new WpFastestCacheStatics();
@@ -142,7 +142,7 @@ GNU General Public License for more details.
 				}
 
 				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
-					if(file_exists(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/pro/library/statics.php")){
+					if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/statics.php")){
 						include_once $this->get_premium_path("statics.php");
 					}
 				}
