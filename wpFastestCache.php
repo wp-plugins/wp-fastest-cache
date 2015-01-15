@@ -19,6 +19,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */ 
+	define("WPFC_WP_CONTENT_BASENAME", str_replace("/", "", basename(content_url())));
 	define("WPFC_WP_CONTENT_DIR", ABSPATH.str_replace("/", "", basename(content_url())));
 
 	class WpFastestCache{

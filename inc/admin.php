@@ -519,13 +519,13 @@
 			
 
 			if(ABSPATH == "//"){
-				$data = $data."RewriteCond %{DOCUMENT_ROOT}/wp-content/cache/all/$1/index.html -f"."\n";
+				$data = $data."RewriteCond %{DOCUMENT_ROOT}/".WPFC_WP_CONTENT_BASENAME."/cache/all/$1/index.html -f"."\n";
 			}else{
-				$data = $data."RewriteCond %{DOCUMENT_ROOT}/wp-content/cache/all/$1/index.html -f [or]"."\n";
-				$data = $data."RewriteCond ".ABSPATH."wp-content/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n";
+				$data = $data."RewriteCond %{DOCUMENT_ROOT}/".WPFC_WP_CONTENT_BASENAME."/cache/all/$1/index.html -f [or]"."\n";
+				$data = $data."RewriteCond ".WPFC_WP_CONTENT_DIR."/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n";
 			}
 
-			$data = $data.'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n";
+			$data = $data.'RewriteRule ^(.*) "/'.$this->getRewriteBase().WPFC_WP_CONTENT_BASENAME.'/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n";
 			
 			//RewriteRule !/  "/wp-content/cache/all/index.html" [L]
 
@@ -554,7 +554,7 @@
 			$newContentPath = str_replace(home_url(), "", content_url());
 			if(!preg_match("/wp-content/", $newContentPath)){
 				$newContentPath = trim($newContentPath, "/");
-				return "RewriteRule ^".$newContentPath."/cache/(.*) ".ABSPATH."wp-content/cache/$1 [L]"."\n";
+				return "RewriteRule ^".$newContentPath."/cache/(.*) ".WPFC_WP_CONTENT_DIR."/cache/$1 [L]"."\n";
 			}
 			return "";
 		}
@@ -1051,9 +1051,9 @@
 
 				    				<button id="wpfc-download-premium-button" class="btn primaryDisableCta" style="width:200px;">
 				    					<?php $wpfc_premium_version = ""; ?>
-				    					<?php if(file_exists(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){ ?>
+				    					<?php if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){ ?>
 				    						<?php
-				    							if($data = @file_get_contents(ABSPATH."wp-content/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){
+				    							if($data = @file_get_contents(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){
 				    								preg_match("/Version:\s*(.+)/", $data, $out);
 				    								if(isset($out[1]) && $out[1]){
 				    									$wpfc_premium_version = trim($out[1]);
