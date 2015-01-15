@@ -28,7 +28,7 @@
 				$out[2] = array_unique($out[2]);
 
 				foreach ($out[2] as $key => $value) {
-					$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($value);
+					$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($value);
 					$jsScript = content_url()."/cache/wpfc-minified/".md5($value);
 
 					if(strpos($this->getJsLinksExcept(), $out[0][$i]) === false){
@@ -96,7 +96,7 @@
 		public function minify($url, $minify = true){
 			$this->url = $url;
 
-			$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($url);
+			$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($url);
 			$jsLink = content_url()."/cache/wpfc-minified/".md5($url);
 
 			if(is_dir($cachFilePath)){
@@ -153,7 +153,7 @@
 				foreach ($prev["value"] as $prevKey => $prevValue) {
 					if($prevKey == count($prev["value"]) - 1){
 						$name = md5($name);
-						$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".$name;
+						$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".$name;
 
 						if(!is_dir($cachFilePath)){
 							$wpfc->createFolder($cachFilePath, $prev["content"], "js", time());

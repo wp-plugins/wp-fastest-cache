@@ -39,7 +39,7 @@
 					}
 
 
-					$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($value);
+					$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($value);
 					$cssLink = content_url()."/cache/wpfc-minified/".md5($value);
 
 					preg_match("/media=[\"\']([^\"\']+)[\"\']/", $out[1][$i], $tmpMedia);
@@ -84,7 +84,7 @@
 		public function minify($url, $minify = true){
 			$this->url = $url;
 
-			$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".md5($url);
+			$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($url);
 			$cssLink = content_url()."/cache/wpfc-minified/".md5($url);
 
 			if(is_dir($cachFilePath)){
@@ -336,7 +336,7 @@
 				foreach ($prev["value"] as $prevKey => $prevValue) {
 					if($prevKey == count($prev["value"]) - 1){
 						$name = md5($prev["name"]);
-						$cachFilePath = ABSPATH."wp-content"."/cache/wpfc-minified/".$name;
+						$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".$name;
 
 						if(!is_dir($cachFilePath)){
 							$wpfc->createFolder($cachFilePath, $prev["content"], "css", time());

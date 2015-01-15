@@ -19,12 +19,14 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */ 
+	define("WPFC_WP_CONTENT_DIR", ABSPATH.str_replace("/", "", basename(content_url())));
 
 	class WpFastestCache{
 		private $systemMessage = "";
 		private $options = array();
 
 		public function __construct(){
+
 			$optimize_image_ajax_requests = array("wpfc_revert_image_ajax_request", 
 												  "wpfc_statics_ajax_request",
 												  "wpfc_optimize_image_ajax_request",
@@ -205,7 +207,7 @@ GNU General Public License for more details.
 		}
 
 		protected function getWpContentDir(){
-			return ABSPATH."wp-content";
+			return WPFC_WP_CONTENT_DIR;
 		}
 
 		protected function getOptions(){
