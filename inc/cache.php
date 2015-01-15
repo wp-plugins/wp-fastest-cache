@@ -359,7 +359,7 @@
 
 										if($jsFiles = @scandir($minifiedJs["cachFilePath"], 1)){
 											if($jsContent = $js->file_get_contents_curl($minifiedJs["url"]."/".$jsFiles[0]."?v=".time())){
-												$prev["content"] .= $jsContent;
+												$prev["content"] = $prev["content"]."\n".$jsContent;
 												array_push($prev["value"], $value);
 											}
 										}
