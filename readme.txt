@@ -77,6 +77,11 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 
 == Changelog ==
 
+= 0.8.3.9 =
+* other plugins can use the functions
+* to put ";" at the end of js file if last char is not ";"
+* to make compatible renamed wp-content sites
+
 = 0.8.3.8 =
 * to prevent using GZip Ninja Speed Compression
 * to prevent using GZIP Output
