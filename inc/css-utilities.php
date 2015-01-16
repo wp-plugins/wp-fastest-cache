@@ -227,8 +227,10 @@
 			preg_match_all("/<\!--\s*\[\s*if[^>]+>(.*?)<\!\s*\[\s*endif\s*\]\s*-->/si", $head[1], $cssLinksInIf);
 
 			preg_match_all("/<\!--(?!\[if)(.*?)(?!<\!\s*\[\s*endif\s*\]\s*)-->/si", $head[1], $cssLinksCommentOut);
+
+			preg_match_all("/<script((?:(?!<\/script).)+)<\/style>((?:(?!<\/script).)+)<\/script>/si", $head[1], $cssLinksInScripts);
 			
-			$this->cssLinksExcept = implode(" ", array_merge($cssLinksInIf[0], $cssLinksCommentOut[0]));
+			$this->cssLinksExcept = implode(" ", array_merge($cssLinksInIf[0], $cssLinksCommentOut[0], $cssLinksInScripts[0]));
 		}
 
 		public function getCssLinks(){
