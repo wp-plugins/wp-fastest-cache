@@ -72,9 +72,8 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 5. Delete All File Page
 6. All cached files are deleted at the determinated time
 7. Block caching for post and pages (TinyMCE)
-8. Block caching for post and pages (Quicktags)
-9. Clean cached files via admin toolbar easly
-11. Exclude page
+8. Clean cached files via admin toolbar easly
+9. Exclude page
 
 == Changelog ==
 
