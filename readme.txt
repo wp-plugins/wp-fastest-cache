@@ -74,7 +74,7 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 7. Block caching for post and pages (TinyMCE)
 8. Block caching for post and pages (Quicktags)
 9. Clean cached files via admin toolbar easly
-10. Exclude page
+11. Exclude page
 
 == Changelog ==
 
