@@ -65,15 +65,16 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 
 == Screenshots ==
 
-1. Without Cache
-2. With Cache
-3. Main Page
-4. Delete All File Page
-5. All cached files are deleted at the determinated time
-6. Block caching for post and pages (TinyMCE)
-7. Block caching for post and pages (Quicktags)
-8. Clean cached files via admin toolbar easly
-9. Exclude page
+1. Performance Comparison
+2. Without Cache
+3. With Cache
+4. Main Page
+5. Delete All File Page
+6. All cached files are deleted at the determinated time
+7. Block caching for post and pages (TinyMCE)
+8. Block caching for post and pages (Quicktags)
+9. Clean cached files via admin toolbar easly
+10. Exclude page
 
 == Changelog ==
 
