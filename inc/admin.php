@@ -1295,7 +1295,7 @@
 				</div>
 			</div>
 			<?php if(!class_exists("WpFastestCacheImageOptimisation")){ ?>
-				<div id="wpfc-promotion" style="bottom: -153px; position: fixed; z-index: 20; right: 20px;">
+				<div id="wpfc-promotion" style="bottom: -153px; position: fixed; z-index: 20; right: 20px;cursor: pointer;">
 					<img src="<?php echo plugins_url("wp-fastest-cache/images/promotions/promotion-1.jpg"); ?>">
 				</div>
 				<script type="text/javascript">
