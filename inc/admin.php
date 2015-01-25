@@ -11,11 +11,6 @@
 
 		public function __construct(){
 			$this->options = $this->getOptions();
-
-			// second precaution for XSS: to remove XSS if XSS has already been added
-			if(strlen($this->options->wpFastestCacheLanguage) > 3){
-				$this->options->wpFastestCacheLanguage = "eng";
-			}
 			
 			$this->optionsPageRequest();
 			$this->iconUrl = plugins_url("wp-fastest-cache/images/icon-32x32.png");
