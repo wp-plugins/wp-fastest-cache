@@ -70,7 +70,7 @@
 						$value->content = trim($value->content, "/");
 
 						if($value->prefix == "exact"){
-							if($value->content == $request_url){
+							if(strtolower($value->content) == strtolower($request_url)){
 								return true;	
 							}
 						}else{
@@ -80,7 +80,7 @@
 								$preg_match_rule = preg_quote($value->content, "/");
 							}
 
-							if(preg_match("/".$preg_match_rule."/", $request_url)){
+							if(preg_match("/".$preg_match_rule."/i", $request_url)){
 								return true;
 							}
 						}
