@@ -876,9 +876,15 @@
 										}
 
 										// $arrSettings = array(array("value" => "", "text" => "Choose One"),
-										// 					array("value" => "hourly", "text" => "Once an hour"),
-										// 					array("value" => "daily", "text" => "Once a day"),
-										// 					array("value" => "twicedaily", "text" => "Twice a day"));
+										// 					array("value" => "everyfiveminute", "text" => "Once Every 5 Minutes"),
+										// 					array("value" => "everyfifteenminute", "text" => "Once Every 15 Minutes"),
+										// 					array("value" => "twiceanhour", "text" => "Twice an Hour"),
+										// 					array("value" => "onceanhour", "text" => "Once an Hour"),
+										// 					array("value" => "everysixhours", "text" => "Once Every 6 Hours"),
+										// 					array("value" => "onceaday", "text" => "Once a Day"),
+										// 					array("value" => "weekly", "text" => "Once a Week"),
+										// 					array("value" => "montly", "text" => "Once a Month'")
+										// 				);
 
 										// foreach ($arrSettings as $key => $value) {
 										// 	//$checked = $value["value"] == $wpFastestCacheTimeOut ? 'selected=""' : "";
