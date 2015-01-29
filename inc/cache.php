@@ -110,7 +110,11 @@
 			} else if(preg_match("/json/i", $_SERVER["HTTP_ACCEPT"])){
 				return $buffer;
 			}else if($this->checkWoocommerceSession()){
-				return $buffer."<!-- \$_COOKIE['wp_woocommerce_session'] has been set -->";
+				if($this->checkHtml($buffer)){
+					return $buffer;
+				}else{
+					return $buffer."<!-- \$_COOKIE['wp_woocommerce_session'] has been set -->";
+				}
 			}else if(defined('DONOTCACHEPAGE') && $this->isPluginActive('wordfence/wordfence.php')){ // for Wordfence: not to cache 503 pages
 				return $buffer."<!-- DONOTCACHEPAGE is defined as TRUE -->";
 			}else if($this->isPasswordProtected($buffer)){
