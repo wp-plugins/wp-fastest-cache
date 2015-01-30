@@ -1136,6 +1136,7 @@
 
 													jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
 													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
+													jQuery("#wpfc-buy-premium-button").text("Purchased");
 
 													if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
 														jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
