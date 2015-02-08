@@ -1002,12 +1002,12 @@
 				    				<img src="<?php echo plugins_url("wp-fastest-cache/images/rocket.png"); ?>" />
 				    			</div>
 				    			<div class="wpfc-premium-step-footer">
-				    				<h1>New Features</h1>
+				    				<h1 id="new-features-h1">New Features</h1>
 				    				<ul>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/image-optimization/">Image Optimization</a></li>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/mobile-cache/">Mobile Cache</a></li>
-				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/minify-html-plus/">Minify Html Plus</a></li>
-				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/combine-js-plus/">Combine JS Plus</a></li>
+				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/minify-html-plus/">Minify HTML Plus</a></li>
+				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/combine-js-plus/">Combine Js Plus</a></li>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/remove-comments/">Remove Comments</a></li>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/delete-cache-logs/">Delete Cache Logs</a></li>
 				    					<li><a target="_blank" style="text-decoration: none;color: #444;" href="http://www.wpfastestcache.com/premium/cache-statics/">Cache Statics</a></li>
@@ -1025,7 +1025,7 @@
 				    				<img width="140px" height="140px" src="<?php echo plugins_url("wp-fastest-cache/images/wallet.png"); ?>" />
 				    			</div>
 				    			<div class="wpfc-premium-step-footer">
-				    				<h1>Just $<span id="wpfc-premium-price"></span></h1>
+				    				<h1 style="float:left;" id="just-h1">Just</h1><h1>&nbsp;$<span id="wpfc-premium-price"></span></h1>
 				    				<p>The download button will be available after paid. You can buy the premium version now.</p>
 				    				<form action="http://api.wpfastestcache.net/paypal/buypremium/" method="post">
 				    					<input type="hidden" name="hostname" value="<?php echo str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"]); ?>">
@@ -1046,7 +1046,7 @@
 				    				<img src="<?php echo plugins_url("wp-fastest-cache/images/download-128x128.png"); ?>" />
 				    			</div>
 				    			<div class="wpfc-premium-step-footer">
-				    				<h1>Get Now!</h1>
+				    				<h1 id="get-now-h1">Get Now!</h1>
 				    				<p>Please don't delete free version. Premium version works with free version.</p>
 
 
@@ -1137,7 +1137,7 @@
 
 													jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
 													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
-													jQuery("#wpfc-buy-premium-button").text("Purchased");
+													jQuery("#wpfc-buy-premium-button").text(window.wpfc.dictionary["Purchased"]);
 
 													if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
 														jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
@@ -1153,7 +1153,7 @@
 															success: function(version){
 																jQuery("#revert-loader-toolbar").hide();
 																if(version_in_site == version){
-																	download_button_span.text("No Update");
+																	download_button_span.text(window.wpfc.dictionary["No Update"]);
 																	jQuery("#wpfc-download-premium-button").attr("disabled", true);
 																}else{
 																	download_button_span.text("Update - " + version);
