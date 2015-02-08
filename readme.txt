@@ -78,6 +78,11 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 
 == Changelog ==
 
+= 0.8.4.1 =
+* exclude page is case insensitive
+* to check buffer is json or not for checkWoocommerceSession()
+* not to comment out Google Analytics by Yoast
+
 = 0.8.4.0 =
 * refactoring of checkHtml()
 
