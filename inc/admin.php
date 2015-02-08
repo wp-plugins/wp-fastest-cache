@@ -1182,7 +1182,7 @@
 				    <div class="tab6" style="padding-left:20px;">
 				    	<h2 style="padding-bottom:10px;">Exclude Pages</h2>
 				    	<div class="questionCon">
-				    			<label style="padding-bottom:10px;">You can stop to create cache for specific pages <a target="_blank" href="http://www.wpfastestcache.com/features/exclude-page/">[Read More]</a></label>
+				    			<label style="padding-bottom:10px;">You can stop to create cache for specific pages</label><label style="padding-bottom:10px;padding-left:5px;">[<a target="_blank" href="http://www.wpfastestcache.com/features/exclude-page/">Read More</a>]</label>
 				    	</div>
 				    	<form method="post" name="wp_manager">
 				    		<input type="hidden" value="exclude" name="wpFastestCachePage">

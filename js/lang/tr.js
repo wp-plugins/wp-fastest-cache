@@ -103,5 +103,13 @@ window.wpfc.dictionary = {
 	"Delete Cache Logs" : "Silinen Cache Logları",
 	"No Update" : "Update Yok",
 	"Get Now!" : "Şimdi Yükleyin",
-	"Just" : "Sadece"
+	"Just" : "Sadece",
+	"Exclude" : "Hariç",
+	"Exclude Pages" : "Hariç Tutulan Sayfalar",
+	"Start With" : "İle Başlayan",
+	"You can stop to create cache for specific pages" : "Belirli sayfalar için cache sistemini durdurabilirsiniz",
+	"Read More" : "Devamını Oku",
+	"Contain" : "İçerdiği",
+	"Exact" : "Tam"
+
 };
