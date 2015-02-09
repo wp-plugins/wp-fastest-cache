@@ -1,6 +1,6 @@
 window.wpfc = {};
 window.wpfc.translate = function(word){
-	return window.wpfc.dictionary[word] ? window.wpfc.dictionary[word] : word;
+	return (typeof window.wpfc.dictionary != "undefined" && typeof window.wpfc.dictionary[word] != "undefined" && window.wpfc.dictionary[word]) ? window.wpfc.dictionary[word] : word;
 };
 jQuery.fn.extend({
     wpfclang: function(){
