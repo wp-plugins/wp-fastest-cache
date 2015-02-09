@@ -1,4 +1,7 @@
 window.wpfc = {};
+window.wpfc.translate = function(word){
+	return window.wpfc.dictionary[word] ? window.wpfc.dictionary[word] : word;
+};
 jQuery.fn.extend({
     wpfclang: function(){
     	var dictionary = window.wpfc.dictionary || {};

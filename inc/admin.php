@@ -1157,7 +1157,7 @@
 
 													jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
 													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
-													jQuery("#wpfc-buy-premium-button").text(window.wpfc.dictionary["Purchased"]);
+													jQuery("#wpfc-buy-premium-button").text(window.wpfc.translate("Purchased"));
 
 													if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
 														jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
@@ -1173,7 +1173,7 @@
 															success: function(version){
 																jQuery("#revert-loader-toolbar").hide();
 																if(version_in_site == version){
-																	download_button_span.text(window.wpfc.dictionary["No Update"]);
+																	download_button_span.text(window.wpfc.translate("No Update"));
 																	jQuery("#wpfc-download-premium-button").attr("disabled", true);
 																}else{
 																	download_button_span.text("Update - " + version);
