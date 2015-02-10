@@ -102,7 +102,9 @@
 		public function callback($buffer){
 			$buffer = $this->checkShortCode($buffer);
 
-			if($this->exclude_page()){
+			if(preg_match("/Mediapartners-Google/i", $_SERVER['HTTP_USER_AGENT'])){
+				return $buffer;
+			}else if($this->exclude_page()){
 				return $buffer."<!-- Wp Fastest Cache: Exclude Page -->";
 			}else if($this->is_xml($buffer)){
 				return $buffer."<!-- Wp Fastest Cache: XML Content -->";
