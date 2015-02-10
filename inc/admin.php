@@ -688,11 +688,6 @@
 								<div class="question">Mobile Theme</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMobileTheme; ?> id="wpFastestCacheMobileTheme" name="wpFastestCacheMobileTheme"><label for="wpFastestCacheMobileTheme">Create cache for mobile theme</label></div>
 							</div>
-							<?php }else{ ?>
-								<div class="questionCon">
-								<div class="question">Mobile Theme</div>
-								<div class="inputCon"><input type="checkbox" id="wpFastestCacheMobileTheme"><label for="wpFastestCacheMobileTheme">Create cache for mobile theme</label></div>
-							</div>
 							<?php } ?>
 
 							<div class="questionCon">
@@ -709,11 +704,6 @@
 							<div class="questionCon">
 								<div class="question">Minify HTML Plus</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMinifyHtmlPowerFul; ?> id="wpFastestCacheMinifyHtmlPowerFul" name="wpFastestCacheMinifyHtmlPowerFul"><label for="wpFastestCacheMinifyHtmlPowerFul">More powerful minify html</label></div>
-							</div>
-							<?php }else{ ?>
-							<div class="questionCon">
-								<div class="question">Minify HTML Plus</div>
-								<div class="inputCon"><input type="checkbox" id="wpFastestCacheMinifyHtmlPowerFul"><label for="wpFastestCacheMinifyHtmlPowerFul">More powerful minify html</label></div>
 							</div>
 							<?php } ?>
 
@@ -743,11 +733,6 @@
 								<div class="question">Combine Js Plus</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJsPowerFul; ?> id="wpFastestCacheCombineJsPowerFul" name="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label></div>
 							</div>
-							<?php }else{ ?>
-							<div class="questionCon">
-								<div class="question">Combine Js Plus</div>
-								<div class="inputCon"><input type="checkbox" id="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label></div>
-							</div>
 							<?php } ?>
 
 
@@ -757,11 +742,6 @@
 							<div class="questionCon">
 								<div class="question">Remove Comments</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRemoveComments; ?> id="wpFastestCacheRemoveComments" name="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comment tags between &#60;head&#62;&#60;/head&#62;</label></div>
-							</div>
-							<?php }else{ ?>
-							<div class="questionCon">
-								<div class="question">Remove Comments</div>
-								<div class="inputCon"><input type="checkbox" id="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comment tags between &#60;head&#62;&#60;/head&#62;</label></div>
 							</div>
 							<?php } ?>
 
