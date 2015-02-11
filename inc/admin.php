@@ -691,7 +691,7 @@
 							<?php }else{ ?>
 							<div class="questionCon disabled">
 								<div class="question">Mobile Theme</div>
-								<div class="inputCon"><input type="checkbox" disabled="" id="wpFastestCacheMobileTheme"><label for="wpFastestCacheMobileTheme">Create cache for mobile theme</label></div>
+								<div class="inputCon"><input type="checkbox" id="wpFastestCacheMobileTheme"><label for="wpFastestCacheMobileTheme">Create cache for mobile theme</label></div>
 							</div>
 							<?php } ?>
 
@@ -713,7 +713,7 @@
 							<?php }else{ ?>
 							<div class="questionCon disabled">
 								<div class="question">Minify HTML Plus</div>
-								<div class="inputCon"><input type="checkbox" disabled="" id="wpFastestCacheMinifyHtmlPowerFul"><label for="wpFastestCacheMinifyHtmlPowerFul">More powerful minify html</label></div>
+								<div class="inputCon"><input type="checkbox" id="wpFastestCacheMinifyHtmlPowerFul"><label for="wpFastestCacheMinifyHtmlPowerFul">More powerful minify html</label></div>
 							</div>
 							<?php } ?>
 
@@ -746,7 +746,7 @@
 							<?php }else{ ?>
 							<div class="questionCon disabled">
 								<div class="question">Combine Js Plus</div>
-								<div class="inputCon"><input type="checkbox" disabled="" id="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label></div>
+								<div class="inputCon"><input type="checkbox" id="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label></div>
 							</div>
 							<?php } ?>
 
@@ -761,7 +761,7 @@
 							<?php }else{ ?>
 							<div class="questionCon disabled">
 								<div class="question">Remove Comments</div>
-								<div class="inputCon"><input type="checkbox" disabled="" id="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comment tags between &#60;head&#62;&#60;/head&#62;</label></div>
+								<div class="inputCon"><input type="checkbox" id="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comment tags between &#60;head&#62;&#60;/head&#62;</label></div>
 							</div>
 							<?php } ?>
 
@@ -1321,6 +1321,16 @@
 				<div id="wpfc-promotion" style="height:250px; bottom: -153px; position: fixed; z-index: 9999; right: 20px;cursor: pointer;">
 					<img src="<?php echo plugins_url("wp-fastest-cache/images/promotions/promotion-1.jpg"); ?>">
 				</div>
+
+				<div id="wpfc-premium-tooltip" style="display:none;width: 160px; height: 60px; position: absolute; margin-left: 354px; margin-top: 112px; color: white;">
+					<div style="float:left;width:13px;">
+						<div style="width: 0px; height: 0px; border-top: 6px solid transparent; border-right: 6px solid #333333; border-bottom: 6px solid transparent; float: right; margin-right: 0px; margin-top: 25px;"></div>
+					</div>
+					<div style="font-family:sans-serif;font-size:13px;text-align: center; border-radius: 5px; float: left; background-color: rgb(51, 51, 51); color: white; width: 147px; padding: 10px 0px;">
+						<label>Only available in Premium version</label>
+					</div>
+				</div>
+
 				<script type="text/javascript">
 					var promotion_id = "wpfc-promotion";
 					var promotion_bottom = jQuery("#wpfc-promotion").css("bottom");
@@ -1337,11 +1347,25 @@
 						jQuery("#wpfc-premium").attr("checked", true);
 						jQuery("#wpfc-premium").trigger("change");
 					});
-					// jQuery("input[type='checkbox']:not([name])").closest("div").click(function(e){
-					// 	jQuery("#wpfc-premium").attr("checked", true);
-					// 	jQuery("#wpfc-premium").trigger("change");
-					// 	return false;
-					// });
+
+					jQuery("div.questionCon.disabled").click(function(e){
+						if(typeof window.wpfc.tooltip != "undefined"){
+							clearTimeout(window.wpfc.tooltip);
+						}
+
+						var inputCon = jQuery(e.currentTarget).find(".inputCon");
+						var left = 30;
+
+						jQuery(e.currentTarget).children().each(function(i, child){
+							left = left + jQuery(child).width();
+						});
+
+						jQuery("#wpfc-premium-tooltip").css({"margin-left" : left + "px", "margin-top" : (jQuery(e.currentTarget).offset().top - 99) + "px"});
+						jQuery("#wpfc-premium-tooltip").fadeIn( "slow", function() {
+							window.wpfc.tooltip = setTimeout(function(){ jQuery("#wpfc-premium-tooltip").fadeOut( "slow"); }, 1000);
+						});
+						return false;
+					});
 				</script>
 			<?php } ?>
 			<script>Wpfclang.init("<?php echo $wpFastestCacheLanguage; ?>");</script>

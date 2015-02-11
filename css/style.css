@@ -22,6 +22,10 @@ div.questionCon.qsubmit{
     text-align: center;
 }
 
+.tabGroup div.questionCon.disabled{
+    color: #888;
+}
+
 .tabGroup div.question{
 	padding-right: 10px;
     float: left;
