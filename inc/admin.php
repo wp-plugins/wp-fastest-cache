@@ -1445,7 +1445,7 @@
 							left = left + jQuery(child).width();
 						});
 
-						jQuery("#wpfc-premium-tooltip").css({"margin-left" : left + "px", "margin-top" : (jQuery(e.currentTarget).offset().top - 99) + "px"});
+						jQuery("#wpfc-premium-tooltip").css({"margin-left" : left + "px", "margin-top" : (jQuery(e.currentTarget).offset().top - jQuery(".tab1").offset().top + 25) + "px"});
 						jQuery("#wpfc-premium-tooltip").fadeIn( "slow", function() {
 							window.wpfc.tooltip = setTimeout(function(){ jQuery("#wpfc-premium-tooltip").fadeOut( "slow"); }, 1000);
 						});
