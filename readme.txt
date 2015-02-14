@@ -52,7 +52,7 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 * Español (by Diplo)
 * Français (by PascalJ)
 * Italiana (by Valerio)
-* Japanese (by KUCKLU)
+* 日本語 (by KUCKLU)
 * Português
 * Русский
 * Türkçe
