@@ -10,11 +10,22 @@
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
 			$this->html = $html;
 
+			$ini = 0;
+
+			if(function_exists("ini_set") && function_exists("ini_get")){
+				$ini = ini_get("pcre.recursion_limit");
+				ini_set("pcre.recursion_limit", "2777");
+			}
+
 			$this->setCssLinksExcept();
 
 			$this->inlineToLink($wpfc);
 			$this->setCssLinks();
 			$this->setCssLinksExcept();
+
+			if($ini){
+				ini_set("pcre.recursion_limit", $ini);
+			}
 		}
 
 		public function inlineToLink($wpfc){
