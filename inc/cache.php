@@ -49,7 +49,12 @@
 						"\/wp\-includes",
 						"\/index\.php",
 						"\/xmlrpc\.php",
-						"\/wp\-api\/"
+						"\/wp\-api\/",
+						"\/cart",
+						"\/checkout", 
+						"\/receipt",
+						"\/confirmation",
+						"\/product"
 					);
 
 			if(preg_match("/".implode("|", $list)."/i", $_SERVER["REQUEST_URI"])){
@@ -129,7 +134,7 @@
 			}else if(is_404()){
 				return $buffer;
 			}else if($this->ignored()){
-				return $buffer;
+				return $buffer."<!-- ignored -->";
 			}else if($this->blockCache === true){
 				return $buffer."<!-- wpfcNOT has been detected -->";
 			}else if(isset($_GET["preview"])){
