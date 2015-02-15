@@ -78,6 +78,11 @@ Setup of this plugin is so easy. You don't need to modify .htacces file. It will
 
 == Changelog ==
 
+= 0.8.4.3 =
+* to stop caching for /wp-api/v1, /cart, /checkout, /receipt, /confirmation, /product - WooCommerce
+* to prevent caching if useragent Mediapartners-Google
+* to decrease pcre.recursion_limit in css optimization to prevent Internal Server Error
+
 = 0.8.4.2 =
 * to fix premium page issue
 
