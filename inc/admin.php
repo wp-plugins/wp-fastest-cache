@@ -1124,7 +1124,7 @@
 				    				<label>Checkout</label>
 				    			</div>
 				    			<div class="wpfc-premium-step-content">
-				    				You need to pay before download the premium version.
+				    				You need to pay before downloading the premium version.
 				    			</div>
 				    			<div class="wpfc-premium-step-image">
 				    				<img width="140px" height="140px" src="<?php echo plugins_url("wp-fastest-cache/images/wallet.png"); ?>" />
@@ -1151,8 +1151,8 @@
 				    				<img src="<?php echo plugins_url("wp-fastest-cache/images/download-128x128.png"); ?>" />
 				    			</div>
 				    			<div class="wpfc-premium-step-footer">
-				    				<h1 id="get-now-h1">Get Now!</h1>
-				    				<p>Please don't delete free version. Premium version works with free version.</p>
+				    				<h1 id="get-now-h1">Get It Now!</h1>
+				    				<p>Please don't delete the free version. Premium version works with the free version.</p>
 
 
 
