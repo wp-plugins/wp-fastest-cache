@@ -13,15 +13,15 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 <h4>Official Web Site</h4>
 
-You can find the more information on our web site (<a href="http://www.wpfastestcache.com/">wpfastestcache.com</a>)
+You can find more information on our web site (<a href="http://www.wpfastestcache.com/">wpfastestcache.com</a>)
 
 This plugin creates static html files from your dynamic WordPress blog.
-When a page is rendered, php and mysql are used. Therefor, system needs RAM and CPU. 
+When a page is rendered, php and mysql are used. Therefore, system needs RAM and CPU. 
 If many visitors come to a site, system uses lots of RAM and CPU so page is rendered so slowly. 
 In this case, you need a cache system not to render page again and again.
 Cache system generates a static html file and saves. Other users reach to static html page.
 <br><br>
-Setup of this plugin is so easy. You don't need to modify .htacces file. It will modified automatically.
+Setup of this plugin is so easy. You don't need to modify the .htacces file. It will be modified automatically.
 
 <h4>Features</h4>
 
