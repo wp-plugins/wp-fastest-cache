@@ -65,7 +65,7 @@
 						if($cssFiles = @scandir($cachFilePath, 1)){
 							if($countStyle[$value] == 1){
 								$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
-								if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
+								if($tmpHtml = @preg_replace("/<style[^><]*>\s*".preg_quote($value, "/")."\s*<\/style>/", $link, $this->html)){
 									if($this->_process($value)){
 										$this->html = $tmpHtml;
 									}
@@ -74,7 +74,7 @@
 								}
 							}else{
 								$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
-								if($tmpHtml = @preg_replace("/<style[^><]*>".preg_quote($value, "/")."<\/style>/", $link, $this->html)){
+								if($tmpHtml = @preg_replace("/<style[^><]*>\s*".preg_quote($value, "/")."\s*<\/style>/", $link, $this->html)){
 									if($this->_process($value)){
 										$this->html = $tmpHtml;
 									}
