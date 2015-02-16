@@ -1,6 +1,6 @@
 <?php
 	class WpFastestCacheCreateCache extends WpFastestCache{
-		private $options = array();
+		public $options = array();
 		private $startTime;
 		private $blockCache = false;
 		private $err = "";

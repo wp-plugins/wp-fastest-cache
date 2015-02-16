@@ -279,6 +279,11 @@
 						$minifiedCss = $this->minify($href);
 
 						if($minifiedCss){
+							if(isset($wpfc->options->wpFastestCacheMinifyCss)){
+								$powerful_html = new WpFastestCachePowerfulHtml();
+								$minifiedCss["cssContent"] = $powerful_html->minify_css($minifiedCss["cssContent"]);
+							}
+
 							if(!is_dir($minifiedCss["cachFilePath"])){
 								$prefix = time();
 								$wpfc->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
@@ -310,6 +315,12 @@
 							$minifiedCss = $this->minify($href, $minify);
 
 							if($minifiedCss){
+
+								if($minify && isset($wpfc->options->wpFastestCacheMinifyCss)){
+									$powerful_html = new WpFastestCachePowerfulHtml();
+									$minifiedCss["cssContent"] = $powerful_html->minify_css($minifiedCss["cssContent"]);
+								}
+
 								if(!is_dir($minifiedCss["cachFilePath"])){
 									$prefix = time();
 									$wpfc->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
