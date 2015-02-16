@@ -279,7 +279,7 @@
 						$minifiedCss = $this->minify($href);
 
 						if($minifiedCss){
-							if(isset($wpfc->options->wpFastestCacheMinifyCss)){
+							if(isset($wpfc->options->wpFastestCacheMinifyCssPowerFul)){
 								$powerful_html = new WpFastestCachePowerfulHtml();
 								$minifiedCss["cssContent"] = $powerful_html->minify_css($minifiedCss["cssContent"]);
 							}
@@ -316,7 +316,7 @@
 
 							if($minifiedCss){
 
-								if($minify && isset($wpfc->options->wpFastestCacheMinifyCss)){
+								if($minify && isset($wpfc->options->wpFastestCacheMinifyCssPowerFul)){
 									$powerful_html = new WpFastestCachePowerfulHtml();
 									$minifiedCss["cssContent"] = $powerful_html->minify_css($minifiedCss["cssContent"]);
 								}
