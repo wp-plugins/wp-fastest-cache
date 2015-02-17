@@ -478,6 +478,12 @@ GNU General Public License for more details.
 			    'wpfc' => true
 		    );
 
+		    $schedules['yearly'] = array(
+			    'interval' => 60*60*24*30*12,
+			    'display' => __( 'Once a Year' ),
+			    'wpfc' => true
+		    );
+
 		    return $schedules;
 		}
 
