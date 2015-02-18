@@ -49,13 +49,11 @@
 						"\/wp\-includes",
 						"\/index\.php",
 						"\/xmlrpc\.php",
-						"\/wp\-api\/",
-						"\/cart",
-						"\/checkout", 
-						"\/receipt",
-						"\/confirmation",
-						"\/product"
+						"\/wp\-api\/"
 					);
+			if($this->isPluginActive('woocommerce/woocommerce.php')){
+				array_push($list, "\/cart", "\/checkout", "\/receipt", "\/confirmation", "\/product");
+			}
 
 			if(preg_match("/".implode("|", $list)."/i", $_SERVER["REQUEST_URI"])){
 				return true;
