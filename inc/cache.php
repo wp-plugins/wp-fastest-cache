@@ -126,7 +126,7 @@
 			}else if($this->isPasswordProtected($buffer)){
 				return $buffer."<!-- Password protected content has been detected -->";
 			}else if($this->isWpLogin($buffer)){
-				return $buffer;
+				return $buffer."<!-- wp-login.php -->";
 			}else if($this->hasContactForm7WithCaptcha($buffer)){
 				return $buffer."<!-- This page was not cached because ContactForm7's captcha -->";
 			}else if(is_404()){
@@ -429,7 +429,10 @@
 		}
 
 		public function isWpLogin($buffer){
-			if(preg_match("/<form[^\>]+loginform[^\>]+>((?:(?!<\/form).)+)user_login((?:(?!<\/form).)+)user_pass((?:(?!<\/form).)+)<\/form>/si", $buffer)){
+			// if(preg_match("/<form[^\>]+loginform[^\>]+>((?:(?!<\/form).)+)user_login((?:(?!<\/form).)+)user_pass((?:(?!<\/form).)+)<\/form>/si", $buffer)){
+			// 	return true;
+			// }
+			if($GLOBALS["pagenow"] == "wp-login.php"){
 				return true;
 			}
 
