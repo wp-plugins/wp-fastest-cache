@@ -1152,7 +1152,7 @@
 				    				<p>The download button will be available after paid. You can buy the premium version now.</p>
 				    				<form action="http://api.wpfastestcache.net/paypal/buypremium/" method="post">
 				    					<input type="hidden" name="hostname" value="<?php echo str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"]); ?>">
-					    				<button id="wpfc-buy-premium-button" type="submit" class="btn primaryCta" style="width:200px;">
+					    				<button id="wpfc-buy-premium-button" type="submit" class="wpfc-btn primaryCta" style="width:200px;">
 					    					<span>Buy</span>
 					    				</button>
 				    				</form>
@@ -1174,7 +1174,7 @@
 
 
 
-				    				<button id="wpfc-download-premium-button" class="btn primaryDisableCta" style="width:200px;">
+				    				<button id="wpfc-download-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
 				    					<?php $wpfc_premium_version = ""; ?>
 				    					<?php if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){ ?>
 				    						<?php
@@ -1191,7 +1191,7 @@
 				    					<?php } ?>
 				    				</button>
 				    				<!--
-				    				<button class="btn primaryNegativeCta" style="width:200px;">
+				    				<button class="wpfc-btn primaryNegativeCta" style="width:200px;">
 				    					<span>Update</span>
 				    					<label>(v 1.0)</label>
 				    				</button>
@@ -1258,12 +1258,12 @@
 													var version_in_site = "<?php echo $wpfc_premium_version; ?>";
 													var download_button_span = jQuery("#wpfc-download-premium-button span");
 
-													jQuery("#wpfc-buy-premium-button").attr("class", "btn primaryDisableCta");
+													jQuery("#wpfc-buy-premium-button").attr("class", "wpfc-btn primaryDisableCta");
 													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
 													jQuery("#wpfc-buy-premium-button").text(window.wpfc.translate("Purchased"));
 
 													if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
-														jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+														jQuery("#wpfc-download-premium-button").attr("class", "wpfc-btn primaryCta");
 														jQuery("#revert-loader-toolbar").hide();
 													}else{
 										    			jQuery.ajax({
@@ -1280,7 +1280,7 @@
 																	jQuery("#wpfc-download-premium-button").attr("disabled", true);
 																}else{
 																	download_button_span.text("Update - " + version);
-																	jQuery("#wpfc-download-premium-button").attr("class", "btn primaryCta");
+																	jQuery("#wpfc-download-premium-button").attr("class", "wpfc-btn primaryCta");
 																}
 																console.log(version, "version", version_in_site, download_button_span);
 															}
