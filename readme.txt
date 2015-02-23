@@ -78,6 +78,10 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.4.4 =
+* to fix inline css issue
+* to prevent caching for renamed wp-login.php
+
 = 0.8.4.3 =
 * to stop caching for /wp-api/v1, /cart, /checkout, /receipt, /confirmation, /product - WooCommerce
 * to prevent caching if useragent Mediapartners-Google
