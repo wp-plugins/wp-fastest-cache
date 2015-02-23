@@ -70,7 +70,7 @@
 
 		public function myplugin_buttonhooks() {
 		   // Only add hooks when the current user has permissions AND is in Rich Text editor mode
-		   if ( ( current_user_can('edit_posts') || current_user_can('edit_pages') ) && get_user_option('rich_editing') ) {
+		   if (current_user_can( 'manage_options' )) {
 		     add_filter("mce_external_plugins", array($this, "myplugin_register_tinymce_javascript"));
 		     add_filter('mce_buttons', array($this, 'myplugin_register_buttons'));
 		   }
@@ -87,7 +87,7 @@
 		}
 
 		public function addButtonOnQuicktagsEditor(){
-			if (wp_script_is('quicktags')){ ?>
+			if (wp_script_is('quicktags') && current_user_can( 'manage_options' )){ ?>
 				<script type="text/javascript">
 				    QTags.addButton('wpfc_not', 'wpfcNOT', '<!--[wpfcNOT]-->', '', '', 'Block caching for this page');
 			    </script>
@@ -1304,8 +1304,8 @@
 				    </div>
 				    <div class="tab6" style="padding-left:20px;">
 				    	<h2 style="padding-bottom:10px;">Exclude Pages</h2>
-				    	<div class="questionCon">
-				    			<label style="padding-bottom:10px;">You can stop to create cache for specific pages</label><label style="padding-bottom:10px;padding-left:5px;">[<a target="_blank" href="http://www.wpfastestcache.com/features/exclude-page/">Read More</a>]</label>
+				    	<div class="questionCon" style="padding-bottom:10px;">
+				    			<label>You can stop to create cache for specific pages</label><label style="padding-bottom:10px;padding-left:5px;">[<a target="_blank" href="http://www.wpfastestcache.com/features/exclude-page/">How to use this feature</a>]</label>
 				    	</div>
 				    	<form method="post" name="wp_manager">
 				    		<input type="hidden" value="exclude" name="wpFastestCachePage">
