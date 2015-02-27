@@ -105,7 +105,9 @@
 		public function callback($buffer){
 			$buffer = $this->checkShortCode($buffer);
 
-			if(preg_match("/Mediapartners-Google/i", $_SERVER['HTTP_USER_AGENT'])){
+			if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
+				return $buffer;
+			}else if(preg_match("/Mediapartners-Google/i", $_SERVER['HTTP_USER_AGENT'])){
 				return $buffer;
 			}else if($this->exclude_page()){
 				return $buffer."<!-- Wp Fastest Cache: Exclude Page -->";
