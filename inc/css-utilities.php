@@ -174,7 +174,7 @@
 			preg_match_all('/@import\s+url\([^\)]+\);/i', $css, $imports);
 
 			if(count($imports[0]) > 0){
-				$css = preg_replace('/@import\s+url\([^\)]+\);/i', "/* @import is moved to the top */", $css);
+				//$css = preg_replace('/@import\s+url\([^\)]+\);/i', "/* @import is moved to the top */", $css);
 				for ($i = count($imports[0])-1; $i >= 0; $i--) {
 					$css = $imports[0][$i]."\n".$css;
 				}
@@ -185,7 +185,7 @@
 		public function fixCharset($css){
 			preg_match_all('/@charset[^\;]+\;/i', $css, $charsets);
 			if(count($charsets[0]) > 0){
-				$css = preg_replace('/@charset[^\;]+\;/i', "/* @charset is moved to the top */", $css);
+				//$css = preg_replace('/@charset[^\;]+\;/i', "/* @charset is moved to the top */", $css);
 				foreach($charsets[0] as $charset){
 					$css = $charset."\n".$css;
 				}
