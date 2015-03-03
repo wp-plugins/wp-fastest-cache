@@ -23,15 +23,13 @@
 			if(count($out) > 0){
 				$countStyle = array_count_values($out[2]);
 
-				$i = 0;
-
 				$out[2] = array_unique($out[2]);
 
 				foreach ($out[2] as $key => $value) {
 					$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($value);
 					$jsScript = content_url()."/cache/wpfc-minified/".md5($value);
 
-					if(strpos($this->getJsLinksExcept(), $out[0][$i]) === false){
+					if(strpos($this->getJsLinksExcept(), $out[0][$key]) === false){
 						if(!is_dir($cachFilePath)){
 							$prefix = time();
 							$wpfc->createFolder($cachFilePath, $value, "js", $prefix);
@@ -39,14 +37,14 @@
 
 						if($jsFiles = @scandir($cachFilePath, 1)){
 							if($countStyle[$value] == 1){
-								$script = "<!-- <script".$out[1][$i].">".str_replace(array("<!--", "-->"), "", $value)."</script> -->"."\n"."<script".$out[1][$i]." src='".$jsScript."/".$jsFiles[0]."'></script>";
+								$script = "<!-- <script".$out[1][$key].">".str_replace(array("<!--", "-->"), "", $value)."</script> -->"."\n"."<script".$out[1][$key]." src='".$jsScript."/".$jsFiles[0]."'></script>";
 								if($tmpHtml = @preg_replace("/<script[^<>]*>".preg_quote($value, "/")."<\/script\s*>/", $script, $this->html)){
 									$this->html = $tmpHtml;
 								}else{
 									$this->err = "inline js is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
 								}
 							}else{
-								$script = "<!-- <script".$out[1][$i].">".str_replace(array("<!--", "-->"), "", $value)."</script> -->"."\n"."<script".$out[1][$i]." src='".$jsScript."/".$jsFiles[0]."'></script>";
+								$script = "<!-- <script".$out[1][$key].">".str_replace(array("<!--", "-->"), "", $value)."</script> -->"."\n"."<script".$out[1][$key]." src='".$jsScript."/".$jsFiles[0]."'></script>";
 								if($tmpHtml = @preg_replace("/<script[^<>]*>".preg_quote($value, "/")."<\/script\s*>/", $script, $this->html)){
 									$this->html = $tmpHtml;
 								}else{
@@ -56,8 +54,6 @@
 							}
 						}
 					}
-
-					$i++;
 				}
 			}
 		}
