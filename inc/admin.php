@@ -1176,9 +1176,9 @@
 
 				    				<button id="wpfc-download-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
 				    					<?php $wpfc_premium_version = ""; ?>
-				    					<?php if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){ ?>
+				    					<?php if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/wpFastestCachePremium.php")){ ?>
 				    						<?php
-				    							if($data = @file_get_contents(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/wpFastestCachePremium.php")){
+				    							if($data = @file_get_contents(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/wpFastestCachePremium.php")){
 				    								preg_match("/Version:\s*(.+)/", $data, $out);
 				    								if(isset($out[1]) && $out[1]){
 				    									$wpfc_premium_version = trim($out[1]);

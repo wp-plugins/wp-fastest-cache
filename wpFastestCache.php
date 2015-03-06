@@ -21,6 +21,7 @@ GNU General Public License for more details.
 */ 
 	define("WPFC_WP_CONTENT_BASENAME", str_replace("/", "", basename(content_url())));
 	define("WPFC_WP_CONTENT_DIR", ABSPATH.str_replace("/", "", basename(content_url())));
+	define("WPFC_WP_PLUGIN_DIR", preg_replace("/(\/trunk\/|\/wp-fastest-cache\/)$/", "", plugin_dir_path( __FILE__ )));
 
 	class WpFastestCache{
 		private $systemMessage = "";
@@ -35,7 +36,7 @@ GNU General Public License for more details.
 												  );
 			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_cache_statics_get"){
 				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
-					if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/statics.php")){
+					if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/library/statics.php")){
 						include_once $this->get_premium_path("statics.php");
 						
 						$cache_statics = new WpFastestCacheStatics();
@@ -72,7 +73,7 @@ GNU General Public License for more details.
 
 							if($wpfc_zip_data){
 
-								$wpfc_zip_dest_path = $this->getWpContentDir()."/plugins/wp-fastest-cache-premium.zip";
+								$wpfc_zip_dest_path = WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium.zip";
 
 								if(@file_put_contents($wpfc_zip_dest_path, $wpfc_zip_data)){
 
@@ -80,10 +81,10 @@ GNU General Public License for more details.
 									include_once ABSPATH."wp-admin/includes/plugin.php";
 
 									if(function_exists("unzip_file")){
-										$this->rm_folder_recursively($this->getWpContentDir()."/plugins/wp-fastest-cache-premium");
+										$this->rm_folder_recursively(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium");
 										
 										WP_Filesystem();
-										$unzipfile = unzip_file($wpfc_zip_dest_path, $this->getWpContentDir()."/plugins/");
+										$unzipfile = unzip_file($wpfc_zip_dest_path, WPFC_WP_PLUGIN_DIR."/");
 
 
 										if ($unzipfile) {
@@ -143,7 +144,7 @@ GNU General Public License for more details.
 				}
 
 				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
-					if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/statics.php")){
+					if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/library/statics.php")){
 						include_once $this->get_premium_path("statics.php");
 					}
 				}
@@ -419,7 +420,7 @@ GNU General Public License for more details.
 		}
 
 		public function get_premium_path($name){
-			return $this->getWpContentDir()."/plugins/wp-fastest-cache-premium/pro/library/".$name;
+			return WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/library/".$name;
 		}
 
 		public function getProLibraryPath($file){
