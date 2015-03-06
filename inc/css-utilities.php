@@ -30,66 +30,137 @@
 
 		public function inlineToLink($wpfc){
 			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
-			preg_match_all("/<style([^><]*)>([^<]+)<\/style>/is",$head[1],$out);
+			//preg_match_all("/<style([^><]*)>([^<]+)<\/style>/is",$head[1],$out);
 
-			if(count($out) > 0){
 
-				$countStyle = array_count_values($out[2]);
+			$data = $head[1];
+			$style_list = array();
+			$style_start_index = false;
+			$style_middle_index = false;
 
-				$i = 0;
-
-				$out[2] = array_unique($out[2]);
-
-				foreach ($out[2] as $key => $value) {
-
-					$value = trim($value);
-
-					// to prevent inline to external if the style is used in the javascript
-					if(in_array($value[0], array(";","'",'"'))){
-						continue;
+			for($i = 0; $i < strlen( $data ); $i++) {
+				if(isset($data[$i-5])){
+				    if(substr($data, $i-5, 6) == "<style"){
+				    	$style_start_index = $i-5;
 					}
+				}
 
+				if($style_start_index && !$style_middle_index){
+					if($data[$i] == ">"){
+						$style_middle_index = $i;
+					}
+				}
 
-					$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($value);
-					$cssLink = content_url()."/cache/wpfc-minified/".md5($value);
+				if(isset($data[$i-7])){
+					if($style_start_index){
+						if(substr($data, $i-7, 8) == "</style>"){
+							array_push($style_list, array("start" => $style_start_index, "middle" => $style_middle_index, "end" => $i));
+							$style_start_index = false;
+							$style_middle_index = false;
+						}
+					}
+				}
+			}
 
-					preg_match("/media=[\"\']([^\"\']+)[\"\']/", $out[1][$i], $tmpMedia);
-					$media = (isset($tmpMedia[1]) && $tmpMedia[1]) ? $tmpMedia[1] : "all";
+			if(!empty($style_list)){
+				foreach (array_reverse($style_list) as $key => $value) {
+					$inline_style_data = substr($data, $value["middle"]+1, ($value["end"] - $value["middle"] + 1 - 9));
+					$inline_style_prefix = substr($data, $value["start"]+6, ($value["middle"] - $value["start"] + 1 - 7));
+					
+					$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($inline_style_data);
+					$cssLink = content_url()."/cache/wpfc-minified/".md5($inline_style_data);
 
-					if(strpos($this->getCssLinksExcept(), $out[0][$i]) === false){
+					if(strpos($this->getCssLinksExcept(), $inline_style_data) === false){
 						if(!is_dir($cachFilePath)){
 							$prefix = time();
-							$wpfc->createFolder($cachFilePath, $value, "css", $prefix);
+							$wpfc->createFolder($cachFilePath, $inline_style_data, "css", $prefix);
 						}
 
 						if($cssFiles = @scandir($cachFilePath, 1)){
-							if($countStyle[$value] == 1){
-								$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
-								if($tmpHtml = @preg_replace("/<style[^><]*>\s*".preg_quote($value, "/")."\s*<\/style>/", $link, $this->html)){
-									if($this->_process($value)){
-										$this->html = $tmpHtml;
-									}
-								}else{
-									$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
-								}
-							}else{
-								$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
-								if($tmpHtml = @preg_replace("/<style[^><]*>\s*".preg_quote($value, "/")."\s*<\/style>/", $link, $this->html)){
-									if($this->_process($value)){
-										$this->html = $tmpHtml;
-									}
-								}else{
-									$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
-								}
-								$countStyle[$value] = $countStyle[$value] - 1;
-							}
+							$link_tag = "<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."'".$inline_style_prefix." />";
+
+							$data = substr_replace($data, " -->\n".$link_tag."\n", $value["end"]+1, 0);
+							$data = substr_replace($data, "<!-- ", $value["start"], 0);
 						}
 					}
-
-					$i++;
-
 				}
+
+				$this->html = str_replace($head[1], $data, $this->html);
 			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			// if(count($out) > 0){
+
+			// 	$countStyle = array_count_values($out[2]);
+
+			// 	$i = 0;
+
+			// 	$out[2] = array_unique($out[2]);
+
+			// 	foreach ($out[2] as $key => $value) {
+
+			// 		$value = trim($value);
+
+			// 		// to prevent inline to external if the style is used in the javascript
+			// 		if(in_array($value[0], array(";","'",'"'))){
+			// 			continue;
+			// 		}
+
+
+			// 		$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($value);
+			// 		$cssLink = content_url()."/cache/wpfc-minified/".md5($value);
+
+			// 		preg_match("/media=[\"\']([^\"\']+)[\"\']/", $out[1][$i], $tmpMedia);
+			// 		$media = (isset($tmpMedia[1]) && $tmpMedia[1]) ? $tmpMedia[1] : "all";
+
+			// 		if(strpos($this->getCssLinksExcept(), $out[0][$i]) === false){
+			// 			if(!is_dir($cachFilePath)){
+			// 				$prefix = time();
+			// 				$wpfc->createFolder($cachFilePath, $value, "css", $prefix);
+			// 			}
+
+			// 			if($cssFiles = @scandir($cachFilePath, 1)){
+			// 				if($countStyle[$value] == 1){
+			// 					$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
+			// 					if($tmpHtml = @preg_replace("/<style[^><]*>\s*".preg_quote($value, "/")."\s*<\/style>/", $link, $this->html)){
+			// 						if($this->_process($value)){
+			// 							$this->html = $tmpHtml;
+			// 						}
+			// 					}else{
+			// 						$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
+			// 					}
+			// 				}else{
+			// 					$link = "<!-- <style".$out[1][$i].">".$value."</style> -->"."\n<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' type='text/css' media='".$media."' />";
+			// 					if($tmpHtml = @preg_replace("/<style[^><]*>\s*".preg_quote($value, "/")."\s*<\/style>/", $link, $this->html)){
+			// 						if($this->_process($value)){
+			// 							$this->html = $tmpHtml;
+			// 						}
+			// 					}else{
+			// 						$this->err = "inline css is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
+			// 					}
+			// 					$countStyle[$value] = $countStyle[$value] - 1;
+			// 				}
+			// 			}
+			// 		}
+
+			// 		$i++;
+
+			// 	}
+			// }
 		}
 
 		public function minify($url, $minify = true){
