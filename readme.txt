@@ -467,7 +467,7 @@ Yes, it works if you use qTranslate with "Use Query Mode (?lang=en)".
 Yes, it is compatible with WPtouch Mobile Plugin %100.
 
 = Is this plugin compatible with WP-PostRatings? =
-Yes, it is NOT compatible with WP-PostRatings.
+No, it is NOT compatible with WP-PostRatings.
 
 = Is this plugin compatible with AdRotate? =
 No, it is NOT compatible with AdRotate.
