@@ -381,6 +381,11 @@
 				$prev = array("content" => "", "value" => array(), "name" => "");
 				foreach ($this->getCssLinks() as $key => $value) {
 					if($href = $this->checkInternal($value)){
+						
+						if(preg_match("/\.ttf/", $href)){
+							continue;
+						}
+
 						if(strpos($this->getCssLinksExcept(), $href) === false && (preg_match("/media=[\'\"]all[\'\"]/", $value) || !preg_match("/media=/", $value))){
 
 							$minifiedCss = $this->minify($href, $minify);
