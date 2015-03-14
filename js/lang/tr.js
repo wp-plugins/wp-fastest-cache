@@ -82,6 +82,8 @@ window.wpfc.dictionary = {
 	"Logged-in Users" : "Giriş Yapanlar",
 	"Minify HTML Plus" : "HTML Küçült Ekstra",
 	"Combine Js Plus" : "Js Birleştir Ekstra",
+	"Minify Css Plus" : "Css Küçült Ekstra",
+	"More powerful minify css" : "Daha güçlü css küçültme aracı",
 	"Cache Statics" : "Cache İstatistikleri",
 	"In the premium version there are some new features which speed up the sites more." : "Premium sürümde siteleri hızlandıran yeni özellikler yer alıyor.",
 	"You need to pay before downloading the premium version." : "Premium sürümünü indirmeden önce ödeme yapmalısınız.",
