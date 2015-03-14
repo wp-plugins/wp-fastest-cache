@@ -81,8 +81,10 @@
 
 			preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)WebFontConfig((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleFonts);
 
+			preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)action\=wordfence_logHuman\&hid=((?:(?!<\/script).)+)<\/script>/si", $head[1], $WordfenceLogHuman);
 
-			$this->jsLinksExcept = implode(" ", array_merge($jsLinksInIf[0], $jsLinksCommentOut[0], $jsLinksGoogleAnalytics[0], $jsLinksGoogleAnalyticsYoast[0], $jsLinksGoogleAnalyticsPush[0], $jsLinksGoogleFonts[0]));
+
+			$this->jsLinksExcept = implode(" ", array_merge($jsLinksInIf[0], $jsLinksCommentOut[0], $jsLinksGoogleAnalytics[0], $jsLinksGoogleAnalyticsYoast[0], $jsLinksGoogleAnalyticsPush[0], $jsLinksGoogleFonts[0], $WordfenceLogHuman[0]));
 		}
 
 		public function getJsLinksExcept(){
