@@ -47,7 +47,7 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 <h4>Supported languages: </h4>
 
-* Deutsch (by Hinji)
+* Deutsch
 * English
 * Español (by Diplo)
 * Français (by PascalJ)
