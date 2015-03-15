@@ -78,6 +78,11 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.4.5 =
+* wpfcNOT is visible only for admins
+* to prevent creating cache for POST request
+* to fix issue of converting inline js to internal file
+
 = 0.8.4.4 =
 * to fix inline css issue
 * to prevent caching for renamed wp-login.php
@@ -446,25 +451,25 @@ Yes. Wpfc supports "Subdirectory Install".
 Yes, it is compatible with Http Secure (https).
 
 = Is this plugin compatible with Adsense? =
-Yes, it is compatible with Adsense %100.
+Yes, it is compatible with Adsense 100%.
 
 = Is this plugin compatible with CloudFlare? =
-Yes, it is compatible with CloudFlare %100. If the "minify html" option is active on CloudFlare, the minify system removed the comment from html so you cannot see the comment of Wpfc at the bottom of the page and you cannot be sure that it works or not. In this case, you need to look at the style files. You can see the minified css files.
+Yes, it is compatible with CloudFlare 100%. If the "minify html" option is active on CloudFlare, the minify system removed the comment from html so you cannot see the comment of Wpfc at the bottom of the page and you cannot be sure that it works or not. In this case, you need to look at the style files. You can see the minified css files.
 
 = Is this plugin compatible with WP-Polls? =
-Yes, it is compatible with WP-Polls %100.
+Yes, it is compatible with WP-Polls 100%.
 
 = Is this plugin compatible with Bulletproof Security? =
-Yes, it is compatible with Bulletproof Security %100.
+Yes, it is compatible with Bulletproof Security 100%.
 
 = Is this plugin compatible with Wordfence Security? =
-Yes, it is compatible with Wordfence Security %100.
+Yes, it is compatible with Wordfence Security 100%.
 
 = Is this plugin compatible with qTranslate? =
 Yes, it works if you use qTranslate with "Use Query Mode (?lang=en)".
 
 = Is this plugin compatible with WPtouch Mobile Plugin? =
-Yes, it is compatible with WPtouch Mobile Plugin %100.
+Yes, it is compatible with WPtouch Mobile Plugin 100%.
 
 = Is this plugin compatible with WP-PostRatings? =
 No, it is NOT compatible with WP-PostRatings.
@@ -479,7 +484,7 @@ Yes, it is compatible with WP-PostViews. The current post views appear on the ad
 No, it is NOT compatible with MobilePress. We advise WPtouch Mobile.
 
 = Is this plugin compatible with WooCommerce Themes? =
-Yes, it is compatible with WooCommerce Themes %100.
+Yes, it is compatible with WooCommerce Themes 100%.
 
 == Upgrade notice ==
 ....
