@@ -71,6 +71,8 @@
 					$cssLink = content_url()."/cache/wpfc-minified/".md5($inline_style_data);
 
 					if(strpos($this->getCssLinksExcept(), $inline_style_data) === false){
+						$inline_style_data = preg_replace("/<!--((?:(?!-->).)+)-->/si", '', $inline_style_data);
+
 						if(!is_dir($cachFilePath)){
 							$prefix = time();
 							$wpfc->createFolder($cachFilePath, $inline_style_data, "css", $prefix);
@@ -79,8 +81,11 @@
 						if($cssFiles = @scandir($cachFilePath, 1)){
 							$link_tag = "<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."'".$inline_style_prefix." />";
 
-							$data = substr_replace($data, " -->\n".$link_tag."\n", $value["end"]+1, 0);
-							$data = substr_replace($data, "<!-- ", $value["start"], 0);
+							// $data = substr_replace($data, " -->\n".$link_tag."\n", $value["end"]+1, 0);
+							// $data = substr_replace($data, "<!-- ", $value["start"], 0);
+
+							$data = substr_replace($data, "<!--\n".$inline_style_data."\n-->\n".$link_tag, $value["start"], ($value["end"] - $value["start"] + 1));
+
 						}
 					}
 				}
