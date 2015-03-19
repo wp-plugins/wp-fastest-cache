@@ -103,5 +103,10 @@ window.wpfc.dictionary = {
     "You can stop to create cache for specific pages" : "Sie können die Cache-Erstellung verhindern" ,
     "Read More" : "Mehr lesen" ,
     "Contain" : "Enthalten" ,
-    "Exact" : "Genau"
+    "Exact" : "Genau",
+    "Error Occured" : "Fehler Aufgetreten",
+    "/wp-content/plugins/ is not writable" : "/wp-content/plugins/ ist nicht schreibbar",
+    "Please read the tutorial" : "Lesen Sie bitte die Anleitung",
+    "You need to activate the premium plugin manually" : "Sie müssen das Premium Plugin manuell aktivieren",
+    "Continue" : "Weiter"
 };

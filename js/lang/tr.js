@@ -105,6 +105,11 @@ window.wpfc.dictionary = {
 	"You can stop to create cache for specific pages" : "Belirli sayfalar için cache sistemini durdurabilirsiniz",
 	"Read More" : "Devamını Oku",
 	"Contain" : "İçerdiği",
-	"Exact" : "Tam"
+	"Exact" : "Tam",
+	"Error Occured" : "Hata Oluştu",
+	"/wp-content/plugins/ is not writable" : "/wp-content/plugins/ yazılabilir değil",
+	"Please read the tutorial" : "Lütfen dökümanı okuyunuz",
+	"You need to activate the premium plugin manually" : "Premium sürümünü manuel olarak aktifleştirmelisiniz",
+	"Continue" : "Devam Et"
 
 };
