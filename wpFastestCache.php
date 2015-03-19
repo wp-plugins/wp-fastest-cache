@@ -96,18 +96,18 @@ GNU General Public License for more details.
 											$result = activate_plugin( 'wp-fastest-cache-premium/wpFastestCachePremium.php' );
 
 											if ( is_wp_error( $result ) ) {
-												$res = array("success" => false, "error_message" => "Go to: http://www.wpfastestcache.com/warnings/how-to-activate-premium-version/"); 
+												$res = array("success" => false, "error_message" => "Error occured while the plugin was activated", "error_code" => 1); 
 											}else{
 												$res = array("success" => true);   
 											}
 										} else {
-											$res = array("success" => false, "error_message" => 'Go to: http://www.wpfastestcache.com/warnings/how-to-activate-premium-version/');      
+											$res = array("success" => false, "error_message" => 'Error occured while the file was unzipped', "error_code" => 2);      
 										}
 									}else{
-										$res = array("success" => false, "error_message" => "/wp-content/plugins/ is not writable");
+										$res = array("success" => false, "error_message" => "unzip_file() is not found", "error_code" => 3);
 									}
 								}else{
-									$res = array("success" => false, "error_message" => "/wp-content/plugins/ is not writable");
+									$res = array("success" => false, "error_message" => "/wp-content/plugins/ is not writable", "error_code" => 4);
 								}
 							}else{
 								$res = array("success" => false, "error_message" => "Error: Service is unavailable. Try later...");
