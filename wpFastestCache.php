@@ -275,8 +275,9 @@ GNU General Public License for more details.
 
 			if(preg_match("/http:\/\/[^\/]+\/(.+)/", $permalink, $out)){
 				$path = $this->getWpContentDir()."/cache/all/".$out[1];
+				$mobile_path = $this->getWpContentDir()."/cache/wpfc-mobile-cache/".$out[1];
+
 				if(is_dir($path)){
-					
 					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
 						include_once $this->get_premium_path("logs.php");
 						$log = new WpFastestCacheLogs("delete");
@@ -284,6 +285,10 @@ GNU General Public License for more details.
 					}
 
 					$this->rm_folder_recursively($path);
+				}
+
+				if(is_dir($mobile_path)){
+					$this->rm_folder_recursively($mobile_path);
 				}
 			}
 		}
