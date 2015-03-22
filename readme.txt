@@ -78,6 +78,10 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.4.6 =
+* to add popup warning modal for premium download
+* to remove mobile cache after update post
+
 = 0.8.4.5 =
 * wpfcNOT is visible only for admins
 * to prevent creating cache for POST request
