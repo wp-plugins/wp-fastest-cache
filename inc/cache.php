@@ -164,7 +164,7 @@
 					}
 				}
 
-				$content = $this->cacheDate($buffer);
+				$content = $buffer;
 
 				if(isset($this->options->wpFastestCacheCombineCss) && isset($this->options->wpFastestCacheMinifyCss)){
 					require_once "css-utilities.php";
@@ -204,6 +204,7 @@
 				if($this->err){
 					return $buffer."<!-- ".$this->err." -->";
 				}else{
+					$content = $this->cacheDate($content);
 					$content = $this->minify($content);
 					$this->createFolder($cachFilePath, $content);
 					return $buffer."<!-- need to refresh to see cached version -->";
