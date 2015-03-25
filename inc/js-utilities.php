@@ -30,6 +30,10 @@
 					$jsScript = content_url()."/cache/wpfc-minified/".md5($value);
 
 					if(strpos($this->getJsLinksExcept(), $out[0][$key]) === false){
+						if(preg_match("/window\.dynamicgoogletags/", $value)){
+							continue;
+						}
+
 						if(!is_dir($cachFilePath)){
 							$prefix = time();
 							$wpfc->createFolder($cachFilePath, $value, "js", $prefix);
