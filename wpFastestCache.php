@@ -309,31 +309,24 @@ GNU General Public License for more details.
 			$cache_path = $this->getWpContentDir()."/cache/all";
 
 			if(is_dir($cache_path)){
-				if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
-					rename($cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
-					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
-					$this->systemMessage = array("All cache files have been deleted","success");
-					
-					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
-						include_once $this->get_premium_path("logs.php");
-						$log = new WpFastestCacheLogs("delete");
-						$log->action();
+				if(!is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
+					if(@mkdir($this->getWpContentDir()."/cache/tmpWpfc", 0755, true)){
+						//
+					}else{
+						$this->systemMessage = array("Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>", "error");
 					}
-
-				}else if(@mkdir($this->getWpContentDir()."/cache/tmpWpfc", 0755, true)){
-					rename($cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
-					wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
-					$this->systemMessage = array("All cache files have been deleted","success");
-					
-					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
-						include_once $this->get_premium_path("logs.php");
-						$log = new WpFastestCacheLogs("delete");
-						$log->action();
-					}
-
-				}else{
-					$this->systemMessage = array("Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>", "error");
 				}
+
+				rename($cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
+				wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
+				$this->systemMessage = array("All cache files have been deleted","success");
+					
+				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+					include_once $this->get_premium_path("logs.php");
+					$log = new WpFastestCacheLogs("delete");
+					$log->action();
+				}
+
 			}else{
 				if($minified){
 					$this->systemMessage = array("Minified CSS and JS files have been deleted","success");
