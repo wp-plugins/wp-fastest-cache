@@ -306,40 +306,42 @@ GNU General Public License for more details.
 				wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
 			}
 
+			$deleted = false;
 			$cache_path = $this->getWpContentDir()."/cache/all";
+			$minified_cache_path = $this->getWpContentDir()."/cache/wpfc-minified";
+
+			if(!is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
+				if(@mkdir($this->getWpContentDir()."/cache/tmpWpfc", 0755, true)){
+					//
+				}else{
+					$this->systemMessage = array("Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>", "error");
+				}
+			}
 
 			if(is_dir($cache_path)){
-				if(!is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
-					if(@mkdir($this->getWpContentDir()."/cache/tmpWpfc", 0755, true)){
-						//
-					}else{
-						$this->systemMessage = array("Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>", "error");
-					}
-				}
-
 				rename($cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
+				$deleted = true;
+				
+			}
+
+			if(is_dir($minified_cache_path)){
+				if($minified){
+					rename($minified_cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
+					$deleted = true;
+				}
+			}
+
+			if($deleted){
 				wp_schedule_single_event(time() + 60, $this->slug()."_TmpDelete_".time());
 				$this->systemMessage = array("All cache files have been deleted","success");
-					
+
 				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
 					include_once $this->get_premium_path("logs.php");
 					$log = new WpFastestCacheLogs("delete");
 					$log->action();
 				}
-
 			}else{
-				if($minified){
-					$this->systemMessage = array("Minified CSS and JS files have been deleted","success");
-					
-					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
-						include_once $this->get_premium_path("logs.php");
-						$log = new WpFastestCacheLogs("delete");
-						$log->action();
-					}
-					
-				}else{
-					$this->systemMessage = array("Already deleted","success");
-				}
+				$this->systemMessage = array("Already deleted","success");
 			}
 		}
 
