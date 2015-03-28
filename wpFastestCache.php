@@ -98,7 +98,8 @@ GNU General Public License for more details.
 											if ( is_wp_error( $result ) ) {
 												$res = array("success" => false, "error_message" => "Error occured while the plugin was activated", "error_code" => 1); 
 											}else{
-												$res = array("success" => true);   
+												$res = array("success" => true);
+												$this->deleteCache(true);
 											}
 										} else {
 											$res = array("success" => false, "error_message" => 'Error occured while the file was unzipped', "error_code" => 2);      
