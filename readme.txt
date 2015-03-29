@@ -78,6 +78,11 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.4.7 =
+* to update Portuguese language
+* to make compatible with Google Adsense plugin
+* to add user-agent of Samsung S5, LG and HTC
+
 = 0.8.4.6 =
 * to add popup warning modal for premium download
 * to remove mobile cache after update post
