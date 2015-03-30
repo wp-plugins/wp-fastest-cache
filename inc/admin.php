@@ -210,9 +210,15 @@
 		}
 
 		public function addJavaScript(){
+			wp_enqueue_script("wpfc-cdn", plugins_url("wp-fastest-cache/js/cdn/cdn.js"), array(), time(), false);
+			wp_enqueue_script("wpfc-cdn-maxcdn", plugins_url("wp-fastest-cache/js/cdn/maxcdn.js"), array(), time(), false);
+
+
 			wp_enqueue_script("wpfc-language", plugins_url("wp-fastest-cache/js/language.js"), array(), time(), false);
 			wp_enqueue_script("wpfc-info", plugins_url("wp-fastest-cache/js/info.js"), array(), time(), true);
 			wp_enqueue_script("wpfc-schedule", plugins_url("wp-fastest-cache/js/schedule.js"), array(), time(), true);
+			wp_enqueue_script("wpfc-toolbar", plugins_url("wp-fastest-cache/js/toolbar.js"), array(), time(), true);
+
 			
 			if(class_exists("WpFastestCacheImageOptimisation")){
 				wp_enqueue_script("wpfc-statics", plugins_url("wp-fastest-cache/js/statics.js"), array(), time(), false);
@@ -647,6 +653,8 @@
 						array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
 
 						array_push($tabs, array("id"=>"wpfc-exclude","title"=>"Exclude"));
+
+						//array_push($tabs, array("id"=>"wpfc-cdn","title"=>"CDN"));
 
 						foreach ($tabs as $key => $value){
 							$checked = "";
@@ -1414,6 +1422,107 @@
 					    	?>
 				    	</script>
 				    </div>
+				    <div class="tab7" style="padding-left:20px;">
+				    	<style type="text/css">
+				    	#integrationDiv {
+						    display: block;
+						    font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode",Verdana,Tahoma,sans-serif;
+						    font-size: 13px;
+						    height: auto;
+						    line-height: 18px;
+						    max-height: 395px;
+						    overflow-x: hidden;
+						    overflow-y: auto;
+						    padding: 0;
+						}
+						.int-item {
+						    background: none repeat scroll 0 0 rgba(100, 100, 100, 0.1);
+						    border-radius: 6px;
+						    cursor: pointer;
+						    margin-bottom: 12px;
+						    overflow: hidden;
+						    padding: 12px;
+						}
+						.int-item:hover {
+						    background: none repeat scroll 0 0 rgba(135, 135, 135, 0.1);
+						}
+						.int-item h2 {
+						    font-size: 14px;
+						    margin: 0 0 3px;
+						}
+						.int-item p {
+						    color: #666;
+						    font-size: 11px;
+						    margin: 0;
+						    position: relative;
+						}
+						.int-item img {
+						    float: left;
+						    height: 36px;
+						    margin-right: 12px;
+						    width: 125px;
+						}
+						.int-item .meta .connected {
+						    color: green;
+						    display: block;
+						    font-size: 12px;
+						    margin-top: 3px;
+						}
+						.int-item .app {
+						    float: left;
+						    /*padding-right: 10px;*/
+						    width: 70%;
+						}
+						.int-item .app .more-info {
+						    cursor: auto;
+						    float: none;
+						    height: auto;
+						    margin-left: 10px;
+						    width: auto;
+						}
+						.int-item .meta {
+						    float: right;
+						    font-size: 11px;
+						    font-weight: bold;
+						    max-width: 100px;
+						    text-align: right;
+						}
+						.int-item .meta .developer {
+						    color: #333333;
+						    display: block;
+						}
+
+				    	</style>
+				    	<h2 style="padding-bottom:10px;">CDN Settings</h2>
+				    	<div>
+				    		<div class="integration-page" style="display: block;width:98%;float:left;">
+				    			<div id="wpfc-int-item-maxcdn" class="int-item">
+				    				<img src="https://www.maxcdn.com/blog/wp-content/themes/maxcdnv5/images/png/brand/maxcdn-logo.png">
+				    				<div class="app">
+				    					<div style="font-weight:bold;font-size:14px;">CDN by MaxCDN</div>
+				    					<p>Experts in Content Delivery Network Services</p>
+				    				</div>
+				    				<div class="meta">
+				    					<span class="connected">Connected</span>
+				    				</div>
+				    			</div>
+				    		</div>
+				    	</div>
+				    	  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+				    	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+				    	<script type="text/javascript">
+
+
+
+				    		(function() {
+				    			jQuery(".int-item").click(function(e){
+				    				WpfcMaxCDN.init({"id" : e.currentTarget.id,
+				    					"template_main_url" : "<?php echo plugins_url('wp-fastest-cache/templates'); ?>"
+				    				});
+				    			});
+				    		})();
+				    	</script>
 				</div>
 				<div class="omni_admin_sidebar">
 
