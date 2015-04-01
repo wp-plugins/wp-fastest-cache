@@ -4,7 +4,7 @@ var Wpfc_Dialog = {
 		jQuery("#" + id).position({my: "center", at: "center", of: window});
 
 		jQuery(".close-wiz").click(function(){
-			jQuery("#" + id).hide();
+			jQuery("#" + id).remove();
 		});
 	}
 };
