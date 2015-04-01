@@ -25,7 +25,10 @@ GNU General Public License for more details.
 		if (!defined('WPFC_WP_PLUGIN_DIR')) {
 			define("WPFC_WP_PLUGIN_DIR", preg_replace("/(\/trunk\/|\/wp-fastest-cache\/)$/", "", plugin_dir_path( __FILE__ )));
 		}
+	}
 
+	if (!defined('WPFC_MAIN_PATH')) {
+		define("WPFC_MAIN_PATH", plugin_dir_path( __FILE__ ));
 	}
 
 	class WpFastestCache{

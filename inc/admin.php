@@ -210,6 +210,9 @@
 		}
 
 		public function addJavaScript(){
+			wp_enqueue_script("wpfc-dialog", plugins_url("wp-fastest-cache/js/dialog.js"), array(), time(), false);
+
+
 			wp_enqueue_script("wpfc-cdn", plugins_url("wp-fastest-cache/js/cdn/cdn.js"), array(), time(), false);
 			wp_enqueue_script("wpfc-cdn-maxcdn", plugins_url("wp-fastest-cache/js/cdn/maxcdn.js"), array(), time(), false);
 
@@ -240,6 +243,7 @@
 			if(isset($_GET["page"]) && $_GET["page"] == "WpFastestCacheOptions"){
 				wp_enqueue_style("wp-fastest-cache-buycredit", plugins_url("wp-fastest-cache/css/buycredit.css"), array(), time(), "all");
 				wp_enqueue_style("wp-fastest-cache-flaticon", plugins_url("wp-fastest-cache/css/flaticon.css"), array(), time(), "all");
+				wp_enqueue_style("wp-fastest-cache-dialog", plugins_url("wp-fastest-cache/css/dialog.css"), array(), time(), "all");
 			}
 		}
 
@@ -369,7 +373,8 @@
 
 				file_put_contents($path.".htaccess", $htaccess);
 			}else{
-				return array(".htaccess is not writable", "error");
+				return array("Options have been saved", "success");
+				//return array(".htaccess is not writable", "error");
 			}
 			return array("Options have been saved", "success");
 
@@ -604,6 +609,44 @@
 			}
 
 			return "";
+		}
+
+		public function check_htaccess(){
+			$path = ABSPATH;
+			
+			if(!is_writable($path.".htaccess")){
+				include_once(WPFC_MAIN_PATH."templates/htaccess.html");
+
+
+				if($this->is_subdirectory_install()){
+					$path = $this->getABSPATH();
+				}
+
+				$htaccess = file_get_contents($path.".htaccess");
+
+				if(isset($this->options->wpFastestCacheLBC)){
+					$htaccess = $this->insertLBCRule($htaccess, array("wpFastestCacheLBC" => "on"));
+				}
+				if(isset($this->options->wpFastestCacheGzip)){
+					$htaccess = $this->insertGzipRule($htaccess, array("wpFastestCacheGzip" => "on"));
+				}
+				if(isset($this->options->wpFastestCacheStatus)){
+					$htaccess = $this->insertRewriteRule($htaccess, array("wpFastestCacheStatus" => "on"));
+				}
+				
+				$htaccess = preg_replace("/\n+/","\n", $htaccess);
+
+				echo "<noscript id='wpfc-htaccess-data'>".$htaccess."</noscript>";
+				echo "<noscript id='wpfc-htaccess-path-data'>".$path.".htaccess"."</noscript>";
+				?>
+				<script type="text/javascript">
+					Wpfc_Dialog.dialog("wpfc-htaccess-modal");
+					jQuery("#wpfc-htaccess-modal-rules").html(jQuery("#wpfc-htaccess-data").html());
+					jQuery("#wpfc-htaccess-modal-path").html(jQuery("#wpfc-htaccess-path-data").html());
+				</script>
+				<?php
+			}
+
 		}
 
 		public function optionsPage(){
@@ -1558,10 +1601,6 @@
 				</div>
 			</div>
 
-
-
-
-
 			<div id="wpfc-plugin-setup-warning" class="mainContent" style="display:none;border:1px solid black">
 			        <div class="pageView"style="display: block;">
 			            <div class="fakeHeader">
@@ -1633,6 +1672,7 @@
 			<?php } ?>
 			<script>Wpfclang.init("<?php echo $wpFastestCacheLanguage; ?>");</script>
 			<?php
+			$this->check_htaccess();
 		}
 	}
 ?>

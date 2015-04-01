@@ -1,0 +1,120 @@
+.window-content-wrapper {
+	background: -moz-linear-gradient(center bottom , rgb(219, 219, 219) 50%, rgb(238, 238, 238) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	text-shadow: 0 0 5px #fff;
+	border-bottom:1px solid #ABABAB;
+	border-top:1px solid #EEE6E6;
+}
+.wiz-cont {
+    font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode",Verdana,Tahoma,sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    min-height: 80px;
+    padding: 22px 28px;
+}
+.wiz-cont h1 {
+	font-size: 21px;
+	margin: 0 0 12px;
+}
+.wiz-cont p {
+    color: #666;
+    margin: 0;
+}
+.wiz-input-cont {
+    background: none repeat scroll 0 0 rgba(100, 100, 100, 0.1);
+    border-radius: 6px;
+    margin-top: 24px;
+    padding: 12px;
+    position: relative;
+}
+.wiz-input-cont label {
+    font-weight: bold;
+    margin-right: 12px;
+}
+.api-key {
+    border: 1px solid #999;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px #eee inset, 0 1px 0 #ddd;
+    font-size: 13px;
+    padding: 4px 6px 3px;
+    width: 380px;
+}
+.window-buttons-wrapper .big-button {
+	margin: 0 4px;
+}
+.buttons-grey {
+    background-color: gray;
+    background-image: url("http://www.jotform.com/images/button-back-grey.png") !important;
+    background-repeat: repeat-x;
+    border: 1px solid #777 !important;
+    color: #000;
+    text-shadow: 0 1px 0 #eee !important;
+}
+.icon-right {
+    margin: -4px -2px 0 3px;
+    position: relative;
+    right: -3px;
+    top: 1px;
+}
+.big-button {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-color: -moz-use-text-color transparent;
+    border-image: none;
+    border-style: none solid;
+    border-width: medium 1px;
+    font-size: 11px;
+    margin: 0;
+    outline: medium none !important;
+    overflow: visible;
+    padding: 3px 6px;
+    text-shadow: 0 1px 0 #e5e5e5, 0 0 5px rgba(255, 255, 255, 0.6);
+    width: auto;
+}
+.window-buttons:hover,.buttons:hover{
+	border-color:#999;
+	background-position:0 -30px;
+}
+.buttons {
+    background: url("/images/button-back.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #aaa;
+    padding: 4px 10px;
+}
+.window-buttons:active,.buttons:active{
+	border-color:#666;
+	background-position:0 -60px;
+}
+.close-wiz {
+    background: url("http://www.jotform.com/images/close-wiz-sprite.png") no-repeat scroll 0 0 transparent;
+    height: 19px;
+    width: 22px;
+    cursor: pointer;
+}
+.mm-input-label{
+    font-weight: bold;
+    vertical-align: middle;
+    margin-right: 12px;
+    color: black;
+}
+.wiz-inp-readonly-textarea{
+    -moz-appearance: textfield;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #aaaaaa #b0b0b0 #cbcbcb;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) inset, 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-family: "Lucida Grande",monospace;
+    font-size: inherit !important;
+    line-height: 14px;
+    padding: 4px 6px 3px;
+    resize: none;
+    white-space: pre;
+    background-color: white !important;
+}
