@@ -613,14 +613,13 @@
 
 		public function check_htaccess(){
 			$path = ABSPATH;
+
+			if($this->is_subdirectory_install()){
+				$path = $this->getABSPATH();
+			}
 			
 			if(!is_writable($path.".htaccess")){
 				include_once(WPFC_MAIN_PATH."templates/htaccess.html");
-
-
-				if($this->is_subdirectory_install()){
-					$path = $this->getABSPATH();
-				}
 
 				$htaccess = file_get_contents($path.".htaccess");
 
