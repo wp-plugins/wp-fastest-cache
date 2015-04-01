@@ -618,7 +618,7 @@
 				$path = $this->getABSPATH();
 			}
 			
-			if(!is_writable($path.".htaccess")){
+			if(!is_writable($path.".htaccess") && count($_POST) > 0){
 				include_once(WPFC_MAIN_PATH."templates/htaccess.html");
 
 				$htaccess = file_get_contents($path.".htaccess");
