@@ -58,6 +58,14 @@
 							continue;
 						}
 
+						if(preg_match("/connect\.facebook\.net/i", $value)){
+							continue;
+						}
+
+						if(preg_match("/document\.createElement\(\\\\'script\\\\'\)/i", $value)){
+							continue;
+						}
+
 						if(!is_dir($cachFilePath)){
 							$prefix = time();
 							$wpfc->createFolder($cachFilePath, $value, "js", $prefix);
