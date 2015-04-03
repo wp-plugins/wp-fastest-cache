@@ -62,7 +62,7 @@
 							continue;
 						}
 
-						if(preg_match("/document\.createElement\(\\\\'script\\\\'\)/i", $value)){
+						if(preg_match("/document\.createElement\([^\(\)]+script[^\(\)]+\)/i", $value)){
 							continue;
 						}
 
