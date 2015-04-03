@@ -317,7 +317,9 @@
 
 			preg_match_all("/<script((?:(?!<\/script).)+)<\/style>((?:(?!<\/script).)+)<\/script>/si", $head[1], $cssLinksInScripts);
 			
-			$this->cssLinksExcept = implode(" ", array_merge($cssLinksInIf[0], $cssLinksCommentOut[0], $cssLinksInScripts[0]));
+			preg_match_all("/<noscript((?:(?!<\/noscript|<noscript).)+)<\/noscript>/si", $head[1], $cssLinksInNoscripts);
+
+			$this->cssLinksExcept = implode(" ", array_merge($cssLinksInIf[0], $cssLinksCommentOut[0], $cssLinksInScripts[0], $cssLinksInNoscripts[0]));
 		}
 
 		public function getCssLinks(){
