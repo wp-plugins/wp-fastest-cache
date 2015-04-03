@@ -30,7 +30,31 @@
 					$jsScript = content_url()."/cache/wpfc-minified/".md5($value);
 
 					if(strpos($this->getJsLinksExcept(), $out[0][$key]) === false){
-						if(preg_match("/window\.dynamicgoogletags/", $value)){
+						if(preg_match("/window\.dynamicgoogletags/i", $value)){
+							continue;
+						}
+
+						if(preg_match("/GoogleAnalyticsObject/i", $value)){
+							continue;
+						}
+
+						if(preg_match("/document\.write/i", $value)){
+							continue;
+						}
+
+						if(preg_match("/google\-analytics\.com/i", $value)){
+							continue;
+						}
+
+						if(preg_match("/addIgnoredOrganic/i", $value)){
+							continue;
+						}
+
+						if(preg_match("/WebFontConfig/i", $value)){
+							continue;
+						}
+
+						if(preg_match("/action\=wordfence_logHuman\&hid=/i", $value)){
 							continue;
 						}
 
@@ -77,17 +101,17 @@
 
 			preg_match_all("/<\!--(?!\[if)(.*?)(?!<\!\s*\[\s*endif\s*\]\s*)-->/si", $head[1], $jsLinksCommentOut);
 
-			preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)GoogleAnalyticsObject((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalytics);
+			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)GoogleAnalyticsObject((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalytics);
 
-			preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)google\-analytics\.com((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalyticsYoast);
+			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)google\-analytics\.com((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalyticsYoast);
 			
-			preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)addIgnoredOrganic((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalyticsPush);
+			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)addIgnoredOrganic((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalyticsPush);
 
-			preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)WebFontConfig((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleFonts);
+			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)WebFontConfig((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleFonts);
 
-			preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)action\=wordfence_logHuman\&hid=((?:(?!<\/script).)+)<\/script>/si", $head[1], $WordfenceLogHuman);
+			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)action\=wordfence_logHuman\&hid=((?:(?!<\/script).)+)<\/script>/si", $head[1], $WordfenceLogHuman);
 
-			preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)document\.write((?:(?!<\/script).)+)<\/script>/si", $head[1], $documentWrite);
+			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)document\.write((?:(?!<\/script).)+)<\/script>/si", $head[1], $documentWrite);
 
 
 			$this->jsLinksExcept = implode(" ", array_merge($jsLinksInIf[0], $jsLinksCommentOut[0], $jsLinksGoogleAnalytics[0], $jsLinksGoogleAnalyticsYoast[0], $jsLinksGoogleAnalyticsPush[0], $jsLinksGoogleFonts[0], $WordfenceLogHuman[0], $documentWrite[0]));
