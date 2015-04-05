@@ -78,6 +78,12 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.4.8 =
+* to show .htaccess rules if not writeable
+* not to comment out Facebook js
+* not to comment out document.createElement('script')
+* not to minify and combine style and js codes in noscript tag
+
 = 0.8.4.7 =
 * to update Portuguese language
 * to make compatible with Google Adsense plugin
