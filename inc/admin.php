@@ -1538,7 +1538,7 @@
 				    	<h2 style="padding-bottom:10px;">CDN Settings</h2>
 				    	<div>
 				    		<div class="integration-page" style="display: block;width:98%;float:left;">
-				    			<div id="wpfc-int-item-maxcdn" class="int-item">
+				    			<div wpfc-cdn-name="maxcdn" class="int-item">
 				    				<img src="https://www.maxcdn.com/blog/wp-content/themes/maxcdnv5/images/png/brand/maxcdn-logo.png">
 				    				<div class="app">
 				    					<div style="font-weight:bold;font-size:14px;">CDN by MaxCDN</div>
@@ -1555,7 +1555,7 @@
 				    	<script type="text/javascript">
 				    		(function() {
 				    			jQuery(".int-item").click(function(e){
-				    				WpfcMaxCDN.init({"id" : e.currentTarget.id,
+				    				WpfcMaxCDN.init({"id" : jQuery(e.currentTarget).attr("wpfc-cdn-name"),
 				    					"template_main_url" : "<?php echo plugins_url('wp-fastest-cache/templates'); ?>"
 				    				});
 				    			});
