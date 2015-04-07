@@ -53,6 +53,7 @@
 		public function wpfc_wppolls_ajax_request() {
 			$id = strip_tags($_POST["poll_id"]);
 			$id = mysql_real_escape_string($id);
+			$id = intval($id);
 
 			$result = check_voted($id);
 
