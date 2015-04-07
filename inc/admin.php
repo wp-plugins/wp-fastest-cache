@@ -365,6 +365,8 @@
 				return array("WordPress Gzip Compression needs to be deactive<br>This plugin has aldready Gzip feature", "error");
 			}else if($this->isPluginActive('filosofo-gzip-compression/filosofo-gzip-compression.php')){
 				return array("GZIP Output needs to be deactive<br>This plugin has aldready Gzip feature", "error");
+			}else if($this->isPluginActive('head-cleaner/head-cleaner.php')){
+				return array("Head Cleaner needs to be deactive", "error");
 			}else if(is_writable($path.".htaccess")){
 				$htaccess = $this->insertLBCRule($htaccess, $post);
 				$htaccess = $this->insertGzipRule($htaccess, $post);
