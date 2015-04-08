@@ -70,7 +70,7 @@
 					$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($inline_style_data);
 					$cssLink = content_url()."/cache/wpfc-minified/".md5($inline_style_data);
 
-					if(strpos($this->getCssLinksExcept(), $inline_style_data) === false){
+					if($inline_style_data && (strpos($this->getCssLinksExcept(), $inline_style_data) === false)){
 						$inline_style_data = preg_replace("/<!--((?:(?!-->).)+)-->/si", '', $inline_style_data);
 
 						if(!is_dir($cachFilePath)){
@@ -278,7 +278,11 @@
 				if(!$matches[1]){
 					$matches[1] = "";
 				}else if(preg_match("/^(\/\/|http|\/\/fonts|data:image|data:application)/", $matches[1])){
-					$matches[1] = $matches[1];
+					if(preg_match("/fonts\.googleapis\.com/", $matches[1])){ // for safari browser
+						$matches[1] = '"'.$matches[1].'"';
+					}else{
+						$matches[1] = $matches[1];
+					}
 				}else if(preg_match("/^\//", $matches[1])){
 					$homeUrl = str_replace(array("http:", "https:"), "", home_url());
 					$matches[1] = $homeUrl.$matches[1];
