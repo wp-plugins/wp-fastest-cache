@@ -139,7 +139,7 @@
 				return $buffer."<!-- wpfcNOT has been detected -->";
 			}else if(isset($_GET["preview"])){
 				return $buffer."<!-- not cached -->";
-			}else if(preg_match("/\?/", $_SERVER["REQUEST_URI"])){
+			}else if(preg_match("/\?/", $_SERVER["REQUEST_URI"]) && !preg_match("/\/\?fdx\_switcher\=true/", $_SERVER["REQUEST_URI"])){ // for WP Mobile Edition
 				return $buffer;
 			}else if($this->checkHtml($buffer)){
 				return $buffer."<!-- html is corrupted -->";
