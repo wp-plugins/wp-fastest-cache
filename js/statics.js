@@ -58,20 +58,9 @@ var WpFcStatics = {
 		});
 
 		jQuery("#wpfc-product-selection-list li").click(function(e){
-			if(jQuery(e.target).prop("tagName") == "LABEL"){
-				jQuery("#wpfc-product-selection-list li label").removeClass("checked");
-				jQuery(e.target).addClass("checked");
-			}
-
-			if(jQuery(e.target).prop("tagName") == "SPAN"){
-				jQuery("#wpfc-product-selection-list li label").removeClass("checked");
-				jQuery(e.target).closest("LABEL").addClass("checked");
-			}
-
-			if(jQuery(e.target).prop("tagName") == "INPUT"){
-				jQuery("#wpfc-product-selection-list li input").attr("checked", false);
-				jQuery(e.target).attr("checked", true);
-			}
+			jQuery("#wpfc-product-selection-list li label").removeClass("checked");
+			jQuery(e.currentTarget).find("label").addClass("checked");
+			jQuery(e.currentTarget).find("input").attr("checked", true);
 		});
 
 		jQuery("#wpfc-cancel-buy-credit").click(function(){
