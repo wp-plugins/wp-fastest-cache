@@ -214,8 +214,8 @@
 			wp_enqueue_script("wpfc-dialog", plugins_url("wp-fastest-cache/js/dialog.js"), array(), time(), false);
 
 
-			// wp_enqueue_script("wpfc-cdn", plugins_url("wp-fastest-cache/js/cdn/cdn.js"), array(), time(), false);
-			// wp_enqueue_script("wpfc-cdn-maxcdn", plugins_url("wp-fastest-cache/js/cdn/maxcdn.js"), array(), time(), false);
+			//wp_enqueue_script("wpfc-cdn", plugins_url("wp-fastest-cache/js/cdn/cdn.js"), array(), time(), false);
+			//wp_enqueue_script("wpfc-cdn-maxcdn", plugins_url("wp-fastest-cache/js/cdn/maxcdn.js"), array(), time(), false);
 
 
 			wp_enqueue_script("wpfc-language", plugins_url("wp-fastest-cache/js/language.js"), array(), time(), false);
@@ -1469,6 +1469,117 @@
 					    	?>
 				    	</script>
 				    </div>
+
+
+
+				    <div class="tab7" style="padding-left:20px;">
+				    	<style type="text/css">
+				    	#integrationDiv {
+						    display: block;
+						    font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode",Verdana,Tahoma,sans-serif;
+						    font-size: 13px;
+						    height: auto;
+						    line-height: 18px;
+						    max-height: 395px;
+						    overflow-x: hidden;
+						    overflow-y: auto;
+						    padding: 0;
+						}
+						.int-item {
+						    background: none repeat scroll 0 0 rgba(100, 100, 100, 0.1);
+						    border-radius: 6px;
+						    cursor: pointer;
+						    margin-bottom: 12px;
+						    overflow: hidden;
+						    padding: 12px;
+						}
+						.int-item:hover {
+						    background: none repeat scroll 0 0 rgba(135, 135, 135, 0.1);
+						}
+						.int-item h2 {
+						    font-size: 14px;
+						    margin: 0 0 3px;
+						}
+						.int-item p {
+						    color: #666;
+						    font-size: 11px;
+						    margin: 0;
+						    position: relative;
+						}
+						.int-item img {
+						    float: left;
+						    height: 36px;
+						    margin-right: 12px;
+						    width: 125px;
+						}
+						.int-item .meta .connected {
+						    color: green;
+						    display: block;
+						    font-size: 12px;
+						    margin-top: 3px;
+						}
+						.int-item .app {
+						    float: left;
+						    /*padding-right: 10px;*/
+						    width: 70%;
+						}
+						.int-item .app .more-info {
+						    cursor: auto;
+						    float: none;
+						    height: auto;
+						    margin-left: 10px;
+						    width: auto;
+						}
+						.int-item .meta {
+						    float: right;
+						    font-size: 11px;
+						    font-weight: bold;
+						    max-width: 100px;
+						    text-align: right;
+						}
+						.int-item .meta .developer {
+						    color: #333333;
+						    display: block;
+						}
+
+				    	</style>
+				    	<h2 style="padding-bottom:10px;">CDN Settings</h2>
+				    	<div>
+				    		<div class="integration-page" style="display: block;width:98%;float:left;">
+				    			<div wpfc-cdn-name="maxcdn" class="int-item">
+				    				<img src="https://www.maxcdn.com/blog/wp-content/themes/maxcdnv5/images/png/brand/maxcdn-logo.png">
+				    				<div class="app">
+				    					<div style="font-weight:bold;font-size:14px;">CDN by MaxCDN</div>
+				    					<p>Experts in Content Delivery Network Services</p>
+				    				</div>
+				    				<div class="meta">
+				    					<span class="connected">Connected</span>
+				    				</div>
+				    			</div>
+				    		</div>
+				    	</div>
+				    	<script type="text/javascript">
+				    		// (function() {
+				    		// 	jQuery(".int-item").click(function(e){
+				    		// 		WpfcMaxCDN.init({"id" : jQuery(e.currentTarget).attr("wpfc-cdn-name"),
+				    		// 			"template_main_url" : "<?php echo plugins_url('wp-fastest-cache/templates'); ?>"
+				    		// 		});
+				    		// 	});
+				    		// })();
+				    	</script>
+				    </div>
+
+
+
+
+
+
+
+
+
+
+
+
 			</div>
 
 			<div class="omni_admin_sidebar">
