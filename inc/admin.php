@@ -1171,7 +1171,7 @@
 				    	<div id="wpfc-premium-container">
 				    		<div class="wpfc-premium-step">
 				    			<div class="wpfc-premium-step-header">
-				    				<label>Discover Feautures</label>
+				    				<label>Discover Features</label>
 				    			</div>
 				    			<div class="wpfc-premium-step-content">
 				    				In the premium version there are some new features which speed up the sites more.
