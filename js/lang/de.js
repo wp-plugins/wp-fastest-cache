@@ -87,7 +87,7 @@ window.wpfc.dictionary = {
     "In the premium version there are some new features which speed up the sites more." : "In der Premium-Version gibt es neue Eigenschaften, die die Seiten beschleunigen." ,
     "You need to pay before downloading the premium version." : "Bevor Sie die Premium-Version herunterladen, müssen Sie zahlen" ,
     "You can download and update the premium when you want if you paid." : "Nachdem Sie bezahlt haben, können Sie die Premium-Version herunterladen und aktualisieren, wann sie wollen" ,
-    "Discover Feautures" : "Eigenschaften" ,
+    "Discover Features" : "Eigenschaften" ,
     "Checkout" : "Bezahlung" ,
     "New Features" : "Neue Funktionen" ,
     "The download button will be available after paid. You can buy the premium version now." : "Der Download-Button wird aktiviert, nachdem Sie bezahlt haben. Sie können die Premium-Version jetzt kaufen." ,

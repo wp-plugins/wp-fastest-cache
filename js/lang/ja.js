@@ -113,7 +113,7 @@ window.wpfc.dictionary = {
 	"In the premium version there are some new features which speed up the sites more."                                                                                 : "プレミアムバージョンにはサイトをもっと加速するいくつかの新機能があります。",
 	"You need to pay before downloading the premium version."                                                                                                              : "ダウンロードする前にプレミアムバージョンの料金をお支払いいただく必要があります。",
 	"You can download and update the premium when you want if you paid."                                                                                                : "お支払い完了後にプレミアムバージョンのダウンロードとアップデートが可能になります。",
-	"Discover Feautures"                                                                                                                                                : "新機能",
+	"Discover Features"                                                                                                                                                : "新機能",
 	"Checkout"                                                                                                                                                          : "お支払い",
 	"Download & Update"                                                                                                                                                 : "ダウンロードとアップデート",
 	"New Features"                                                                                                                                                      : "追加される新機能",

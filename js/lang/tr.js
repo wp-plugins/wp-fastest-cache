@@ -88,7 +88,7 @@ window.wpfc.dictionary = {
 	"In the premium version there are some new features which speed up the sites more." : "Premium sürümde siteleri hızlandıran yeni özellikler yer alıyor.",
 	"You need to pay before downloading the premium version." : "Premium sürümünü indirmeden önce ödeme yapmalısınız.",
 	"You can download and update the premium when you want if you paid." : "Eğer ödemeyi yaptıysanız premium sürümünü indirebilir veya güncelleştirebilirsiniz.",
-	"Discover Feautures" : "Özellikleri Keşfedin",
+	"Discover Features" : "Özellikleri Keşfedin",
 	"Checkout" : "Ödeme",
 	"Download & Update" : "İndir & Güncelle",
 	"New Features" : "Yeni Özellikler",
