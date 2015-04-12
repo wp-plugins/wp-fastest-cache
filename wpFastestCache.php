@@ -43,6 +43,13 @@ GNU General Public License for more details.
 												  "wpfc_update_image_list_ajax_request"
 												  );
 			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_check_url_ajax_request"){
+				$_GET["url"] = strip_tags($_GET["url"]);
+				$_GET["url"] = str_replace(array("'", '"'), "", $_GET["url"]);
+				
+				if(!preg_match("/^http/", $_GET["url"])){
+					$_GET["url"] = "http://".$_GET["url"];
+				}
+				
 				$response = wp_remote_get($_GET["url"], array('timeout' => 10 ) );
 
 				if ( !$response || is_wp_error( $response ) ) {
