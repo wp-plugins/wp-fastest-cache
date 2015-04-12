@@ -78,6 +78,11 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.4.9 =
+* to be compatible with WP Mobile Edition
+* to prevent from sql injection attacks (Kacper Szurek)
+* to prevent using Head Cleaner
+
 = 0.8.4.8 =
 * to show .htaccess rules if not writeable
 * not to comment out Facebook js
