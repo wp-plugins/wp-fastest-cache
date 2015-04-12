@@ -42,7 +42,22 @@ GNU General Public License for more details.
 												  "wpfc_optimize_image_ajax_request",
 												  "wpfc_update_image_list_ajax_request"
 												  );
-			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_cache_statics_get"){
+			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_check_url_ajax_request"){
+				$response = wp_remote_get($_GET["url"], array('timeout' => 10 ) );
+
+				if ( !$response || is_wp_error( $response ) ) {
+					$res = array("success" => false, "error_message" => $response->get_error_message());
+				}else{
+					$response_code = wp_remote_retrieve_response_code( $response );
+					if($response_code == 200){
+						$res = array("success" => true);
+					}else{
+						$res = array("success" => false, "error_message" => $response->get_error_message());
+					}
+				}
+				echo json_encode($res);
+				exit;
+			}else if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_cache_statics_get"){
 				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
 					if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/library/statics.php")){
 						include_once $this->get_premium_path("statics.php");
