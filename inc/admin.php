@@ -562,6 +562,7 @@
 		}
 
 		public function ruleForWpContent(){
+			return "";
 			$newContentPath = str_replace(home_url(), "", content_url());
 			if(!preg_match("/wp-content/", $newContentPath)){
 				$newContentPath = trim($newContentPath, "/");
