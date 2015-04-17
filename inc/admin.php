@@ -1560,9 +1560,19 @@
 				    	</div>
 				    	<script type="text/javascript">
 				    		// (function() {
+					    	// 	<?php
+					    	// 		$cdn_values = get_option("WpFastestCacheCDN");
+					    	// 		if($cdn_values){
+					    	// 			$cdn_values_arr = json_decode($cdn_values);
+					    	// 			?>
+					    	// 				jQuery("div[wpfc-cdn-name='<?php echo $cdn_values_arr->id;?>']").find("span.connected").text("Connected");
+					    	// 			<?php
+					    	// 		}
+					    	// 	?>
 				    		// 	jQuery(".int-item").click(function(e){
 				    		// 		WpfcMaxCDN.init({"id" : jQuery(e.currentTarget).attr("wpfc-cdn-name"),
-				    		// 			"template_main_url" : "<?php echo plugins_url('wp-fastest-cache/templates'); ?>"
+				    		// 			"template_main_url" : "<?php echo plugins_url('wp-fastest-cache/templates'); ?>",
+				    		// 			"values" : <?php echo $cdn_values ? $cdn_values : '""'; ?>
 				    		// 		});
 				    		// 	});
 				    		// })();
