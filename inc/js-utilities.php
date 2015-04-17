@@ -30,6 +30,9 @@
 					$jsScript = content_url()."/cache/wpfc-minified/".md5($value);
 
 					if(strpos($this->getJsLinksExcept(), $out[0][$key]) === false){
+						if(preg_match("/switchTo5x/i", $value)){ // WP Socializer
+							continue;
+						}
 						if(preg_match("/window\.dynamicgoogletags/i", $value)){
 							continue;
 						}
