@@ -1,6 +1,7 @@
 <?php
 	class WpFastestCacheCreateCache extends WpFastestCache{
 		public $options = array();
+		public $cdn;
 		private $startTime;
 		private $blockCache = false;
 		private $err = "";
@@ -9,6 +10,19 @@
 			$this->options = $this->getOptions();
 
 			$this->checkActivePlugins();
+
+			$this->set_cdn();
+		}
+
+		public function set_cdn(){
+			$cdn_values = get_option("WpFastestCacheCDN");
+			if($cdn_values){
+				$std = json_decode($cdn_values);
+
+				$std->originurl = trim($std->originurl, "/");
+				$std->originurl = preg_replace("/http(s?)\:\/\/(www\.)?/i", "", $std->originurl);
+				$this->cdn = $std;
+			}
 		}
 
 		public function checkActivePlugins(){
@@ -206,10 +220,31 @@
 				}else{
 					$content = $this->cacheDate($content);
 					$content = $this->minify($content);
+					if($this->cdn){
+						$content = preg_replace_callback("/[\'\"][^\'\"]+".preg_quote($this->cdn->originurl, "/")."[^\'\"]+[\'\"]/i", array($this, 'cdn_replace_urls'), $content);
+					}
 					$this->createFolder($cachFilePath, $content);
 					return $buffer."<!-- need to refresh to see cached version -->";
 				}
 			}
+		}
+
+		public function cdn_replace_urls($matches){
+			if(preg_match("/".preg_quote($this->cdn->originurl, "/")."/", $matches[0])){
+				$extension = $this->get_extension($matches[0]);
+				if($extension){
+					if(preg_match("/".$extension."/i", $this->cdn->file_types)){
+						$matches[0] = str_replace($this->cdn->originurl, $this->cdn->cdnurl, $matches[0]);
+					}
+				}
+			}
+			return $matches[0];
+		}
+
+		public function get_extension($url){
+			$url = str_replace(array("'",'"'), "", $url);
+			$file_name = preg_replace("/\?.*/", "", basename($url));
+			return $file_name ? substr(strrchr($file_name,'.'),1) : "";
 		}
 
 		public function minify($content){

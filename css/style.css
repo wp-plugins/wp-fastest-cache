@@ -94,7 +94,7 @@ div.questionCon.qsubmit{
 }
   
 /* This matchs tabs displaying to thier associated radio inputs */
-#wpfc-options:checked ~ .tab1, #wpfc-deleteCache:checked ~ .tab2, #wpfc-cacheTimeout:checked ~ .tab3, #wpfc-imageOptimisation:checked ~ .tab4, #wpfc-premium:checked ~ .tab5, #wpfc-exclude:checked ~ .tab6, #wpfc-cdn:checked ~ .tab7 {
+#wpfc-options:checked ~ .tab1, #wpfc-deleteCache:checked ~ .tab2, #wpfc-cacheTimeout:checked ~ .tab3, #wpfc-imageOptimisation:checked ~ .tab4, #wpfc-premium:checked ~ .tab5, #wpfc-exclude:checked ~ .tab6 , #wpfc-cdn:checked ~.tab7{
     display: block;
 }
 /* for lef panel */
@@ -382,3 +382,4 @@ span.deleteicon span.cleared {
 .wpfc-exclude-rule-line-delete{
     display: none;
 }
+/* input[type=checkbox]:checked:before {  color: #e14d43;} */

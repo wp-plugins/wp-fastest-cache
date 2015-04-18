@@ -20,11 +20,11 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */ 
 	if (!defined('WPFC_WP_CONTENT_BASENAME')) {
-		define("WPFC_WP_CONTENT_BASENAME", str_replace("/", "", basename(content_url())));
-		define("WPFC_WP_CONTENT_DIR", ABSPATH.str_replace("/", "", basename(content_url())));
 		if (!defined('WPFC_WP_PLUGIN_DIR')) {
 			define("WPFC_WP_PLUGIN_DIR", preg_replace("/(\/trunk\/|\/wp-fastest-cache\/)$/", "", plugin_dir_path( __FILE__ )));
 		}
+		define("WPFC_WP_CONTENT_DIR", dirname(WPFC_WP_PLUGIN_DIR));
+		define("WPFC_WP_CONTENT_BASENAME", basename(WPFC_WP_CONTENT_DIR));
 	}
 
 	if (!defined('WPFC_MAIN_PATH')) {
@@ -42,7 +42,22 @@ GNU General Public License for more details.
 												  "wpfc_optimize_image_ajax_request",
 												  "wpfc_update_image_list_ajax_request"
 												  );
-			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_check_url_ajax_request"){
+
+			if(isset($_POST) && isset($_POST["action"]) && $_POST["action"] == "wpfc_remove_cdn_integration_ajax_request"){
+				delete_option("WpFastestCacheCDN");
+				echo json_encode(array("success" => true));
+				exit;
+
+			}else if(isset($_POST) && isset($_POST["action"]) && $_POST["action"] == "wpfc_save_cdn_integration_ajax_request"){
+				$values = json_encode($_POST["values"]);
+				if(get_option("WpFastestCacheCDN")){
+					update_option("WpFastestCacheCDN", $values);
+				}else{
+					add_option("WpFastestCacheCDN", $values, null, "yes");
+				}
+				echo json_encode(array("success" => true));
+				exit;
+			}else if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_check_url_ajax_request"){
 				$_GET["url"] = strip_tags($_GET["url"]);
 				$_GET["url"] = str_replace(array("'", '"'), "", $_GET["url"]);
 				

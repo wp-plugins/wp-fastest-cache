@@ -214,8 +214,8 @@
 			wp_enqueue_script("wpfc-dialog", plugins_url("wp-fastest-cache/js/dialog.js"), array(), time(), false);
 
 
-			//wp_enqueue_script("wpfc-cdn", plugins_url("wp-fastest-cache/js/cdn/cdn.js"), array(), time(), false);
-			//wp_enqueue_script("wpfc-cdn-maxcdn", plugins_url("wp-fastest-cache/js/cdn/maxcdn.js"), array(), time(), false);
+			wp_enqueue_script("wpfc-cdn", plugins_url("wp-fastest-cache/js/cdn/cdn.js"), array(), time(), false);
+			wp_enqueue_script("wpfc-cdn-maxcdn", plugins_url("wp-fastest-cache/js/cdn/maxcdn.js"), array(), time(), false);
 
 
 			wp_enqueue_script("wpfc-language", plugins_url("wp-fastest-cache/js/language.js"), array(), time(), false);
@@ -702,7 +702,10 @@
 
 						array_push($tabs, array("id"=>"wpfc-exclude","title"=>"Exclude"));
 
-						//array_push($tabs, array("id"=>"wpfc-cdn","title"=>"CDN"));
+						$cdn_tester_list = array("berkatan.com");
+						if(in_array($_SERVER["HTTP_HOST"], $cdn_tester_list)){
+							array_push($tabs, array("id"=>"wpfc-cdn","title"=>"CDN"));
+						}
 
 						foreach ($tabs as $key => $value){
 							$checked = "";
@@ -1554,29 +1557,29 @@
 				    					<p>Experts in Content Delivery Network Services</p>
 				    				</div>
 				    				<div class="meta">
-				    					<span class="connected">Connected</span>
+				    					<span class="connected"></span>
 				    				</div>
 				    			</div>
 				    		</div>
 				    	</div>
 				    	<script type="text/javascript">
-				    		// (function() {
-					    	// 	<?php
-					    	// 		$cdn_values = get_option("WpFastestCacheCDN");
-					    	// 		if($cdn_values){
-					    	// 			$cdn_values_arr = json_decode($cdn_values);
-					    	// 			?>
-					    	// 				jQuery("div[wpfc-cdn-name='<?php echo $cdn_values_arr->id;?>']").find("span.connected").text("Connected");
-					    	// 			<?php
-					    	// 		}
-					    	// 	?>
-				    		// 	jQuery(".int-item").click(function(e){
-				    		// 		WpfcMaxCDN.init({"id" : jQuery(e.currentTarget).attr("wpfc-cdn-name"),
-				    		// 			"template_main_url" : "<?php echo plugins_url('wp-fastest-cache/templates'); ?>",
-				    		// 			"values" : <?php echo $cdn_values ? $cdn_values : '""'; ?>
-				    		// 		});
-				    		// 	});
-				    		// })();
+				    		(function() {
+					    		<?php
+					    			$cdn_values = get_option("WpFastestCacheCDN");
+					    			if($cdn_values){
+					    				$cdn_values_arr = json_decode($cdn_values);
+					    				?>
+					    					jQuery("div[wpfc-cdn-name='<?php echo $cdn_values_arr->id;?>']").find("span.connected").text("Connected");
+					    				<?php
+					    			}
+					    		?>
+				    			jQuery(".int-item").click(function(e){
+				    				WpfcMaxCDN.init({"id" : jQuery(e.currentTarget).attr("wpfc-cdn-name"),
+				    					"template_main_url" : "<?php echo plugins_url('wp-fastest-cache/templates'); ?>",
+				    					"values" : <?php echo $cdn_values ? $cdn_values : '""'; ?>
+				    				});
+				    			});
+				    		})();
 				    	</script>
 				    </div>
 
