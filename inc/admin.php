@@ -1547,7 +1547,7 @@
 						}
 
 				    	</style>
-				    	<h2 style="padding-bottom:10px;">CDN Settings</h2>
+				    	<h2 style="padding-bottom:10px;">CDN Settings (BETA)</h2>
 				    	<div>
 				    		<div class="integration-page" style="display: block;width:98%;float:left;">
 				    			<div wpfc-cdn-name="maxcdn" class="int-item">
