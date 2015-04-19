@@ -18,83 +18,100 @@
 
 		public function inlineToScript($wpfc){
 			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
-			preg_match_all("/<script([^\>]*)>((?:(?!<\/script).)+)<\/script\s*>/is",$head[1],$out);
 
-			if(count($out) > 0){
-				$countStyle = array_count_values($out[2]);
 
-				$out[2] = array_unique($out[2]);
+			$data = $head[1];
+			$script_list = array();
+			$script_start_index = false;
 
-				foreach ($out[2] as $key => $value) {
-					$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($value);
-					$jsScript = content_url()."/cache/wpfc-minified/".md5($value);
+			for($i = 0; $i < strlen( $data ); $i++) {
+				if(isset($data[$i-6])){
+				    if(substr($data, $i-6, 7) == "<script"){
+				    	$script_start_index = $i-6;
+					}
+				}
 
-					if(strpos($this->getJsLinksExcept(), $out[0][$key]) === false){
-						if(preg_match("/switchTo5x/i", $value)){ // WP Socializer
-							continue;
-						}
-						if(preg_match("/window\.dynamicgoogletags/i", $value)){
-							continue;
-						}
-
-						if(preg_match("/GoogleAnalyticsObject/i", $value)){
-							continue;
-						}
-
-						if(preg_match("/document\.write/i", $value)){
-							continue;
-						}
-
-						if(preg_match("/google\-analytics\.com/i", $value)){
-							continue;
-						}
-
-						if(preg_match("/addIgnoredOrganic/i", $value)){
-							continue;
-						}
-
-						if(preg_match("/WebFontConfig/i", $value)){
-							continue;
-						}
-
-						if(preg_match("/action\=wordfence_logHuman\&hid=/i", $value)){
-							continue;
-						}
-
-						if(preg_match("/connect\.facebook\.net/i", $value)){
-							continue;
-						}
-
-						if(preg_match("/document\.createElement\([^\(\)]+script[^\(\)]+\)/i", $value)){
-							continue;
-						}
-
-						if(!is_dir($cachFilePath)){
-							$prefix = time();
-							$wpfc->createFolder($cachFilePath, $value, "js", $prefix);
-						}
-
-						if($jsFiles = @scandir($cachFilePath, 1)){
-							if($countStyle[$value] == 1){
-								$script = "<!-- <script".$out[1][$key].">".str_replace(array("<!--", "-->"), "", $value)."</script> -->"."\n"."<script".$out[1][$key]." src='".$jsScript."/".$jsFiles[0]."'></script>";
-								if($tmpHtml = @preg_replace("/<script[^<>]*>".preg_quote($value, "/")."<\/script\s*>/", $script, $this->html)){
-									$this->html = $tmpHtml;
-								}else{
-									$this->err = "inline js is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
-								}
-							}else{
-								$script = "<!-- <script".$out[1][$key].">".str_replace(array("<!--", "-->"), "", $value)."</script> -->"."\n"."<script".$out[1][$key]." src='".$jsScript."/".$jsFiles[0]."'></script>";
-								if($tmpHtml = @preg_replace("/<script[^<>]*>".preg_quote($value, "/")."<\/script\s*>/", $script, $this->html)){
-									$this->html = $tmpHtml;
-								}else{
-									$this->err = "inline js is too large. it is a mistake for optimization. save it as a file and call in the html.".$value;
-								}
-								$countStyle[$value] = $countStyle[$value] - 1;
-							}
+				if(isset($data[$i-8])){
+					if($script_start_index){
+						if(substr($data, $i-8, 9) == "</script>"){
+							array_push($script_list, array("start" => $script_start_index, "end" => $i));
+							$script_start_index = false;
 						}
 					}
 				}
 			}
+
+			if(!empty($script_list)){
+				foreach (array_reverse($script_list) as $key => $value) {
+					$inline_script = substr($data, $value["start"], ($value["end"] - $value["start"] + 1));
+
+					if(preg_match("/^<script[^\>\<]*src\=[^\>\<]*>/i", $inline_script)){
+						continue;
+					}
+
+					if(preg_match("/switchTo5x/i", $inline_script)){ // WP Socializer
+						continue;
+					}
+
+					if(preg_match("/window\.dynamicgoogletags/i", $inline_script)){
+						continue;
+					}
+
+					if(preg_match("/GoogleAnalyticsObject/i", $inline_script)){
+						continue;
+					}
+
+					if(preg_match("/document\.write/i", $inline_script)){
+						continue;
+					}
+
+					if(preg_match("/google\-analytics\.com/i", $inline_script)){
+						continue;
+					}
+
+					if(preg_match("/addIgnoredOrganic/i", $inline_script)){
+						continue;
+					}
+
+					if(preg_match("/WebFontConfig/i", $inline_script)){
+						continue;
+					}
+
+					if(preg_match("/action\=wordfence_logHuman\&hid=/i", $inline_script)){
+						continue;
+					}
+
+					if(preg_match("/connect\.facebook\.net/i", $inline_script)){
+						continue;
+					}
+
+					if(preg_match("/document\.createElement\([^\(\)]+script[^\(\)]+\)/i", $inline_script)){
+						continue;
+					}
+
+					if(strpos($this->getJsLinksExcept(), $inline_script) === false){
+						$attributes = "";
+						$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($inline_script);
+						$jsScript = content_url()."/cache/wpfc-minified/".md5($inline_script);
+
+						if(preg_match("/<script([^\>]*)>/i", $inline_script, $out)){
+							$attributes = $out[1];
+						}
+
+						if(!is_dir($cachFilePath)){
+							$prefix = time();
+							$wpfc->createFolder($cachFilePath, $inline_script, "js", $prefix);
+						}
+
+						if($jsFiles = @scandir($cachFilePath, 1)){
+							$script = "<script src='".$jsScript."/".$jsFiles[0]."'".$attributes."></script>";
+							$data = substr_replace($data, "<!-- ".$inline_script." -->"."\n".$script, $value["start"], ($value["end"] - $value["start"] + 1));
+						}
+					}
+				}
+			}
+
+			$this->html = str_replace($head[1], $data, $this->html);
 		}
 
 		public function setJsLinks(){
