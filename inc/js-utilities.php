@@ -97,6 +97,10 @@
 						if(preg_match("/<script([^\>]*)>/i", $inline_script, $out)){
 							$attributes = $out[1];
 						}
+						
+						$inline_script = trim();
+						$inline_script = preg_replace("/<script([^\>]*)>/i", "", $inline_script);
+						$inline_script = preg_replace("/<\/script>/i", "", $inline_script);
 
 						if(!is_dir($cachFilePath)){
 							$prefix = time();
