@@ -78,6 +78,12 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.5.0 =
+* to prevent combine js file which is added by WP Socializer
+* to make ruleForWpContent() pasive
+* refactoring of inlineToScript()
+* Romanian has been added
+
 = 0.8.4.9 =
 * to be compatible with WP Mobile Edition
 * to prevent from sql injection attacks (Kacper Szurek)
