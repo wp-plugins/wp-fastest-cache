@@ -209,6 +209,7 @@ button:focus {outline:0;}
     background: linear-gradient(top,  #38bf26 0%,#39cc28 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#38bf26', endColorstr='#39cc28',GradientType=0 );
 }
+
 .wiz-error-msg{
     color: red;
     font-weight: bold;
@@ -249,4 +250,12 @@ button:focus {outline:0;}
 .wpfc-checkbox-list label input {
     margin-right:5px;
     vertical-align:bottom;
-} 
+}
+
+.wpfc-bottom-note{
+    margin-top: 20px !important 
+}
+
+.wpfc-bottom-note a{
+    font-weight: bold;
+}

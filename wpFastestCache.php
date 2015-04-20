@@ -136,19 +136,19 @@ GNU General Public License for more details.
 											$result = activate_plugin( 'wp-fastest-cache-premium/wpFastestCachePremium.php' );
 
 											if ( is_wp_error( $result ) ) {
-												$res = array("success" => false, "error_message" => "Error occured while the plugin was activated", "error_code" => 1); 
+												$res = array("success" => false, "error_message" => "Error occured while the plugin was activated", "error_code" => 1, "file_url" => $wpfc_premium_download_link); 
 											}else{
 												$res = array("success" => true);
 												$this->deleteCache(true);
 											}
 										} else {
-											$res = array("success" => false, "error_message" => 'Error occured while the file was unzipped', "error_code" => 2);      
+											$res = array("success" => false, "error_message" => 'Error occured while the file was unzipped', "error_code" => 2, "file_url" => $wpfc_premium_download_link);      
 										}
 									}else{
-										$res = array("success" => false, "error_message" => "unzip_file() is not found", "error_code" => 3);
+										$res = array("success" => false, "error_message" => "unzip_file() is not found", "error_code" => 3, "file_url" => $wpfc_premium_download_link);
 									}
 								}else{
-									$res = array("success" => false, "error_message" => "/wp-content/plugins/ is not writable", "error_code" => 4);
+									$res = array("success" => false, "error_message" => "/wp-content/plugins/ is not writable", "error_code" => 4, "file_url" => $wpfc_premium_download_link);
 								}
 							}else{
 								$res = array("success" => false, "error_message" => "Error: Service is unavailable. Try later...");
