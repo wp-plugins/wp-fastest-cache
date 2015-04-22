@@ -857,15 +857,15 @@
 
 
 							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
-							<div class="questionCon">
+<!-- 							<div class="questionCon">
 								<div class="question">Remove Comments</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRemoveComments; ?> id="wpFastestCacheRemoveComments" name="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comment tags between &#60;head&#62;&#60;/head&#62;</label></div>
-							</div>
+							</div> -->
 							<?php }else{ ?>
-							<div class="questionCon disabled">
+<!-- 							<div class="questionCon disabled">
 								<div class="question">Remove Comments</div>
 								<div class="inputCon"><input type="checkbox" id="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comment tags between &#60;head&#62;&#60;/head&#62;</label></div>
-							</div>
+							</div> -->
 							<?php } ?>
 
 
