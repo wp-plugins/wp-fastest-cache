@@ -672,6 +672,7 @@
 			$wpFastestCacheMinifyHtml = isset($this->options->wpFastestCacheMinifyHtml) ? 'checked="checked"' : "";
 			$wpFastestCacheMinifyHtmlPowerFul = isset($this->options->wpFastestCacheMinifyHtmlPowerFul) ? 'checked="checked"' : "";
 
+			$wpFastestCacheMinifyJs = isset($this->options->wpFastestCacheMinifyJs) ? 'checked="checked"' : "";
 
 			$wpFastestCacheMobile = isset($this->options->wpFastestCacheMobile) ? 'checked="checked"' : "";
 			$wpFastestCacheMobileTheme = isset($this->options->wpFastestCacheMobileTheme) ? 'checked="checked"' : "";
@@ -801,6 +802,28 @@
 								<div class="inputCon"><input type="checkbox" id="wpFastestCacheMinifyCssPowerFul"><label for="wpFastestCacheMinifyCssPowerFul">More powerful minify css</label></div>
 							</div>
 							<?php } ?>
+
+
+
+							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
+								<?php if(method_exists("WpFastestCachePowerfulHtml", "minify_js_in_body")){ ?>
+									<div class="questionCon">
+										<div class="question">Minify Js</div>
+										<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheMinifyJs; ?> id="wpFastestCacheMinifyJs" name="wpFastestCacheMinifyJs"><label for="wpFastestCacheMinifyJs">You can decrease the size of js files</label></div>
+									</div>
+								<?php }else{ ?>
+									<div class="questionCon update-needed">
+										<div class="question">Minify Js</div>
+										<div class="inputCon"><input type="checkbox" id="wpFastestCacheMinifyJs"><label for="wpFastestCacheMinifyJs">You can decrease the size of js files</label></div>
+									</div>
+								<?php } ?>
+							<?php }else{ ?>
+							<div class="questionCon disabled">
+								<div class="question">Minify Js</div>
+								<div class="inputCon"><input type="checkbox" id="wpFastestCacheMinifyJs"><label for="wpFastestCacheMinifyJs">You can decrease the size of js files</label></div>
+							</div>
+							<?php } ?>
+
 
 
 
@@ -1717,6 +1740,18 @@
 						jQuery("#wpfc-premium-tooltip").css({"margin-left" : left + "px", "margin-top" : (jQuery(e.currentTarget).offset().top - jQuery(".tab1").offset().top + 25) + "px"});
 						jQuery("#wpfc-premium-tooltip").fadeIn( "slow", function() {
 							window.wpfc.tooltip = setTimeout(function(){ jQuery("#wpfc-premium-tooltip").hide(); }, 1000);
+						});
+						return false;
+					});
+				</script>
+			<?php }else{ ?>
+				<script type="text/javascript">
+					jQuery(".update-needed").click(function(e){
+						jQuery("#revert-loader-toolbar").show();
+						jQuery.get('<?php echo plugins_url("wp-fastest-cache/templates/update_now.php"); ?>', function( data ) {
+							jQuery("#revert-loader-toolbar").hide();
+							jQuery("body").append(data);
+							Wpfc_Dialog.dialog("wpfc-modal-updatenow");
 						});
 						return false;
 					});

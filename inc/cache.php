@@ -213,6 +213,10 @@
 					if(isset($this->options->wpFastestCacheMinifyHtmlPowerFul)){
 						$content = $powerful_html->minify_html();
 					}
+
+					if(isset($this->options->wpFastestCacheMinifyJs) && method_exists("WpFastestCachePowerfulHtml", "minify_js_in_body")){
+						$content = $powerful_html->minify_js_in_body($this);
+					}
 				}
 
 				if($this->err){
