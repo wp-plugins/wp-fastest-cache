@@ -238,7 +238,7 @@
 				$extension = $this->get_extension($matches[0]);
 				if($extension){
 					if(preg_match("/".$extension."/i", $this->cdn->file_types)){
-						$matches[0] = preg_replace("/http(s?)\:\/\/(www\.)?".preg_quote($this->cdn->originurl, "/")."/i", "//".$this->cdn->cdnurl, $matches[0]);
+						$matches[0] = preg_replace("/(http(s?)\:)?\/\/(www\.)?".preg_quote($this->cdn->originurl, "/")."/i", "//".$this->cdn->cdnurl, $matches[0]);
 						//$matches[0] = str_replace($this->cdn->originurl, $this->cdn->cdnurl, $matches[0]);
 					}
 				}
