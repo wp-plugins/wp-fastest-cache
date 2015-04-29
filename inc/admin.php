@@ -440,6 +440,7 @@
 		  				"AddOutputFilterByType DEFLATE text/html"."\n".
 		  				"AddOutputFilterByType DEFLATE text/xml"."\n".
 		  				"AddOutputFilterByType DEFLATE text/css"."\n".
+		  				"AddOutputFilterByType DEFLATE text/javascript"."\n".
 		  				"AddOutputFilterByType DEFLATE application/xml"."\n".
 		  				"AddOutputFilterByType DEFLATE application/xhtml+xml"."\n".
 		  				"AddOutputFilterByType DEFLATE application/rss+xml"."\n".
@@ -703,9 +704,12 @@
 
 						array_push($tabs, array("id"=>"wpfc-exclude","title"=>"Exclude"));
 
-						$cdn_tester_list = array("berkatan.com", 
+						$cdn_tester_list = array("berkatan.com",
+												"villa-mosaica.com",
 												"teknooneri.com",
 												"poweryourinvestment.com",
+												"monamouresthetiqueauto.com",
+												"mapassionesthetiqueauto.ca",
 												"smartlist.ee");
 						if(in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $cdn_tester_list)){
 							array_push($tabs, array("id"=>"wpfc-cdn","title"=>"CDN"));
