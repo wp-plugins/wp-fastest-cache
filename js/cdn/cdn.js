@@ -36,11 +36,11 @@ var WpfcCDN = {
 	},
 	fill_integration_fields: function(){
 		var self = this;
-		jQuery("#cdn-url").val(self.values.cdnurl);
-		jQuery("#origin-url").val(self.values.originurl);
+		jQuery("#wpfc-wizard-" + self.values.id).find("input#cdn-url").val(self.values.cdnurl);
+		jQuery("#wpfc-wizard-" + self.values.id).find("#origin-url").val(self.values.originurl);
 
 		if(self.values.file_types){
-			jQuery(".wpfc-checkbox-list input[type='checkbox']").attr("checked", false);
+			jQuery("#wpfc-wizard-" + self.values.id).find(".wpfc-checkbox-list input[type='checkbox']").attr("checked", false);
 			jQuery.each(self.values.file_types.split(","), function( index, value ) {
 				jQuery("#file-type-" + value).attr("checked", true);
 			});
