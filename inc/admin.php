@@ -710,6 +710,7 @@
 												"poweryourinvestment.com",
 												"monamouresthetiqueauto.com",
 												"mapassionesthetiqueauto.ca",
+												"blackwaterstudios.co.uk",
 												"smartlist.ee");
 						if(in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $cdn_tester_list)){
 							array_push($tabs, array("id"=>"wpfc-cdn","title"=>"CDN"));
