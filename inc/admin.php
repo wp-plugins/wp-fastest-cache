@@ -477,6 +477,10 @@
 
 		public function prefixRedirect(){
 			$forceTo = "";
+			
+			if(defined("WPFC_DISABLE_REDIRECTION") && WPFC_DISABLE_REDIRECTION){
+				return $forceTo;
+			}
 
 			if(preg_match("/^https:\/\//", home_url())){
 				if(!$this->isPluginActive('wordpress-https/wordpress-https.php')){
