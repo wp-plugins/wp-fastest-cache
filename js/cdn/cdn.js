@@ -3,7 +3,21 @@ var WpfcCDN = {
 	id : "",
 	template_url : "",
 	content : "",
-	conditions : "",
+	init: function(obj){
+		this.set_params(obj);
+		this.open_wizard();
+	},
+	check_conditions: function(action, current_page_number){
+		var self = this;
+
+		if(action == "next"){
+			if(current_page_number == 2){
+				self.check_url_exist();
+			}else{
+				return true;
+			}
+		}
+	},
 	set_params: function(obj){
 		this.id = obj.id;
 		this.template_url = obj.template_main_url + "/" + this.id + ".php";
@@ -44,7 +58,7 @@ var WpfcCDN = {
 			current_page_number = jQuery(".wpfc-cdn-pages-container div.wiz-cont:visible").attr("wpfc-cdn-page");
 
 			if(action == "next"){
-				if(self.conditions("next", current_page_number)){
+				if(self.check_conditions("next", current_page_number)){
 					self.show_page("next");
 				}
 			}else if(action == "back"){
