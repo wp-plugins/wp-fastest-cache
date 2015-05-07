@@ -45,6 +45,9 @@
 				foreach (array_reverse($script_list) as $key => $value) {
 					$inline_script = substr($data, $value["start"], ($value["end"] - $value["start"] + 1));
 
+					$inline_script = preg_replace("/<!--((?:(?!-->).)+)-->/si", '', $inline_script);
+					$inline_script = preg_replace("/^\s+/m", "", ((string) $inline_script));
+
 					if(preg_match("/^<script[^\>\<]*src\=[^\>\<]*>/i", $inline_script)){
 						continue;
 					}
