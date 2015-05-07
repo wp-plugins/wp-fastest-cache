@@ -133,24 +133,40 @@
 		public function setJsLinksExcept(){
 			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
 
-			preg_match_all("/<\!--\s*\[\s*if[^>]+>(.*?)<\!\s*\[\s*endif\s*\]\s*-->/si", $head[1], $jsLinksInIf);
+			$data = $head[1];
+			$comment_list = array();
+			$comment_start_index = false;
 
-			preg_match_all("/<\!--(?!\[if)(.*?)(?!<\!\s*\[\s*endif\s*\]\s*)-->/si", $head[1], $jsLinksCommentOut);
+			for($i = 0; $i < strlen( $data ); $i++) {
+				if(isset($data[$i-3])){
+				    if($data[$i-3].$data[$i-2].$data[$i-1].$data[$i] == "<!--"){
+				    	$comment_start_index = $i-3;
+					}
+				}
 
-			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)GoogleAnalyticsObject((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalytics);
+				if(isset($data[$i-2])){
+					if($comment_start_index){
+						if($data[$i-2].$data[$i-1].$data[$i] == "-->"){
+							array_push($comment_list, array("start" => $comment_start_index, "end" => $i));
+							$comment_start_index = false;
+						}
+					}
+				}
+			}
 
-			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)google\-analytics\.com((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalyticsYoast);
-			
-			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)addIgnoredOrganic((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleAnalyticsPush);
+			if(!empty($comment_list)){
+				foreach (array_reverse($comment_list) as $key => $value) {
+					if(($value["end"] - $value["start"]) > 4){
+						$this->jsLinksExcept = $this->jsLinksExcept.substr($data, $value["start"], ($value["end"] - $value["start"] + 1));
+					}
+				}
+			}
 
-			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)WebFontConfig((?:(?!<\/script).)+)<\/script>/si", $head[1], $jsLinksGoogleFonts);
+			// preg_match_all("/<\!--\s*\[\s*if[^>]+>(.*?)<\!\s*\[\s*endif\s*\]\s*-->/si", $head[1], $jsLinksInIf);
 
-			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)action\=wordfence_logHuman\&hid=((?:(?!<\/script).)+)<\/script>/si", $head[1], $WordfenceLogHuman);
+			// preg_match_all("/<\!--(?!\[if)(.*?)(?!<\!\s*\[\s*endif\s*\]\s*)-->/si", $head[1], $jsLinksCommentOut);
 
-			// preg_match_all("/<script[^\>]*>((?:(?!<\/script).)+)document\.write((?:(?!<\/script).)+)<\/script>/si", $head[1], $documentWrite);
-
-
-			$this->jsLinksExcept = implode(" ", array_merge($jsLinksInIf[0], $jsLinksCommentOut[0]));
+			// $this->jsLinksExcept = implode(" ", array_merge($jsLinksInIf[0], $jsLinksCommentOut[0]));
 		}
 
 		public function getJsLinksExcept(){
