@@ -716,6 +716,8 @@
 												"monamouresthetiqueauto.com",
 												"mapassionesthetiqueauto.ca",
 												"blackwaterstudios.co.uk",
+												"thessdreview.com",
+												"technologyx.com",
 												"thrivingaudios.com",
 												"smartlist.ee");
 						if(in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $cdn_tester_list)){
