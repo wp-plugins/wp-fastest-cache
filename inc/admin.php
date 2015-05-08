@@ -709,20 +709,22 @@
 						array_push($tabs, array("id"=>"wpfc-exclude","title"=>"Exclude"));
 
 
-						$cdn_tester_list = array("berkatan.com",
-												"villa-mosaica.com",
-												"teknooneri.com",
-												"poweryourinvestment.com",
-												"monamouresthetiqueauto.com",
-												"mapassionesthetiqueauto.ca",
-												"blackwaterstudios.co.uk",
-												"thessdreview.com",
-												"technologyx.com",
-												"thrivingaudios.com",
-												"smartlist.ee");
-						if(in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $cdn_tester_list)){
-							array_push($tabs, array("id"=>"wpfc-cdn","title"=>"CDN"));
-						}
+						// $cdn_tester_list = array("berkatan.com",
+						// 						"villa-mosaica.com",
+						// 						"teknooneri.com",
+						// 						"poweryourinvestment.com",
+						// 						"monamouresthetiqueauto.com",
+						// 						"mapassionesthetiqueauto.ca",
+						// 						"blackwaterstudios.co.uk",
+						// 						"thessdreview.com",
+						// 						"technologyx.com",
+						// 						"thrivingaudios.com",
+						// 						"smartlist.ee");
+						// if(in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $cdn_tester_list)){
+						// 	array_push($tabs, array("id"=>"wpfc-cdn","title"=>"CDN"));
+						// }
+
+						array_push($tabs, array("id"=>"wpfc-cdn","title"=>"CDN"));
 
 						foreach ($tabs as $key => $value){
 							$checked = "";
@@ -1620,7 +1622,7 @@
 				    			</div>
 
 
-				    			<div wpfc-cdn-name="incapsula" class="int-item">
+<!-- 				    			<div wpfc-cdn-name="incapsula" class="int-item">
 				    				<img src="data:image/png;base64,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"/>
 				    				<div class="app">
 				    					<div style="font-weight:bold;font-size:14px;">CDN by Incapsula</div>
@@ -1629,7 +1631,7 @@
 				    				<div class="meta">
 				    					<span class="connected"></span>
 				    				</div>
-				    			</div>
+				    			</div> -->
 
 
 
