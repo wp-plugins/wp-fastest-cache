@@ -914,6 +914,7 @@
 									  <option value="pt">Português</option>
 									  <option value="ru">Русский</option>
 									  <option value="ro">Română</option>
+									  <option value="sv">Svenska</option>
 									  <option value="tr">Türkçe</option>
 									  <!-- <option value="ukr">Українська</option> -->
 									</select> 
