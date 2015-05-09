@@ -54,6 +54,7 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 * Italiana (by Valerio)
 * 日本語 (by KUCKLU)
 * Português
+* Română
 * Русский
 * Svenska (Linus Wileryd)
 * Türkçe
