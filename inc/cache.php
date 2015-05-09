@@ -63,7 +63,8 @@
 						"\/wp\-includes",
 						"\/index\.php",
 						"\/xmlrpc\.php",
-						"\/wp\-api\/"
+						"\/wp\-api\/",
+						"leaflet\-geojson\.php"
 					);
 			if($this->isPluginActive('woocommerce/woocommerce.php')){
 				array_push($list, "\/cart", "\/checkout", "\/receipt", "\/confirmation", "\/product");
