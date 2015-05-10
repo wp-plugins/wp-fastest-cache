@@ -42,8 +42,15 @@ GNU General Public License for more details.
 												  "wpfc_optimize_image_ajax_request",
 												  "wpfc_update_image_list_ajax_request"
 												  );
-
-			if(isset($_POST) && isset($_POST["action"]) && $_POST["action"] == "wpfc_remove_cdn_integration_ajax_request"){
+			if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_cdn_options_ajax_request"){
+				$cdn_values = get_option("WpFastestCacheCDN");
+				if($cdn_values){
+					echo $cdn_values;
+				}else{
+					echo json_encode(array("success" => false)); 
+				}
+				exit;
+			}else if(isset($_POST) && isset($_POST["action"]) && $_POST["action"] == "wpfc_remove_cdn_integration_ajax_request"){
 				delete_option("WpFastestCacheCDN");
 				echo json_encode(array("success" => true));
 				exit;
