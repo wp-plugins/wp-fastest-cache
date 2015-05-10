@@ -149,7 +149,7 @@
 			}else if(is_404()){
 				return $buffer;
 			}else if($this->ignored()){
-				return $buffer."<!-- ignored -->";
+				return $buffer;
 			}else if($this->blockCache === true){
 				return $buffer."<!-- wpfcNOT has been detected -->";
 			}else if(isset($_GET["preview"])){
