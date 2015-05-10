@@ -24,7 +24,7 @@
 						<h1>Let's Get Started</h1>		
 						<p>Hi! If you don't have a <strong>CDN77</strong> account, you can create one. If you already have, please continue...</p>
 						<div class="wiz-input-cont" style="text-align:center;">
-							<a href="http://tracking.maxcdn.com/c/149801/3982/378" target="_blank">
+							<a href="https://www.cdn77.com/" target="_blank">
 								<button class="wpfc-green-button">Create a CDN77 Account</button>
 							</a>
 					    </div>
