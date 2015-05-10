@@ -81,6 +81,12 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.5.1 =
+* to add MaxCDN and CDN77
+* to remove comments from inline js
+* to fix trim() issue
+* to be compatible with Leaflet Maps Marker
+
 = 0.8.5.0 =
 * to prevent combine js file which is added by WP Socializer
 * to make ruleForWpContent() pasive
