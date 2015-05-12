@@ -78,6 +78,7 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 7. Block caching for post and pages (TinyMCE)
 8. Clean cached files via admin toolbar easly
 9. Exclude page
+10. CDN
 
 == Changelog ==
 
