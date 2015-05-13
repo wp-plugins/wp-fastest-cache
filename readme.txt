@@ -83,7 +83,7 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 == Changelog ==
 
 = 0.8.5.1 =
-* to add MaxCDN and CDN77
+* to add MaxCDN
 * to remove comments from inline js
 * to fix trim() issue
 * to be compatible with Leaflet Maps Marker
