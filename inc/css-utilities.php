@@ -79,6 +79,7 @@
 						}
 
 						if($cssFiles = @scandir($cachFilePath, 1)){
+							$cssLink = str_replace(array("http://", "https://"), "//", $cssLink);
 							$link_tag = "<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."'".$inline_style_prefix." />";
 
 							// $data = substr_replace($data, " -->\n".$link_tag."\n", $value["end"]+1, 0);
