@@ -179,16 +179,17 @@
 				return array("cachFilePath" => $cachFilePath, "cssContent" => "", "url" => $cssLink, "realUrl" => $url);
 			}else{
 				if($css = $this->file_get_contents_curl($url."?v=".time())){
+					
 					if($minify){
 						$cssContent = $this->_process($css);
-						$cssContent = $this->fixPathsInCssContent($cssContent);
 					}else{
 						$cssContent = $css;
-						$cssContent = $this->fixPathsInCssContent($cssContent);
 					}
 
-					return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => $cssLink, "realUrl" => $url);
-					//return array("cachFilePath" => $cachFilePath, "cssContent" => "/* ".$url." */\n".$cssContent, "url" => $cssLink, "realUrl" => $url);
+					if($cssContent){
+						$cssContent = $this->fixPathsInCssContent($cssContent);
+						return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => $cssLink, "realUrl" => $url);
+					}
 				}
 			}
 			return false;
