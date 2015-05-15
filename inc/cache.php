@@ -86,6 +86,7 @@
 
 				foreach($std as $key => $value){
 					if(isset($value->prefix) && $value->prefix){
+						$value->content = trim($value->content);
 						$value->content = trim($value->content, "/");
 
 						if($value->prefix == "exact"){
