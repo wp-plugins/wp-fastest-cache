@@ -50,6 +50,10 @@
 						continue;
 					}
 
+					if(preg_match("/yandex\.ru/i", $inline_script)){
+						continue;
+					}
+
 					if(preg_match("/switchTo5x/i", $inline_script)){ // WP Socializer
 						continue;
 					}
