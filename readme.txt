@@ -1,7 +1,7 @@
 === WP Fastest Cache ===
 Contributors: emrevona
 Donate link: http://profiles.wordpress.org/emrevona/
-Tags: cache, caching, performance, wp-cache, optimize, minify, woocommerce, plugin, post, posts, google, ajax, comments, seo, adsense, gzip, google page speed, ylow
+Tags: cache, caching, performance, wp-cache, optimize, minify, cdn, woocommerce, plugin, post, posts, google, ajax, comments, seo, adsense, gzip, google page speed, ylow, image, images
 
 Requires at least: 3.3
 Tested up to: 4.2
