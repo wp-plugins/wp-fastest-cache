@@ -83,7 +83,7 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 == Changelog ==
 
 = 0.8.5.1 =
-* to add MaxCDN
+* <strong>[FEATURE]</strong> to add MaxCDN
 * to remove comments from inline js
 * to fix trim() issue
 * to be compatible with Leaflet Maps Marker
@@ -92,10 +92,10 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 * to prevent combine js file which is added by WP Socializer
 * to make ruleForWpContent() pasive
 * refactoring of inlineToScript()
-* Romanian has been added
+* <strong>[FEATURE]</strong> Romanian has been added
 
 = 0.8.4.9 =
-* to be compatible with WP Mobile Edition
+* <strong>[FEATURE]</strong> to be compatible with WP Mobile Edition
 * to prevent from sql injection attacks (Kacper Szurek)
 * to prevent using Head Cleaner
 
@@ -163,7 +163,7 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 * to fix vulnerability (discoverd by 0pc0deFR aka Kevin FALCOZ)
 * to fix issue of moving chartset to the top
 * to prevent combine Google Fonts javascripts
-* [FEATURE] exclude page
+* <strong>[FEATURE]</strong>  exclude page
 
 = 0.8.3.4 =
 * to prevent inline to external if the style is used in the javascript
@@ -184,7 +184,7 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 = 0.8.3.1 =
 * index.html files have been added intead of .htaccess
 * to prevent comment out inline js rules twice
-* [FEATURE] to add delete button on the admin bar
+* <strong>[FEATURE]</strong>  to add delete button on the admin bar
 * to fix url() problem for data:image/svg+xml
 
 = 0.8.3.0 =
