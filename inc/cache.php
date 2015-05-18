@@ -162,6 +162,15 @@
 			}else{				
 				if($this->isMobile()){
 					if(class_exists("WpFcMobileCache") && isset($this->options->wpFastestCacheMobileTheme)){
+						
+						// wptouch: ipad is accepted as a desktop so no need to create cache if user agent is ipad 
+						// https://wordpress.org/support/topic/plugin-wptouch-wptouch-wont-display-mobile-version-on-ipad?replies=12
+						if($this->isPluginActive('wptouch/wptouch.php')){
+							if(preg_match("/ipad/i", $_SERVER['HTTP_USER_AGENT'])){
+								return $buffer."<!-- ipad user -->";
+							}
+						}
+
 						$wpfc_mobile = new WpFcMobileCache();
 						$cachFilePath = $this->getWpContentDir()."/cache/".$wpfc_mobile->get_folder_name()."".$_SERVER["REQUEST_URI"];
 					}else{
