@@ -446,6 +446,7 @@
 
 		public function mergeCss($wpfc, $prev){
 			if(count($prev["value"]) > 0){
+				$name = "";
 				foreach ($prev["value"] as $prevKey => $prevValue) {
 					if($prevKey == count($prev["value"]) - 1){
 						$name = md5($prev["name"]);
