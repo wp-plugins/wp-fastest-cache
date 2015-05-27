@@ -240,6 +240,9 @@
 					$content = $this->minify($content);
 					if($this->cdn){
 						$content = preg_replace_callback("/[\'\"][^\'\"]+".preg_quote($this->cdn->originurl, "/")."[^\'\"]+[\'\"]/i", array($this, 'cdn_replace_urls'), $content);
+
+						// url()
+						$content = preg_replace_callback("/url\([^\)]+\)/i", array($this, 'cdn_replace_urls'), $content);
 					}
 					$this->createFolder($cachFilePath, $content);
 					return $buffer."<!-- need to refresh to see cached version -->";
@@ -253,7 +256,6 @@
 				if($extension){
 					if(preg_match("/".$extension."/i", $this->cdn->file_types)){
 						$matches[0] = preg_replace("/(http(s?)\:)?\/\/(www\.)?".preg_quote($this->cdn->originurl, "/")."/i", "//".$this->cdn->cdnurl, $matches[0]);
-						//$matches[0] = str_replace($this->cdn->originurl, $this->cdn->cdnurl, $matches[0]);
 					}
 				}
 			}
@@ -261,7 +263,7 @@
 		}
 
 		public function get_extension($url){
-			$url = str_replace(array("'",'"'), "", $url);
+			$url = str_replace(array("'",'"',")"), "", $url);
 			$file_name = preg_replace("/\?.*/", "", basename($url));
 			return $file_name ? substr(strrchr($file_name,'.'),1) : "";
 		}
