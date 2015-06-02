@@ -116,6 +116,7 @@
 						}
 
 						if($jsFiles = @scandir($cachFilePath, 1)){
+							$jsScript = str_replace(array("http://", "https://"), "//", $jsScript);
 							$script = "<script src='".$jsScript."/".$jsFiles[0]."'".$attributes."></script>";
 							$data = substr_replace($data, "<!-- ".$inline_script." -->"."\n".$script, $value["start"], ($value["end"] - $value["start"] + 1));
 						}
