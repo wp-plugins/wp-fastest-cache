@@ -411,7 +411,7 @@
 					foreach ($js->getJsLinks() as $key => $value) {
 						if($href = $js->checkInternal($value)){
 							if(strpos($js->getJsLinksExcept(), $href) === false){
-								if(!preg_match("/<script[^>]+json[^>]+>.+/", $value)){
+								if(!preg_match("/<script[^>]+json[^>]+>.+/", $value) && !preg_match("/<script[^>]+text\/template[^>]+>.+/", $value)){
 									$minifiedJs = $js->minify($href, $minify);
 
 									if($minifiedJs){
