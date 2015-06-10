@@ -1,3 +1,9 @@
+<?php
+	$url = $_GET["url"];
+	$url = str_replace(array("\"","'"), "", $url);
+	$url = strip_tags($url);
+	echo $url;
+?>
 <div id="wpfc-modal-downloaderror" style="top: 10.5px; left: 226px; position: absolute; padding: 6px; height: auto; width: 560px; z-index: 10001;">
 	<div style="height: 100%; width: 100%; background: none repeat scroll 0% 0% rgb(0, 0, 0); position: absolute; top: 0px; left: 0px; z-index: -1; opacity: 0.5; border-radius: 8px;">
 	</div>
@@ -24,7 +30,7 @@
 						<h1>Manually Activation</h1>		
 						<p>/wp-content/plugins/ is not writable. You need to activate the premium plugin manually.</p>
 						<div class="wiz-input-cont" style="text-align:center;" id="wpfc-send-email">
-							<a href="<?php echo $_GET["url"]; ?>">
+							<a href="<?php echo $url; ?>">
 								<button class="wpfc-green-button" style="padding: 6px 60px;">
 									<span>Download</span>
 								</button>
