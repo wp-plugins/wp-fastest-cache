@@ -135,22 +135,26 @@ GNU General Public License for more details.
 									if(function_exists("unzip_file")){
 										$this->rm_folder_recursively(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium");
 										
-										WP_Filesystem();
-										$unzipfile = unzip_file($wpfc_zip_dest_path, WPFC_WP_PLUGIN_DIR."/");
+										if(!function_exists('gzopen')){
+											$res = array("success" => false, "error_message" => "Missing zlib extension", "error_code" => 5, "file_url" => $wpfc_premium_download_link); 
+										}else{
+											WP_Filesystem();
+											$unzipfile = unzip_file($wpfc_zip_dest_path, WPFC_WP_PLUGIN_DIR."/");
 
+											if ($unzipfile) {
+												$result = activate_plugin( 'wp-fastest-cache-premium/wpFastestCachePremium.php' );
 
-										if ($unzipfile) {
-											$result = activate_plugin( 'wp-fastest-cache-premium/wpFastestCachePremium.php' );
-
-											if ( is_wp_error( $result ) ) {
-												$res = array("success" => false, "error_message" => "Error occured while the plugin was activated", "error_code" => 1, "file_url" => $wpfc_premium_download_link); 
-											}else{
-												$res = array("success" => true);
-												$this->deleteCache(true);
+												if ( is_wp_error( $result ) ) {
+													$res = array("success" => false, "error_message" => "Error occured while the plugin was activated", "error_code" => 1, "file_url" => $wpfc_premium_download_link); 
+												}else{
+													$res = array("success" => true);
+													$this->deleteCache(true);
+												}
+											} else {
+												$res = array("success" => false, "error_message" => 'Error occured while the file was unzipped', "error_code" => 2, "file_url" => $wpfc_premium_download_link);      
 											}
-										} else {
-											$res = array("success" => false, "error_message" => 'Error occured while the file was unzipped', "error_code" => 2, "file_url" => $wpfc_premium_download_link);      
 										}
+										
 									}else{
 										$res = array("success" => false, "error_message" => "unzip_file() is not found", "error_code" => 3, "file_url" => $wpfc_premium_download_link);
 									}
