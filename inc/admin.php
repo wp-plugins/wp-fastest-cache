@@ -592,7 +592,13 @@
 			preg_match("/https?:\/\/[^\/]+(.*)/", $url, $out);
 
 			if(isset($out[1]) && $out[1]){
-				return trim($out[1], "/")."/";
+				$out[1] = trim($out[1], "/");
+
+				if(preg_match("/\/".$out[1]."\//", WPFC_WP_CONTENT_DIR)){
+					return $out[1]."/";
+				}else{
+					return "";
+				}
 			}else{
 				return "";
 			}
