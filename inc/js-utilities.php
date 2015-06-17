@@ -1,26 +1,78 @@
 <?php
 	class JsUtilities{
+		private $wpfc;
 		private $html = "";
 		private $jsLinks = array();
 		private $jsLinksExcept = "";
 		private $url = "";
+		private $minify;
 
-		public function __construct($wpfc, $html){
+		public function __construct($wpfc, $html, $minify = false){
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
+			$this->minify = $minify;
+			$this->wpfc = $wpfc;
 			$this->html = $html;
 
 			$this->setJsLinksExcept();
-
-			$this->inlineToScript($wpfc);
 			$this->setJsLinks();
-			$this->setJsLinksExcept();
 		}
 
-		public function inlineToScript($wpfc){
-			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
+		public function combine_js(){
+			if(count($this->jsLinks) > 0){
+				$prev_content = "";
+				foreach($this->jsLinks as $key => $value){
+					$script_tag = substr($this->html, $value["start"], ($value["end"] - $value["start"] + 1));
+
+					if(!preg_match("/<script[^>]+json[^>]+>.+/", $script_tag) && !preg_match("/<script[^>]+text\/template[^>]+>.+/", $script_tag)){
+						if($href = $this->checkInternal($script_tag)){
+							if(strpos($this->jsLinksExcept, $href) === false){
+								$minifiedJs = $this->minify($href);
+
+								if($minifiedJs){
+									if(!is_dir($minifiedJs["cachFilePath"])){
+										$prefix = time();
+										$this->wpfc->createFolder($minifiedJs["cachFilePath"], $minifiedJs["jsContent"], "js", $prefix);
+									}
+
+									if($jsFiles = @scandir($minifiedJs["cachFilePath"], 1)){
+										if($jsContent = $this->file_get_contents_curl($minifiedJs["url"]."/".$jsFiles[0]."?v=".time())){
+											$prev_content = $jsContent."\n".$prev_content;
+
+											$script_tag = "<!-- ".$script_tag." -->";
+
+											if(($key + 1) == count($this->jsLinks)){
+												$this->mergeJs($prev_content, $value, true);
+												$prev_content = "";
+											}else{
+												$this->html = substr_replace($this->html, $script_tag, $value["start"], ($value["end"] - $value["start"] + 1));
+											}
+										}
+									}
+								}else{
+									$this->mergeJs($prev_content, $value);
+									$prev_content = "";
+								}
+							}else{
+								$this->mergeJs($prev_content, $value);
+								$prev_content = "";
+							}
+						}else{
+							$this->mergeJs($prev_content, $value);
+							$prev_content = "";
+						}
+					}else{
+						$this->mergeJs($prev_content, $value);
+						$prev_content = "";
+					}
+				}
+			}
+
+			return $this->html;
+		}
 
 
-			$data = $head[1];
+		public function setJsLinks(){
+			$data = $this->html;
 			$script_list = array();
 			$script_start_index = false;
 
@@ -40,105 +92,13 @@
 					}
 				}
 			}
-
-			if(!empty($script_list)){
-				foreach (array_reverse($script_list) as $key => $value) {
-					$inline_script = substr($data, $value["start"], ($value["end"] - $value["start"] + 1));
-
-
-					if(preg_match("/^<script[^\>\<]*src\=[^\>\<]*>/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/yandex\.ru/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/switchTo5x/i", $inline_script)){ // WP Socializer
-						continue;
-					}
-
-					if(preg_match("/window\.dynamicgoogletags/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/GoogleAnalyticsObject/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/document\.write/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/google\-analytics\.com/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/addIgnoredOrganic/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/WebFontConfig/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/action\=wordfence_logHuman\&hid=/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/connect\.facebook\.net/i", $inline_script)){
-						continue;
-					}
-
-					if(preg_match("/document\.createElement\([^\(\)]+script[^\(\)]+\)/i", $inline_script)){
-						continue;
-					}
-
-					if(strpos($this->getJsLinksExcept(), $inline_script) === false){
-						$inline_script = preg_replace("/<!--((?:(?!-->).)+)-->/si", '', $inline_script);
-						$inline_script = preg_replace("/^\s+/m", "", ((string) $inline_script));
-						
-						$attributes = "";
-						$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($inline_script);
-						$jsScript = content_url()."/cache/wpfc-minified/".md5($inline_script);
-
-						if(preg_match("/<script([^\>]*)>/i", $inline_script, $out)){
-							$attributes = $out[1];
-						}
-						
-						$inline_script = trim($inline_script);
-						$inline_script = preg_replace("/<script([^\>]*)>/i", "", $inline_script);
-						$inline_script = preg_replace("/<\/script>/i", "", $inline_script);
-
-						if(!is_dir($cachFilePath)){
-							$prefix = time();
-							$wpfc->createFolder($cachFilePath, $inline_script, "js", $prefix);
-						}
-
-						if($jsFiles = @scandir($cachFilePath, 1)){
-							$jsScript = str_replace(array("http://", "https://"), "//", $jsScript);
-							$script = "<script src='".$jsScript."/".$jsFiles[0]."'".$attributes."></script>";
-							$data = substr_replace($data, "<!-- ".$inline_script." -->"."\n".$script, $value["start"], ($value["end"] - $value["start"] + 1));
-						}
-					}
-				}
+			if(count($script_list) > 0){
+				$this->jsLinks = array_reverse($script_list);
 			}
-
-			$this->html = str_replace($head[1], $data, $this->html);
-		}
-
-		public function setJsLinks(){
-			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
-
-			preg_match_all("/<script[^<>]+src=[\"\']([^\"\']+)[\"\'][^<>]*><\/script>/", $head[1], $this->jsLinks);
-
-			$this->jsLinks = $this->jsLinks[0];
 		}
 
 		public function setJsLinksExcept(){
-			preg_match("/<head(.*?)<\/head>/si", $this->html, $head);
-
-			$data = $head[1];
+			$data = $this->html;
 			$comment_list = array();
 			$comment_start_index = false;
 
@@ -166,23 +126,9 @@
 					}
 				}
 			}
-
-			// preg_match_all("/<\!--\s*\[\s*if[^>]+>(.*?)<\!\s*\[\s*endif\s*\]\s*-->/si", $head[1], $jsLinksInIf);
-
-			// preg_match_all("/<\!--(?!\[if)(.*?)(?!<\!\s*\[\s*endif\s*\]\s*)-->/si", $head[1], $jsLinksCommentOut);
-
-			// $this->jsLinksExcept = implode(" ", array_merge($jsLinksInIf[0], $jsLinksCommentOut[0]));
 		}
 
-		public function getJsLinksExcept(){
-			return $this->jsLinksExcept;
-		}
-
-		public function getJsLinks(){
-			return array_unique($this->jsLinks);
-		}
-
-		public function minify($url, $minify = true){
+		public function minify($url){
 			$this->url = $url;
 
 			$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".md5($url);
@@ -192,8 +138,12 @@
 				return array("cachFilePath" => $cachFilePath, "jsContent" => "", "url" => $jsLink);
 			}else{
 				if($js = $this->file_get_contents_curl($url)){
-					if($minify){
-						$js = preg_replace("/^\s+/m", "", ((string) $js));
+
+					if($this->minify){
+						if(class_exists("WpFastestCachePowerfulHtml")){
+							$powerful_html = new WpFastestCachePowerfulHtml();
+							$js = $powerful_html->minify_js($js);
+						}
 					}
 
 					$js = "\n// source --> ".$url." \n".$js;
@@ -219,47 +169,29 @@
 			return false;
 		}
 
-		public function replaceLink($search, $replace, $content){
-			$href = "";
 
-			if(stripos($search, "<script") === false){
-				$href = $search;
-			}else{
-				preg_match("/.+src=[\"\'](.+)[\"\'].+/", $search, $out);
+		public function mergeJs($js_content, $value, $last = false){
+			$name = md5($js_content);
+			$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".$name;
+
+			if(!is_dir($cachFilePath)){
+				$this->wpfc->createFolder($cachFilePath, $js_content, "js", time());
 			}
 
-			if(count($out) > 0){
-				$content = preg_replace("/<script[^>]+".preg_quote($out[1], "/")."[^>]+><\/script>/", $replace, $content);
-			}
+			if($jsFiles = @scandir($cachFilePath, 1)){
+				$prefixLink = str_replace(array("http:", "https:"), "", content_url());
+				$newLink = "<script src='".$prefixLink."/cache/wpfc-minified/".$name."/".$jsFiles[0]."' type=\"text/javascript\"></script>";
 
-			return $content;
-		}
-
-
-		public function mergeJs($prev, $wpfc){
-			if(count($prev["value"]) > 0){
-				$name = "";
-				foreach ($prev["value"] as $prevKey => $prevValue) {
-					if($prevKey == count($prev["value"]) - 1){
-						$name = md5($name);
-						$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".$name;
-
-						if(!is_dir($cachFilePath)){
-							$wpfc->createFolder($cachFilePath, $prev["content"], "js", time());
-						}
-
-						if($jsFiles = @scandir($cachFilePath, 1)){
-							$prefixLink = str_replace(array("http:", "https:"), "", content_url());
-							$newLink = "<script src='".$prefixLink."/cache/wpfc-minified/".$name."/".$jsFiles[0]."' type=\"text/javascript\"></script>";
-							$this->html = $this->replaceLink($prevValue, "<!-- ".$prevValue." -->"."\n".$newLink, $this->html);
-						}
-					}else{
-						$name .= $prevValue;
-						$this->html = $this->replaceLink($prevValue, "<!-- ".$prevValue." -->", $this->html);
-					}
+				$script_tag = substr($this->html, $value["start"], ($value["end"] - $value["start"] + 1));
+				
+				if($last){
+					$script_tag = $newLink."\n<!-- ".$script_tag." -->\n";
+				}else{
+					$script_tag = $script_tag."\n".$newLink;
 				}
+
+				$this->html = substr_replace($this->html, $script_tag, $value["start"], ($value["end"] - $value["start"] + 1));
 			}
-			return $this->html;
 		}
 
 		public function file_get_contents_curl($url) {
@@ -273,21 +205,6 @@
 			}
 
 			$url = preg_replace("/^\/\//", "http://", $url);
-			
-			// $ch = curl_init();
-		 
-			// curl_setopt($ch, CURLOPT_HEADER, 0);
-			// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
-			// curl_setopt($ch, CURLOPT_URL, $url);
-		 
-			// $data = curl_exec($ch);
-			// curl_close($ch);
-		 
-			// if(preg_match("/<\/\s*html\s*>\s*$/i", $data)){
-			// 	return false;
-			// }else{
-			// 	return $data;	
-			// }
 
 			$response = wp_remote_get($url, array('timeout' => 10 ) );
 
