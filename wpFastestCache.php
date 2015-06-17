@@ -319,28 +319,32 @@ GNU General Public License for more details.
 		public function singleDeleteCache($comment_id = false, $post_id = false){
 			if($comment_id){
 				$comment = get_comment($comment_id);
+				
+				if($comment && $comment->comment_post_ID){
+					$post_id = $comment->comment_post_ID;
+				}
 			}
 
-			$post_id = $post_id ? $post_id : $comment->comment_post_ID;
+			if($post_id){
+				$permalink = get_permalink($post_id);
 
-			$permalink = get_permalink($post_id);
+				if(preg_match("/http:\/\/[^\/]+\/(.+)/", $permalink, $out)){
+					$path = $this->getWpContentDir()."/cache/all/".$out[1];
+					$mobile_path = $this->getWpContentDir()."/cache/wpfc-mobile-cache/".$out[1];
 
-			if(preg_match("/http:\/\/[^\/]+\/(.+)/", $permalink, $out)){
-				$path = $this->getWpContentDir()."/cache/all/".$out[1];
-				$mobile_path = $this->getWpContentDir()."/cache/wpfc-mobile-cache/".$out[1];
+					if(is_dir($path)){
+						if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+							include_once $this->get_premium_path("logs.php");
+							$log = new WpFastestCacheLogs("delete");
+							$log->action();
+						}
 
-				if(is_dir($path)){
-					if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
-						include_once $this->get_premium_path("logs.php");
-						$log = new WpFastestCacheLogs("delete");
-						$log->action();
+						$this->rm_folder_recursively($path);
 					}
 
-					$this->rm_folder_recursively($path);
-				}
-
-				if(is_dir($mobile_path)){
-					$this->rm_folder_recursively($mobile_path);
+					if(is_dir($mobile_path)){
+						$this->rm_folder_recursively($mobile_path);
+					}
 				}
 			}
 		}
