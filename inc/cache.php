@@ -214,7 +214,14 @@
 				}
 
 				if(isset($this->options->wpFastestCacheCombineJs)){
-					$content = $this->combineJs($content, false);
+					preg_match("/<head(.*?)<\/head>/si", $content, $head);
+
+					require_once "js-utilities.php";
+					$js = new JsUtilities($this, $head[1], $this->options->wpFastestCacheMinifyJs);
+
+					$tmp_head = $js->combine_js();
+
+					$content = str_replace($head[1], $tmp_head, $content);
 				}
 
 				if(class_exists("WpFastestCachePowerfulHtml")){
@@ -396,63 +403,6 @@
 			if(count($out) > 0){
 				$content = preg_replace("/<link[^>]+".preg_quote($out[1], "/")."[^>]+>/", $replace, $content);
 			}
-
-			return $content;
-		}
-
-		public function combineJs($content, $minify = false){
-			$minify = true;
-			if(isset($this->options->wpFastestCacheCombineJs)){
-				require_once "js-utilities.php";
-				$js = new JsUtilities($this, $content);
-
-				if(count($js->getJsLinks()) > 0){
-					$prev = array("content" => "", "value" => array());
-					foreach ($js->getJsLinks() as $key => $value) {
-						if($href = $js->checkInternal($value)){
-							if(strpos($js->getJsLinksExcept(), $href) === false){
-								if(!preg_match("/<script[^>]+json[^>]+>.+/", $value) && !preg_match("/<script[^>]+text\/template[^>]+>.+/", $value)){
-									$minifiedJs = $js->minify($href, $minify);
-
-									if($minifiedJs){
-										if(!is_dir($minifiedJs["cachFilePath"])){
-
-											if(isset($this->options->wpFastestCacheCombineJsPowerFul)){
-												$powerful_html = new WpFastestCachePowerfulHtml();
-												$minifiedJs["jsContent"] = $powerful_html->minify_js($minifiedJs["jsContent"]);
-											}
-
-
-											$prefix = time();
-											$this->createFolder($minifiedJs["cachFilePath"], $minifiedJs["jsContent"], "js", $prefix);
-										}
-
-										if($jsFiles = @scandir($minifiedJs["cachFilePath"], 1)){
-											if($jsContent = $js->file_get_contents_curl($minifiedJs["url"]."/".$jsFiles[0]."?v=".time())){
-												$prev["content"] = $prev["content"]."\n".$jsContent;
-												array_push($prev["value"], $value);
-											}
-										}
-									}
-								}else{
-									$content = $js->mergeJs($prev, $this);
-									$prev = array("content" => "", "value" => array());
-								}
-							}else{
-								$content = $js->mergeJs($prev, $this);
-								$prev = array("content" => "", "value" => array());
-							}
-						}else{
-							$content = $js->mergeJs($prev, $this);
-							$prev = array("content" => "", "value" => array());
-						}
-					}
-					$content = $js->mergeJs($prev, $this);
-				}
-			}
-
-			$content = preg_replace("/(<!-- )+/","<!-- ", $content);
-			$content = preg_replace("/( -->)+/"," -->", $content);
 
 			return $content;
 		}
