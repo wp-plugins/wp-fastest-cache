@@ -110,6 +110,7 @@ window.wpfc.dictionary = {
 	"/wp-content/plugins/ is not writable" : "/wp-content/plugins/ yazılabilir değil",
 	"Please read the tutorial" : "Lütfen dökümanı okuyunuz",
 	"You need to activate the premium plugin manually" : "Premium sürümünü manuel olarak aktifleştirmelisiniz",
-	"Continue" : "Devam Et"
-
+	"Continue" : "Devam Et",
+	"Minify Js" : "JS Küçült",
+	"You can decrease the size of js files" : "JS dosyalarının boyununu küçültebilirsiniz"
 };

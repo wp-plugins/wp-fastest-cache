@@ -80,8 +80,8 @@ window.wpfc.dictionary = {
    "All" : "Todas",
    "Backup Image" : "Becape de Imagem",
    "Logged-in Users" : "Usuários Autenticados",
-   "Minify HTML Plus" : "'Minify HTML Plus'",
-   "Combine Js Plus" : "'Minify HTML Plus'",
+   "Minify HTML Plus" : "",
+   "Combine Js Plus" : "",
    "Cache Statics" : "Estatísticas do Cache",
    "In the premium version there are some new features which speed up the sites more." : "Na versão premium, traz novos recursos que vão acelerar ainda mais seu <i>website</i>.",
    "You need to pay before downloading the premium version." : "É necessário realizar o pagamento antes de baixar a versão premium.",
@@ -108,6 +108,10 @@ window.wpfc.dictionary = {
    "/wp-content/plugins/ is not writable" : "Pasta /wp-content/plugins/ bloqueada para edição",
    "Please read the tutorial" : "Por favor, consulte o tutorial",
    "You need to activate the premium plugin manually" : "É necessário ativar a versão premium manualmente",
-   "Continue" : "Continuar"
-
+   "Continue" : "Continuar",
+   "Minify HTML Plus" : "Minify HTML Plus",
+   "Combine Js Plus" : "Combine JS Plus",
+   "More powerful minify css" : "Minimizador de CSS mais poderoso!",
+   "Minify Js" : "Minify JS",
+   "You can decrease the size of js files" : "Permite reduzir o tamanho dos arquivos JavaScript."
 };
