@@ -546,7 +546,7 @@
 			//RewriteRule !/  "/wp-content/cache/all/index.html" [L]
 
 
-			if(class_exists("WpFcMobileCache") && $this->options->wpFastestCacheMobileTheme){
+			if(class_exists("WpFcMobileCache") && isset($this->options->wpFastestCacheMobileTheme) && $this->options->wpFastestCacheMobileTheme){
 				$wpfc_mobile = new WpFcMobileCache();
 				$wpfc_mobile->set_wptouch($this->isPluginActive('wptouch/wptouch.php'));
 				$data = $data."\n\n\n".$wpfc_mobile->update_htaccess($data);
