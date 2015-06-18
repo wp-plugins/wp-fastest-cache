@@ -217,7 +217,12 @@
 					preg_match("/<head(.*?)<\/head>/si", $content, $head);
 
 					require_once "js-utilities.php";
-					$js = new JsUtilities($this, $head[1], $this->options->wpFastestCacheMinifyJs);
+
+					if(isset($this->options->wpFastestCacheMinifyJs) && $this->options->wpFastestCacheMinifyJs){
+						$js = new JsUtilities($this, $head[1], true);
+					}else{
+						$js = new JsUtilities($this, $head[1]);
+					}
 
 					$tmp_head = $js->combine_js();
 
