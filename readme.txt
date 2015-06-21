@@ -82,6 +82,13 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.5.3 =
+* to check zlib extension for downloading premium automatically
+* to update Portuguese and Turkish languages
+* to be compatible with sub-directory installation with renamed wp-content
+* refactoring of js-utilities.php
+* to fix delete comment issue
+
 = 0.8.5.2 =
 * to replace https:// and http:// to // after converting inline css to link
 * to replace https:// and http:// to // after converting inline js to link
