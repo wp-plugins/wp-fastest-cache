@@ -1367,32 +1367,6 @@
 																			jQuery("#revert-loader-toolbar").hide();
 																		});
 																	}
-
-																	// var warning_box = jQuery("#wpfc-plugin-setup-warning");
-																	// var message = "";
-																	// wpfc.dictionary = typeof wpfc.dictionary != "undefined" ? wpfc.dictionary : [];
-																	
-																	// message += typeof wpfc.dictionary[data.error_message] != "undefined" ? wpfc.dictionary[data.error_message] : data.error_message;
-																	// message += ". ";
-																	// message += typeof wpfc.dictionary["You need to activate the premium plugin manually"] != "undefined" ? wpfc.dictionary["You need to activate the premium plugin manually"] : "You need to activate the premium plugin manually";
-																	// message += ". ";
-																	// message += typeof wpfc.dictionary["Please read the tutorial"] != "undefined" ? wpfc.dictionary["Please read the tutorial"] : "Please read the tutorial"; 
-																	// message += ". ";
-
-																	// warning_box.find(".fieldRow").text(message);
-																	// warning_box.find("#wpfc-read-tutorial").click(function(){
-																	// 	warning_box.hide();
-																	// 	var win = window.open("http://www.wpfastestcache.com/warnings/how-to-activate-premium-version-manually/", '_blank');
-																	// 	win.focus();
-																	// });
-
-																	// var windowHeight = 70;//(jQuery(window).height() - warning_box.height())/2;
-																	// var windowWidth = (jQuery(window).width() - warning_box.width())/2;
-
-																	// warning_box.css({"top": windowHeight, "left": windowWidth, "display" : "block", "position" : "fixed"});
-
-																	// jQuery("#revert-loader-toolbar").hide();
-
 																}
 																console.log(data, "data");
 															}
