@@ -1323,7 +1323,15 @@
 
 							function wpfc_premium_page(){
 								jQuery("#revert-loader-toolbar").show();
-				    			jQuery.ajax({
+
+								jQuery.get("<?php echo plugins_url('wp-fastest-cache/templates'); ?>/allow.php", function( data ) {
+									jQuery("body").append(data);
+									Wpfc_Dialog.dialog("wpfc-modal-allow");
+								});
+							}
+
+							function allowed_calls(){
+								jQuery.ajax({
 									type: 'GET', 
 									url: "https://api.wpfastestcache.net/prices/premium/",
 									cache: false,
