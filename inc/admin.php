@@ -1311,12 +1311,6 @@
 				    		</div>
 				    	</div>
 				    	<script type="text/javascript">
-					    	function GetUserInfo(data) {
-					    		window.wpfc_country = data.country;
-							}
-				    	</script>
-				    	<script type="text/javascript" src="//ipinfo.io/json?callback=GetUserInfo"></script>
-				    	<script type="text/javascript">
 				    		if(jQuery(".tab5").is(":visible")){
 				    			jQuery(document).ready(function(){
 					    			wpfc_premium_page();
