@@ -1734,10 +1734,6 @@
 			</div>
 
 			<?php if(!class_exists("WpFastestCacheImageOptimisation")){ ?>
-				<div id="wpfc-promotion" style="height:250px; bottom: -153px; position: fixed; z-index: 9999; right: 20px;cursor: pointer;">
-					<img src="<?php echo plugins_url("wp-fastest-cache/images/promotions/promotion-1.jpg"); ?>">
-				</div>
-
 				<div id="wpfc-premium-tooltip" style="display:none;width: 160px; height: 60px; position: absolute; margin-left: 354px; margin-top: 112px; color: white;">
 					<div style="float:left;width:13px;">
 						<div style="width: 0px; height: 0px; border-top: 6px solid transparent; border-right: 6px solid #333333; border-bottom: 6px solid transparent; float: right; margin-right: 0px; margin-top: 25px;"></div>
@@ -1748,22 +1744,6 @@
 				</div>
 
 				<script type="text/javascript">
-					var promotion_id = "wpfc-promotion";
-					var promotion_bottom = jQuery("#wpfc-promotion").css("bottom");
-
-					jQuery("#" + promotion_id).mouseenter(function(){
-						jQuery("#" + promotion_id).css({"bottom" : "5px", "z-index" : "9999"});
-					});
-
-					jQuery("#" + promotion_id).mouseleave(function(){
-						jQuery("#" + promotion_id).css({"bottom" : promotion_bottom, "z-index" : "9999"});
-					});
-
-					jQuery("#" + promotion_id).click(function(){
-						jQuery("#wpfc-premium").attr("checked", true);
-						jQuery("#wpfc-premium").trigger("change");
-					});
-
 					jQuery("div.questionCon.disabled").click(function(e){
 						if(typeof window.wpfc.tooltip != "undefined"){
 							clearTimeout(window.wpfc.tooltip);
