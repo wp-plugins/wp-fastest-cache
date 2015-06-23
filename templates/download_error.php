@@ -11,7 +11,7 @@
 			<table width="100%" height="100%">
 				<tbody>
 					<tr>
-						<td valign="middle" style="vertical-align: middle; font-weight: bold; color: rgb(255, 255, 255); text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5); padding-left: 10px; font-size: 13px; cursor: move;">Download Error</td>
+						<td valign="middle" style="vertical-align: middle; font-weight: bold; color: rgb(255, 255, 255); text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5); padding-left: 10px; font-size: 13px; cursor: move;">Download</td>
 						<td width="20" align="center" style="vertical-align: middle;"></td>
 						<td width="20" align="center" style="vertical-align: middle; font-family: Arial,Helvetica,sans-serif; color: rgb(170, 170, 170); cursor: default;">
 							<div title="Close Window" class="close-wiz"></div>
