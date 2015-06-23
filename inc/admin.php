@@ -1259,14 +1259,23 @@
 				    				<img width="140px" height="140px" src="<?php echo plugins_url("wp-fastest-cache/images/wallet.png"); ?>" />
 				    			</div>
 				    			<div class="wpfc-premium-step-footer">
-				    				<h1 style="float:left;" id="just-h1">Just</h1><h1>&nbsp;$<span id="wpfc-premium-price"></span></h1>
+				    				<h1 style="float:left;" id="just-h1">Just</h1><h1>&nbsp;$<span id="wpfc-premium-price">39.99</span></h1>
 				    				<p>The download button will be available after paid. You can buy the premium version now.</p>
-				    				<form action="http://api.wpfastestcache.net/paypal/buypremium/" method="post">
-				    					<input type="hidden" name="hostname" value="<?php echo str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"]); ?>">
-					    				<button id="wpfc-buy-premium-button" type="submit" class="wpfc-btn primaryCta" style="width:200px;">
-					    					<span>Buy</span>
-					    				</button>
-				    				</form>
+				    				
+				    				<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
+					    					<button id="wpfc-buy-premium-button" type="submit" class="wpfc-btn primaryDisableCta" style="width:200px;">
+						    					<span>Purchased</span>
+						    				</button>
+					    				<?php }else{ ?>
+						    				<form action="http://api.wpfastestcache.net/paypal/buypremium/" method="post">
+						    					<input type="hidden" name="hostname" value="<?php echo str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"]); ?>">
+							    				<button id="wpfc-buy-premium-button" type="submit" class="wpfc-btn primaryCta" style="width:200px;">
+							    					<span>Buy</span>
+							    				</button>
+						    				</form>
+					    				<?php } ?>
+
+
 				    			</div>
 				    		</div>
 				    		<div class="wpfc-premium-step">
@@ -1284,23 +1293,26 @@
 				    				<p>Please don't delete the free version. Premium version works with the free version.</p>
 
 
-
-				    				<button id="wpfc-download-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
-				    					<?php $wpfc_premium_version = ""; ?>
-				    					<?php if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/wpFastestCachePremium.php")){ ?>
-				    						<?php
-				    							if($data = @file_get_contents(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/wpFastestCachePremium.php")){
-				    								preg_match("/Version:\s*(.+)/", $data, $out);
-				    								if(isset($out[1]) && $out[1]){
-				    									$wpfc_premium_version = trim($out[1]);
-				    								}
-				    							}
-				    						?>
-				    						<span>Update</span>
-				    					<?php }else{ ?>
-				    						<span data-type="download">Download</span>
-				    					<?php } ?>
-				    				</button>
+				    				<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
+					    				<button id="wpfc-download-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
+					    					<span data-type="download">Download</span>
+					    				</button>
+				    				<?php }else{ ?>
+					    				<button class="wpfc-btn primaryCta" id="wpfc-download-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
+					    					<span data-type="download">Download</span>
+					    				</button>
+					    				<script type="text/javascript">
+					    					var wpfc_api_key = '<?php echo get_option("WpFc_api_key"); ?>';
+					    					jQuery("#wpfc-download-premium-button").click(function(){
+					    						jQuery("#revert-loader-toolbar").show();
+						    					jQuery.get("<?php echo plugins_url('wp-fastest-cache/templates'); ?>/download_error.php?apikey=" + wpfc_api_key, function( data ) {
+						    						jQuery("body").append(data);
+						    						Wpfc_Dialog.dialog("wpfc-modal-downloaderror");
+						    						jQuery("#revert-loader-toolbar").hide();
+						    					});
+					    					});
+					    				</script>
+				    				<?php } ?>
 				    				<!--
 				    				<button class="wpfc-btn primaryNegativeCta" style="width:200px;">
 				    					<span>Update</span>
@@ -1310,123 +1322,6 @@
 				    			</div>
 				    		</div>
 				    	</div>
-				    	<script type="text/javascript">
-				    		if(jQuery(".tab5").is(":visible")){
-				    			jQuery(document).ready(function(){
-					    			wpfc_premium_page();
-				    			});
-				    		}
-
-				    		jQuery("#wpfc-premium").change(function(e){
-				    			wpfc_premium_page();
-				    		});
-
-							function wpfc_premium_page(){
-								jQuery("#revert-loader-toolbar").show();
-
-								jQuery.get("<?php echo plugins_url('wp-fastest-cache/templates'); ?>/allow.php", function( data ) {
-									jQuery("body").append(data);
-									Wpfc_Dialog.dialog("wpfc-modal-allow");
-								});
-							}
-
-							function allowed_calls(){
-								jQuery.ajax({
-									type: 'GET', 
-									url: "https://api.wpfastestcache.net/prices/premium/",
-									cache: false,
-									error: function(x, t, m) {
-										alert(t);
-									},
-									success: function(price){
-										jQuery("#wpfc-premium-price").text(price);
-						    			jQuery.ajax({
-											type: 'GET', 
-											url: "https://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/type/<?php echo get_option("WpFc_api_key"); ?>",
-											cache: false,
-											error: function(x, t, m) {
-												alert(t);
-											},
-											success: function(credit){
-												if(credit == "premium"){
-													jQuery("#wpfc-download-premium-button").click(function(){
-														jQuery("#revert-loader-toolbar").show();
-														jQuery.ajax({
-															type: 'GET',
-															url: "<?php echo admin_url(); ?>admin-ajax.php",
-															data : {"action": "wpfc_download_premium"},
-															dataType : "json",
-															cache: false, 
-															success: function(data){
-																if(data.success){
-																	 location.reload();
-																}else{
-																	console.log(data, "data");
-																	if(jQuery("#wpfc-download-premium-button span").text().match(/update/i)){
-																		jQuery.get("<?php echo plugins_url('wp-fastest-cache/templates'); ?>/update_error.php?url=" + data.file_url, function( data ) {
-																			jQuery("body").append(data);
-																			Wpfc_Dialog.dialog("wpfc-modal-downloaderror");
-																			jQuery("#revert-loader-toolbar").hide();
-																		});
-																	}else{
-																		jQuery.get("<?php echo plugins_url('wp-fastest-cache/templates'); ?>/download_error.php?url=" + data.file_url, function( data ) {
-																			jQuery("body").append(data);
-																			Wpfc_Dialog.dialog("wpfc-modal-downloaderror");
-																			jQuery("#revert-loader-toolbar").hide();
-																		});
-																	}
-																}
-																console.log(data, "data");
-															}
-														});
-													});
-
-													var version_in_site = "<?php echo $wpfc_premium_version; ?>";
-													var download_button_span = jQuery("#wpfc-download-premium-button span");
-
-													jQuery("#wpfc-buy-premium-button").attr("class", "wpfc-btn primaryDisableCta");
-													jQuery("#wpfc-buy-premium-button").attr("disabled", true);
-													jQuery("#wpfc-buy-premium-button").text(window.wpfc.translate("Purchased"));
-
-													if(typeof download_button_span.attr("data-type") != "undefined" && download_button_span.attr("data-type") == "download"){
-														jQuery("#wpfc-download-premium-button").attr("class", "wpfc-btn primaryCta");
-														jQuery("#revert-loader-toolbar").hide();
-													}else{
-										    			jQuery.ajax({
-															type: 'GET', 
-															url: "https://api.wpfastestcache.net/premium/version/",
-															cache: false,
-															error: function(x, t, m) {
-																alert(t);
-															},
-															success: function(version){
-																jQuery("#revert-loader-toolbar").hide();
-																if(version_in_site == version){
-																	download_button_span.text(window.wpfc.translate("No Update"));
-																	jQuery("#wpfc-download-premium-button").attr("disabled", true);
-																}else{
-																	download_button_span.text("Update - " + version);
-																	jQuery("#wpfc-download-premium-button").attr("class", "wpfc-btn primaryCta");
-																}
-																console.log(version, "version", version_in_site, download_button_span);
-															}
-														});
-													}
-												}else{
-													jQuery("#revert-loader-toolbar").hide();
-												}
-											}
-										});
-										jQuery.ajax({
-											type: 'GET', 
-											url: "https://api.wpfastestcache.net/user/<?php echo str_replace("www.", "", $_SERVER["HTTP_HOST"]); ?>/update_country/<?php echo get_option("WpFc_api_key"); ?>" + "/" + window.wpfc_country,
-											cache: false,
-											success: function(){}
-										});
-									}
-								});
-							}
-				    	</script>
 				    </div>
 				    <div class="tab6" style="padding-left:20px;">
 				    	<h2 style="padding-bottom:10px;">Exclude Pages</h2>
