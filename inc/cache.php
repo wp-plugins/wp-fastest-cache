@@ -12,6 +12,9 @@
 			$this->checkActivePlugins();
 
 			$this->set_cdn();
+
+			//to fix: PHP Notice: Undefined index: HTTP_USER_AGENT
+			$_SERVER['HTTP_USER_AGENT'] = "Empty User Agent";
 		}
 
 		public function set_cdn(){
