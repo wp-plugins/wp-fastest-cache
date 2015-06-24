@@ -1305,7 +1305,7 @@
 					    					var wpfc_api_key = '<?php echo get_option("WpFc_api_key"); ?>';
 					    					jQuery("#wpfc-download-premium-button").click(function(){
 					    						jQuery("#revert-loader-toolbar").show();
-						    					jQuery.get("<?php echo plugins_url('wp-fastest-cache/templates'); ?>/download_error.php?apikey=" + wpfc_api_key, function( data ) {
+						    					jQuery.get("<?php echo plugins_url('wp-fastest-cache/templates'); ?>/download.php?apikey=" + wpfc_api_key, function( data ) {
 						    						jQuery("body").append(data);
 						    						Wpfc_Dialog.dialog("wpfc-modal-downloaderror");
 						    						jQuery("#revert-loader-toolbar").hide();
