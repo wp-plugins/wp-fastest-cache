@@ -82,6 +82,9 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.5.4 =
+* to be compatible with Guideline
+
 = 0.8.5.3 =
 * to check zlib extension for downloading premium automatically
 * to update Portuguese and Turkish languages
