@@ -23,6 +23,19 @@
 				add_action( 'wp_loaded', array($this, "load_admin_toolbar") );
 			}
 		}
+
+		public function get_premium_version(){
+			$wpfc_premium_version = "";
+			if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/wpFastestCachePremium.php")){
+				if($data = @file_get_contents(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/wpFastestCachePremium.php")){
+					preg_match("/Version:\s*(.+)/", $data, $out);
+					if(isset($out[1]) && $out[1]){
+						$wpfc_premium_version = trim($out[1]);
+					}
+				}
+			}
+			return $wpfc_premium_version;
+		}
 		public function load_admin_toolbar(){
 			if (current_user_can( 'manage_options' ) || current_user_can('edit_others_pages')) {
 				include_once plugin_dir_path(__FILE__)."admin-toolbar.php";
@@ -226,6 +239,10 @@
 			
 			if(class_exists("WpFastestCacheImageOptimisation")){
 				wp_enqueue_script("wpfc-statics", plugins_url("wp-fastest-cache/js/statics.js"), array(), time(), false);
+
+				if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/js/premium.js")){
+					wp_enqueue_script("wpfc-premium", plugins_url("wp-fastest-cache-premium/pro/js/premium.js"), array(), time(), true);
+				}
 			}
 			
 			if(isset($this->options->wpFastestCacheLanguage) && $this->options->wpFastestCacheLanguage != "eng"){
@@ -1294,9 +1311,45 @@
 
 
 				    				<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
-					    				<button id="wpfc-download-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
-					    					<span data-type="download">Download</span>
+					    				<button id="wpfc-update-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
+					    					<span data-type="update">Update</span>
 					    				</button>
+					    				<script type="text/javascript">
+					    					jQuery(document).ready(function(){
+
+				    							if(jQuery(".tab5").is(":visible")){
+										    		wpfc_premium_page();
+									    		}
+
+									    		jQuery("#wpfc-premium").change(function(e){
+									    			wpfc_premium_page();
+									    		});
+
+									    		function wpfc_premium_page(){
+										    		jQuery(document).ready(function(){
+							    						if(typeof Wpfc_Premium == "undefined"){
+							    							jQuery("#wpfc-update-premium-button").attr("class", "wpfc-btn primaryCta");
+
+							    							jQuery("#wpfc-update-premium-button").click(function(){
+							    								jQuery("#revert-loader-toolbar").show();
+							    								
+																jQuery.get('<?php echo plugins_url('wp-fastest-cache/templates'); ?>' + "/update_error.php?error_message=" + "You use old version of premium. " + "&apikey=" + '<?php echo get_option("WpFc_api_key"); ?>', function( data ) {
+																	jQuery("body").append(data);
+																	Wpfc_Dialog.dialog("wpfc-modal-updateerror");
+																	jQuery("#revert-loader-toolbar").hide();
+																});
+							    							});
+							    						}else{
+							    							Wpfc_Premium.check_update("<?php echo $this->get_premium_version(); ?>", '<?php echo get_option("WpFc_api_key"); ?>', '<?php echo plugins_url('wp-fastest-cache/templates'); ?>');
+							    						}
+										    		});
+									    		}
+
+					    					});
+					    				</script>
+					    				<script type="text/javascript">
+
+					    				</script>
 				    				<?php }else{ ?>
 					    				<button class="wpfc-btn primaryCta" id="wpfc-download-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
 					    					<span data-type="download">Download</span>

@@ -97,8 +97,70 @@ GNU General Public License for more details.
 						exit;
 					}
 				}
-			}else if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_download_premium"){
-				//removed
+			}else if(isset($_GET) && isset($_GET["action"]) && $_GET["action"] == "wpfc_update_premium"){
+				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
+					if(!file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/library/update.php")){
+						$res = array("success" => false, "error_message" => "update.php is not exist");
+					}else{
+						include_once $this->get_premium_path("update.php");
+						
+						if(!class_exists("WpFastestCacheUpdate")){
+							$res = array("success" => false, "error_message" => "WpFastestCacheUpdate is not exist");
+						}else{
+							$wpfc_premium = new WpFastestCacheUpdate();
+							$content = $wpfc_premium->download_premium();
+
+							if($content["success"]){
+								$wpfc_zip_data = $content["content"];
+
+								$wpfc_zip_dest_path = WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium.zip";
+
+								if(@file_put_contents($wpfc_zip_dest_path, $wpfc_zip_data)){
+
+									include_once ABSPATH."wp-admin/includes/file.php";
+									include_once ABSPATH."wp-admin/includes/plugin.php";
+
+									if(function_exists("unzip_file")){
+										$this->rm_folder_recursively(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium");
+										
+										if(!function_exists('gzopen')){
+											$res = array("success" => false, "error_message" => "Missing zlib extension"); 
+										}else{
+											WP_Filesystem();
+											$unzipfile = unzip_file($wpfc_zip_dest_path, WPFC_WP_PLUGIN_DIR."/");
+
+											if ($unzipfile) {
+												$result = activate_plugin( 'wp-fastest-cache-premium/wpFastestCachePremium.php' );
+
+												if ( is_wp_error( $result ) ) {
+													$res = array("success" => false, "error_message" => "Error occured while the plugin was activated"); 
+												}else{
+													$res = array("success" => true);
+													$this->deleteCache(true);
+												}
+											} else {
+												$res = array("success" => false, "error_message" => 'Error occured while the file was unzipped');      
+											}
+										}
+										
+									}else{
+										$res = array("success" => false, "error_message" => "unzip_file() is not found");
+									}
+								}else{
+									$res = array("success" => false, "error_message" => "/wp-content/plugins/ is not writable");
+								}
+							}else{
+								$res = array("success" => false, "error_message" => $content["error_message"]);
+							}
+						}
+					}
+				}else{
+					$res = array("success" => false, "error_message" => "Premium is not active");
+
+				}
+
+				echo json_encode($res);
+				exit;
 			}else if(isset($_GET) && isset($_GET["action"]) && in_array($_GET["action"], $optimize_image_ajax_requests)){
 				if($this->isPluginActive("wp-fastest-cache-premium/wpFastestCachePremium.php")){
 					include_once $this->get_premium_path("image.php");

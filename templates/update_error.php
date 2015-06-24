@@ -1,4 +1,13 @@
-<div id="wpfc-modal-downloaderror" style="top: 10.5px; left: 226px; position: absolute; padding: 6px; height: auto; width: 560px; z-index: 10001;">
+<?php
+	$apikey = $_GET["apikey"];
+	$apikey = str_replace(array("\"","'"), "", $apikey);
+	$apikey = strip_tags($apikey);
+
+	$error_message = $_GET["error_message"];
+	$error_message = str_replace(array("\"","'"), "", $error_message);
+	$error_message = strip_tags($error_message);
+?>
+<div id="wpfc-modal-updateerror" style="top: 10.5px; left: 226px; position: absolute; padding: 6px; height: auto; width: 560px; z-index: 10001;">
 	<div style="height: 100%; width: 100%; background: none repeat scroll 0% 0% rgb(0, 0, 0); position: absolute; top: 0px; left: 0px; z-index: -1; opacity: 0.5; border-radius: 8px;">
 	</div>
 	<div style="z-index: 600; border-radius: 3px;">
@@ -22,9 +31,9 @@
 				<div id="wpfc-wizard-downloaderror" class="wpfc-cdn-pages-container">
 					<div wpfc-cdn-page="1" class="wiz-cont">
 						<h1>Manually Update</h1>		
-						<p>/wp-content/plugins/ is not writable. You need to download the file and update the plugin manually.</p>
+						<p><label><?php echo $error_message; ?></label> You need to download the file and update the plugin manually.</p>
 						<div class="wiz-input-cont" style="text-align:center;" id="wpfc-send-email">
-							<a href="<?php echo $_GET["url"]; ?>">
+							<a target="_blank" href="<?php echo "http://api.wpfastestcache.net/premium/newdownload/".str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"])."/".$apikey; ?>">
 								<button class="wpfc-green-button" style="padding: 6px 60px;">
 									<span>Download</span>
 								</button>
