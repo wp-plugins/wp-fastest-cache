@@ -426,12 +426,12 @@
 						}else{
 							$prev["content"] = $this->fixRules($prev["content"]);
 							$this->mergeCss($wpfc, $prev);
-							$prev = array("content" => "", "value" => array());
+							$prev = array("content" => "", "value" => array(), "name" => "");
 						}
 					}else{
 						$prev["content"] = $this->fixRules($prev["content"]);
 						$this->mergeCss($wpfc, $prev);
-						$prev = array("content" => "", "value" => array());
+						$prev = array("content" => "", "value" => array(), "name" => "");
 					}
 				}
 				$prev["content"] = $this->fixRules($prev["content"]);
