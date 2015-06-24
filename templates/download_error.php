@@ -27,7 +27,7 @@
 				<div id="wpfc-wizard-downloaderror" class="wpfc-cdn-pages-container">
 					<div wpfc-cdn-page="1" class="wiz-cont">
 						<h1>Manually Activation</h1>		
-						<p>You can download the premium version via following button. You need to activate the premium plugin manually. Please don't forget read the following article.</p>
+						<p>If you have already paid, you can download the premium version via following button. You need to activate the premium plugin manually. Please don't forget read the following article.</p>
 						<div class="wiz-input-cont" style="text-align:center;" id="wpfc-send-email">
 							<a target="_blank" href="<?php echo "http://api.wpfastestcache.net/premium/newdownload/".str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"])."/".$apikey; ?>">
 								<button class="wpfc-green-button" style="padding: 6px 60px;">
