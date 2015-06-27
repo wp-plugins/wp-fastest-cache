@@ -49,19 +49,19 @@
 										}
 									}
 								}else{
-									$this->mergeJs($prev_content, $value);
+									$this->mergeJs($prev_content, $this->jsLinks[$key - 1]);
 									$prev_content = "";
 								}
 							}else{
-								$this->mergeJs($prev_content, $value);
+								$this->mergeJs($prev_content, $this->jsLinks[$key - 1]);
 								$prev_content = "";
 							}
 						}else{
-							$this->mergeJs($prev_content, $value);
+							$this->mergeJs($prev_content, $this->jsLinks[$key - 1]);
 							$prev_content = "";
 						}
 					}else{
-						$this->mergeJs($prev_content, $value);
+						$this->mergeJs($prev_content, $this->jsLinks[$key - 1]);
 						$prev_content = "";
 					}
 				}
@@ -187,7 +187,7 @@
 				if($last){
 					$script_tag = $newLink."\n<!-- ".$script_tag." -->\n";
 				}else{
-					$script_tag = $script_tag."\n".$newLink;
+					$script_tag = $newLink."\n".$script_tag;
 				}
 
 				$this->html = substr_replace($this->html, $script_tag, $value["start"], ($value["end"] - $value["start"] + 1));
