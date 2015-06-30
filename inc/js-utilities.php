@@ -143,10 +143,12 @@
 						if(class_exists("WpFastestCachePowerfulHtml")){
 							$powerful_html = new WpFastestCachePowerfulHtml();
 							$js = $powerful_html->minify_js($js);
+						}else{
+							$js = "\n// source --> ".$url." \n".$js;
 						}
+					}else{
+						$js = "\n// source --> ".$url." \n".$js;
 					}
-
-					$js = "\n// source --> ".$url." \n".$js;
 
 					return array("cachFilePath" => $cachFilePath, "jsContent" => $js, "url" => $jsLink);
 				}
