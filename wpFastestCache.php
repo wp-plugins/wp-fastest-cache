@@ -370,7 +370,7 @@ GNU General Public License for more details.
 
 			if(is_dir($minified_cache_path)){
 				if($minified){
-					rename($minified_cache_path, $this->getWpContentDir()."/cache/tmpWpfc/".time());
+					rename($minified_cache_path, $this->getWpContentDir()."/cache/tmpWpfc/m".time());
 					$deleted = true;
 				}
 			}
