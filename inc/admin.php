@@ -427,6 +427,7 @@
 					'ExpiresByType image/jpg A2592000'."\n".
 					'ExpiresByType image/jpeg A2592000'."\n".
 					'ExpiresByType image/ico A2592000'."\n".
+					'ExpiresByType image/svg+xml A2592000'."\n".
 					'ExpiresByType text/css A2592000'."\n".
 					'ExpiresByType text/javascript A2592000'."\n".
 					'ExpiresByType application/javascript A2592000'."\n".
