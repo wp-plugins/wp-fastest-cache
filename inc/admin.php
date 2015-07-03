@@ -848,6 +848,11 @@
 							<?php } ?>
 
 
+							<div class="questionCon">
+								<div class="question">Combine Css</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineCss; ?> id="wpFastestCacheCombineCss" name="wpFastestCacheCombineCss"><label for="wpFastestCacheCombineCss">Reduce HTTP requests through combined css files</label></div>
+								<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/optimization/combine-js-css-files/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+							</div>
 
 							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
 								<?php if(method_exists("WpFastestCachePowerfulHtml", "minify_js_in_body")){ ?>
@@ -868,15 +873,6 @@
 							</div>
 							<?php } ?>
 
-
-
-
-
-							<div class="questionCon">
-								<div class="question">Combine Css</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineCss; ?> id="wpFastestCacheCombineCss" name="wpFastestCacheCombineCss"><label for="wpFastestCacheCombineCss">Reduce HTTP requests through combined css files</label></div>
-								<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/optimization/combine-js-css-files/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
-							</div>
 							<div class="questionCon">
 								<div class="question">Combine Js</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJs; ?> id="wpFastestCacheCombineJs" name="wpFastestCacheCombineJs"><label for="wpFastestCacheCombineJs">Reduce HTTP requests through combined js files</label> <b style="color:red;">(header)</b></div>
