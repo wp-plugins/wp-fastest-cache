@@ -53,8 +53,13 @@
 		public function createCache(){
 			if(isset($this->options->wpFastestCacheStatus)){
 				$this->startTime = microtime(true);
+				add_action( 'get_footer', array($this, "wp_print_scripts_action"));
 				ob_start(array($this, "callback"));
 			}
+		}
+
+		public function wp_print_scripts_action(){
+			echo "<!--WPFC_FOOTER_START-->";
 		}
 
 		public function ignored(){
@@ -216,10 +221,12 @@
 					$this->err = $css->getError();
 				}
 
+				if(isset($this->options->wpFastestCacheCombineJs) || isset($this->options->wpFastestCacheMinifyJs) || isset($this->options->wpFastestCacheCombineJsPowerFul)){
+					require_once "js-utilities.php";
+				}
+
 				if(isset($this->options->wpFastestCacheCombineJs)){
 					preg_match("/<head(.*?)<\/head>/si", $content, $head);
-
-					require_once "js-utilities.php";
 
 					if(isset($this->options->wpFastestCacheMinifyJs) && $this->options->wpFastestCacheMinifyJs){
 						$js = new JsUtilities($this, $head[1], true);
@@ -247,6 +254,14 @@
 					if(isset($this->options->wpFastestCacheMinifyJs) && method_exists("WpFastestCachePowerfulHtml", "minify_js_in_body")){
 						$content = $powerful_html->minify_js_in_body($this);
 					}
+
+					if(isset($this->options->wpFastestCacheCombineJsPowerFul) && method_exists("WpFastestCachePowerfulHtml", "combine_js_in_footer")){
+						if(isset($this->options->wpFastestCacheMinifyJs) && $this->options->wpFastestCacheMinifyJs){
+							$content = $powerful_html->combine_js_in_footer($this, true);
+						}else{
+							$content = $powerful_html->combine_js_in_footer($this);
+						}
+					}
 				}
 
 				if($this->err){
@@ -260,6 +275,9 @@
 						// url()
 						$content = preg_replace_callback("/url\([^\)]+\)/i", array($this, 'cdn_replace_urls'), $content);
 					}
+					
+					$content = str_replace("<!--WPFC_FOOTER_START-->", "", $content);
+
 					$this->createFolder($cachFilePath, $content);
 					return $buffer."<!-- need to refresh to see cached version -->";
 				}

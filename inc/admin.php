@@ -879,22 +879,29 @@
 							</div>
 							<div class="questionCon">
 								<div class="question">Combine Js</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJs; ?> id="wpFastestCacheCombineJs" name="wpFastestCacheCombineJs"><label for="wpFastestCacheCombineJs">Reduce HTTP requests through combined js files</label></div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJs; ?> id="wpFastestCacheCombineJs" name="wpFastestCacheCombineJs"><label for="wpFastestCacheCombineJs">Reduce HTTP requests through combined js files</label> <b style="color:red;">(header)</b></div>
 								<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/optimization/combine-js-css-files/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
 							</div>
 
 
 
 							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
-							<div class="questionCon">
-								<div class="question">Combine Js Plus</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJsPowerFul; ?> id="wpFastestCacheCombineJsPowerFul" name="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label></div>
-							</div>
+								<?php if(method_exists("WpFastestCachePowerfulHtml", "combine_js_in_footer")){ ?>
+									<div class="questionCon">
+										<div class="question">Combine Js Plus</div>
+										<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineJsPowerFul; ?> id="wpFastestCacheCombineJsPowerFul" name="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Reduce HTTP requests through combined js files</label> <b style="color:red;">(footer)</b></div>
+									</div>
+								<?php }else{ ?>
+									<div class="questionCon update-needed">
+										<div class="question">Combine Js Plus</div>
+										<div class="inputCon"><input type="checkbox" id="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Reduce HTTP requests through combined js files</label> <b style="color:red;">(footer)</b></div>
+									</div>
+								<?php } ?>
 							<?php }else{ ?>
-							<div class="questionCon disabled">
-								<div class="question">Combine Js Plus</div>
-								<div class="inputCon"><input type="checkbox" id="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label></div>
-							</div>
+								<div class="questionCon disabled">
+									<div class="question">Combine Js Plus</div>
+									<div class="inputCon"><input type="checkbox" id="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label> <b style="color:red;">(footer)</b></div>
+								</div>
 							<?php } ?>
 							
 							<div class="questionCon">
