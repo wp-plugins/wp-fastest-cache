@@ -896,7 +896,7 @@
 							<?php }else{ ?>
 								<div class="questionCon disabled">
 									<div class="question">Combine Js Plus</div>
-									<div class="inputCon"><input type="checkbox" id="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label> <b style="color:red;">(footer)</b></div>
+									<div class="inputCon"><input type="checkbox" id="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Reduce HTTP requests through combined js files</label> <b style="color:red;">(footer)</b></div>
 								</div>
 							<?php } ?>
 							
