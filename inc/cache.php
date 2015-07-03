@@ -242,6 +242,14 @@
 				if(class_exists("WpFastestCachePowerfulHtml")){
 					$powerful_html = new WpFastestCachePowerfulHtml();
 					$powerful_html->set_html($content);
+
+					if(isset($this->options->wpFastestCacheCombineJsPowerFul) && method_exists("WpFastestCachePowerfulHtml", "combine_js_in_footer")){
+						if(isset($this->options->wpFastestCacheMinifyJs) && $this->options->wpFastestCacheMinifyJs){
+							$content = $powerful_html->combine_js_in_footer($this, true);
+						}else{
+							$content = $powerful_html->combine_js_in_footer($this);
+						}
+					}
 					
 					if(isset($this->options->wpFastestCacheRemoveComments)){
 						$content = $powerful_html->remove_head_comments();
@@ -253,14 +261,6 @@
 
 					if(isset($this->options->wpFastestCacheMinifyJs) && method_exists("WpFastestCachePowerfulHtml", "minify_js_in_body")){
 						$content = $powerful_html->minify_js_in_body($this);
-					}
-
-					if(isset($this->options->wpFastestCacheCombineJsPowerFul) && method_exists("WpFastestCachePowerfulHtml", "combine_js_in_footer")){
-						if(isset($this->options->wpFastestCacheMinifyJs) && $this->options->wpFastestCacheMinifyJs){
-							$content = $powerful_html->combine_js_in_footer($this, true);
-						}else{
-							$content = $powerful_html->combine_js_in_footer($this);
-						}
 					}
 				}
 
