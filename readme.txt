@@ -56,8 +56,8 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 * 日本語 (by KUCKLU)
 * Português
 * Română
-* Русский
-* Svenska (Linus Wileryd)
+* Русский (by Maxim)
+* Svenska (by Linus Wileryd)
 * Türkçe
 
 == Installation ==
