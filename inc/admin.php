@@ -340,12 +340,12 @@
 				$path = $this->getABSPATH();
 			}
 
-			if(!file_exists($path.".htaccess")){
-				return array("<label>.htaccess was not found</label> <a target='_blank' href='http://www.wpfastestcache.com/warnings/htaccess-was-not-found/'>Read More</a>", "error");
-			}
-
 			if(isset($_SERVER["SERVER_SOFTWARE"]) && $_SERVER["SERVER_SOFTWARE"] && preg_match("/iis/i", $_SERVER["SERVER_SOFTWARE"])){
 				return array("The plugin does not work with Microsoft IIS only with Apache", "error");
+			}
+
+			if(!file_exists($path.".htaccess")){
+				return array("<label>.htaccess was not found</label> <a target='_blank' href='http://www.wpfastestcache.com/warnings/htaccess-was-not-found/'>Read More</a>", "error");
 			}
 
 			if($this->isPluginActive('wp-postviews/wp-postviews.php')){
@@ -1633,7 +1633,9 @@
 			<?php } ?>
 			<script>Wpfclang.init("<?php echo $wpFastestCacheLanguage; ?>");</script>
 			<?php
-			$this->check_htaccess();
+			if(isset($_SERVER["SERVER_SOFTWARE"]) && $_SERVER["SERVER_SOFTWARE"] && !preg_match("/iis/i", $_SERVER["SERVER_SOFTWARE"])){
+				$this->check_htaccess();
+			}
 		}
 	}
 ?>
