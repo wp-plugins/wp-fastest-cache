@@ -443,7 +443,7 @@
 
 				preg_match("/BEGIN LBCWpFastestCache/", $htaccess, $check);
 				if(count($check) === 0){
-					return $htaccess.$data;
+					return $data.$htaccess;
 				}else{
 					return $htaccess;
 				}
@@ -477,7 +477,7 @@
 
 
 				$htaccess = preg_replace("/#\s?BEGIN\s?GzipWpFastestCache.*?#\s?END\s?GzipWpFastestCache/s", "", $htaccess);
-				return $htaccess.$data;
+				return $data.$htaccess;
 
 			}else{
 				//delete gzip rules
@@ -489,7 +489,7 @@
 		public function insertRewriteRule($htaccess, $post){
 			if(isset($post["wpFastestCacheStatus"]) && $post["wpFastestCacheStatus"] == "on"){
 				$htaccess = preg_replace("/#\s?BEGIN\s?WpFastestCache.*?#\s?END\s?WpFastestCache/s", "", $htaccess);
-				$htaccess = $htaccess.$this->getHtaccess();
+				$htaccess = $this->getHtaccess().$htaccess;
 			}else{
 				$htaccess = preg_replace("/#\s?BEGIN\s?WpFastestCache.*?#\s?END\s?WpFastestCache/s", "", $htaccess);
 				$this->deleteCache();
