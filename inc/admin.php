@@ -1200,53 +1200,6 @@
 				    			define("WPFC_API_KEY", get_option("WpFc_api_key"));
 				    		}
 				    	?>
-				    	<style type="text/css">
-				    		#wpfc-premium-container{
-				    			overflow: hidden;
-				    		}
-				    		.wpfc-premium-step{
-				    			width: 246px;
-				    			float: left;
-				    			margin-left: 3px;
-				    		}
-				    		.wpfc-premium-step div{
-				    			float: left !important;
-				    		}
-				    		.wpfc-premium-step-header{
-				    			width: 100%; 
-				    			background-color: rgb(58, 158, 235); 
-				    			padding-top: 12px;
-				    			padding-bottom: 11px;
-				    			text-align: center;
-				    		}
-				    		.wpfc-premium-step-header label{
-				    			font-size: 17pt !important;
-				    			color: white !important;
-				    		}
-				    		.wpfc-premium-step-content{
-				    			font-size: 16px !important;
-				    			line-height: 20px !important;
-				    			padding-top: 25px !important;
-				    			padding-left: 25px !important;
-				    			height: 100px;
-				    		}
-				    		.wpfc-premium-step-footer p{
-				    			font-size: 15px !important;
-				    		}
-				    		.wpfc-premium-step-footer ul li{
-				    			background: url("<?php echo plugins_url("wp-fastest-cache/images/blue-check.png"); ?>") no-repeat scroll 0 2px transparent;
-				    			padding: 3px 30px;
-				    			font-size: 15px;
-				    		}
-				    		.wpfc-premium-step-footer{
-				    			padding-left: 25px;
-				    		}
-				    		.wpfc-premium-step-image{
-				    			width: 100%; 
-				    			height: 180px;
-				    			text-align: center;
-				    		}
-				    	</style>
 				    	<div id="wpfc-premium-container">
 				    		<div class="wpfc-premium-step">
 				    			<div class="wpfc-premium-step-header">
@@ -1471,79 +1424,7 @@
 				    	</script>
 				    </div>
 
-
-
 				    <div class="tab7" style="padding-left:20px;">
-				    	<style type="text/css">
-				    	#integrationDiv {
-						    display: block;
-						    font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode",Verdana,Tahoma,sans-serif;
-						    font-size: 13px;
-						    height: auto;
-						    line-height: 18px;
-						    max-height: 395px;
-						    overflow-x: hidden;
-						    overflow-y: auto;
-						    padding: 0;
-						}
-						.int-item {
-						    background: none repeat scroll 0 0 rgba(100, 100, 100, 0.1);
-						    border-radius: 6px;
-						    cursor: pointer;
-						    margin-bottom: 12px;
-						    overflow: hidden;
-						    padding: 12px;
-						}
-						.int-item:hover {
-						    background: none repeat scroll 0 0 rgba(135, 135, 135, 0.1);
-						}
-						.int-item h2 {
-						    font-size: 14px;
-						    margin: 0 0 3px;
-						}
-						.int-item p {
-						    color: #666;
-						    font-size: 11px;
-						    margin: 0;
-						    position: relative;
-						}
-						.int-item img {
-						    float: left;
-						    height: 36px;
-						    margin-right: 12px;
-						    width: 125px;
-						}
-						.int-item .meta .connected {
-						    color: green;
-						    display: block;
-						    font-size: 12px;
-						    margin-top: 3px;
-						}
-						.int-item .app {
-						    float: left;
-						    /*padding-right: 10px;*/
-						    width: 70%;
-						}
-						.int-item .app .more-info {
-						    cursor: auto;
-						    float: none;
-						    height: auto;
-						    margin-left: 10px;
-						    width: auto;
-						}
-						.int-item .meta {
-						    float: right;
-						    font-size: 11px;
-						    font-weight: bold;
-						    max-width: 100px;
-						    text-align: right;
-						}
-						.int-item .meta .developer {
-						    color: #333333;
-						    display: block;
-						}
-
-				    	</style>
 				    	<h2 style="padding-bottom:10px;">CDN Settings</h2>
 				    	<div>
 				    		<div class="integration-page" style="display: block;width:98%;float:left;">
