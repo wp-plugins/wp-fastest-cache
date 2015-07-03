@@ -896,28 +896,7 @@
 								<div class="inputCon"><input type="checkbox" id="wpFastestCacheCombineJsPowerFul"><label for="wpFastestCacheCombineJsPowerFul">Minify the combined js files</label></div>
 							</div>
 							<?php } ?>
-
-
-
-
-							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
-<!-- 							<div class="questionCon">
-								<div class="question">Remove Comments</div>
-								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRemoveComments; ?> id="wpFastestCacheRemoveComments" name="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comment tags between &#60;head&#62;&#60;/head&#62;</label></div>
-							</div> -->
-							<?php }else{ ?>
-<!-- 							<div class="questionCon disabled">
-								<div class="question">Remove Comments</div>
-								<div class="inputCon"><input type="checkbox" id="wpFastestCacheRemoveComments"><label for="wpFastestCacheRemoveComments">Remove the comment tags between &#60;head&#62;&#60;/head&#62;</label></div>
-							</div> -->
-							<?php } ?>
-
-
-
-
-
-
-
+							
 							<div class="questionCon">
 								<div class="question">Gzip</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheGzip; ?> id="wpFastestCacheGzip" name="wpFastestCacheGzip"><label for="wpFastestCacheGzip">Reduce the size of files sent from your server</label></div>
