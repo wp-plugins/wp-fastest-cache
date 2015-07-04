@@ -63,6 +63,7 @@ div.questionCon.qsubmit{
   
     /* Set the background color to default gray (non-selected tab) */
     background-color:#ddd;
+    color: black;
 }
   
 /* Focused tabs need to be highlighted as such */
