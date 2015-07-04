@@ -80,12 +80,12 @@
 
 						if($cssFiles = @scandir($cachFilePath, 1)){
 							$cssLink = str_replace(array("http://", "https://"), "//", $cssLink);
-							$link_tag = "<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."'".$inline_style_prefix." />";
+							$link_tag = "<link rel='stylesheet' href='".$cssLink."/".$cssFiles[0]."' wpfc-inline='true' ".$inline_style_prefix." />";
 
 							// $data = substr_replace($data, " -->\n".$link_tag."\n", $value["end"]+1, 0);
 							// $data = substr_replace($data, "<!-- ", $value["start"], 0);
 
-							$data = substr_replace($data, "<!--\n".$inline_style_data."\n-->\n".$link_tag, $value["start"], ($value["end"] - $value["start"] + 1));
+							$data = substr_replace($data, $link_tag, $value["start"], ($value["end"] - $value["start"] + 1));
 
 						}
 					}
@@ -368,6 +368,18 @@
 								$minifiedCss["cssContent"] = $powerful_html->minify_css($minifiedCss["cssContent"]);
 							}
 
+							if(preg_match("/wpfc\-inline/", $value)){
+								$prev["content"] = $this->fixRules($prev["content"]);
+								$this->mergeCss($wpfc, $prev);
+								$prev = array("content" => "", "value" => array(), "name" => "");
+
+								$attributes = preg_replace("/.+wpfc\-inline\=\'true\'([^\>]+)\/>/", "$1", $value);
+								$attributes = $attributes ? " ".trim($attributes) : "";
+								$this->html = $wpfc->replaceLink($value, "<style".$attributes.">".$minifiedCss["cssContent"]."</style>", $this->html);
+
+								continue;
+							}
+
 							if(!is_dir($minifiedCss["cachFilePath"])){
 								$prefix = time();
 								$wpfc->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
@@ -409,6 +421,20 @@
 									$powerful_html = new WpFastestCachePowerfulHtml();
 									$minifiedCss["cssContent"] = $powerful_html->minify_css($minifiedCss["cssContent"]);
 								}
+
+								if(preg_match("/wpfc\-inline/", $value)){
+									$prev["content"] = $this->fixRules($prev["content"]);
+									$this->mergeCss($wpfc, $prev);
+									$prev = array("content" => "", "value" => array(), "name" => "");
+
+									$attributes = preg_replace("/.+wpfc\-inline\=\'true\'([^\>]+)\/>/", "$1", $value);
+									$attributes = $attributes ? " ".trim($attributes) : "";
+									$this->html = $wpfc->replaceLink($value, "<style".$attributes.">".$minifiedCss["cssContent"]."</style>", $this->html);
+
+									continue;
+								}
+
+
 
 								if(!is_dir($minifiedCss["cachFilePath"])){
 									$prefix = time();
