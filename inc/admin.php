@@ -1296,11 +1296,12 @@
 					    					<span data-type="download">Download</span>
 					    				</button>
 					    				<script type="text/javascript">
-					    					var wpfc_api_key = '<?php echo get_option("WpFc_api_key"); ?>';
 					    					jQuery("#wpfc-download-premium-button").click(function(){
 					    						jQuery("#revert-loader-toolbar").show();
-						    					jQuery.get("<?php echo plugins_url('wp-fastest-cache/templates'); ?>/download.php?apikey=" + wpfc_api_key, function( data ) {
+						    					jQuery.get("<?php echo plugins_url('wp-fastest-cache/templates'); ?>/download.html", function( data ) {
+						    						var wpfc_api_url = '<?php echo "http://api.wpfastestcache.net/premium/newdownload/".str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"])."/".get_option("WpFc_api_key"); ?>';
 						    						jQuery("body").append(data);
+						    						jQuery("#wpfc-download-now").attr("href", wpfc_api_url);
 						    						Wpfc_Dialog.dialog("wpfc-modal-downloaderror");
 						    						jQuery("#revert-loader-toolbar").hide();
 						    					});
