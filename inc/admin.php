@@ -1606,7 +1606,7 @@
 				<script type="text/javascript">
 					jQuery(".update-needed").click(function(e){
 						jQuery("#revert-loader-toolbar").show();
-						jQuery.get('<?php echo plugins_url("wp-fastest-cache/templates/update_now.php"); ?>', function( data ) {
+						jQuery.get('<?php echo plugins_url("wp-fastest-cache/templates/update_now.html"); ?>', function( data ) {
 							jQuery("#revert-loader-toolbar").hide();
 							jQuery("body").append(data);
 							Wpfc_Dialog.dialog("wpfc-modal-updatenow");
