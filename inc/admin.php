@@ -1281,7 +1281,7 @@
 																});
 							    							});
 							    						}else{
-							    							Wpfc_Premium.check_update("<?php echo $this->get_premium_version(); ?>", '<?php echo get_option("WpFc_api_key"); ?>', '<?php echo plugins_url('wp-fastest-cache/templates'); ?>');
+							    							Wpfc_Premium.check_update("<?php echo $this->get_premium_version(); ?>", '<?php echo "http://api.wpfastestcache.net/premium/newdownload/".str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"])."/".get_option("WpFc_api_key"); ?>', '<?php echo plugins_url('wp-fastest-cache/templates'); ?>');
 							    						}
 										    		});
 									    		}
