@@ -1220,18 +1220,20 @@
 				    				<h1 style="float:left;" id="just-h1">Just</h1><h1>&nbsp;$<span id="wpfc-premium-price">39.99</span></h1>
 				    				<p>The download button will be available after paid. You can buy the premium version now.</p>
 				    				
-				    				<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
-					    					<button id="wpfc-buy-premium-button" type="submit" class="wpfc-btn primaryDisableCta" style="width:200px;">
-						    					<span>Purchased</span>
-						    				</button>
-					    				<?php }else{ ?>
-						    				<form action="http://api.wpfastestcache.net/paypal/buypremium/" method="post">
-						    					<input type="hidden" name="hostname" value="<?php echo str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"]); ?>">
-							    				<button id="wpfc-buy-premium-button" type="submit" class="wpfc-btn primaryCta" style="width:200px;">
-							    					<span>Buy</span>
+				    				<?php if(!preg_match("/\.ir/i", $_SERVER["HTTP_HOST"])){ ?>
+					    				<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
+						    					<button id="wpfc-buy-premium-button" type="submit" class="wpfc-btn primaryDisableCta" style="width:200px;">
+							    					<span>Purchased</span>
 							    				</button>
-						    				</form>
-					    				<?php } ?>
+						    				<?php }else{ ?>
+							    				<form action="http://api.wpfastestcache.net/paypal/buypremium/" method="post">
+							    					<input type="hidden" name="hostname" value="<?php echo str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"]); ?>">
+								    				<button id="wpfc-buy-premium-button" type="submit" class="wpfc-btn primaryCta" style="width:200px;">
+								    					<span>Buy</span>
+								    				</button>
+							    				</form>
+						    			<?php } ?>
+					    			<?php } ?>
 
 
 				    			</div>
