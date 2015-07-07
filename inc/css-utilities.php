@@ -369,7 +369,7 @@
 							}
 
 							if(preg_match("/wpfc\-inline/", $value)){
-								$prev["content"] = $this->fixRules($prev["content"]);
+								//$prev["content"] = $this->fixRules($prev["content"]);
 								$this->mergeCss($wpfc, $prev);
 								$prev = array("content" => "", "value" => array(), "name" => "");
 
@@ -423,7 +423,7 @@
 								}
 
 								if(preg_match("/wpfc\-inline/", $value)){
-									$prev["content"] = $this->fixRules($prev["content"]);
+									//$prev["content"] = $this->fixRules($prev["content"]);
 									$this->mergeCss($wpfc, $prev);
 									$prev = array("content" => "", "value" => array(), "name" => "");
 
@@ -450,17 +450,17 @@
 								}
 							}
 						}else{
-							$prev["content"] = $this->fixRules($prev["content"]);
+							//$prev["content"] = $this->fixRules($prev["content"]);
 							$this->mergeCss($wpfc, $prev);
 							$prev = array("content" => "", "value" => array(), "name" => "");
 						}
 					}else{
-						$prev["content"] = $this->fixRules($prev["content"]);
+						//$prev["content"] = $this->fixRules($prev["content"]);
 						$this->mergeCss($wpfc, $prev);
 						$prev = array("content" => "", "value" => array(), "name" => "");
 					}
 				}
-				$prev["content"] = $this->fixRules($prev["content"]);
+				//$prev["content"] = $this->fixRules($prev["content"]);
 				$this->mergeCss($wpfc, $prev);
 			}
 
@@ -478,6 +478,8 @@
 						$name = md5($prev["name"]);
 						$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".$name;
 
+						$prev["content"] = $this->fixRules($prev["content"]);
+						
 						if(!is_dir($cachFilePath)){
 							$wpfc->createFolder($cachFilePath, $prev["content"], "css", time());
 						}
