@@ -5,6 +5,7 @@
 		private $cssLinksExcept = "";
 		private $url = "";
 		private $err = "";
+		private $minify = false;
 
 		public function __construct($wpfc, $html){
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
@@ -402,6 +403,8 @@
 		}
 
 		public function combineCss($wpfc, $minify = false){
+			$this->minify = $minify;
+
 			if(count($this->getCssLinks()) > 0){
 				$prev = array("content" => "", "value" => array(), "name" => "");
 				foreach ($this->getCssLinks() as $key => $value) {
@@ -479,6 +482,10 @@
 						$cachFilePath = WPFC_WP_CONTENT_DIR."/cache/wpfc-minified/".$name;
 
 						$prev["content"] = $this->fixRules($prev["content"]);
+
+						if($this->minify){
+							$prev["content"] = $this->_process($prev["content"]);
+						}
 						
 						if(!is_dir($cachFilePath)){
 							$wpfc->createFolder($cachFilePath, $prev["content"], "css", time());
