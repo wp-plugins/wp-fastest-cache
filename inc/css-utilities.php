@@ -5,10 +5,11 @@
 		private $cssLinksExcept = "";
 		private $url = "";
 		private $err = "";
-		private $minify = false;
+		private $wpfc;
 
 		public function __construct($wpfc, $html){
 			//$this->html = preg_replace("/\s+/", " ", ((string) $html));
+			$this->wpfc = $wpfc;
 			$this->html = $html;
 
 			$ini = 0;
@@ -243,7 +244,8 @@
 		}
 
 		public function fixRules($css){
-			$css = $this->fixImportRules($css);
+			//$css = $this->fixImportRules($css);
+			$css = preg_replace_callback('/@import\s+url\(([^\)]+)\);/i', array($this, 'fix_import_rules'), $css);
 			$css = $this->fixCharset($css);
 			//$css = preg_replace("/@media/i","\n@media",$css);
 			return $css;
@@ -259,6 +261,18 @@
 				}
 			}
 			return $css;
+		}
+
+		public function fix_import_rules($matches){
+			if($cssContent = $this->file_get_contents_curl($matches[1]."?v=".time())){
+				$tmp_url = $this->url;
+				$this->url = $matches[1];
+				$cssContent = $this->fixPathsInCssContent($cssContent); 
+				$this->url = $tmp_url;
+				return "/* ".$matches[0]." */"."\n".$cssContent;
+			}
+
+			return $matches[0];
 		}
 
 		public function fixCharset($css){
@@ -381,6 +395,18 @@
 								continue;
 							}
 
+							$minifiedCss["cssContent"] = $this->fixRules($minifiedCss["cssContent"]);
+
+							if(isset($this->wpfc->options->wpFastestCacheMinifyCss) && $this->wpfc->options->wpFastestCacheMinifyCss){
+								$minifiedCss["cssContent"] = $this->_process($minifiedCss["cssContent"]);
+							}
+
+							if(isset($this->wpfc->options->wpFastestCacheMinifyCssPowerFul) && $this->wpfc->options->wpFastestCacheMinifyCssPowerFul){
+								$powerful_html = new WpFastestCachePowerfulHtml();
+								$minifiedCss["cssContent"] = $powerful_html->minify_css($minifiedCss["cssContent"]);
+							}
+
+
 							if(!is_dir($minifiedCss["cachFilePath"])){
 								$prefix = time();
 								$wpfc->createFolder($minifiedCss["cachFilePath"], $minifiedCss["cssContent"], "css", $prefix);
@@ -403,8 +429,6 @@
 		}
 
 		public function combineCss($wpfc, $minify = false){
-			$this->minify = $minify;
-
 			if(count($this->getCssLinks()) > 0){
 				$prev = array("content" => "", "value" => array(), "name" => "");
 				foreach ($this->getCssLinks() as $key => $value) {
@@ -483,8 +507,13 @@
 
 						$prev["content"] = $this->fixRules($prev["content"]);
 
-						if($this->minify){
+						if(isset($this->wpfc->options->wpFastestCacheMinifyCss) && $this->wpfc->options->wpFastestCacheMinifyCss){
 							$prev["content"] = $this->_process($prev["content"]);
+						}
+
+						if(isset($this->wpfc->options->wpFastestCacheMinifyCssPowerFul) && $this->wpfc->options->wpFastestCacheMinifyCssPowerFul){
+							$powerful_html = new WpFastestCachePowerfulHtml();
+							$prev["content"] = $powerful_html->minify_css($prev["content"]);
 						}
 
 						/* 
