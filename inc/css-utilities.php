@@ -486,9 +486,18 @@
 						if($this->minify){
 							$prev["content"] = $this->_process($prev["content"]);
 						}
-						
-						if(!is_dir($cachFilePath)){
-							$wpfc->createFolder($cachFilePath, $prev["content"], "css", time());
+
+						/* 
+							The css files are saved in the previous function.
+							If only one css file is in the array, there is need to save again.
+						*/
+						if(count($prev["value"]) == 1){
+							$wpfc->rm_folder_recursively($cachFilePath);
+							$wpfc->createFolder($cachFilePath, $prev["content"], "css", time());							
+						}else{
+							if(!is_dir($cachFilePath)){
+								$wpfc->createFolder($cachFilePath, $prev["content"], "css", time());
+							}
 						}
 
 						if($cssFiles = @scandir($cachFilePath, 1)){
