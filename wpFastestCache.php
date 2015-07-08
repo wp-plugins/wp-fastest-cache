@@ -440,7 +440,7 @@ GNU General Public License for more details.
 		    return $path;
 		}
 
-		protected function rm_folder_recursively($dir, $i = 1) {
+		public function rm_folder_recursively($dir, $i = 1) {
 			$files = @scandir($dir);
 		    foreach((array)$files as $file) {
 		    	if($i > 500){
