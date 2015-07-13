@@ -520,6 +520,14 @@
 								   "RewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
 								   "RewriteRule ^(.*)$ ".preg_quote(home_url(), "/")."\/$1 [R=301,L]"."\n";
 					}
+				}else{
+					if(preg_match("/^https:\/\/www\./", home_url())){
+						$forceTo = "\nRewriteCond %{HTTPS} =on"."\n".
+						           "RewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n";
+					}else{
+						$forceTo = "\nRewriteCond %{HTTPS} =on"."\n".
+								   "RewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n";
+					}
 				}
 			}else{
 				if(preg_match("/^http:\/\/www\./", home_url())){
@@ -695,6 +703,7 @@
 			$wpFastestCacheGzip = isset($this->options->wpFastestCacheGzip) ? 'checked="checked"' : "";
 			$wpFastestCacheCombineJs = isset($this->options->wpFastestCacheCombineJs) ? 'checked="checked"' : "";
 			$wpFastestCacheCombineJsPowerFul = isset($this->options->wpFastestCacheCombineJsPowerFul) ? 'checked="checked"' : "";
+			$wpFastestCacheDeferCss = isset($this->options->wpFastestCacheDeferCss) ? 'checked="checked"' : "";
 			$wpFastestCacheLanguage = isset($this->options->wpFastestCacheLanguage) ? $this->options->wpFastestCacheLanguage : "eng";
 			$wpFastestCacheLBC = isset($this->options->wpFastestCacheLBC) ? 'checked="checked"' : "";
 			$wpFastestCacheLoggedInUser = isset($this->options->wpFastestCacheLoggedInUser) ? 'checked="checked"' : "";
@@ -853,6 +862,18 @@
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheCombineCss; ?> id="wpFastestCacheCombineCss" name="wpFastestCacheCombineCss"><label for="wpFastestCacheCombineCss">Reduce HTTP requests through combined css files</label></div>
 								<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/optimization/combine-js-css-files/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
 							</div>
+
+
+
+							<div class="questionCon" style="display:none;">
+								<div class="question">Defer Css</div>
+								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheDeferCss; ?> id="wpFastestCacheDeferCss" name="wpFastestCacheDeferCss"><label for="wpFastestCacheDeferCss">Load the css files after page load</label></div>
+							</div>
+
+
+
+
+
 
 							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
 								<?php if(method_exists("WpFastestCachePowerfulHtml", "minify_js_in_body")){ ?>
