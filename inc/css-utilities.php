@@ -267,7 +267,8 @@
 			if($cssContent = $this->file_get_contents_curl($matches[1]."?v=".time())){
 				$tmp_url = $this->url;
 				$this->url = $matches[1];
-				$cssContent = $this->fixPathsInCssContent($cssContent); 
+				$cssContent = $this->fixPathsInCssContent($cssContent);
+				$cssContent = $this->fixRules($cssContent); 
 				$this->url = $tmp_url;
 				return "/* ".$matches[0]." */"."\n".$cssContent;
 			}
