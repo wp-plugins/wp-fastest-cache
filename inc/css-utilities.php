@@ -244,7 +244,7 @@
 		}
 
 		public function fixRules($css){
-			//$css = $this->fixImportRules($css);
+			$css = $this->fixImportRules($css);
 			$css = preg_replace_callback('/@import\s+url\(([^\)]+)\);/i', array($this, 'fix_import_rules'), $css);
 			$css = $this->fixCharset($css);
 			//$css = preg_replace("/@media/i","\n@media",$css);
@@ -252,12 +252,14 @@
 		}
 
 		public function fixImportRules($css){
-			preg_match_all('/@import\s+url\([^\)]+\);/i', $css, $imports);
+			preg_match_all('/@import\s+url\(([^\)]+)\);/i', $css, $imports);
 
 			if(count($imports[0]) > 0){
-				$css = preg_replace('/@import\s+url\([^\)]+\);/i', "/* @import is moved to the top */", $css);
 				for ($i = count($imports[0])-1; $i >= 0; $i--) {
-					$css = $imports[0][$i]."\n".$css;
+					
+					if(!$this->is_internal_css($imports[1][$i])){
+						$css = $imports[0][$i]."\n".$css;
+					}
 				}
 			}
 			return $css;
