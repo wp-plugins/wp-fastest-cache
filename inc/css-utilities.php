@@ -264,16 +264,36 @@
 		}
 
 		public function fix_import_rules($matches){
-			if($cssContent = $this->file_get_contents_curl($matches[1]."?v=".time())){
-				$tmp_url = $this->url;
-				$this->url = $matches[1];
-				$cssContent = $this->fixPathsInCssContent($cssContent);
-				$cssContent = $this->fixRules($cssContent); 
-				$this->url = $tmp_url;
-				return "/* ".$matches[0]." */"."\n".$cssContent;
+			if($this->is_internal_css($matches[1])){
+				if($cssContent = $this->file_get_contents_curl($matches[1]."?v=".time())){
+					$tmp_url = $this->url;
+					$this->url = $matches[1];
+					$cssContent = $this->fixPathsInCssContent($cssContent);
+					$cssContent = $this->fixRules($cssContent); 
+					$this->url = $tmp_url;
+					return "/* ".$matches[0]." */"."\n".$cssContent;
+				}
 			}
 
 			return $matches[0];
+		}
+
+		public function is_internal_css($url){
+			$http_host = trim($_SERVER["HTTP_HOST"], "www.");
+
+			$url = trim($url);
+			$url = trim($url, "'");
+			$url = trim($url, '"');
+			$url = trim($url, 'https://');
+			$url = trim($url, 'http://');
+			$url = trim($url, '//');
+			$url = trim($url, 'www.');
+
+			if($url && preg_match("/".$http_host."/i", $url)){
+				return true;
+			}
+
+			return false;
 		}
 
 		public function fixCharset($css){
