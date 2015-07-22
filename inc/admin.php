@@ -508,28 +508,12 @@
 			}
 
 			if(preg_match("/^https:\/\//", home_url())){
-				if(!$this->isPluginActive('wordpress-https/wordpress-https.php')){
-					if(preg_match("/^https:\/\/www\./", home_url())){
-						$forceTo = "\nRewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
-								   "RewriteRule ^(.*)$ ".preg_quote(home_url(), "/")."\/$1 [R=301,L]"."\n".
-								   "RewriteCond %{HTTPS} !=on"."\n".
-								   "RewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
-								   "RewriteRule ^(.*)$ ".preg_quote(home_url(), "/")."\/$1 [R=301,L]"."\n";
-					}else{
-						$forceTo = "\nRewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
-								   "RewriteRule ^(.*)$ https://".str_replace("www.", "", $_SERVER["HTTP_HOST"])."/$1 [R=301,L]"."\n".
-								   "RewriteCond %{HTTPS} !=on"."\n".
-								   "RewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n".
-								   "RewriteRule ^(.*)$ ".preg_quote(home_url(), "/")."\/$1 [R=301,L]"."\n";
-					}
+				if(preg_match("/^https:\/\/www\./", home_url())){
+					$forceTo = "\nRewriteCond %{HTTPS} =on"."\n".
+					           "RewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n";
 				}else{
-					if(preg_match("/^https:\/\/www\./", home_url())){
-						$forceTo = "\nRewriteCond %{HTTPS} =on"."\n".
-						           "RewriteCond %{HTTP_HOST} ^www.".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n";
-					}else{
-						$forceTo = "\nRewriteCond %{HTTPS} =on"."\n".
-								   "RewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n";
-					}
+					$forceTo = "\nRewriteCond %{HTTPS} =on"."\n".
+							   "RewriteCond %{HTTP_HOST} ^".str_replace("www.", "", $_SERVER["HTTP_HOST"])."\n";
 				}
 			}else{
 				if(preg_match("/^http:\/\/www\./", home_url())){
