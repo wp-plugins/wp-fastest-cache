@@ -378,6 +378,8 @@
 				return $this->warningIncompatible("AdRotate");
 			}else if($this->isPluginActive('mobilepress/mobilepress.php')){
 				return $this->warningIncompatible("MobilePress", array("name" => "WPtouch Mobile", "url" => "https://wordpress.org/plugins/wptouch/"));
+			}else if($this->isPluginActive('wp-performance-score-booster/wp-performance-score-booster.php')){
+				return array("WP Performance Score Booster needs to be deactive<br>This plugin has aldready Gzip, Leverage Browser Caching features", "error");
 			}else if($this->isPluginActive('bwp-minify/bwp-minify.php')){
 				return array("Better WordPress Minify needs to be deactive<br>This plugin has aldready Minify feature", "error");
 			}else if($this->isPluginActive('gzippy/gzippy.php')){
