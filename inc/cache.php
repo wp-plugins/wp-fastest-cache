@@ -275,6 +275,11 @@
 						// url()
 						$content = preg_replace_callback("/url\([^\)]+\)/i", array($this, 'cdn_replace_urls'), $content);
 					}
+
+					if(isset($this->options->wpFastestCacheDeferCss) && method_exists("WpFastestCachePowerfulHtml", "defer_css")){
+						$content = $powerful_html->defer_css($content);
+					}
+
 					
 					$content = str_replace("<!--WPFC_FOOTER_START-->", "", $content);
 
