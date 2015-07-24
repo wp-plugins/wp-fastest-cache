@@ -82,6 +82,20 @@ Setup of this plugin is so easy. You don't need to modify the .htacces file. It 
 
 == Changelog ==
 
+= 0.8.5.5 =
+* to add Amazon CloudFront CDN
+* to add KeyCDN
+* to update Russian Language
+* to fix PHP Notice: Undefined index: HTTP_USER_AGENT
+* to fix PHP Notice: Undefined index: name
+* to fix combine js issue with commented out js
+* to fix delete minify files issue
+* to add wpfc rules after other rules in htaccess
+* to add image/svg+xml for leverage browser cache
+* refactoring of minify and combine css features
+* to fix redirection to /wp-content/cache/all for ssl
+* to add text for toolbar icon
+
 = 0.8.5.4 =
 * to be compatible with Guideline
 
