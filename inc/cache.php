@@ -22,9 +22,11 @@
 			if($cdn_values){
 				$std = json_decode($cdn_values);
 
+				$std->originurl = trim($std->originurl);
 				$std->originurl = trim($std->originurl, "/");
 				$std->originurl = preg_replace("/http(s?)\:\/\/(www\.)?/i", "", $std->originurl);
 
+				$std->cdnurl = trim($std->cdnurl);
 				$std->cdnurl = trim($std->cdnurl, "/");
 				$std->cdnurl = preg_replace("/http(s?)\:\/\/(www\.)?/i", "", $std->cdnurl);
 				$this->cdn = $std;
