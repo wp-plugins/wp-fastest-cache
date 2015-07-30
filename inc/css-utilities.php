@@ -448,7 +448,11 @@
 				$url = home_url().$url;
 			}
 
-			$url = preg_replace("/^\/\//", "http://", $url);
+			if(preg_match("/http\:\/\//i", home_url())){
+				$url = preg_replace("/^\/\//", "http://", $url);
+			}else if(preg_match("/https\:\/\//i", home_url())){
+				$url = preg_replace("/^\/\//", "https://", $url);
+			}
 
 			$response = wp_remote_get($url, array('timeout' => 10, 'headers' => array("cache-control" => array("no-store, no-cache, must-revalidate", "post-check=0, pre-check=0"))));
 
