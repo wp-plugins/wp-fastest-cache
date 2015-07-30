@@ -261,7 +261,11 @@
 
 			if(is_dir($cachFilePath)){
 				if($cssFiles = @scandir($cachFilePath, 1)){
-					return array("cachFilePath" => $cachFilePath, "cssContent" => "", "url" => $cssLink."/".$cssFiles[0], "realUrl" => $url);
+					if($cssContent = $this->file_get_contents_curl($cssLink."/".$cssFiles[0])){
+						return array("cachFilePath" => $cachFilePath, "cssContent" => $cssContent, "url" => $cssLink."/".$cssFiles[0], "realUrl" => $url);
+					}else{
+						return false;
+					}
 				}
 			}else{
 				if($cssContent = $this->file_get_contents_curl($url."?v=".time())){
