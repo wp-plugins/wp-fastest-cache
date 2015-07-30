@@ -205,22 +205,14 @@
 
 				$content = $buffer;
 
-				if(isset($this->options->wpFastestCacheCombineCss) && isset($this->options->wpFastestCacheMinifyCss)){
+				if(isset($this->options->wpFastestCacheCombineCss)){
 					require_once "css-utilities.php";
 					$css = new CssUtilities($this, $content);
-					$content = $css->combineCss($this, true);
-					//to minify css files which are NOT "media='all'"
-					$content = $css->minifyCss($this, true);
-					$this->err = $css->getError();
-				}else if(isset($this->options->wpFastestCacheCombineCss)){
-					require_once "css-utilities.php";
-					$css = new CssUtilities($this, $content);
-					$content = $css->combineCss($this, false);
+					$content = $css->combineCss();
 				}else if(isset($this->options->wpFastestCacheMinifyCss)){
 					require_once "css-utilities.php";
 					$css = new CssUtilities($this, $content);
-					$content = $css->minifyCss($this, false);
-					$this->err = $css->getError();
+					$content = $css->minifyCss();
 				}
 
 				if(isset($this->options->wpFastestCacheCombineJs) || isset($this->options->wpFastestCacheMinifyJs) || isset($this->options->wpFastestCacheCombineJsPowerFul)){
