@@ -21,6 +21,13 @@
 				'meta' => array("class" => "wpfc-toolbar-child")
 			));
 
+			$wp_admin_bar->add_menu( array(
+				'id'    => 'wpfc-toolbar-parent-delete-cache-and-minified',
+				'title' => 'Delete Cache and Minified CSS/JS',
+				'parent'=> 'wpfc-toolbar-parent',
+				'meta' => array("class" => "wpfc-toolbar-child")
+			));
+
 			?>
 			<script type="text/javascript">
 
