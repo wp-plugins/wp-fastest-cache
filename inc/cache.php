@@ -145,7 +145,7 @@
 				return $buffer."<!-- Wp Fastest Cache: XML Content -->";
 			}else if (is_user_logged_in() || $this->isCommenter()){
 				return $buffer;
-			} else if(preg_match("/json/i", $_SERVER["HTTP_ACCEPT"])){
+			} else if(isset($_SERVER["HTTP_ACCEPT"]) && preg_match("/json/i", $_SERVER["HTTP_ACCEPT"])){
 				return $buffer;
 			}else if($this->checkWoocommerceSession()){
 				if($this->checkHtml($buffer)){
