@@ -91,14 +91,16 @@
 							}
 						}
 
-						foreach (array_reverse($group_value) as $tag_key => $tag_value) {
-							$text = substr($this->html, $tag_value["start"], ($tag_value["end"]-$tag_value["start"] + 1));
+						if($combined_link){
+							foreach (array_reverse($group_value) as $tag_key => $tag_value) {
+								$text = substr($this->html, $tag_value["start"], ($tag_value["end"]-$tag_value["start"] + 1));
 
-							if($tag_key > 0){
-								$this->html = substr_replace($this->html, "<!-- ".$text." -->", $tag_value["start"], ($tag_value["end"] - $tag_value["start"] + 1));
-							}else{
-								$this->html = substr_replace($this->html, "<!-- ".$text." -->"."\n".$combined_link, $tag_value["start"], ($tag_value["end"] - $tag_value["start"] + 1));
+								if($tag_key > 0){
+									$this->html = substr_replace($this->html, "<!-- ".$text." -->", $tag_value["start"], ($tag_value["end"] - $tag_value["start"] + 1));
+								}else{
+									$this->html = substr_replace($this->html, "<!-- ".$text." -->"."\n".$combined_link, $tag_value["start"], ($tag_value["end"] - $tag_value["start"] + 1));
 
+								}
 							}
 						}
 					}
