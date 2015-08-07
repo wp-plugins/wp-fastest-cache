@@ -81,8 +81,10 @@
 						}else{
 							$combined_css = $this->create_content(array_reverse($group_value));
 							$combined_css = $this->fix_charset($combined_css);
-							
-							$this->wpfc->createFolder($cachFilePath, $combined_css, "css", time());
+
+							if($combined_css){
+								$this->wpfc->createFolder($cachFilePath, $combined_css, "css", time());
+							}
 
 							if(is_dir($cachFilePath)){
 								if($cssFiles = @scandir($cachFilePath, 1)){
@@ -117,6 +119,8 @@
 
 				if($minifiedCss){
 					$combined_css = $minifiedCss["cssContent"].$combined_css;
+				}else{
+					return false;
 				}
 			}
 
