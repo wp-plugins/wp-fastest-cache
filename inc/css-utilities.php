@@ -154,7 +154,7 @@
 				}
 			}
 
-			return $rrr.$this->html;
+			return $this->html;
 		}
 
 		public function checkInternal($link){
