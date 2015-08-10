@@ -289,6 +289,8 @@
 						}
 					}
 
+					$cssContent = str_replace("\xEF\xBB\xBF", '', $cssContent);
+
 					if(!is_dir($cachFilePath)){
 						$prefix = time();
 						$this->wpfc->createFolder($cachFilePath, $cssContent, "css", $prefix);
