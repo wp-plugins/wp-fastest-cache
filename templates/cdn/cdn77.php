@@ -28,6 +28,7 @@
 								<button class="wpfc-green-button">Create a CDN77 Account</button>
 							</a>
 					    </div>
+					    <p class="wpfc-bottom-note" style="margin-bottom:-10px;"><a target="_blank" href="https://client.cdn77.com/support/knowledgebase/cms-integration/wordpress-cdn-integration-using-wp-fastest-cache">Note: Please read How to Integrate CDN77 into WP Fastest Cache</a></p>
 					</div>
 					<div wpfc-cdn-page="2" class="wiz-cont" style="display:none">
 						<h1>Enter CDN Url</h1>		
