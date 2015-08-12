@@ -931,6 +931,7 @@
 									  <option value="es">Español</option>
 									  <option value="it">Italiana</option>
 									  <option value="ja">日本語</option>
+									  <option value="pl">Polski</option>
 									  <option value="pt">Português</option>
 									  <option value="ro">Română</option>
 									  <option value="ru">Русский</option>
